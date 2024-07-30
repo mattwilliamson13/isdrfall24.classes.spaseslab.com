@@ -1,0 +1,1609 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.4.555">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Jessica Taylor, Nora Honkomp, and Matt Williamson">
+<meta name="dcterms.date" content="2022-11-15">
+
+<title>Intro to Spatial Data in R - Getting Set Up</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="..//files/iSDR_logo.png" rel="icon" type="image/png">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
+<link href="../site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">Intro to Spatial Data in R</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../syllabus.html"> 
+<span class="menu-text">Syllabus</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../schedule.html"> 
+<span class="menu-text">Schedule</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../content/index.html"> 
+<span class="menu-text">Content</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../assignment/index.html"> 
+<span class="menu-text">Assignments</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../example/index.html"> 
+<span class="menu-text">Examples</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../lesson/index.html"> 
+<span class="menu-text">Lessons</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../resource/index.html"> 
+<span class="menu-text">Resources</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://ecostatsbsu.slack.com/archives/CV4DEJ8M7"> <i class="bi bi-slack" role="img" aria-label="Slack">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/BSU-Spatial-Data-in-R-Fall2024"> <i class="bi bi-github" role="img" aria-label="GitHub">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+          <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#resources" id="toc-resources" class="nav-link active" data-scroll-target="#resources">Resources</a></li>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link" data-scroll-target="#introduction">Introduction</a>
+  <ul class="collapse">
+  <li><a href="#lets-git-started" id="toc-lets-git-started" class="nav-link" data-scroll-target="#lets-git-started">Let’s “git” started</a>
+  <ul class="collapse">
+  <li><a href="#accept-the-invitation-to-the-assignment-repo" id="toc-accept-the-invitation-to-the-assignment-repo" class="nav-link" data-scroll-target="#accept-the-invitation-to-the-assignment-repo">Accept the invitation to the assignment repo</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#getting-started" id="toc-getting-started" class="nav-link" data-scroll-target="#getting-started">Getting Started</a>
+  <ul class="collapse">
+  <li><a href="#installload-required-package" id="toc-installload-required-package" class="nav-link" data-scroll-target="#installload-required-package">Install/Load Required Package</a></li>
+  <li><a href="#create-a-github-account" id="toc-create-a-github-account" class="nav-link" data-scroll-target="#create-a-github-account">Create a GitHub Account</a></li>
+  <li><a href="#github-and-rstudio-server" id="toc-github-and-rstudio-server" class="nav-link" data-scroll-target="#github-and-rstudio-server">Github and RStudio Server</a>
+  <ul class="collapse">
+  <li><a href="#bring-the-project-into-rstudio" id="toc-bring-the-project-into-rstudio" class="nav-link" data-scroll-target="#bring-the-project-into-rstudio">Bring the project into RStudio</a></li>
+  <li><a href="#verify-that-the-git-tab-is-available-and-that-your-project-is-shown-in-the-upper-right-hand-corner" id="toc-verify-that-the-git-tab-is-available-and-that-your-project-is-shown-in-the-upper-right-hand-corner" class="nav-link" data-scroll-target="#verify-that-the-git-tab-is-available-and-that-your-project-is-shown-in-the-upper-right-hand-corner">Verify that the “Git” tab is available and that your project is shown in the upper right-hand corner</a></li>
+  </ul></li>
+  <li><a href="#installing-git-for-your-local-machine" id="toc-installing-git-for-your-local-machine" class="nav-link" data-scroll-target="#installing-git-for-your-local-machine">Installing Git (for your local machine)</a>
+  <ul class="collapse">
+  <li><a href="#windows" id="toc-windows" class="nav-link" data-scroll-target="#windows">Windows</a></li>
+  <li><a href="#mac" id="toc-mac" class="nav-link" data-scroll-target="#mac">Mac</a></li>
+  <li><a href="#introduce-yourself-to-git-in-r" id="toc-introduce-yourself-to-git-in-r" class="nav-link" data-scroll-target="#introduce-yourself-to-git-in-r">Introduce Yourself to Git in R</a></li>
+  <li><a href="#get-a-personal-access-token" id="toc-get-a-personal-access-token" class="nav-link" data-scroll-target="#get-a-personal-access-token">Get a Personal Access Token</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#basic-workflow" id="toc-basic-workflow" class="nav-link" data-scroll-target="#basic-workflow">Basic workflow</a></li>
+  <li><a href="#what-does-git-do" id="toc-what-does-git-do" class="nav-link" data-scroll-target="#what-does-git-do">What Does Git do?</a>
+  <ul class="collapse">
+  <li><a href="#version-control" id="toc-version-control" class="nav-link" data-scroll-target="#version-control">Version Control</a></li>
+  <li><a href="#setting-up-a-local-repository" id="toc-setting-up-a-local-repository" class="nav-link" data-scroll-target="#setting-up-a-local-repository">Setting Up a Local Repository</a>
+  <ul class="collapse">
+  <li><a href="#adding-staging-and-committing" id="toc-adding-staging-and-committing" class="nav-link" data-scroll-target="#adding-staging-and-committing">Adding, Staging, and Committing</a></li>
+  </ul></li>
+  <li><a href="#branches-and-merging" id="toc-branches-and-merging" class="nav-link" data-scroll-target="#branches-and-merging">Branches and Merging</a>
+  <ul class="collapse">
+  <li><a href="#branches" id="toc-branches" class="nav-link" data-scroll-target="#branches">Branches</a></li>
+  <li><a href="#merging" id="toc-merging" class="nav-link" data-scroll-target="#merging">Merging</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#remote-storagecollaboration-with-github" id="toc-remote-storagecollaboration-with-github" class="nav-link" data-scroll-target="#remote-storagecollaboration-with-github">Remote Storage/Collaboration (with GitHub)</a>
+  <ul class="collapse">
+  <li><a href="#setting-up-remote-repositories" id="toc-setting-up-remote-repositories" class="nav-link" data-scroll-target="#setting-up-remote-repositories">Setting Up Remote Repositories</a>
+  <ul class="collapse">
+  <li><a href="#new-repository" id="toc-new-repository" class="nav-link" data-scroll-target="#new-repository">New Repository</a></li>
+  <li><a href="#from-an-existing-project" id="toc-from-an-existing-project" class="nav-link" data-scroll-target="#from-an-existing-project">From an Existing Project</a></li>
+  <li><a href="#cloning-a-repository" id="toc-cloning-a-repository" class="nav-link" data-scroll-target="#cloning-a-repository">Cloning a Repository</a></li>
+  </ul></li>
+  <li><a href="#pushing-and-pulling" id="toc-pushing-and-pulling" class="nav-link" data-scroll-target="#pushing-and-pulling">“Pushing” and “Pulling”</a></li>
+  <li><a href="#adding-and-managing-collaborators" id="toc-adding-and-managing-collaborators" class="nav-link" data-scroll-target="#adding-and-managing-collaborators">Adding and Managing Collaborators</a></li>
+  <li><a href="#merge-conflicts" id="toc-merge-conflicts" class="nav-link" data-scroll-target="#merge-conflicts">Merge Conflicts</a></li>
+  <li><a href="#cloning-branching-and-forking-oh-my" id="toc-cloning-branching-and-forking-oh-my" class="nav-link" data-scroll-target="#cloning-branching-and-forking-oh-my">Cloning, Branching, and Forking, Oh My!</a></li>
+  <li><a href="#gitignore-and-large-files" id="toc-gitignore-and-large-files" class="nav-link" data-scroll-target="#gitignore-and-large-files">.gitignore and Large Files</a></li>
+  <li><a href="#amend-commits" id="toc-amend-commits" class="nav-link" data-scroll-target="#amend-commits">Amend Commits</a></li>
+  <li><a href="#installing-a-git-client" id="toc-installing-a-git-client" class="nav-link" data-scroll-target="#installing-a-git-client">Installing a Git Client</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<div class="quarto-title-block"><div><h1 class="title">Getting Set Up</h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button">View Source</a></li></ul></div></div>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Jessica Taylor, Nora Honkomp, and Matt Williamson </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">November 15, 2022</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>This is an intro to git and github, most of which was originally created by <a href="https://github.com/JessicaTaylor55/Git_Tutorial/tree/main">Jessica Taylor and Nora Honkomp</a> (2 former students in this class!).</p>
+<section id="resources" class="level1">
+<h1>Resources</h1>
+<p>The following resources are great to get you started with Git and GitHub. Although some have very similar information, I found it helpful to go through them all as some have explanations or examples that are unique and helped me have a more well-rounded understanding of the concepts.</p>
+<ul>
+<li>This chapter is largely based off of chapter 5 in <span class="citation" data-cites="Gandrud_2015">Gandrud (<a href="#ref-Gandrud_2015" role="doc-biblioref">2015</a>)</span>.</li>
+<li><a href="https://happygitwithr.com/index.html">Happy Git With R</a> provides a good starter guide with a few different approaches depending on your needs.</li>
+<li><a href="https://docs.github.com/en/get-started/quickstart">This GitHub Doc</a> focuses more on using GitHub.</li>
+<li><a href="https://ohshitgit.com/">Oh S#!*, Git!?!</a> provides tools for when mistakes are made (e.g., committing to the wrong branch) and how to fix them in the terminal (See the section [Install a Git Client] to do these things using a graphic user interface). Note: this page contains a lot of swear words.</li>
+<li><a href="https://www.pluralsight.com/blog/software-development/the-definitive-guide-to-forks-and-branches-in-git#:~:text=Forking%20creates%20a%20full%20copy,what%20branch%20you%20are%20using.">This article</a> from pluralsight clarifies the difference between a branch and a fork.</li>
+</ul>
+</section>
+<section id="introduction" class="level1">
+<h1>Introduction</h1>
+<p>Being able to track changes, revert to previous versions, and collaborate efficiently are important parts of reproducibility and transparency. In this chapter, we will explore how to add those elements to your workflow using Git and GitHub. Git is a version control software installed locally, and GitHub is a cloud-based system to store and share your work online.</p>
+<section id="lets-git-started" class="level2">
+<h2 class="anchored" data-anchor-id="lets-git-started">Let’s “git” started</h2>
+<p>We are using GitHub classroom for all of the assignments in this course. This allows each of you to have your own repositories for version control and backup of your code without the worries of stepping on someone else toes. The goal of this class is not to have you become a ‘master’ of all things git, but I am hoping you’ll learn the utility of version control and adopt as much of it as make sense for you and your workflows.</p>
+<section id="accept-the-invitation-to-the-assignment-repo" class="level3">
+<h3 class="anchored" data-anchor-id="accept-the-invitation-to-the-assignment-repo">Accept the invitation to the assignment repo</h3>
+<p>The first thing you’ll need to do is accept the invitation to ’assignment-1` repository (repo). This <em>should</em> automatically clone (make an exact copy) of the assignment repo in your personal account.</p>
+</section>
+</section>
+</section>
+<section id="getting-started" class="level1">
+<h1>Getting Started</h1>
+<section id="installload-required-package" class="level2">
+<h2 class="anchored" data-anchor-id="installload-required-package">Install/Load Required Package</h2>
+<p>Load the following packages in RStudio. If you do not have them installed, you can do so using <code>install.packages()</code>.</p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(usethis)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gitcreds)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(knitr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</section>
+<section id="create-a-github-account" class="level2">
+<h2 class="anchored" data-anchor-id="create-a-github-account">Create a GitHub Account</h2>
+<p>You will need to access GitHub with an account for this tutorial. If you don’t already have an account, you can sign up for free here: <a href="https://github.com/" class="uri">https://github.com/</a></p>
+<p>You will be asked to sign up using your email, a password you create, and a username. Your username is what will be visible to others that you collaborate with, so it’s a good idea to make it something straight forward and professional. You can skip personalization for now by scrolling to the bottom of the page.</p>
+</section>
+<section id="github-and-rstudio-server" class="level2">
+<h2 class="anchored" data-anchor-id="github-and-rstudio-server">Github and RStudio Server</h2>
+<p>Unfortunately, GitHub has ended its support for username/password remote authentication. Instead, it uses something called a Personal Access Token. You can read more about it <a href="https://docs.github.com/en/github/authenticating-to-github/keeping-your-account-and-data-secure/creating-a-personal-access-token">here</a> if you are interested, but the easiest way to deal with this is by following Jenny Bryan’s <a href="https://happygitwithr.com/credential-caching.html#credential-caching">happygitwithr</a> recommended approach:</p>
+<ol type="1">
+<li>Introduce yourself to git: There are a number of ways to do this, but I find this to be the easiest</li>
+</ol>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(usethis) <span class="co">#you may need to install this using install.packages('usethis')</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">use_git_config</span>(<span class="at">user.name =</span> <span class="st">"Matt Williamson"</span>, <span class="at">user.email =</span> <span class="st">"mattwilliamson@boisestate.edu"</span>) <span class="co">#your info here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<ol start="2" type="1">
+<li>Get a PAT if you don’t have one already (make sure you save it somewhere)</li>
+</ol>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>usethis<span class="sc">::</span><span class="fu">create_github_token</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<ol start="3" type="1">
+<li>Store your credential for use in RStudio</li>
+</ol>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gitcreds) <span class="co">#may need to install this too</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">gitcreds_set</span>() <span class="co">#should prompt you for your pat - paste it here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<ol start="4" type="1">
+<li>Verify that Rstudio has saved your credential</li>
+</ol>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">gitcreds_get</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>R should return something that looks like this:</p>
+<section id="bring-the-project-into-rstudio" class="level3">
+<h3 class="anchored" data-anchor-id="bring-the-project-into-rstudio">Bring the project into RStudio</h3>
+<ol start="2" type="1">
+<li>Go to File&gt;New Project and choose the “Version Control” option</li>
+<li>Select “Git” (Not Subversion)</li>
+<li>paste the link from the “Clone Repository” button into the “Repository URL” space</li>
+</ol>
+</section>
+<section id="verify-that-the-git-tab-is-available-and-that-your-project-is-shown-in-the-upper-right-hand-corner" class="level3">
+<h3 class="anchored" data-anchor-id="verify-that-the-git-tab-is-available-and-that-your-project-is-shown-in-the-upper-right-hand-corner">Verify that the “Git” tab is available and that your project is shown in the upper right-hand corner</h3>
+<p>Assuming all this has worked, you should be able to click on the “Git” tab and see something like this:</p>
+</section>
+</section>
+<section id="installing-git-for-your-local-machine" class="level2">
+<h2 class="anchored" data-anchor-id="installing-git-for-your-local-machine">Installing Git (for your local machine)</h2>
+<p>You will need the program Git for this tutorial. First, let’s check to see if Git is already installed.</p>
+<p>Select the <code>Terminal</code> tab next to the <code>Console</code> tab in the section of Rstudio displaying your console (bottom-left panel). Enter the following:</p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">which</span> git</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> <span class="at">--version</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>/c/Program Files/Git/cmd/git
+git version 2.45.2.windows.1</code></pre>
+</div>
+</div>
+<p>You will get something like the above output if Git is already installed. If it is not installed, you will get something like <code>git: command not found</code>.</p>
+<section id="windows" class="level3">
+<h3 class="anchored" data-anchor-id="windows">Windows</h3>
+<p>Download the program here: <a href="https://git-scm.com/downloads" class="uri">https://git-scm.com/downloads</a></p>
+</section>
+<section id="mac" class="level3">
+<h3 class="anchored" data-anchor-id="mac">Mac</h3>
+<p>You may have been prompted to install command line developer tools. You should accept this offer. If you were not prompted, use this command:</p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">xcode-select</span> <span class="at">--install</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</section>
+<section id="introduce-yourself-to-git-in-r" class="level3">
+<h3 class="anchored" data-anchor-id="introduce-yourself-to-git-in-r">Introduce Yourself to Git in R</h3>
+<p>Once Git is successfully installed and you have a GitHub account, you will need to let R/Git know your account information to access the remote repositories.</p>
+<p>Enter the following in the <code>Console</code> tab, substituting the user name and email with your GitHub user name and email:</p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>usethis<span class="sc">::</span><span class="fu">use_git_config</span>(<span class="at">user.name =</span> <span class="st">"Bob Barker"</span>, <span class="at">user.email =</span> <span class="st">"bobbarker@thepriceisright.org"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</section>
+<section id="get-a-personal-access-token" class="level3">
+<h3 class="anchored" data-anchor-id="get-a-personal-access-token">Get a Personal Access Token</h3>
+<p>A personal access token (PAT) is used for GitHub as a type of authentication. You used to be able to use your username and password, but not any more. The token-based authentication has increased security.</p>
+<p>Before generating a new PAT, check to see if you already have one. Run <code>gitcreds_set()</code> and one of two things will happen:<br>
+</p>
+<ol type="1">
+<li><p>R will prompt you to enter a token. This means you don’t already have one and need to create one. Hit <code>Esc</code> and run the second line of code, <code>create_github_token()</code>. This will bring you to GitHub where you can create a token. Save this token somewhere safe - you will not be able to access it via GitHub again.</p></li>
+<li><p>R will show you the saved credentials (username and password) and give you options to exit without changing (1: Abort), replace the credentials, or to see the current token. This means you already have a token and can keep it or change it if it has expired. If it expired and you need a new one, run <code>create_github_token()</code>.</p></li>
+</ol>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Run this to see if you already have credentials, or to change them</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>gitcreds<span class="sc">::</span><span class="fu">gitcreds_set</span>()</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="do">## Only run this if you need to generate a token</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="fu">create_github_token</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</section>
+</section>
+</section>
+<section id="basic-workflow" class="level1">
+<h1>Basic workflow</h1>
+<ol type="1">
+<li><p>Everytime you begin working on code, make sure you “Pull” from the remote repository to make sure you have the most recent version of things (this is especially important when you are collaborating with people).</p></li>
+<li><p>Make some changes to code</p></li>
+<li><p>Save those changes</p></li>
+<li><p>“Commit” those changes - Think of commits as ‘breadcrumbs’ they help you remember where you were in the coding process in case you need to revert back to a previous version. Your commit messages should help you remember what was ‘happening’ in the code when you made the commit. In general, you should save and commit fairly frequently and especially everytime you do something ‘consequential’. Git allows you to ‘turn back time’, but that’s only useful if you left enough information to get back to where you want to be.</p></li>
+<li><p>Push your work to the remote - when you’re done working on the project for the day, push your local changes to the remote. This will ensure that if you switch computers or if someone else is going to work on the project, you (or they) will have the most recent version. Plus, if you don’t do this, step 1 will really mess you up.</p></li>
+</ol>
+</section>
+<section id="what-does-git-do" class="level1">
+<h1>What Does Git do?</h1>
+<section id="version-control" class="level2">
+<h2 class="anchored" data-anchor-id="version-control">Version Control</h2>
+<p>The main function of Git is version control. This means Git will track the changes you make so you can revert to (or view) previous versions of the document. In order for this to work effectively, you need to start tracking your changes (make a repository) and frequently create versions with changes you have made (committing).</p>
+</section>
+<section id="setting-up-a-local-repository" class="level2">
+<h2 class="anchored" data-anchor-id="setting-up-a-local-repository">Setting Up a Local Repository</h2>
+<p>Another function of Git is to store all your relevant files in a repository, similar to a project. You can create a repository that is located only on your device (therefore it is considered “local”). This will allow you to track changes to a project on your computer and access previous versions of the document at any time. We will look at how to create a local repository using Rstudio, but know that it is also possible to do this using the terminal. (See page 96 of <span class="citation" data-cites="Gandrud_2015">Gandrud (<a href="#ref-Gandrud_2015" role="doc-biblioref">2015</a>)</span>)</p>
+<ol type="1">
+<li>In Rstudio, select <code>File</code> in the top left corner, and then <code>New Project</code></li>
+<li>When the New Project menu appears, select <code>New Directory</code></li>
+</ol>
+<ol start="3" type="1">
+<li>On the following screen, select <code>New Project</code></li>
+<li>Finally, type the name you want to use for your new project, browse to the location where you want it saved on your computer, and select the <code>Create a git repository</code> box. <!--
+![](img/01/create_git_repository.PNG)
+--></li>
+</ol>
+<p>You now have a folder with a <code>.Rproj</code> object and a <code>.gitignore</code> file. There is also a hidden <code>.git</code> folder that stores all the project information, including the version history files (commit history).</p>
+<section id="adding-staging-and-committing" class="level3">
+<h3 class="anchored" data-anchor-id="adding-staging-and-committing">Adding, Staging, and Committing</h3>
+<p>You can create new files or move existing files (including your data) into this project folder, and Git can track changes made to them. In order to do this, you will need to “add” files that have been created or moved into the project and “commit” these changes.</p>
+<p>First, you will need to save the new file or move an existing file into the project folder. Then, you will “add” those files to your commit by checking the boxes in the <code>Git</code> tab in your Rstudio window. If Git is already tracking a document, you will see an <code>M</code> in the status column, however, if the file hasn’t been added (and is therefore not being tracked), you will see a <code>?</code> in the status column. <!--
+![](img/01/adding.PNG)
+--> In order to save a version of your project as it is right now (with these added files), you will need to commit. To do this, select the <code>Commit</code> button, above the boxes you just checked. This will open a new window where you can see the list of files that you added.</p>
+<p>Type a useful message in the <code>Commit message</code> box briefly describing the changes you made in this version. Then hit <code>Commit</code>. <!--
+![](img/01/committing.PNG)
+--> You should see a window pop up telling you what changes were successfully made. If this window ever says “failed”, “execution halted”, or “aborted”, this means the commit did not work and you should read the message closely to determine why.</p>
+<p>Save and commit frequently in order to get the most use out of your version control.</p>
+</section>
+</section>
+<section id="branches-and-merging" class="level2">
+<h2 class="anchored" data-anchor-id="branches-and-merging">Branches and Merging</h2>
+<section id="branches" class="level3">
+<h3 class="anchored" data-anchor-id="branches">Branches</h3>
+<p>A new repository will have one branch called <code>main</code>. You can think of this as the master version. You can create additional branches which are an exact copy of the main branch where you can make changes without committing them to the master. This is useful when several people are working on the same thing, or if you want to try multiple approaches to the same file (i.e.&nbsp;test run some code).</p>
+<p>To create a branch, select the button with small purple shapes on the right hand side of your <code>Git</code> tab in Rstudio. <!--
+![](img/01/branch_button.PNG)
+--> You can now create a new branch, for example one called “test”. This is essentially a copy of everything that is in your repository, and making changes here will not affect the <code>main</code> branch.</p>
+<p>To switch between branches, select the drop down menu to the right of the button you used to create a new branch. <!--
+![](img/01/branches.PNG)
+--> You can easily switch to a different branch by selecting it on this menu.</p>
+<p>Note that any files you create on a side branch will not show up in the main branch unless you merge them.</p>
+<p>You can have multiple branches coming off your main branch at once, so you can try multiple different approaches (or by multiple people) simultaneously. Anytime you make a new branch it will start as a duplicate of the main branch.</p>
+<p>You can see a history of your commits on different branches by selecting the clock icon (designating “History”) near the <code>Commit</code> button on your <code>Git</code> tab. You will initially see the history for only the branch you are currently in, but if you select the drop down menu of branches at the top of this window, you can select another branch or <code>all branches</code> and see how the branches compare to one another. <!--
+![](img/01/history_button.PNG)
+--></p>
+</section>
+<section id="merging" class="level3">
+<h3 class="anchored" data-anchor-id="merging">Merging</h3>
+<p>If you find a method that works in a side branch and you want to bring it in to the main branch, this is called a merge.</p>
+<p>To merge a side branch with the main branch (changing the version of your repo <code>main</code> branch to match that of the successful side branch), we will use the terminal.</p>
+<ol type="1">
+<li>Make sure you are on the <code>main</code> branch</li>
+<li>Select the <code>Terminal</code> tab next to the <code>Console</code> tab in the section of Rstudio displaying your console.</li>
+<li>Type <code>git merge</code> and then the name of the branch you want to merge into the main branch. <!--
+![](img/01/merge_terminal.PNG)
+--></li>
+</ol>
+<p>The repository of your <code>main</code> branch should now match the repository of whatever branch you merged with it.</p>
+<p>One way to check if the branches merged the way you intended is to select the history button again (make sure you go to <code>all branches</code>) and check that the “HEAD” (which is the main branch) is at the same level as whichever branch you merged it with.</p>
+</section>
+</section>
+</section>
+<section id="remote-storagecollaboration-with-github" class="level1">
+<h1>Remote Storage/Collaboration (with GitHub)</h1>
+<p>With GitHub, you can set up a repository that is accessible from the internet (referred to as “remote”) and can be accessed by other people. Remote repositories are nice because you can access them from different computers, assuming you have internet access, giving you access to your project wherever you are and creating a back up in case something happens to your computer. Github also allows for structured collaboration, so your whole team can make edits on the same documents and keep track of what has been changed where.</p>
+<section id="setting-up-remote-repositories" class="level2">
+<h2 class="anchored" data-anchor-id="setting-up-remote-repositories">Setting Up Remote Repositories</h2>
+<p>To set up a remote repository, make sure you are able to log into GitHub. We will go over three different ways to make repositories: starting from scratch with a new repository, creating a repository for an already started project, and accessing a repository made by a collaborator.</p>
+<section id="new-repository" class="level3">
+<h3 class="anchored" data-anchor-id="new-repository">New Repository</h3>
+<p>To create a brand new repository, click on the plus sign near your profile picture in the top right corner of GitHub and select <code>New repository</code>. <!--
+![](img/01/your_repository.PNG)
+--></p>
+<p>On the next page, type in a name for your repository and choose whether you want it to be public or private. It is recommended you select the box to create a README file. This will give you a place to describe the layout of your repository and the purpose of each file. Without a README file, visitors to your repository (and maybe future you) might not be able to figure out how to properly use the files in your repository, leading to your working being non-reproducible. <!--
+![](img/01/readme.PNG)
+--> Now you can click <code>Create Repository</code>.</p>
+<p>Once your repository is created, you will see only the README file is present. To create other files, let’s create a directory for this repo on our computer.</p>
+<ol type="1">
+<li>In R studio, follow the instructions for creating a new project, but when you see the following menu, select <code>Version Control</code> this time.<br>
+<!--
+![](img/01/version_control_directory.PNG)
+--></li>
+<li>On the next window, select <code>Git</code>.</li>
+<li>Return to the GitHub page for the repository you created and select the green <code>Code</code> button.</li>
+<li>Copy the HTTPS link from the menu that pops up. <!--
+![](img/01/repo_link.PNG)
+--></li>
+<li>Return to Rstudio and paste the link in the Repository URL line at the top of the popped up window. Make sure to check the file path that is currently set and use the <code>Browse</code> button if you want to save the folder for this directory in a different place. <!--
+![](img/01/clone_repo.PNG)
+--></li>
+</ol>
+<p>Your repository is now set up in a new project in Rstudio, and you can begin by creating an Rmarkdown, R Script, etc.</p>
+<p>Note, you can edit the contents of the README file by opening it in Rstudio.</p>
+</section>
+<section id="from-an-existing-project" class="level3">
+<h3 class="anchored" data-anchor-id="from-an-existing-project">From an Existing Project</h3>
+<p>You may find yourself wanting to create a repo on GitHub for a project you have already started working on. Fortunately, it is easy to start version control tracking on a project and add the project to a remote repository.</p>
+<p>Here are the steps to follow if you have a project folder with a <code>.Rproj</code> file in it and your directory is not already being tracked with Git:</p>
+<ol type="1">
+<li>Follow the steps above for creating a New repository, but this time do not click the box to create a README file. This will bring you to a page with a “Quick Set Up” link. Keep this page open for later.<br>
+<!--
+![](img/01/quick_setup.PNG)
+--></li>
+<li>Go to RStudio and open the <code>.Rproj</code> file that will be added to the GitHub repository./</li>
+<li>Select the <code>Terminal</code> tab next to <code>Console</code> and enter the following lines of code.</li>
+</ol>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> git init <span class="at">-b</span> main</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>“git” tells bash what program we want to use &nbsp; “init” tells bash to initialize a Git repository fir this directory<br>
+“-b main” is saying we want to create a branch called “main”<br>
+</p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> git add .</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>This will add all of the files within the current folder to the repository. You may get a lot of warnings because you have a <code>.Rproj</code> file and potentially a <code>.Rhistory</code> file in this folder which are not usually ideal to track. We will take care of this by adding these file names to the .gitignore file shortly.</p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> git commit <span class="at">-m</span> <span class="st">"First commit"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>This line creates your first commit. You can change the commit message to anything that makes sense to you.</p>
+<ol start="4" type="1">
+<li>Go back to GitHub and copy the Quick start link. Type the following code in the terminal, but replace <code>&lt;REMOTE_URL&gt;</code> with the copied link.</li>
+</ol>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> git remote add origin <span class="op">&lt;</span>REMOTE_URL<span class="op">&gt;</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Replace "&lt;REMOTE_URL&gt;" with url from GitHub</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<ol start="5" type="1">
+<li>Last, we will push these changes to GitHub. We will further discuss what this means later, but for now run the following line in the terminal.</li>
+</ol>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> git push origin main</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>Now when you return to GitHub and refresh your repository page, you should see all of the files from your existing project.</p>
+<p>You can add a <code>README</code> and <code>.gitignore</code> on the GitHub website by selecting “Add file” on the repository’s page. When you make a .gitignore file, it may suggest you use a template, in which case, select the <code>R</code> template from the drop down list and it will automatically fill the document with file types that should typically not be tracked.</p>
+</section>
+<section id="cloning-a-repository" class="level3">
+<h3 class="anchored" data-anchor-id="cloning-a-repository">Cloning a Repository</h3>
+<p>If you want to join a repository that has already been created, you can either find the repository by searching for it on GitHub (if it is publicly available) or contact the creator and have them add you as a collaborator to the repository. Either way, you will follow steps 1-5 in the “New Repository” section above, but this time the link is coming from the already created repository.</p>
+<p>In cases where the repository is not accessible (you do not have cloning priveleges), you will have to create a pull request.</p>
+</section>
+</section>
+<section id="pushing-and-pulling" class="level2">
+<h2 class="anchored" data-anchor-id="pushing-and-pulling">“Pushing” and “Pulling”</h2>
+<p>Once you have your remote repository ready, you can make changes to the files and “add” and “commit” them like we did in the “Version Control” section above. However, now we must take steps to make sure our local version of the repository is up-to-date with the online version, and the versions that all other collaborators have on their computers.</p>
+<p>To do this, we will need to “push” and “pull”. “Pulling” is when we bring recent and out-of-sync changes from the online version to our local device. “Pushing” is the opposite; we are sending our commits to the online version to update it with our recent changes. This will allow anyone else working in the repository to “pull” your changes onto their computer.</p>
+<p>To push and pull, use the blue and green arrows on the <code>Git</code> tab in R studio. <!--
+![](img/01/push_pull_buttons.PNG)
+--></p>
+<p>You may also notice the next time you “commit” your changes, these same push and pull buttons are located above the “Commit Message” box on the pop up window.</p>
+<p>It is good practice to “pull” each time you are about to start working in a repository and to push after you commit, or at least once at the end of your working period within a repository for the day. Keeping good “push” and “pull” habits will help you avoid merge conflicts with collaborators or yourself if you work on a project on more than one computer.</p>
+</section>
+<section id="adding-and-managing-collaborators" class="level2">
+<h2 class="anchored" data-anchor-id="adding-and-managing-collaborators">Adding and Managing Collaborators</h2>
+<p>Collaborative coding is a huge benefit of GitHub. In order to invite your collaborators to clone your remote repository, you will need to know their GitHub username, or at least their email address.</p>
+<ol type="1">
+<li><p>On your repository page on GitHub, select <code>Settings</code> in the middle of the banner near the top of the page. <!--
+![](img/01/settings_button.PNG)
+--></p></li>
+<li><p>In the menu on the left, select the <code>Collaborators</code> page. <!--
+![](img/01/collaborators.PNG)
+--></p></li>
+<li><p>Enter your password, and then select <code>Add People</code> under <code>Manage Access</code></p></li>
+</ol>
+<p>Add your collaborators one at a time. This will send them a message inviting them to join the repository.</p>
+<p>As the owner of the repository, you will be able to remove people from the repository at any time.</p>
+</section>
+<section id="merge-conflicts" class="level2">
+<h2 class="anchored" data-anchor-id="merge-conflicts">Merge Conflicts</h2>
+<p>When two people are working on a branch at the same time, changes were made and not pushed before someone else started working, or a collaborator forgets to pull before starting to make changes, a merge conflict may arise. Merge conflicts happen because Git is not sure how to combine the different changes that occurred in the same sections of the document. In some instances, Git is smart enough to figure it out and will merge the versions on its own. Other times, the merge conflict will be need to be fixed manually. Note that Git will not allow the push until the merge conflict is solved.</p>
+<p>If a merge conflict occurs, you will see some specific things added to your code. There will be a line at the beginning that starts with <code>&lt;&lt;&lt;&lt;&lt;&lt;&lt;</code>, a line at the end starting with <code>&gt;&gt;&gt;&gt;&gt;&gt;&gt;</code> and a line in the middle that just has <code>=======</code>. The two different version are shown above and below the middle line, labeled with which branch has which version. It is your job to decide how these versions fit together. Once you have modified the code to match the final version you want to keep, you can delete the three lines of code containing the <code>&gt;</code>, <code>&lt;</code> and <code>=</code> symbols and “stage” and “commit” your files as usual. <!--
+![](img/01/MergeConflict.PNG)
+--> ### On GitHub</p>
+<p>You can also merge branches and resolve merge conflicts on GitHub. You would push your branch to GitHub, then go to the GitHub repo webpage. You will need to create a pull request to merge your branch. If there is a merge conflict, you will need to click on “Resolve conflicts” before you can merge your branch. The syntax to edit the document and resolve the conflict is the same as above. <!--
+![](img/01/ResolvePullRequest.PNG)
+--> # Extras</p>
+</section>
+<section id="cloning-branching-and-forking-oh-my" class="level2">
+<h2 class="anchored" data-anchor-id="cloning-branching-and-forking-oh-my">Cloning, Branching, and Forking, Oh My!</h2>
+<p>Cloning, branching, and forking are functions that are similar, but they are not the same. When you <strong>clone</strong> a repository, you are connected to it and are working in that repository. You can commit changes and push them to the same repository. When you create a <strong>branch</strong>, you create a copy where you can work on a specific part of a document or run test code with the intent to merge it back to the main branch. Many branches are short-lived and deleted once their purpose has been served. Anyone that has access to the repository also has access to the branches in it. A <strong>fork</strong> creates a copy of the entire repository as well, however, the collaborators are disconnected from it. The intent is generally to diverge from the original repository and never be merged back into it.</p>
+</section>
+<section id="gitignore-and-large-files" class="level2">
+<h2 class="anchored" data-anchor-id="gitignore-and-large-files">.gitignore and Large Files</h2>
+<p>GitHub does not allow repositories to be larger than 5GB. While we recommend keeping all of the files necessary to run your analysis together in the repo, this may not be possible if say for example your data files are larger than the size limit. If this is the case, you can manually distribute your data file a different way. (See <a href="https://git-lfs.github.com/" class="uri">https://git-lfs.github.com/</a> first though if this is an issue you are actually having.)</p>
+<p>Once all collaborators (or just you) have the large data file in your Git repo, you may forget that you cannot send this to GitHub and accidentally try to commit and push it. Fortunately, Git will recognize the problem before it takes place and will give you the following warning: <!--
+![](img/01/large_file_warning.PNG)
+--> To resolve this problem, you just need to tell Git to ignore the large file when you make your commit. First, determine which file(s) is/are too big by looking at their size. Then, navigate to your <code>.gitignore</code> document and open it. Last, add the name(s) of the file(s) that is/are too large. Now you will be able to commit and push the tracked files within your repository.</p>
+<p>You can add any files you do not want to be tracked to .gitignore. An example is the html file generated by rendering this document. It is regenerated constantly, so there is no need to track the changes.</p>
+</section>
+<section id="amend-commits" class="level2">
+<h2 class="anchored" data-anchor-id="amend-commits">Amend Commits</h2>
+<p>If at any point you find you have made a commit that should not have been made (e.x. you accidentally added and committed files that are too large and now you aren’t able to push), you can easily fix this by making the necessary changes within your files, checking the “amend previous commit” box on the commit screen, and then committing as usual. This will overwrite your previous commit with the correct version you want to commit. If you need to amend an earlier commit (i.e.&nbsp;not the most recent commit), you will need to use the terminal (See <a href="https://ohshitgit.com/">Oh S#!*, Git!?!</a>). <!--
+![](img/01/amend_commit_box.PNG)
+--></p>
+</section>
+<section id="installing-a-git-client" class="level2">
+<h2 class="anchored" data-anchor-id="installing-a-git-client">Installing a Git Client</h2>
+<p>With all of the commits, branching, merging, and collaboration, it can be tricky to keep track of everything going on in your repository. Viewing the commit history in GitHub or under the Git tab in RStudio is useful, though it can still be a little hard to follow. Using a Git client software helps visualize the workflow and allows you to use commands in the graphic user interface (GUI) that you would normally need to type into the terminal. <!--
+![](img/01/GitKraken.PNG)
+--></p>
+<p>There are a few Git Clients out there and you may want to try a few to see what works for you. I use GitKraken which you can download <a href="https://www.gitkraken.com/download">here.</a></p>
+
+
+<!-- -->
+
+
+</section>
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list">
+<div id="ref-Gandrud_2015" class="csl-entry" role="listitem">
+Gandrud, C. 2015. <span class="nocase">Reproducible Research with R and RStudio</span>. Page 294 (C. Gandrud, Ed.). CRC Press.
+</div>
+</div></section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  const viewSource = window.document.getElementById('quarto-view-source') ||
+                     window.document.getElementById('quarto-code-tools-source');
+  if (viewSource) {
+    const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+    viewSource.addEventListener("click", function(e) {
+      if (sourceUrl) {
+        // rstudio viewer pane
+        if (/\bcapabilities=\b/.test(window.location)) {
+          window.open(sourceUrl);
+        } else {
+          window.location.href = sourceUrl;
+        }
+      } else {
+        const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+        modal.show();
+      }
+      return false;
+    });
+  }
+  function toggleCodeHandler(show) {
+    return function(e) {
+      const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+      for (let i=0; i<detailsSrc.length; i++) {
+        const details = detailsSrc[i].parentElement;
+        if (show) {
+          details.open = true;
+        } else {
+          details.removeAttribute("open");
+        }
+      }
+      const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+      const fromCls = show ? "hidden" : "unhidden";
+      const toCls = show ? "unhidden" : "hidden";
+      for (let i=0; i<cellCodeDivs.length; i++) {
+        const codeDiv = cellCodeDivs[i];
+        if (codeDiv.classList.contains(fromCls)) {
+          codeDiv.classList.remove(fromCls);
+          codeDiv.classList.add(toCls);
+        } 
+      }
+      return false;
+    }
+  }
+  const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+  if (hideAllCode) {
+    hideAllCode.addEventListener("click", toggleCodeHandler(false));
+  }
+  const showAllCode = window.document.getElementById("quarto-show-all-code");
+  if (showAllCode) {
+    showAllCode.addEventListener("click", toggleCodeHandler(true));
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/isdrfall24\.classes\.spaseslab\.com");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="sourceCode" id="cb16" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Getting Set Up"</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="an">author:</span><span class="co"> "Jessica Taylor, Nora Honkomp, and Matt Williamson"</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> "2022-11-15"</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>This is an intro to git and github, most of which was originally created by <span class="co">[</span><span class="ot">Jessica Taylor and Nora Honkomp</span><span class="co">](https://github.com/JessicaTaylor55/Git_Tutorial/tree/main)</span> (2 former students in this class!).</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a><span class="fu"># Resources</span></span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>The following resources are great to get you started with Git and GitHub. Although some have very similar information, I found it helpful to go through them all as some have explanations or examples that are unique and helped me have a more well-rounded understanding of the concepts.</span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>This chapter is largely based off of chapter 5 in @Gandrud_2015.</span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">Happy Git With R</span><span class="co">](https://happygitwithr.com/index.html)</span> provides a good starter guide with a few different approaches depending on your needs.</span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">This GitHub Doc</span><span class="co">](https://docs.github.com/en/get-started/quickstart)</span> focuses more on using GitHub.</span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">Oh S#!\*, Git!?!</span><span class="co">](https://ohshitgit.com/)</span> provides tools for when mistakes are made (e.g., committing to the wrong branch) and how to fix them in the terminal (See the section <span class="co">[</span><span class="ot">Install a Git Client</span><span class="co">]</span> to do these things using a graphic user interface). Note: this page contains a lot of swear words.</span>
+<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">This article</span><span class="co">](https://www.pluralsight.com/blog/software-development/the-definitive-guide-to-forks-and-branches-in-git#:~:text=Forking%20creates%20a%20full%20copy,what%20branch%20you%20are%20using.)</span> from pluralsight clarifies the difference between a branch and a fork.</span>
+<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a><span class="fu"># Introduction</span></span>
+<span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a>Being able to track changes, revert to previous versions, and collaborate efficiently are important parts of reproducibility and transparency. In this chapter, we will explore how to add those elements to your workflow using Git and GitHub. Git is a version control software installed locally, and GitHub is a cloud-based system to store and share your work online.</span>
+<span id="cb16-22"><a href="#cb16-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-23"><a href="#cb16-23" aria-hidden="true" tabindex="-1"></a><span class="fu">## Let's "git" started</span></span>
+<span id="cb16-24"><a href="#cb16-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-25"><a href="#cb16-25" aria-hidden="true" tabindex="-1"></a>We are using GitHub classroom for all of the assignments in this course. This allows each of you to have your own repositories for version control and backup of your code without the worries of stepping on someone else toes. The goal of this class is not to have you become a 'master' of all things git, but I am hoping you'll learn the utility of version control and adopt as much of it as make sense for you and your workflows. </span>
+<span id="cb16-26"><a href="#cb16-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-27"><a href="#cb16-27" aria-hidden="true" tabindex="-1"></a><span class="fu">### Accept the invitation to the assignment repo</span></span>
+<span id="cb16-28"><a href="#cb16-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-29"><a href="#cb16-29" aria-hidden="true" tabindex="-1"></a>The first thing you'll need to do is accept the invitation to 'assignment-1` repository (repo). This _should_ automatically clone (make an exact copy) of the assignment repo in your personal account. </span>
+<span id="cb16-30"><a href="#cb16-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-31"><a href="#cb16-31" aria-hidden="true" tabindex="-1"></a><span class="fu"># Getting Started</span></span>
+<span id="cb16-32"><a href="#cb16-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-33"><a href="#cb16-33" aria-hidden="true" tabindex="-1"></a><span class="fu">## Install/Load Required Package</span></span>
+<span id="cb16-34"><a href="#cb16-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-35"><a href="#cb16-35" aria-hidden="true" tabindex="-1"></a>Load the following packages in RStudio. If you do not have them installed, you can do so using <span class="in">`install.packages()`</span>.</span>
+<span id="cb16-36"><a href="#cb16-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-37"><a href="#cb16-37" aria-hidden="true" tabindex="-1"></a><span class="in">```{r load packages, warning = FALSE}</span></span>
+<span id="cb16-38"><a href="#cb16-38" aria-hidden="true" tabindex="-1"></a><span class="in">library(usethis)</span></span>
+<span id="cb16-39"><a href="#cb16-39" aria-hidden="true" tabindex="-1"></a><span class="in">library(gitcreds)</span></span>
+<span id="cb16-40"><a href="#cb16-40" aria-hidden="true" tabindex="-1"></a><span class="in">library(knitr)</span></span>
+<span id="cb16-41"><a href="#cb16-41" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb16-42"><a href="#cb16-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-43"><a href="#cb16-43" aria-hidden="true" tabindex="-1"></a><span class="fu">## Create a GitHub Account</span></span>
+<span id="cb16-44"><a href="#cb16-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-45"><a href="#cb16-45" aria-hidden="true" tabindex="-1"></a>You will need to access GitHub with an account for this tutorial. If you don't already have an account, you can sign up for free here: <span class="ot">&lt;https://github.com/&gt;</span></span>
+<span id="cb16-46"><a href="#cb16-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-47"><a href="#cb16-47" aria-hidden="true" tabindex="-1"></a>You will be asked to sign up using your email, a password you create, and a username. Your username is what will be visible to others that you collaborate with, so it's a good idea to make it something straight forward and professional. You can skip personalization for now by scrolling to the bottom of the page.</span>
+<span id="cb16-48"><a href="#cb16-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-49"><a href="#cb16-49" aria-hidden="true" tabindex="-1"></a><span class="fu">## Github and RStudio Server</span></span>
+<span id="cb16-50"><a href="#cb16-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-51"><a href="#cb16-51" aria-hidden="true" tabindex="-1"></a>Unfortunately, GitHub has ended its support for username/password remote authentication. Instead, it uses something called a Personal Access Token. You can read more about it <span class="co">[</span><span class="ot">here</span><span class="co">](https://docs.github.com/en/github/authenticating-to-github/keeping-your-account-and-data-secure/creating-a-personal-access-token)</span> if you are interested, but the easiest way to deal with this is by following Jenny Bryan's <span class="co">[</span><span class="ot">happygitwithr</span><span class="co">](https://happygitwithr.com/credential-caching.html#credential-caching)</span> recommended approach:</span>
+<span id="cb16-52"><a href="#cb16-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-53"><a href="#cb16-53" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>Introduce yourself to git: </span>
+<span id="cb16-54"><a href="#cb16-54" aria-hidden="true" tabindex="-1"></a>There are a number of ways to do this, but I find this to be the easiest</span>
+<span id="cb16-55"><a href="#cb16-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-56"><a href="#cb16-56" aria-hidden="true" tabindex="-1"></a><span class="in">```{r introgit, eval=FALSE}</span></span>
+<span id="cb16-57"><a href="#cb16-57" aria-hidden="true" tabindex="-1"></a><span class="in">library(usethis) #you may need to install this using install.packages('usethis')</span></span>
+<span id="cb16-58"><a href="#cb16-58" aria-hidden="true" tabindex="-1"></a><span class="in">use_git_config(user.name = "Matt Williamson", user.email = "mattwilliamson@boisestate.edu") #your info here</span></span>
+<span id="cb16-59"><a href="#cb16-59" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb16-60"><a href="#cb16-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-61"><a href="#cb16-61" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>Get a PAT if you don't have one already (make sure you save it somewhere)</span>
+<span id="cb16-62"><a href="#cb16-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-63"><a href="#cb16-63" aria-hidden="true" tabindex="-1"></a><span class="in">```{r getpat, eval=FALSE}</span></span>
+<span id="cb16-64"><a href="#cb16-64" aria-hidden="true" tabindex="-1"></a><span class="in">usethis::create_github_token()</span></span>
+<span id="cb16-65"><a href="#cb16-65" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb16-66"><a href="#cb16-66" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-67"><a href="#cb16-67" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>Store your credential for use in RStudio</span>
+<span id="cb16-68"><a href="#cb16-68" aria-hidden="true" tabindex="-1"></a><span class="in">```{r storepat, eval=FALSE}</span></span>
+<span id="cb16-69"><a href="#cb16-69" aria-hidden="true" tabindex="-1"></a><span class="in">library(gitcreds) #may need to install this too</span></span>
+<span id="cb16-70"><a href="#cb16-70" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-71"><a href="#cb16-71" aria-hidden="true" tabindex="-1"></a><span class="in">gitcreds_set() #should prompt you for your pat - paste it here</span></span>
+<span id="cb16-72"><a href="#cb16-72" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-73"><a href="#cb16-73" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb16-74"><a href="#cb16-74" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-75"><a href="#cb16-75" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>Verify that Rstudio has saved your credential</span>
+<span id="cb16-76"><a href="#cb16-76" aria-hidden="true" tabindex="-1"></a><span class="in">```{r patverify, eval=FALSE}</span></span>
+<span id="cb16-77"><a href="#cb16-77" aria-hidden="true" tabindex="-1"></a><span class="in">gitcreds_get()</span></span>
+<span id="cb16-78"><a href="#cb16-78" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-79"><a href="#cb16-79" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb16-80"><a href="#cb16-80" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-81"><a href="#cb16-81" aria-hidden="true" tabindex="-1"></a>R should return something that looks like this:</span>
+<span id="cb16-82"><a href="#cb16-82" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-83"><a href="#cb16-83" aria-hidden="true" tabindex="-1"></a><span class="in">```{r gitsuccess, echo=FALSE, out.width="70%"}</span></span>
+<span id="cb16-84"><a href="#cb16-84" aria-hidden="true" tabindex="-1"></a><span class="in">#knitr::include_graphics("img/01/credentialsuccess.png", error = FALSE)</span></span>
+<span id="cb16-85"><a href="#cb16-85" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb16-86"><a href="#cb16-86" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-87"><a href="#cb16-87" aria-hidden="true" tabindex="-1"></a><span class="fu">### Bring the project into RStudio</span></span>
+<span id="cb16-88"><a href="#cb16-88" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-89"><a href="#cb16-89" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>Go to File&gt;New Project and choose the "Version Control" option</span>
+<span id="cb16-90"><a href="#cb16-90" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>Select "Git" (Not Subversion)</span>
+<span id="cb16-91"><a href="#cb16-91" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>paste the link from the "Clone Repository" button into the "Repository URL" space</span>
+<span id="cb16-92"><a href="#cb16-92" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-93"><a href="#cb16-93" aria-hidden="true" tabindex="-1"></a><span class="fu">### Verify that the "Git" tab is available and that your project is shown in the upper right-hand corner</span></span>
+<span id="cb16-94"><a href="#cb16-94" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-95"><a href="#cb16-95" aria-hidden="true" tabindex="-1"></a>Assuming all this has worked, you should be able to click on the "Git" tab and see something like this:</span>
+<span id="cb16-96"><a href="#cb16-96" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-97"><a href="#cb16-97" aria-hidden="true" tabindex="-1"></a><span class="in">```{r gittab, echo=FALSE, out.width="70%"}</span></span>
+<span id="cb16-98"><a href="#cb16-98" aria-hidden="true" tabindex="-1"></a><span class="in">#knitr::include_graphics("img/01/gittab.png", error = FALSE)</span></span>
+<span id="cb16-99"><a href="#cb16-99" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb16-100"><a href="#cb16-100" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-101"><a href="#cb16-101" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-102"><a href="#cb16-102" aria-hidden="true" tabindex="-1"></a><span class="fu">## Installing Git (for your local machine)</span></span>
+<span id="cb16-103"><a href="#cb16-103" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-104"><a href="#cb16-104" aria-hidden="true" tabindex="-1"></a>You will need the program Git for this tutorial. First, let's check to see if Git is already installed.</span>
+<span id="cb16-105"><a href="#cb16-105" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-106"><a href="#cb16-106" aria-hidden="true" tabindex="-1"></a>Select the <span class="in">`Terminal`</span> tab next to the <span class="in">`Console`</span> tab in the section of Rstudio displaying your console (bottom-left panel). Enter the following:</span>
+<span id="cb16-107"><a href="#cb16-107" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-108"><a href="#cb16-108" aria-hidden="true" tabindex="-1"></a><span class="in">```{bash git version}</span></span>
+<span id="cb16-109"><a href="#cb16-109" aria-hidden="true" tabindex="-1"></a><span class="in">which git</span></span>
+<span id="cb16-110"><a href="#cb16-110" aria-hidden="true" tabindex="-1"></a><span class="in">git --version</span></span>
+<span id="cb16-111"><a href="#cb16-111" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb16-112"><a href="#cb16-112" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-113"><a href="#cb16-113" aria-hidden="true" tabindex="-1"></a>You will get something like the above output if Git is already installed. If it is not installed, you will get something like <span class="in">`git: command not found`</span>.</span>
+<span id="cb16-114"><a href="#cb16-114" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-115"><a href="#cb16-115" aria-hidden="true" tabindex="-1"></a><span class="fu">### Windows</span></span>
+<span id="cb16-116"><a href="#cb16-116" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-117"><a href="#cb16-117" aria-hidden="true" tabindex="-1"></a>Download the program here: <span class="ot">&lt;https://git-scm.com/downloads&gt;</span></span>
+<span id="cb16-118"><a href="#cb16-118" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-119"><a href="#cb16-119" aria-hidden="true" tabindex="-1"></a><span class="fu">### Mac</span></span>
+<span id="cb16-120"><a href="#cb16-120" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-121"><a href="#cb16-121" aria-hidden="true" tabindex="-1"></a>You may have been prompted to install command line developer tools. You should accept this offer. If you were not prompted, use this command:</span>
+<span id="cb16-122"><a href="#cb16-122" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-123"><a href="#cb16-123" aria-hidden="true" tabindex="-1"></a><span class="in">```{bash install git mac, eval = FALSE}</span></span>
+<span id="cb16-124"><a href="#cb16-124" aria-hidden="true" tabindex="-1"></a><span class="in">xcode-select --install</span></span>
+<span id="cb16-125"><a href="#cb16-125" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb16-126"><a href="#cb16-126" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-127"><a href="#cb16-127" aria-hidden="true" tabindex="-1"></a><span class="fu">### Introduce Yourself to Git in R</span></span>
+<span id="cb16-128"><a href="#cb16-128" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-129"><a href="#cb16-129" aria-hidden="true" tabindex="-1"></a>Once Git is successfully installed and you have a GitHub account, you will need to let R/Git know your account information to access the remote repositories.</span>
+<span id="cb16-130"><a href="#cb16-130" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-131"><a href="#cb16-131" aria-hidden="true" tabindex="-1"></a>Enter the following in the <span class="in">`Console`</span> tab, substituting the user name and email with your GitHub user name and email:</span>
+<span id="cb16-132"><a href="#cb16-132" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-133"><a href="#cb16-133" aria-hidden="true" tabindex="-1"></a><span class="in">```{r git introduction, eval = FALSE}</span></span>
+<span id="cb16-134"><a href="#cb16-134" aria-hidden="true" tabindex="-1"></a><span class="in">usethis::use_git_config(user.name = "Bob Barker", user.email = "bobbarker@thepriceisright.org")</span></span>
+<span id="cb16-135"><a href="#cb16-135" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb16-136"><a href="#cb16-136" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-137"><a href="#cb16-137" aria-hidden="true" tabindex="-1"></a><span class="fu">### Get a Personal Access Token</span></span>
+<span id="cb16-138"><a href="#cb16-138" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-139"><a href="#cb16-139" aria-hidden="true" tabindex="-1"></a>A personal access token (PAT) is used for GitHub as a type of authentication. You used to be able to use your username and password, but not any more. The token-based authentication has increased security.</span>
+<span id="cb16-140"><a href="#cb16-140" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-141"><a href="#cb16-141" aria-hidden="true" tabindex="-1"></a>Before generating a new PAT, check to see if you already have one. Run <span class="in">`gitcreds_set()`</span> and one of two things will happen:\</span>
+<span id="cb16-142"><a href="#cb16-142" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-143"><a href="#cb16-143" aria-hidden="true" tabindex="-1"></a>1)  R will prompt you to enter a token. This means you don't already have one and need to create one. Hit <span class="in">`Esc`</span> and run the second line of code, <span class="in">`create_github_token()`</span>. This will bring you to GitHub where you can create a token. Save this token somewhere safe - you will not be able to access it via GitHub again.</span>
+<span id="cb16-144"><a href="#cb16-144" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-145"><a href="#cb16-145" aria-hidden="true" tabindex="-1"></a>2)  R will show you the saved credentials (username and password) and give you options to exit without changing (1: Abort), replace the credentials, or to see the current token. This means you already have a token and can keep it or change it if it has expired. If it expired and you need a new one, run <span class="in">`create_github_token()`</span>.</span>
+<span id="cb16-146"><a href="#cb16-146" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-147"><a href="#cb16-147" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, eval = FALSE}</span></span>
+<span id="cb16-148"><a href="#cb16-148" aria-hidden="true" tabindex="-1"></a><span class="in">## Run this to see if you already have credentials, or to change them</span></span>
+<span id="cb16-149"><a href="#cb16-149" aria-hidden="true" tabindex="-1"></a><span class="in">gitcreds::gitcreds_set()</span></span>
+<span id="cb16-150"><a href="#cb16-150" aria-hidden="true" tabindex="-1"></a><span class="in">## Only run this if you need to generate a token</span></span>
+<span id="cb16-151"><a href="#cb16-151" aria-hidden="true" tabindex="-1"></a><span class="in">create_github_token()</span></span>
+<span id="cb16-152"><a href="#cb16-152" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb16-153"><a href="#cb16-153" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-154"><a href="#cb16-154" aria-hidden="true" tabindex="-1"></a><span class="fu"># Basic workflow</span></span>
+<span id="cb16-155"><a href="#cb16-155" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-156"><a href="#cb16-156" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>Everytime you begin working on code, make sure you "Pull" from the remote repository to make sure you have the most recent version of things (this is especially important when you are collaborating with people).</span>
+<span id="cb16-157"><a href="#cb16-157" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-158"><a href="#cb16-158" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>Make some changes to code</span>
+<span id="cb16-159"><a href="#cb16-159" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-160"><a href="#cb16-160" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>Save those changes</span>
+<span id="cb16-161"><a href="#cb16-161" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-162"><a href="#cb16-162" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>"Commit" those changes - Think of commits as 'breadcrumbs' they help you remember where you were in the coding process in case you need to revert back to a previous version. Your commit messages should help you remember what was 'happening' in the code when you made the commit. In general, you should save and commit fairly frequently and especially everytime you do something 'consequential'. Git allows you to 'turn back time', but that's only useful if you left enough information to get back to where you want to be.</span>
+<span id="cb16-163"><a href="#cb16-163" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-164"><a href="#cb16-164" aria-hidden="true" tabindex="-1"></a><span class="ss">5. </span>Push your work to the remote - when you're done working on the project for the day, push your local changes to the remote. This will ensure that if you switch computers or if someone else is going to work on the project, you (or they) will have the most recent version. Plus, if you don't do this, step 1 will really mess you up.</span>
+<span id="cb16-165"><a href="#cb16-165" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-166"><a href="#cb16-166" aria-hidden="true" tabindex="-1"></a><span class="fu"># What Does Git do?</span></span>
+<span id="cb16-167"><a href="#cb16-167" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-168"><a href="#cb16-168" aria-hidden="true" tabindex="-1"></a><span class="fu">## Version Control</span></span>
+<span id="cb16-169"><a href="#cb16-169" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-170"><a href="#cb16-170" aria-hidden="true" tabindex="-1"></a>The main function of Git is version control. This means Git will track the changes you make so you can revert to (or view) previous versions of the document. In order for this to work effectively, you need to start tracking your changes (make a repository) and frequently create versions with changes you have made (committing).</span>
+<span id="cb16-171"><a href="#cb16-171" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-172"><a href="#cb16-172" aria-hidden="true" tabindex="-1"></a><span class="fu">## Setting Up a Local Repository</span></span>
+<span id="cb16-173"><a href="#cb16-173" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-174"><a href="#cb16-174" aria-hidden="true" tabindex="-1"></a>Another function of Git is to store all your relevant files in a repository, similar to a project. You can create a repository that is located only on your device (therefore it is considered "local"). This will allow you to track changes to a project on your computer and access previous versions of the document at any time. We will look at how to create a local repository using Rstudio, but know that it is also possible to do this using the terminal. (See page 96 of @Gandrud_2015)</span>
+<span id="cb16-175"><a href="#cb16-175" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-176"><a href="#cb16-176" aria-hidden="true" tabindex="-1"></a><span class="ss">1.  </span>In Rstudio, select <span class="in">`File`</span> in the top left corner, and then <span class="in">`New Project`</span></span>
+<span id="cb16-177"><a href="#cb16-177" aria-hidden="true" tabindex="-1"></a><span class="ss">2.  </span>When the New Project menu appears, select <span class="in">`New Directory`</span></span>
+<span id="cb16-178"><a href="#cb16-178" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-179"><a href="#cb16-179" aria-hidden="true" tabindex="-1"></a><span class="in">```{r new directory, echo = FALSE, out.width = '60%', fig.align = 'center'}</span></span>
+<span id="cb16-180"><a href="#cb16-180" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-181"><a href="#cb16-181" aria-hidden="true" tabindex="-1"></a><span class="in">#knitr::include_graphics("img/01/new_directory.png")</span></span>
+<span id="cb16-182"><a href="#cb16-182" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb16-183"><a href="#cb16-183" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-184"><a href="#cb16-184" aria-hidden="true" tabindex="-1"></a><span class="ss">3.  </span>On the following screen, select <span class="in">`New Project`</span></span>
+<span id="cb16-185"><a href="#cb16-185" aria-hidden="true" tabindex="-1"></a><span class="ss">4.  </span>Finally, type the name you want to use for your new project, browse to the location where you want it saved on your computer, and select the <span class="in">`Create a git repository`</span> box.</span>
+<span id="cb16-186"><a href="#cb16-186" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!--</span></span>
+<span id="cb16-187"><a href="#cb16-187" aria-hidden="true" tabindex="-1"></a><span class="co">![](img/01/create_git_repository.PNG)</span></span>
+<span id="cb16-188"><a href="#cb16-188" aria-hidden="true" tabindex="-1"></a><span class="co">--&gt;</span></span>
+<span id="cb16-189"><a href="#cb16-189" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-190"><a href="#cb16-190" aria-hidden="true" tabindex="-1"></a>You now have a folder with a <span class="in">`.Rproj`</span> object and a <span class="in">`.gitignore`</span> file. There is also a hidden <span class="in">`.git`</span> folder that stores all the project information, including the version history files (commit history).</span>
+<span id="cb16-191"><a href="#cb16-191" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-192"><a href="#cb16-192" aria-hidden="true" tabindex="-1"></a><span class="fu">### Adding, Staging, and Committing</span></span>
+<span id="cb16-193"><a href="#cb16-193" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-194"><a href="#cb16-194" aria-hidden="true" tabindex="-1"></a>You can create new files or move existing files (including your data) into this project folder, and Git can track changes made to them. In order to do this, you will need to "add" files that have been created or moved into the project and "commit" these changes.</span>
+<span id="cb16-195"><a href="#cb16-195" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-196"><a href="#cb16-196" aria-hidden="true" tabindex="-1"></a>First, you will need to save the new file or move an existing file into the project folder. Then, you will "add" those files to your commit by checking the boxes in the <span class="in">`Git`</span> tab in your Rstudio window. If Git is already tracking a document, you will see an <span class="in">`M`</span> in the status column, however, if the file hasn't been added (and is therefore not being tracked), you will see a <span class="in">`?`</span> in the status column.</span>
+<span id="cb16-197"><a href="#cb16-197" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!--</span></span>
+<span id="cb16-198"><a href="#cb16-198" aria-hidden="true" tabindex="-1"></a><span class="co">![](img/01/adding.PNG)</span></span>
+<span id="cb16-199"><a href="#cb16-199" aria-hidden="true" tabindex="-1"></a><span class="co">--&gt;</span></span>
+<span id="cb16-200"><a href="#cb16-200" aria-hidden="true" tabindex="-1"></a>In order to save a version of your project as it is right now (with these added files), you will need to commit. To do this, select the <span class="in">`Commit`</span> button, above the boxes you just checked. This will open a new window where you can see the list of files that you added.</span>
+<span id="cb16-201"><a href="#cb16-201" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-202"><a href="#cb16-202" aria-hidden="true" tabindex="-1"></a>Type a useful message in the <span class="in">`Commit message`</span> box briefly describing the changes you made in this version. Then hit <span class="in">`Commit`</span>.</span>
+<span id="cb16-203"><a href="#cb16-203" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!--</span></span>
+<span id="cb16-204"><a href="#cb16-204" aria-hidden="true" tabindex="-1"></a><span class="co">![](img/01/committing.PNG)</span></span>
+<span id="cb16-205"><a href="#cb16-205" aria-hidden="true" tabindex="-1"></a><span class="co">--&gt;</span></span>
+<span id="cb16-206"><a href="#cb16-206" aria-hidden="true" tabindex="-1"></a>You should see a window pop up telling you what changes were successfully made. If this window ever says "failed", "execution halted", or "aborted", this means the commit did not work and you should read the message closely to determine why.</span>
+<span id="cb16-207"><a href="#cb16-207" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-208"><a href="#cb16-208" aria-hidden="true" tabindex="-1"></a>Save and commit frequently in order to get the most use out of your version control.</span>
+<span id="cb16-209"><a href="#cb16-209" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-210"><a href="#cb16-210" aria-hidden="true" tabindex="-1"></a><span class="fu">## Branches and Merging</span></span>
+<span id="cb16-211"><a href="#cb16-211" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-212"><a href="#cb16-212" aria-hidden="true" tabindex="-1"></a><span class="fu">### Branches</span></span>
+<span id="cb16-213"><a href="#cb16-213" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-214"><a href="#cb16-214" aria-hidden="true" tabindex="-1"></a>A new repository will have one branch called <span class="in">`main`</span>. You can think of this as the master version. You can create additional branches which are an exact copy of the main branch where you can make changes without committing them to the master. This is useful when several people are working on the same thing, or if you want to try multiple approaches to the same file (i.e. test run some code).</span>
+<span id="cb16-215"><a href="#cb16-215" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-216"><a href="#cb16-216" aria-hidden="true" tabindex="-1"></a>To create a branch, select the button with small purple shapes on the right hand side of your <span class="in">`Git`</span> tab in Rstudio.</span>
+<span id="cb16-217"><a href="#cb16-217" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!--</span></span>
+<span id="cb16-218"><a href="#cb16-218" aria-hidden="true" tabindex="-1"></a><span class="co">![](img/01/branch_button.PNG)</span></span>
+<span id="cb16-219"><a href="#cb16-219" aria-hidden="true" tabindex="-1"></a><span class="co">--&gt;</span></span>
+<span id="cb16-220"><a href="#cb16-220" aria-hidden="true" tabindex="-1"></a>You can now create a new branch, for example one called "test". This is essentially a copy of everything that is in your repository, and making changes here will not affect the <span class="in">`main`</span> branch.</span>
+<span id="cb16-221"><a href="#cb16-221" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-222"><a href="#cb16-222" aria-hidden="true" tabindex="-1"></a>To switch between branches, select the drop down menu to the right of the button you used to create a new branch.</span>
+<span id="cb16-223"><a href="#cb16-223" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!--</span></span>
+<span id="cb16-224"><a href="#cb16-224" aria-hidden="true" tabindex="-1"></a><span class="co">![](img/01/branches.PNG)</span></span>
+<span id="cb16-225"><a href="#cb16-225" aria-hidden="true" tabindex="-1"></a><span class="co">--&gt;</span></span>
+<span id="cb16-226"><a href="#cb16-226" aria-hidden="true" tabindex="-1"></a>You can easily switch to a different branch by selecting it on this menu.</span>
+<span id="cb16-227"><a href="#cb16-227" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-228"><a href="#cb16-228" aria-hidden="true" tabindex="-1"></a>Note that any files you create on a side branch will not show up in the main branch unless you merge them.</span>
+<span id="cb16-229"><a href="#cb16-229" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-230"><a href="#cb16-230" aria-hidden="true" tabindex="-1"></a>You can have multiple branches coming off your main branch at once, so you can try multiple different approaches (or by multiple people) simultaneously. Anytime you make a new branch it will start as a duplicate of the main branch.</span>
+<span id="cb16-231"><a href="#cb16-231" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-232"><a href="#cb16-232" aria-hidden="true" tabindex="-1"></a>You can see a history of your commits on different branches by selecting the clock icon (designating "History") near the <span class="in">`Commit`</span> button on your <span class="in">`Git`</span> tab. You will initially see the history for only the branch you are currently in, but if you select the drop down menu of branches at the top of this window, you can select another branch or <span class="in">`all branches`</span> and see how the branches compare to one another.</span>
+<span id="cb16-233"><a href="#cb16-233" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!--</span></span>
+<span id="cb16-234"><a href="#cb16-234" aria-hidden="true" tabindex="-1"></a><span class="co">![](img/01/history_button.PNG)</span></span>
+<span id="cb16-235"><a href="#cb16-235" aria-hidden="true" tabindex="-1"></a><span class="co">--&gt;</span></span>
+<span id="cb16-236"><a href="#cb16-236" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-237"><a href="#cb16-237" aria-hidden="true" tabindex="-1"></a><span class="fu">### Merging</span></span>
+<span id="cb16-238"><a href="#cb16-238" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-239"><a href="#cb16-239" aria-hidden="true" tabindex="-1"></a>If you find a method that works in a side branch and you want to bring it in to the main branch, this is called a merge.</span>
+<span id="cb16-240"><a href="#cb16-240" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-241"><a href="#cb16-241" aria-hidden="true" tabindex="-1"></a>To merge a side branch with the main branch (changing the version of your repo <span class="in">`main`</span> branch to match that of the successful side branch), we will use the terminal.</span>
+<span id="cb16-242"><a href="#cb16-242" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-243"><a href="#cb16-243" aria-hidden="true" tabindex="-1"></a><span class="ss">1.  </span>Make sure you are on the <span class="in">`main`</span> branch</span>
+<span id="cb16-244"><a href="#cb16-244" aria-hidden="true" tabindex="-1"></a><span class="ss">2.  </span>Select the <span class="in">`Terminal`</span> tab next to the <span class="in">`Console`</span> tab in the section of Rstudio displaying your console.</span>
+<span id="cb16-245"><a href="#cb16-245" aria-hidden="true" tabindex="-1"></a><span class="ss">3.  </span>Type <span class="in">`git merge`</span> and then the name of the branch you want to merge into the main branch.</span>
+<span id="cb16-246"><a href="#cb16-246" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!--</span></span>
+<span id="cb16-247"><a href="#cb16-247" aria-hidden="true" tabindex="-1"></a><span class="co">![](img/01/merge_terminal.PNG)</span></span>
+<span id="cb16-248"><a href="#cb16-248" aria-hidden="true" tabindex="-1"></a><span class="co">--&gt;</span></span>
+<span id="cb16-249"><a href="#cb16-249" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-250"><a href="#cb16-250" aria-hidden="true" tabindex="-1"></a>The repository of your <span class="in">`main`</span> branch should now match the repository of whatever branch you merged with it.</span>
+<span id="cb16-251"><a href="#cb16-251" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-252"><a href="#cb16-252" aria-hidden="true" tabindex="-1"></a>One way to check if the branches merged the way you intended is to select the history button again (make sure you go to <span class="in">`all branches`</span>) and check that the "HEAD" (which is the main branch) is at the same level as whichever branch you merged it with.</span>
+<span id="cb16-253"><a href="#cb16-253" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-254"><a href="#cb16-254" aria-hidden="true" tabindex="-1"></a><span class="fu"># Remote Storage/Collaboration (with GitHub)</span></span>
+<span id="cb16-255"><a href="#cb16-255" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-256"><a href="#cb16-256" aria-hidden="true" tabindex="-1"></a>With GitHub, you can set up a repository that is accessible from the internet (referred to as "remote") and can be accessed by other people. Remote repositories are nice because you can access them from different computers, assuming you have internet access, giving you access to your project wherever you are and creating a back up in case something happens to your computer. Github also allows for structured collaboration, so your whole team can make edits on the same documents and keep track of what has been changed where.</span>
+<span id="cb16-257"><a href="#cb16-257" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-258"><a href="#cb16-258" aria-hidden="true" tabindex="-1"></a><span class="fu">## Setting Up Remote Repositories</span></span>
+<span id="cb16-259"><a href="#cb16-259" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-260"><a href="#cb16-260" aria-hidden="true" tabindex="-1"></a>To set up a remote repository, make sure you are able to log into GitHub. We will go over three different ways to make repositories: starting from scratch with a new repository, creating a repository for an already started project, and accessing a repository made by a collaborator.</span>
+<span id="cb16-261"><a href="#cb16-261" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-262"><a href="#cb16-262" aria-hidden="true" tabindex="-1"></a><span class="fu">### New Repository</span></span>
+<span id="cb16-263"><a href="#cb16-263" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-264"><a href="#cb16-264" aria-hidden="true" tabindex="-1"></a>To create a brand new repository, click on the plus sign near your profile picture in the top right corner of GitHub and select <span class="in">`New repository`</span>.</span>
+<span id="cb16-265"><a href="#cb16-265" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!--</span></span>
+<span id="cb16-266"><a href="#cb16-266" aria-hidden="true" tabindex="-1"></a><span class="co">![](img/01/your_repository.PNG)</span></span>
+<span id="cb16-267"><a href="#cb16-267" aria-hidden="true" tabindex="-1"></a><span class="co">--&gt;</span></span>
+<span id="cb16-268"><a href="#cb16-268" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-269"><a href="#cb16-269" aria-hidden="true" tabindex="-1"></a>On the next page, type in a name for your repository and choose whether you want it to be public or private. It is recommended you select the box to create a README file. This will give you a place to describe the layout of your repository and the purpose of each file. Without a README file, visitors to your repository (and maybe future you) might not be able to figure out how to properly use the files in your repository, leading to your working being non-reproducible.</span>
+<span id="cb16-270"><a href="#cb16-270" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!--</span></span>
+<span id="cb16-271"><a href="#cb16-271" aria-hidden="true" tabindex="-1"></a><span class="co">![](img/01/readme.PNG)</span></span>
+<span id="cb16-272"><a href="#cb16-272" aria-hidden="true" tabindex="-1"></a><span class="co">--&gt;</span></span>
+<span id="cb16-273"><a href="#cb16-273" aria-hidden="true" tabindex="-1"></a>Now you can click <span class="in">`Create Repository`</span>.</span>
+<span id="cb16-274"><a href="#cb16-274" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-275"><a href="#cb16-275" aria-hidden="true" tabindex="-1"></a>Once your repository is created, you will see only the README file is present. To create other files, let's create a directory for this repo on our computer.</span>
+<span id="cb16-276"><a href="#cb16-276" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-277"><a href="#cb16-277" aria-hidden="true" tabindex="-1"></a><span class="ss">1.  </span>In R studio, follow the instructions for creating a new project, but when you see the following menu, select <span class="in">`Version Control`</span> this time.\</span>
+<span id="cb16-278"><a href="#cb16-278" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!--</span></span>
+<span id="cb16-279"><a href="#cb16-279" aria-hidden="true" tabindex="-1"></a><span class="co">![](img/01/version_control_directory.PNG)</span></span>
+<span id="cb16-280"><a href="#cb16-280" aria-hidden="true" tabindex="-1"></a><span class="co">--&gt;</span></span>
+<span id="cb16-281"><a href="#cb16-281" aria-hidden="true" tabindex="-1"></a><span class="ss">2.  </span>On the next window, select <span class="in">`Git`</span>.</span>
+<span id="cb16-282"><a href="#cb16-282" aria-hidden="true" tabindex="-1"></a><span class="ss">3.  </span>Return to the GitHub page for the repository you created and select the green <span class="in">`Code`</span> button.</span>
+<span id="cb16-283"><a href="#cb16-283" aria-hidden="true" tabindex="-1"></a><span class="ss">4.  </span>Copy the HTTPS link from the menu that pops up.</span>
+<span id="cb16-284"><a href="#cb16-284" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!--</span></span>
+<span id="cb16-285"><a href="#cb16-285" aria-hidden="true" tabindex="-1"></a><span class="co">![](img/01/repo_link.PNG)</span></span>
+<span id="cb16-286"><a href="#cb16-286" aria-hidden="true" tabindex="-1"></a><span class="co">--&gt;</span></span>
+<span id="cb16-287"><a href="#cb16-287" aria-hidden="true" tabindex="-1"></a><span class="ss">5.  </span>Return to Rstudio and paste the link in the Repository URL line at the top of the popped up window. Make sure to check the file path that is currently set and use the <span class="in">`Browse`</span> button if you want to save the folder for this directory in a different place.</span>
+<span id="cb16-288"><a href="#cb16-288" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!--</span></span>
+<span id="cb16-289"><a href="#cb16-289" aria-hidden="true" tabindex="-1"></a><span class="co">![](img/01/clone_repo.PNG)</span></span>
+<span id="cb16-290"><a href="#cb16-290" aria-hidden="true" tabindex="-1"></a><span class="co">--&gt;</span></span>
+<span id="cb16-291"><a href="#cb16-291" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-292"><a href="#cb16-292" aria-hidden="true" tabindex="-1"></a>Your repository is now set up in a new project in Rstudio, and you can begin by creating an Rmarkdown, R Script, etc.</span>
+<span id="cb16-293"><a href="#cb16-293" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-294"><a href="#cb16-294" aria-hidden="true" tabindex="-1"></a>Note, you can edit the contents of the README file by opening it in Rstudio.</span>
+<span id="cb16-295"><a href="#cb16-295" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-296"><a href="#cb16-296" aria-hidden="true" tabindex="-1"></a><span class="fu">### From an Existing Project</span></span>
+<span id="cb16-297"><a href="#cb16-297" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-298"><a href="#cb16-298" aria-hidden="true" tabindex="-1"></a>You may find yourself wanting to create a repo on GitHub for a project you have already started working on. Fortunately, it is easy to start version control tracking on a project and add the project to a remote repository.</span>
+<span id="cb16-299"><a href="#cb16-299" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-300"><a href="#cb16-300" aria-hidden="true" tabindex="-1"></a>Here are the steps to follow if you have a project folder with a <span class="in">`.Rproj`</span> file in it and your directory is not already being tracked with Git:</span>
+<span id="cb16-301"><a href="#cb16-301" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-302"><a href="#cb16-302" aria-hidden="true" tabindex="-1"></a><span class="ss">1.  </span>Follow the steps above for creating a New repository, but this time do not click the box to create a README file. This will bring you to a page with a "Quick Set Up" link. Keep this page open for later.\</span>
+<span id="cb16-303"><a href="#cb16-303" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!--</span></span>
+<span id="cb16-304"><a href="#cb16-304" aria-hidden="true" tabindex="-1"></a><span class="co">![](img/01/quick_setup.PNG)</span></span>
+<span id="cb16-305"><a href="#cb16-305" aria-hidden="true" tabindex="-1"></a><span class="co">--&gt;</span></span>
+<span id="cb16-306"><a href="#cb16-306" aria-hidden="true" tabindex="-1"></a><span class="ss">2.  </span>Go to RStudio and open the <span class="in">`.Rproj`</span> file that will be added to the GitHub repository./</span>
+<span id="cb16-307"><a href="#cb16-307" aria-hidden="true" tabindex="-1"></a><span class="ss">3.  </span>Select the <span class="in">`Terminal`</span> tab next to <span class="in">`Console`</span> and enter the following lines of code.</span>
+<span id="cb16-308"><a href="#cb16-308" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-309"><a href="#cb16-309" aria-hidden="true" tabindex="-1"></a><span class="in">```{bash initialize repo, eval =  FALSE}</span></span>
+<span id="cb16-310"><a href="#cb16-310" aria-hidden="true" tabindex="-1"></a><span class="in">$ git init -b main</span></span>
+<span id="cb16-311"><a href="#cb16-311" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb16-312"><a href="#cb16-312" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-313"><a href="#cb16-313" aria-hidden="true" tabindex="-1"></a>"git" tells bash what program we want to use &nbsp; "init" tells bash to initialize a Git repository fir this directory\</span>
+<span id="cb16-314"><a href="#cb16-314" aria-hidden="true" tabindex="-1"></a>"-b main" is saying we want to create a branch called "main"\</span>
+<span id="cb16-315"><a href="#cb16-315" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-316"><a href="#cb16-316" aria-hidden="true" tabindex="-1"></a><span class="in">```{bash add files to repo, eval = FALSE}</span></span>
+<span id="cb16-317"><a href="#cb16-317" aria-hidden="true" tabindex="-1"></a><span class="in">$ git add .</span></span>
+<span id="cb16-318"><a href="#cb16-318" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb16-319"><a href="#cb16-319" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-320"><a href="#cb16-320" aria-hidden="true" tabindex="-1"></a>This will add all of the files within the current folder to the repository. You may get a lot of warnings because you have a <span class="in">`.Rproj`</span> file and potentially a <span class="in">`.Rhistory`</span> file in this folder which are not usually ideal to track. We will take care of this by adding these file names to the .gitignore file shortly.</span>
+<span id="cb16-321"><a href="#cb16-321" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-322"><a href="#cb16-322" aria-hidden="true" tabindex="-1"></a><span class="in">```{bash commit changes, eval = FALSE}</span></span>
+<span id="cb16-323"><a href="#cb16-323" aria-hidden="true" tabindex="-1"></a><span class="in">$ git commit -m "First commit"</span></span>
+<span id="cb16-324"><a href="#cb16-324" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb16-325"><a href="#cb16-325" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-326"><a href="#cb16-326" aria-hidden="true" tabindex="-1"></a>This line creates your first commit. You can change the commit message to anything that makes sense to you.</span>
+<span id="cb16-327"><a href="#cb16-327" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-328"><a href="#cb16-328" aria-hidden="true" tabindex="-1"></a><span class="ss">4.  </span>Go back to GitHub and copy the Quick start link. Type the following code in the terminal, but replace <span class="in">`&lt;REMOTE_URL&gt;`</span> with the copied link.</span>
+<span id="cb16-329"><a href="#cb16-329" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-330"><a href="#cb16-330" aria-hidden="true" tabindex="-1"></a><span class="in">```{bash link repo to GitHub, eval = FALSE}</span></span>
+<span id="cb16-331"><a href="#cb16-331" aria-hidden="true" tabindex="-1"></a><span class="in">$ git remote add origin &lt;REMOTE_URL&gt;</span></span>
+<span id="cb16-332"><a href="#cb16-332" aria-hidden="true" tabindex="-1"></a><span class="in"># Replace "&lt;REMOTE_URL&gt;" with url from GitHub</span></span>
+<span id="cb16-333"><a href="#cb16-333" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb16-334"><a href="#cb16-334" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-335"><a href="#cb16-335" aria-hidden="true" tabindex="-1"></a><span class="ss">5.  </span>Last, we will push these changes to GitHub. We will further discuss what this means later, but for now run the following line in the terminal.</span>
+<span id="cb16-336"><a href="#cb16-336" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-337"><a href="#cb16-337" aria-hidden="true" tabindex="-1"></a><span class="in">```{bash push changes to GitHub, eval = FALSE}</span></span>
+<span id="cb16-338"><a href="#cb16-338" aria-hidden="true" tabindex="-1"></a><span class="in">$ git push origin main</span></span>
+<span id="cb16-339"><a href="#cb16-339" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb16-340"><a href="#cb16-340" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-341"><a href="#cb16-341" aria-hidden="true" tabindex="-1"></a>Now when you return to GitHub and refresh your repository page, you should see all of the files from your existing project.</span>
+<span id="cb16-342"><a href="#cb16-342" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-343"><a href="#cb16-343" aria-hidden="true" tabindex="-1"></a>You can add a <span class="in">`README`</span> and <span class="in">`.gitignore`</span> on the GitHub website by selecting "Add file" on the repository's page. When you make a .gitignore file, it may suggest you use a template, in which case, select the <span class="in">`R`</span> template from the drop down list and it will automatically fill the document with file types that should typically not be tracked.</span>
+<span id="cb16-344"><a href="#cb16-344" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-345"><a href="#cb16-345" aria-hidden="true" tabindex="-1"></a><span class="fu">### Cloning a Repository</span></span>
+<span id="cb16-346"><a href="#cb16-346" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-347"><a href="#cb16-347" aria-hidden="true" tabindex="-1"></a>If you want to join a repository that has already been created, you can either find the repository by searching for it on GitHub (if it is publicly available) or contact the creator and have them add you as a collaborator to the repository. Either way, you will follow steps 1-5 in the "New Repository" section above, but this time the link is coming from the already created repository.</span>
+<span id="cb16-348"><a href="#cb16-348" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-349"><a href="#cb16-349" aria-hidden="true" tabindex="-1"></a>In cases where the repository is not accessible (you do not have cloning priveleges), you will have to create a pull request.</span>
+<span id="cb16-350"><a href="#cb16-350" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-351"><a href="#cb16-351" aria-hidden="true" tabindex="-1"></a><span class="fu">## "Pushing" and "Pulling"</span></span>
+<span id="cb16-352"><a href="#cb16-352" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-353"><a href="#cb16-353" aria-hidden="true" tabindex="-1"></a>Once you have your remote repository ready, you can make changes to the files and "add" and "commit" them like we did in the "Version Control" section above. However, now we must take steps to make sure our local version of the repository is up-to-date with the online version, and the versions that all other collaborators have on their computers.</span>
+<span id="cb16-354"><a href="#cb16-354" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-355"><a href="#cb16-355" aria-hidden="true" tabindex="-1"></a>To do this, we will need to "push" and "pull". "Pulling" is when we bring recent and out-of-sync changes from the online version to our local device. "Pushing" is the opposite; we are sending our commits to the online version to update it with our recent changes. This will allow anyone else working in the repository to "pull" your changes onto their computer.</span>
+<span id="cb16-356"><a href="#cb16-356" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-357"><a href="#cb16-357" aria-hidden="true" tabindex="-1"></a>To push and pull, use the blue and green arrows on the <span class="in">`Git`</span> tab in R studio.</span>
+<span id="cb16-358"><a href="#cb16-358" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!--</span></span>
+<span id="cb16-359"><a href="#cb16-359" aria-hidden="true" tabindex="-1"></a><span class="co">![](img/01/push_pull_buttons.PNG)</span></span>
+<span id="cb16-360"><a href="#cb16-360" aria-hidden="true" tabindex="-1"></a><span class="co">--&gt;</span></span>
+<span id="cb16-361"><a href="#cb16-361" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-362"><a href="#cb16-362" aria-hidden="true" tabindex="-1"></a>You may also notice the next time you "commit" your changes, these same push and pull buttons are located above the "Commit Message" box on the pop up window.</span>
+<span id="cb16-363"><a href="#cb16-363" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-364"><a href="#cb16-364" aria-hidden="true" tabindex="-1"></a>It is good practice to "pull" each time you are about to start working in a repository and to push after you commit, or at least once at the end of your working period within a repository for the day. Keeping good "push" and "pull" habits will help you avoid merge conflicts with collaborators or yourself if you work on a project on more than one computer.</span>
+<span id="cb16-365"><a href="#cb16-365" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-366"><a href="#cb16-366" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-367"><a href="#cb16-367" aria-hidden="true" tabindex="-1"></a><span class="fu">## Adding and Managing Collaborators</span></span>
+<span id="cb16-368"><a href="#cb16-368" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-369"><a href="#cb16-369" aria-hidden="true" tabindex="-1"></a>Collaborative coding is a huge benefit of GitHub. In order to invite your collaborators to clone your remote repository, you will need to know their GitHub username, or at least their email address.</span>
+<span id="cb16-370"><a href="#cb16-370" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-371"><a href="#cb16-371" aria-hidden="true" tabindex="-1"></a><span class="ss">1.  </span>On your repository page on GitHub, select <span class="in">`Settings`</span> in the middle of the banner near the top of the page.</span>
+<span id="cb16-372"><a href="#cb16-372" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!--</span></span>
+<span id="cb16-373"><a href="#cb16-373" aria-hidden="true" tabindex="-1"></a><span class="co">![](img/01/settings_button.PNG)</span></span>
+<span id="cb16-374"><a href="#cb16-374" aria-hidden="true" tabindex="-1"></a><span class="co">--&gt;</span></span>
+<span id="cb16-375"><a href="#cb16-375" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-376"><a href="#cb16-376" aria-hidden="true" tabindex="-1"></a><span class="ss">2.  </span>In the menu on the left, select the <span class="in">`Collaborators`</span> page.</span>
+<span id="cb16-377"><a href="#cb16-377" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!--</span></span>
+<span id="cb16-378"><a href="#cb16-378" aria-hidden="true" tabindex="-1"></a><span class="co">![](img/01/collaborators.PNG)</span></span>
+<span id="cb16-379"><a href="#cb16-379" aria-hidden="true" tabindex="-1"></a><span class="co">--&gt;</span></span>
+<span id="cb16-380"><a href="#cb16-380" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-381"><a href="#cb16-381" aria-hidden="true" tabindex="-1"></a><span class="ss">3.  </span>Enter your password, and then select <span class="in">`Add People`</span> under <span class="in">`Manage Access`</span></span>
+<span id="cb16-382"><a href="#cb16-382" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-383"><a href="#cb16-383" aria-hidden="true" tabindex="-1"></a>Add your collaborators one at a time. This will send them a message inviting them to join the repository.</span>
+<span id="cb16-384"><a href="#cb16-384" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-385"><a href="#cb16-385" aria-hidden="true" tabindex="-1"></a>As the owner of the repository, you will be able to remove people from the repository at any time.</span>
+<span id="cb16-386"><a href="#cb16-386" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-387"><a href="#cb16-387" aria-hidden="true" tabindex="-1"></a><span class="fu">## Merge Conflicts</span></span>
+<span id="cb16-388"><a href="#cb16-388" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-389"><a href="#cb16-389" aria-hidden="true" tabindex="-1"></a>When two people are working on a branch at the same time, changes were made and not pushed before someone else started working, or a collaborator forgets to pull before starting to make changes, a merge conflict may arise. Merge conflicts happen because Git is not sure how to combine the different changes that occurred in the same sections of the document. In some instances, Git is smart enough to figure it out and will merge the versions on its own. Other times, the merge conflict will be need to be fixed manually. Note that Git will not allow the push until the merge conflict is solved.</span>
+<span id="cb16-390"><a href="#cb16-390" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-391"><a href="#cb16-391" aria-hidden="true" tabindex="-1"></a>If a merge conflict occurs, you will see some specific things added to your code. There will be a line at the beginning that starts with <span class="in">`&lt;&lt;&lt;&lt;&lt;&lt;&lt;`</span>, a line at the end starting with <span class="in">`&gt;&gt;&gt;&gt;&gt;&gt;&gt;`</span> and a line in the middle that just has <span class="in">`=======`</span>. The two different version are shown above and below the middle line, labeled with which branch has which version. It is your job to decide how these versions fit together. Once you have modified the code to match the final version you want to keep, you can delete the three lines of code containing the <span class="in">`&gt;`</span>, <span class="in">`&lt;`</span> and <span class="in">`=`</span> symbols and "stage" and "commit" your files as usual.</span>
+<span id="cb16-392"><a href="#cb16-392" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!--</span></span>
+<span id="cb16-393"><a href="#cb16-393" aria-hidden="true" tabindex="-1"></a><span class="co">![](img/01/MergeConflict.PNG)</span></span>
+<span id="cb16-394"><a href="#cb16-394" aria-hidden="true" tabindex="-1"></a><span class="co">--&gt;</span></span>
+<span id="cb16-395"><a href="#cb16-395" aria-hidden="true" tabindex="-1"></a><span class="fu">### On GitHub</span></span>
+<span id="cb16-396"><a href="#cb16-396" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-397"><a href="#cb16-397" aria-hidden="true" tabindex="-1"></a>You can also merge branches and resolve merge conflicts on GitHub. You would push your branch to GitHub, then go to the GitHub repo webpage. You will need to create a pull request to merge your branch. If there is a merge conflict, you will need to click on "Resolve conflicts" before you can merge your branch. The syntax to edit the document and resolve the conflict is the same as above.</span>
+<span id="cb16-398"><a href="#cb16-398" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!--</span></span>
+<span id="cb16-399"><a href="#cb16-399" aria-hidden="true" tabindex="-1"></a><span class="co">![](img/01/ResolvePullRequest.PNG)</span></span>
+<span id="cb16-400"><a href="#cb16-400" aria-hidden="true" tabindex="-1"></a><span class="co">--&gt;</span></span>
+<span id="cb16-401"><a href="#cb16-401" aria-hidden="true" tabindex="-1"></a><span class="fu"># Extras</span></span>
+<span id="cb16-402"><a href="#cb16-402" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-403"><a href="#cb16-403" aria-hidden="true" tabindex="-1"></a><span class="fu">## Cloning, Branching, and Forking, Oh My!</span></span>
+<span id="cb16-404"><a href="#cb16-404" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-405"><a href="#cb16-405" aria-hidden="true" tabindex="-1"></a>Cloning, branching, and forking are functions that are similar, but they are not the same. When you **clone** a repository, you are connected to it and are working in that repository. You can commit changes and push them to the same repository. When you create a **branch**, you create a copy where you can work on a specific part of a document or run test code with the intent to merge it back to the main branch. Many branches are short-lived and deleted once their purpose has been served. Anyone that has access to the repository also has access to the branches in it. A **fork** creates a copy of the entire repository as well, however, the collaborators are disconnected from it. The intent is generally to diverge from the original repository and never be merged back into it.</span>
+<span id="cb16-406"><a href="#cb16-406" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-407"><a href="#cb16-407" aria-hidden="true" tabindex="-1"></a><span class="fu">## .gitignore and Large Files</span></span>
+<span id="cb16-408"><a href="#cb16-408" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-409"><a href="#cb16-409" aria-hidden="true" tabindex="-1"></a>GitHub does not allow repositories to be larger than 5GB. While we recommend keeping all of the files necessary to run your analysis together in the repo, this may not be possible if say for example your data files are larger than the size limit. If this is the case, you can manually distribute your data file a different way. (See <span class="ot">&lt;https://git-lfs.github.com/&gt;</span> first though if this is an issue you are actually having.)</span>
+<span id="cb16-410"><a href="#cb16-410" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-411"><a href="#cb16-411" aria-hidden="true" tabindex="-1"></a>Once all collaborators (or just you) have the large data file in your Git repo, you may forget that you cannot send this to GitHub and accidentally try to commit and push it. Fortunately, Git will recognize the problem before it takes place and will give you the following warning:</span>
+<span id="cb16-412"><a href="#cb16-412" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!--</span></span>
+<span id="cb16-413"><a href="#cb16-413" aria-hidden="true" tabindex="-1"></a><span class="co">![](img/01/large_file_warning.PNG)</span></span>
+<span id="cb16-414"><a href="#cb16-414" aria-hidden="true" tabindex="-1"></a><span class="co">--&gt;</span></span>
+<span id="cb16-415"><a href="#cb16-415" aria-hidden="true" tabindex="-1"></a>To resolve this problem, you just need to tell Git to ignore the large file when you make your commit. First, determine which file(s) is/are too big by looking at their size. Then, navigate to your <span class="in">`.gitignore`</span> document and open it. Last, add the name(s) of the file(s) that is/are too large. Now you will be able to commit and push the tracked files within your repository.</span>
+<span id="cb16-416"><a href="#cb16-416" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-417"><a href="#cb16-417" aria-hidden="true" tabindex="-1"></a>You can add any files you do not want to be tracked to .gitignore. An example is the html file generated by rendering this document. It is regenerated constantly, so there is no need to track the changes.</span>
+<span id="cb16-418"><a href="#cb16-418" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-419"><a href="#cb16-419" aria-hidden="true" tabindex="-1"></a><span class="fu">## Amend Commits</span></span>
+<span id="cb16-420"><a href="#cb16-420" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-421"><a href="#cb16-421" aria-hidden="true" tabindex="-1"></a>If at any point you find you have made a commit that should not have been made (e.x. you accidentally added and committed files that are too large and now you aren't able to push), you can easily fix this by making the necessary changes within your files, checking the "amend previous commit" box on the commit screen, and then committing as usual. This will overwrite your previous commit with the correct version you want to commit. If you need to amend an earlier commit (i.e. not the most recent commit), you will need to use the terminal (See <span class="co">[</span><span class="ot">Oh S#!\*, Git!?!</span><span class="co">](https://ohshitgit.com/)</span>).</span>
+<span id="cb16-422"><a href="#cb16-422" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!--</span></span>
+<span id="cb16-423"><a href="#cb16-423" aria-hidden="true" tabindex="-1"></a><span class="co">![](img/01/amend_commit_box.PNG)</span></span>
+<span id="cb16-424"><a href="#cb16-424" aria-hidden="true" tabindex="-1"></a><span class="co">--&gt;</span></span>
+<span id="cb16-425"><a href="#cb16-425" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-426"><a href="#cb16-426" aria-hidden="true" tabindex="-1"></a><span class="fu">## Installing a Git Client</span></span>
+<span id="cb16-427"><a href="#cb16-427" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-428"><a href="#cb16-428" aria-hidden="true" tabindex="-1"></a>With all of the commits, branching, merging, and collaboration, it can be tricky to keep track of everything going on in your repository. Viewing the commit history in GitHub or under the Git tab in RStudio is useful, though it can still be a little hard to follow. Using a Git client software helps visualize the workflow and allows you to use commands in the graphic user interface (GUI) that you would normally need to type into the terminal.</span>
+<span id="cb16-429"><a href="#cb16-429" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!--</span></span>
+<span id="cb16-430"><a href="#cb16-430" aria-hidden="true" tabindex="-1"></a><span class="co">![](img/01/GitKraken.PNG)</span></span>
+<span id="cb16-431"><a href="#cb16-431" aria-hidden="true" tabindex="-1"></a><span class="co">--&gt;</span></span>
+<span id="cb16-432"><a href="#cb16-432" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-433"><a href="#cb16-433" aria-hidden="true" tabindex="-1"></a>There are a few Git Clients out there and you may want to try a few to see what works for you. I use GitKraken which you can download <span class="co">[</span><span class="ot">here.</span><span class="co">](https://www.gitkraken.com/download)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div></div></div></div></div>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>Content <i class="fa-brands fa-creative-commons" aria-hidden="true"></i> 2023 by <a href="www.spaseslab.com">Matt Williamson</a> <br> All content licensed under a <i class="fa-brands fa-creative-commons" aria-hidden="true"></i> <i class="fa-brands fa-creative-commons-by" aria-hidden="true"></i> <i class="fa-brands fa-creative-commons-nc" aria-hidden="true"></i> <a href="https://creativecommons.org/licenses/by-nc/4.0/">Creative Commons Attribution-NonCommercial 4.0 International license (CC BY-NC 4.0)</a></p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+<p>Made with <i class="fa-brands fa-r-project" aria-hidden="true"></i> and <a href="https://quarto.org/">Quarto</a><br> <a href="https://github.com/BSU-Spatial-Data-in-R-Fall2024">View the source at <i class="fa-brands fa-github" aria-hidden="true"></i> GitHub</a> Based on websites designed by <a href="https://github.com/andrewheiss/evalf22.classes.andrewheiss.com">Andrew Heiss</a></p>
+</div>
+  </div>
+</footer>
+
+
+
+
+</body></html>
