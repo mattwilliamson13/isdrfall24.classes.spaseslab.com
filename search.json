@@ -600,7 +600,7 @@
     "href": "assignment/self-eval1.html",
     "title": "Self-reflection 1",
     "section": "",
-    "text": "This is the first of three self-reflections that you’ll complete during the course. These provide an opportunity for me to learn more about you, check-in on how the course is going, and make sure that getting what you need from the course materials. This first reflection also helps us set the standards for your assessment in the course. As such, I’m asking that you complete this in a timely fashion and turn it in by Aug. 24 . You’ll need to accept the link to access the questions.",
+    "text": "This is the first of three self-reflections that you’ll complete during the course. These provide an opportunity for me to learn more about you, check-in on how the course is going, and make sure that getting what you need from the course materials. This first reflection also helps us set the standards for your assessment in the course. As such, I’m asking that you complete this in a timely fashion and turn it in by Aug. 23. You’ll need to accept this link to access the questions.",
     "crumbs": [
       "Assignments",
       "Self Assessments",
@@ -1725,7 +1725,7 @@
     "href": "slides/01-slides.html#course-webpage",
     "title": "Getting Started",
     "section": "Course Webpage",
-    "text": "Course Webpage\n\nhttps://isdrfall24.classes.spaseslab.com/\n\n\nSyllabus\nSchedule\nLectures\nAssignments\nResources"
+    "text": "Course Webpage\nhttps://isdrfall24.classes.spaseslab.com/\n\n\nSyllabus\nSchedule\nLectures\nAssignments\nResources"
   },
   {
     "objectID": "slides/01-slides.html#assignments",
@@ -1760,7 +1760,7 @@
     "href": "slides/01-slides.html#joining-the-assignment-and-cloning-the-repo",
     "title": "Getting Started",
     "section": "Joining the assignment and cloning the repo",
-    "text": "Joining the assignment and cloning the repo\n\nClick this link \nBring the project into RStudio\n\n\nGo to File&gt;New Project and choose the “Version Control” option\nSelect “Git” (Not Subversion)\nPaste the link from the “Clone Repository” button into the “Repository URL” space"
+    "text": "Joining the assignment and cloning the repo\n\nClick this link\nBring the project into RStudio\n\n\nGo to File&gt;New Project and choose the “Version Control” option\nSelect “Git” (Not Subversion)\nPaste the link from the “Clone Repository” button into the “Repository URL” space"
   },
   {
     "objectID": "slides/01-slides.html#the-git-workflow",
