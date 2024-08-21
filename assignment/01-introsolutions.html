@@ -204,51 +204,59 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <p><span style="color:#9F281A;">How does geographic analysis fit into your goals for your research? Given our discussion of the aims and limitations of geographic analysis, are there particular issues that you would like to know more about or guard against?</span></p>
 <blockquote class="blockquote">
-<p>Almost all of my research has to do with geographic analysis and basic geographic concepts. I suppose that’s why I teach this course. For me, one of the biggest challenges is figuring out how to a) choose a scale of analysis that matches the scale of the phenomena that I’m interested in and b) reconcile the fact that most of the data I have access to was rarely collected at that specific scale. I’m constantly looking for new methods to try and determine if and when my results are dependent upon some arbitrary choice of extent and resolution.</p>
+<p>My research is based almost entirely on geographic analysis, between estimating ecosystem services and studying agricultural change through time in different Idaho locations. One issue I face is that I integrate ecosystem services data collected and estimated at multiple scales into one analysis. I have to be careful I don’t fall into any pitfalls or fallacies when I combine multiple sources of data. In other cases, I have county level data and have to acknowledge the measurement bias that comes with data collection along those policial boundaries.</p>
 </blockquote>
 <p><span style="color:#9F281A;">What are the primary components that describe spatial data?</span></p>
 <blockquote class="blockquote">
-<p>I would say that the primary components are the coordinate reference system (because it helps us understand where we actually are on Earth), the extent of the data (because that helps me know what scale we’re working with and the size of the computational probelem), the resolution (same reason as extent), the geometry, and spatial support. I don’t think about this last one often enough, but it really is the key to honest interpretation of the spatial data that you have.</p>
+<p>I would say that the primary components are the coordinate reference system (because it helps us understand where we actually are on Earth), the extent of the data (because that helps me know what scale we’re working with and the size of the computational problem), the resolution (same reason as extent), the geometry, and spatial support. I don’t think about this last one often enough, but it really is the key to honest interpretation of the spatial data that you have.</p>
 </blockquote>
 <p><span style="color:#9F281A;">What is the coordinate reference system and why is it important</span></p>
 <blockquote class="blockquote">
 <p>The CRS consists of the information necessary to locate points in 2 or 3 dimensional space. Coordinates are only meaningful in the context of a CRS (i.e., (2,2) could describe any number of places in the world - we need to know the origin and the datum to actually know where that is). The CRS becomes particularly important when we need to align datasets that were not collected in the same CRS originally or when we need to transfer locations from the globe to a flat surface (e.g., map, screen, etc).</p>
 </blockquote>
 <p><span style="color:#9F281A;">Find two maps of the same area in different projections? How does the projection affect your perception of the data being displayed?</span></p>
-<p>Here’s a fun article on <a href="https://www.nature.com/nature-index/news/data-visualisation-animated-map-mercater-projection-true-size-countries">projections</a> that shows what i’m talking about!</p>
-<p><span style="color:#9F281A;">Read in the cejst.shp file in the assignment01 folder. How many attributes describe each object? How many unique geometries are there? What is the coordinate reference system?</span></p>
+<blockquote class="blockquote">
+<p>Here’s a fun article on <a href="https://www.nature.com/nature-index/news/data-visualisation-animated-map-mercater-projection-true-size-countries">projections</a> that shows what I’m talking about!</p>
+</blockquote>
+<p><span style="color:#9F281A;">Read in the cejst_nw.shp file in the assignment01 folder. How many attributes describe each object? How many unique geometries are there? What is the coordinate reference system?</span></p>
 <p>I can read in the data using <code>st_read</code> or <code>read_sf</code></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="in">#| message: false</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="in">library(sf)</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="in"># cejst.sf &lt;- read_sf("data/opt/data/2023/assignment01/cejst_nw.shp")</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="in"># cejst.st &lt;- st_read("data/opt/data/2023/assignment01/cejst_nw.shp")</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>cejst.sf <span class="ot">&lt;-</span> <span class="fu">read_sf</span>(<span class="st">"/opt/data/data/assignment01/cejst_nw.shp"</span>)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>cejst.st <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="st">"/opt/data/data/assignment01/cejst_nw.shp"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>You can inspect the differences between the resulting object classes by calling <code>class</code></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="in">#| message: false</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="in">library(sf)</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="in"># class(cejst.sf)</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="in"># class(cejst.st)</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="in">class(cejst.sf)</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="in">class(cejst.st)</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "sf"         "tbl_df"     "tbl"        "data.frame"
+[1] "sf"         "data.frame"</code></pre>
+</div>
 </div>
 <p>You’ll notice that using <code>st_read</code> assigns the object to an <code>sf</code> and <code>data.frame</code> class meaning that functions defined for those two classes will work. Alternatively, <code>read_sf</code> assigns the object to <code>sf</code>, <code>tbl_df</code>, <code>tbl</code>, and <code>data.frame</code> classes meaning that a much broader set of functions can be run on the <code>cejst.sf</code> object.</p>
 <p>Because the data are in <a href="https://www.statology.org/long-vs-wide-data/">wide format</a>, we can assume that there is only 1 observation for each location (because <code>sf</code> requires that there is a geometry entry for every observation (even if it’s empty)). Probably the easiest way to get the number of observations is:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="in"># nrow(cejst.sf)</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="in">nrow(cejst.sf)</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2590</code></pre>
+</div>
 </div>
 <p>Similarly, if we wanted to know how many attributes are collected for each observation we could use <code>ncol</code>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="in"># ncol(cejst.sf)</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="in">ncol(cejst.sf)</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 124</code></pre>
+</div>
 </div>
 <p>Note that these are really only approximate estimates. There’s usually a lot of extra ID-style columns in spatial data such that the number of columns with useful information is less than the total number of columns, but we won’t worry about that for now.</p>
 
