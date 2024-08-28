@@ -1373,21 +1373,36 @@
     "href": "assignment/02-introspatial.html",
     "title": "Assignment 2: Intro to Spatial Data",
     "section": "",
-    "text": "This is the second assignment of the semester for HES 505.\nFor the rest of the course, I’ll be asking you to use pseudocode to plan your analysis steps before you start using any functions (or writing your own). Pseudocode allows you to think about the important steps of your process and identify your desired results before your start down the path of coding. You can think of pseudocode as an outline for syntax, much like the one you might use for writing an manuscript or report. Quarto documents are designed to let you both outline your report and plan your analysis all in the same place! This assingment is meant to give you some practice setting up your outlines before you start coding. By the end of this assignment you should be able to:"
+    "text": "This is the second assignment of the semester for HES 505.\nFor the rest of the course, I’ll be asking you to use pseudocode to plan your analysis steps before you start using any functions (or writing your own). Pseudocode allows you to think about the important steps of your process and identify your desired results before your start down the path of coding. You can think of pseudocode as an outline for syntax, much like the one you might use for writing an manuscript or report. Quarto documents are designed to let you both outline your report and plan your analysis all in the same place! This assingment is meant to give you some practice setting up your outlines before you start coding. By the end of this assignment you should be able to:",
+    "crumbs": [
+      "Assignments",
+      "Homework",
+      "Spatial Data and Quarto"
+    ]
   },
   {
     "objectID": "assignment/02-introspatial.html#instructions",
     "href": "assignment/02-introspatial.html#instructions",
     "title": "Assignment 2: Intro to Spatial Data",
     "section": "Instructions",
-    "text": "Instructions\n\nAfter you’ve joined the assignment repository, you should have this file (named Readme.md) inside of a R project named assignment-2-xx where xx is your github username (or initials).\nOnce you’ve verified that you’ve correctly cloned the assignment repository, create a new Quarto document. Name this file assignment-2-xxx.qmd and give it a title (like M Williamson Assignment 2). Make sure that you select the html output option (Quarto can do a lot of cool things, but the html format is the least-likely to cause you additional headaches). We’ll be using Quarto throughout the course so it’s worth checking out the other tutorials in the getting started section.\nCopy the questions below into your document and change the color of their text.\nSave the changes and make your first commit!\nAnswer the questions making sure save and commit at least 4 more times (having 5 commits is part of the assignment).\nRender the document to html (you should now have at least 3 files in the repository: Readme.md, assignment-2-xx.qmd, and assignment-2-xx.html). Commit these changes and push them to the repository on GitHub. You should see the files there when you go to github.com."
+    "text": "Instructions\n\nAfter you’ve joined the assignment repository, you should have this file (named Readme.md) inside of a R project named assignment-2-xx where xx is your github username (or initials).\nOnce you’ve verified that you’ve correctly cloned the assignment repository, create a new Quarto document. Name this file assignment-2-xxx.qmd and give it a title (like M Williamson Assignment 2). Make sure that you select the html output option (Quarto can do a lot of cool things, but the html format is the least-likely to cause you additional headaches). We’ll be using Quarto throughout the course so it’s worth checking out the other tutorials in the getting started section.\nCopy the questions below into your document and change the color of their text.\nSave the changes and make your first commit!\nAnswer the questions making sure save and commit at least 4 more times (having 5 commits is part of the assignment).\nRender the document to html (you should now have at least 3 files in the repository: Readme.md, assignment-2-xx.qmd, and assignment-2-xx.html). Commit these changes and push them to the repository on GitHub. You should see the files there when you go to github.com.",
+    "crumbs": [
+      "Assignments",
+      "Homework",
+      "Spatial Data and Quarto"
+    ]
   },
   {
     "objectID": "assignment/02-introspatial.html#the-assignment",
     "href": "assignment/02-introspatial.html#the-assignment",
     "title": "Assignment 2: Intro to Spatial Data",
     "section": "The Assignment",
-    "text": "The Assignment\nFind a figure that you’d like to mimic with your research. The figure should be from a manuscript or report and present the results of a quantitative aaalysis (i.e., not a conceptual model or an image). Once you’ve found one you should:\n\nCreate a section called “Introduction” in your Quarto document. In that section, you should give me the citation for the article and a brief description (similar to the caption) of the figure.\nCreate a second section called “Methods” and write out the steps necessary to create the figure. These should be similar to the pseudocode we discussed in clase (e.g., “Load Data”, “Summarize by county”, “Run linear regression”, “Build Figure”). The methods section of the manuscript you’ve chosen should provide you with enough information to begin sketching this out. Don’t worry if you don’t know all of the steps, the goal is to get you thinking about the “mile markers” along the way to creating the figure.\nAdd in code blocks for each step in your pseudocode. Give each block a name that corresponds to your pseudocode steps.\nBased on the webpage linked above and the “Execution Options” section linked there, add execution options to each block that ensure that the code block will be printed, but not evaluated.\nAdd a “Results” section and use the markdown command to include an image of the figure from the manuscript you chose.\n\n\n\n\n\n\n\nNote\n\n\n\nSolutions are here"
+    "text": "The Assignment\nFind a figure that you’d like to mimic with your research. The figure should be from a manuscript or report and present the results of a quantitative analysis (i.e., not a conceptual model or an image). Once you’ve found one you should:\n\nCreate a section called “Introduction” in your Quarto document. In that section, you should give me the citation for the article and a brief description (similar to the caption) of the figure.\nCreate a second section called “Methods” and write out the steps necessary to create the figure. These should be similar to the pseudocode we discussed in clase (e.g., “Load Data”, “Summarize by county”, “Run linear regression”, “Build Figure”). The methods section of the manuscript you’ve chosen should provide you with enough information to begin sketching this out. Don’t worry if you don’t know all of the steps, the goal is to get you thinking about the “mile markers” along the way to creating the figure.\nAdd in code blocks for each step in your pseudocode. Give each block a name that corresponds to your pseudocode steps.\nBased on the webpage linked above and the “Execution Options” section linked there, add execution options to each block that ensure that the code block will be printed, but not evaluated.\nAdd a “Results” section and use the markdown command to include an image of the figure from the manuscript you chose.",
+    "crumbs": [
+      "Assignments",
+      "Homework",
+      "Spatial Data and Quarto"
+    ]
   },
   {
     "objectID": "assignment/01-introsolutions.html",
@@ -2358,102 +2373,18 @@
     "text": "Objectives\n\nRevisit the components of spatial data\nDescribe some of the key considerations for thinking about spatial data\nIntroduce the two primary R packages for spatial workflows\nLearn to read and explore spatial objects in R"
   },
   {
-    "objectID": "slides/04-slides.html#describing-absolute-locations",
-    "href": "slides/04-slides.html#describing-absolute-locations",
+    "objectID": "slides/04-slides.html#questions-from-monday",
+    "href": "slides/04-slides.html#questions-from-monday",
     "title": "Reading Spatial Data in R",
-    "section": "Describing Absolute Locations",
-    "text": "Describing Absolute Locations\n\nCoordinates: 2 or more measurements that specify location relative to a reference system\n\n\n\n\n\nCartesian coordinate system\norigin (O) = the point at which both measurement systems intersect\nAdaptable to multiple dimensions (e.g. z for altitude)\n\n\n\n\n\n\nCartesian Coordinate System"
+    "section": "Questions from Monday",
+    "text": "Questions from Monday\n\nWhy do we need a projection for calculations on a computer?\nWhat does it mean that a raster’s geometry is implicit?"
   },
   {
-    "objectID": "slides/04-slides.html#locations-on-a-globe",
-    "href": "slides/04-slides.html#locations-on-a-globe",
+    "objectID": "slides/04-slides.html#reviewing-spatial-data",
+    "href": "slides/04-slides.html#reviewing-spatial-data",
     "title": "Reading Spatial Data in R",
-    "section": "Locations on a Globe",
-    "text": "Locations on a Globe\n\nThe earth is not flat…\n\n\nLatitude and Longitude"
-  },
-  {
-    "objectID": "slides/04-slides.html#locations-on-a-globe-1",
-    "href": "slides/04-slides.html#locations-on-a-globe-1",
-    "title": "Reading Spatial Data in R",
-    "section": "Locations on a Globe",
-    "text": "Locations on a Globe\n\nThe earth is not flat…\nGlobal Reference Systems (GRS)\nGraticule: the grid formed by the intersection of longitude and latitude\nThe graticule is based on an ellipsoid model of earth’s surface and contained in the datum"
-  },
-  {
-    "objectID": "slides/04-slides.html#global-reference-systems",
-    "href": "slides/04-slides.html#global-reference-systems",
-    "title": "Reading Spatial Data in R",
-    "section": "Global Reference Systems",
-    "text": "Global Reference Systems\n\nThe datum describes which ellipsoid to use and the precise relations between locations on earth’s surface and Cartesian coordinates\n\n\nGeodetic datums (e.g., WGS84): distance from earth’s center of gravity\nLocal data (e.g., NAD83): better models for local variation in earth’s surface"
-  },
-  {
-    "objectID": "slides/04-slides.html#describing-location-extent",
-    "href": "slides/04-slides.html#describing-location-extent",
-    "title": "Reading Spatial Data in R",
-    "section": "Describing location: extent",
-    "text": "Describing location: extent\n\n\nHow much of the world does the data cover?\nFor rasters, these are the corners of the lattice\nFor vectors, we call this the bounding box"
-  },
-  {
-    "objectID": "slides/04-slides.html#describing-location-resolution",
-    "href": "slides/04-slides.html#describing-location-resolution",
-    "title": "Reading Spatial Data in R",
-    "section": "Describing location: resolution",
-    "text": "Describing location: resolution\n\n\n\n\nResolution: the accuracy that the location and shape of a map’s features can be depicted\nMinimum Mapping Unit: The minimum size and dimensions that can be reliably represented at a given map scale.\nMap scale vs. scale of analysis"
-  },
-  {
-    "objectID": "slides/04-slides.html#projections",
-    "href": "slides/04-slides.html#projections",
-    "title": "Reading Spatial Data in R",
-    "section": "Projections",
-    "text": "Projections\n\n\n\n\nBut maps, screens, and publications are…\nProjections describe how the data should be translated to a flat surface\nRely on ‘developable surfaces’\nDescribed by the Coordinate Reference System (CRS)\n\n\n\n\n\n\nDevelopable Surfaces\n\n\n\n\n\nProjection necessarily induces some form of distortion (tearing, compression, or shearing)"
-  },
-  {
-    "objectID": "slides/04-slides.html#coordinate-reference-systems",
-    "href": "slides/04-slides.html#coordinate-reference-systems",
-    "title": "Reading Spatial Data in R",
-    "section": "Coordinate Reference Systems",
-    "text": "Coordinate Reference Systems\n\n\nSome projections minimize distortion of angle, area, or distance\nOthers attempt to avoid extreme distortion of any kind\nIncludes: Datum, ellipsoid, units, and other information (e.g., False Easting, Central Meridian) to further map the projection to the GCS\nNot all projections have/require all of the parameters"
-  },
-  {
-    "objectID": "slides/04-slides.html#choosing-projections",
-    "href": "slides/04-slides.html#choosing-projections",
-    "title": "Reading Spatial Data in R",
-    "section": "Choosing Projections",
-    "text": "Choosing Projections\n\n\n\n\n\nEqual-area for thematic maps\nConformal for presentations\nMercator or equidistant for navigation and distance"
-  },
-  {
-    "objectID": "slides/04-slides.html#geometries",
-    "href": "slides/04-slides.html#geometries",
-    "title": "Reading Spatial Data in R",
-    "section": "Geometries",
-    "text": "Geometries\n\n\n\nVectors store aggregate the locations of a feature into a geometry\nMost vector operations require simple, valid geometries\n\n\n\n\n\nImage Source: Colin Williams (NEON)"
-  },
-  {
-    "objectID": "slides/04-slides.html#valid-geometries",
-    "href": "slides/04-slides.html#valid-geometries",
-    "title": "Reading Spatial Data in R",
-    "section": "Valid Geometries",
-    "text": "Valid Geometries\n\nA linestring is simple if it does not intersect Valid polygons: - Are closed (i.e., the last vertex equals the first) - Have holes (inner rings) that inside the the exterior boundary - Have holes that touch the exterior at no more than one vertex (they don’t extend across a line) - For multipolygons, adjacent polygons touch only at points - Do not repeat their own path"
-  },
-  {
-    "objectID": "slides/04-slides.html#empty-geometries",
-    "href": "slides/04-slides.html#empty-geometries",
-    "title": "Reading Spatial Data in R",
-    "section": "Empty Geometries",
-    "text": "Empty Geometries\n\nEmpty geometries arise when an operation produces NULL outcomes (like looking for the intersection between two non-intersecting polygons)\nsf allows empty geometries to make sure that information about the data type is retained\nSimilar to a data.frame with no rows or a list with NULL values\nMost vector operations require simple, valid geometries"
-  },
-  {
-    "objectID": "slides/04-slides.html#support",
-    "href": "slides/04-slides.html#support",
-    "title": "Reading Spatial Data in R",
-    "section": "Support",
-    "text": "Support\n\nSupport is the area to which an attribute applies.\n\n\n\nFor vectors, the attribute-geometry-relationship can be:\nconstant = applies to every point in the geometry (lines and polygons are just lots of points)\nidentity = a value unique to a geometry\naggregate = a single value that integrates data across the geometry\nRasters can have point (attribute refers to the cell center) or cell (attribute refers to an area similar to the pixel) support"
-  },
-  {
-    "objectID": "slides/04-slides.html#spatial-messiness",
-    "href": "slides/04-slides.html#spatial-messiness",
-    "title": "Reading Spatial Data in R",
-    "section": "Spatial Messiness",
-    "text": "Spatial Messiness\n\nQuantitative geography requires that our data are aligned\nAchieving alignment is part of reproducible workflows\nMaking principled decisions about projections, resolution, extent, etc"
+    "section": "Reviewing Spatial Data",
+    "text": "Reviewing Spatial Data\nLet’s Kahoot!\nhttps://create.kahoot.it/share/isdr-session-4/888711f4-50a3-4732-a707-cbf68d9ae9dc"
   },
   {
     "objectID": "slides/04-slides.html#data-types-and-r-packages",
@@ -2481,7 +2412,7 @@
     "href": "slides/04-slides.html#reading-in-spatial-data-shapefiles-1",
     "title": "Reading Spatial Data in R",
     "section": "Reading in Spatial Data: shapefiles",
-    "text": "Reading in Spatial Data: shapefiles\n\n\n\nlibrary(sf)\nshapefile.inR &lt;- read_sf(dsn = \"path/to/file.shp\", \n                         layer=NULL, geometry_column=...)"
+    "text": "Reading in Spatial Data: shapefiles\n\n\n\nlibrary(sf)\nshapefile.inR &lt;- read_sf(dsn = \"path/to/file.shp\")"
   },
   {
     "objectID": "slides/04-slides.html#reading-in-spatial-data-rasters",
