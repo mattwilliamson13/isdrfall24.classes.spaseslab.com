@@ -5,40 +5,44 @@
     <lastmod>2024-08-26T16:19:04.725Z</lastmod>
   </url>
   <url>
-    <loc>https://isdrfall24.classes.spaseslab.com/slides/03-slides.html</loc>
-    <lastmod>2024-08-26T17:33:55.324Z</lastmod>
+    <loc>https://isdrfall24.classes.spaseslab.com/slides/04-slides.html</loc>
+    <lastmod>2024-08-28T16:40:44.323Z</lastmod>
   </url>
   <url>
-    <loc>https://isdrfall24.classes.spaseslab.com/slides/01-slides.html</loc>
-    <lastmod>2024-07-30T20:15:31.907Z</lastmod>
+    <loc>https://isdrfall24.classes.spaseslab.com/slides/02-slides.html</loc>
+    <lastmod>2024-08-19T17:27:49.048Z</lastmod>
   </url>
   <url>
-    <loc>https://isdrfall24.classes.spaseslab.com/resource/rmarkdown.html</loc>
-    <lastmod>2024-07-22T21:50:25.701Z</lastmod>
+    <loc>https://isdrfall24.classes.spaseslab.com/schedule.html</loc>
+    <lastmod>2024-08-01T16:02:01.980Z</lastmod>
   </url>
   <url>
-    <loc>https://isdrfall24.classes.spaseslab.com/resource/lastyear.html</loc>
-    <lastmod>2024-07-22T21:37:26.214Z</lastmod>
+    <loc>https://isdrfall24.classes.spaseslab.com/resource/r.html</loc>
+    <lastmod>2024-07-22T21:49:10.712Z</lastmod>
   </url>
   <url>
-    <loc>https://isdrfall24.classes.spaseslab.com/resource/index.html</loc>
-    <lastmod>2024-07-18T20:29:40.087Z</lastmod>
+    <loc>https://isdrfall24.classes.spaseslab.com/resource/install.html</loc>
+    <lastmod>2024-07-18T20:29:40.088Z</lastmod>
   </url>
   <url>
-    <loc>https://isdrfall24.classes.spaseslab.com/resource/data.html</loc>
-    <lastmod>2024-07-22T21:42:45.697Z</lastmod>
+    <loc>https://isdrfall24.classes.spaseslab.com/resource/git.html</loc>
+    <lastmod>2024-07-22T21:51:53.199Z</lastmod>
   </url>
   <url>
-    <loc>https://isdrfall24.classes.spaseslab.com/lesson/quarto.html</loc>
+    <loc>https://isdrfall24.classes.spaseslab.com/lesson/vector_intro.html</loc>
     <lastmod>2024-07-18T20:29:40.085Z</lastmod>
   </url>
   <url>
-    <loc>https://isdrfall24.classes.spaseslab.com/lesson/getting-setup.html</loc>
-    <lastmod>2024-08-01T16:40:52.615Z</lastmod>
+    <loc>https://isdrfall24.classes.spaseslab.com/lesson/index.html</loc>
+    <lastmod>2024-07-18T20:29:40.084Z</lastmod>
   </url>
   <url>
-    <loc>https://isdrfall24.classes.spaseslab.com/index.html</loc>
-    <lastmod>2024-07-22T22:26:22.902Z</lastmod>
+    <loc>https://isdrfall24.classes.spaseslab.com/lesson/dataclasses.html</loc>
+    <lastmod>2024-07-18T20:29:40.067Z</lastmod>
+  </url>
+  <url>
+    <loc>https://isdrfall24.classes.spaseslab.com/example/session-4-example.html</loc>
+    <lastmod>2024-08-28T21:15:13.298Z</lastmod>
   </url>
   <url>
     <loc>https://isdrfall24.classes.spaseslab.com/example/getting-setup.html</loc>
@@ -93,8 +97,8 @@
     <lastmod>2024-07-18T20:29:40.038Z</lastmod>
   </url>
   <url>
-    <loc>https://isdrfall24.classes.spaseslab.com/content/06-content.html</loc>
-    <lastmod>2024-07-18T20:29:40.037Z</lastmod>
+    <loc>https://isdrfall24.classes.spaseslab.com/content/05-content.html</loc>
+    <lastmod>2024-08-28T22:13:14.975Z</lastmod>
   </url>
   <url>
     <loc>https://isdrfall24.classes.spaseslab.com/content/03-content.html</loc>
@@ -261,39 +265,43 @@
     <lastmod>2024-07-18T20:29:40.047Z</lastmod>
   </url>
   <url>
-    <loc>https://isdrfall24.classes.spaseslab.com/lesson/dataclasses.html</loc>
-    <lastmod>2024-07-18T20:29:40.067Z</lastmod>
+    <loc>https://isdrfall24.classes.spaseslab.com/index.html</loc>
+    <lastmod>2024-07-22T22:26:22.902Z</lastmod>
   </url>
   <url>
-    <loc>https://isdrfall24.classes.spaseslab.com/lesson/index.html</loc>
-    <lastmod>2024-07-18T20:29:40.084Z</lastmod>
+    <loc>https://isdrfall24.classes.spaseslab.com/lesson/getting-setup.html</loc>
+    <lastmod>2024-08-01T16:40:52.615Z</lastmod>
   </url>
   <url>
-    <loc>https://isdrfall24.classes.spaseslab.com/lesson/vector_intro.html</loc>
+    <loc>https://isdrfall24.classes.spaseslab.com/lesson/quarto.html</loc>
     <lastmod>2024-07-18T20:29:40.085Z</lastmod>
   </url>
   <url>
-    <loc>https://isdrfall24.classes.spaseslab.com/resource/git.html</loc>
-    <lastmod>2024-07-22T21:51:53.199Z</lastmod>
+    <loc>https://isdrfall24.classes.spaseslab.com/resource/data.html</loc>
+    <lastmod>2024-07-22T21:42:45.697Z</lastmod>
   </url>
   <url>
-    <loc>https://isdrfall24.classes.spaseslab.com/resource/install.html</loc>
-    <lastmod>2024-07-18T20:29:40.088Z</lastmod>
+    <loc>https://isdrfall24.classes.spaseslab.com/resource/index.html</loc>
+    <lastmod>2024-07-18T20:29:40.087Z</lastmod>
   </url>
   <url>
-    <loc>https://isdrfall24.classes.spaseslab.com/resource/r.html</loc>
-    <lastmod>2024-07-22T21:49:10.712Z</lastmod>
+    <loc>https://isdrfall24.classes.spaseslab.com/resource/lastyear.html</loc>
+    <lastmod>2024-07-22T21:37:26.214Z</lastmod>
   </url>
   <url>
-    <loc>https://isdrfall24.classes.spaseslab.com/schedule.html</loc>
-    <lastmod>2024-08-01T16:02:01.980Z</lastmod>
+    <loc>https://isdrfall24.classes.spaseslab.com/resource/rmarkdown.html</loc>
+    <lastmod>2024-07-22T21:50:25.701Z</lastmod>
   </url>
   <url>
-    <loc>https://isdrfall24.classes.spaseslab.com/slides/02-slides.html</loc>
-    <lastmod>2024-08-19T17:27:49.048Z</lastmod>
+    <loc>https://isdrfall24.classes.spaseslab.com/slides/01-slides.html</loc>
+    <lastmod>2024-07-30T20:15:31.907Z</lastmod>
   </url>
   <url>
-    <loc>https://isdrfall24.classes.spaseslab.com/slides/04-slides.html</loc>
-    <lastmod>2024-08-28T16:40:44.323Z</lastmod>
+    <loc>https://isdrfall24.classes.spaseslab.com/slides/03-slides.html</loc>
+    <lastmod>2024-08-26T17:33:55.324Z</lastmod>
+  </url>
+  <url>
+    <loc>https://isdrfall24.classes.spaseslab.com/slides/05-slides.html</loc>
+    <lastmod>2024-08-28T22:08:37.562Z</lastmod>
   </url>
 </urlset>
