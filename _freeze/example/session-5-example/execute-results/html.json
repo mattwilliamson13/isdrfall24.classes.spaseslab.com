@@ -1,0 +1,17 @@
+{
+  "hash": "bcba60cdde965c5f8c21fbda9767c5f8",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"Session 5 Live Code\"\nauthor: \"Carolyn Koehn\"\nformat: html\n---\n\n\nThis is the html output of the Quarto options we tested in class today.\n\n## Code chunk output options\n\nCommon code chunk options (all true by default):\n\n- include\n- eval\n- echo\n- warning\n- message\n\n![This table shows what occurs when these options are set to false.](img/code_chunk_options.jpg)\n\nWe used the following code to test code chunk options to generate this table. We also added code chunk labels.\n\n\n::: {.cell}\n\n````{.cell-code}\n```{{r}}\n#| output: false\n#| label: \"read libraries\"\n\nlibrary(tidyverse)\nlibrary(sf)\n```\n````\n:::\n\n\nI'm getting data from this source. In literate programming, we would add more detail!\n\n\n::: {.cell}\n\n```{.r .cell-code}\ncejst <- st_read(\"/opt/data/data/assignment01/cejst_nw.shp\")\n```\n:::\n\n\n\n::: {.cell}\n\n````{.cell-code}\n```{{r}}\n#| warning: false\n\nggplot(data = cejst, aes(x = AGE_10, y = AGE_MIDDLE)) +\n  geom_point()\n```\n````\n\n::: {.cell-output-display}\n![](session-5-example_files/figure-html/unnamed-chunk-4-1.png){width=672}\n:::\n:::\n\n\nYou can find more information on code chunk options [here](https://quarto.org/docs/computations/execution-options.html).\n\n## Inline code\n\nWe implemented inline code by with the formula: `` ` ``, `r`, a single space, some code, `` ` ``.\n\nThe mean proportion of children 10 and under in the Northwest is 0.1140576.\n\nYou can find more information on inline code [here](https://quarto.org/docs/computations/inline-code.html).\n\n## Heading Styles\n\n`# Heading 1`\n\n`## Heading 2`\n\n`### Heading 3`\n\n`#### Heading 4`\n\n`##### Heading 5`\n\n`###### Heading 6`\n\nrenders as:\n\n# Heading 1\n## Heading 2\n### Heading 3\n#### Heading 4\n##### Heading 5\n###### Heading 6\n\n## Text formatting\n\n`**bold**` renders as **bold**\n\n`_italics_` renders as _italics_\n\n## Lists\n\n### Bullet List\n\n`- bullet 1`\n\n`  - bullet 2`\n\n`    - another sub-bullet`\n\n`- bullet 3`\n\nrenders as:\n\n- bullet 1\n  - bullet 2\n    - another sub-bullet\n- bullet 3\n\n### Numbered List\n\n`1. number 1`\n\n`2. number 2`\n\nrenders as:\n\n1. number 1\n2. number 2\n\n## Commenting\n\nTo comment out text outside code chunks, use `<!--` at the beginning of a comment and `-->` at the end.\n\nMore information about text formatting in Quarto can be found [here](https://quarto.org/docs/authoring/markdown-basics.html).\n\n<!--\n1. number 1\n2. number 2\n-->\n",
+    "supporting": [
+      "session-5-example_files"
+    ],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}
