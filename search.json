@@ -1203,32 +1203,40 @@
     "text": "Slides\nThe slides for today’s lesson are available online as an HTML file. Use the buttons below to open the slides either as an interactive website or as a static PDF (for printing or storing for later). You can also click in the slides below and navigate through them with your left and right arrow keys.\n\n View all slides in new window  Download PDF of all slides\n\n\n\n\nLink to today’s Panopto Slides"
   },
   {
-    "objectID": "content/08-content.html",
-    "href": "content/08-content.html",
+    "objectID": "content/07-content.html",
+    "href": "content/07-content.html",
     "title": "Areal Data: Vectors",
     "section": "",
-    "text": "Now that you have started working with the various components of coordinates and coordinate reference systems, it’s time to start learning the fundamental aspects of working with vector data in sf and R. The syntax is a little confusing at first, but once you’ve gotten a sense for the logic behind it you should be able to start piecing together the functions necessary to implement the pseudocode you write for an analysis. We’ll spend more time on vector manipulation in the coming weeks so you’ll get plenty of practice with the ideas we introduce today."
+    "text": "Now that you have started working with the various components of coordinates and coordinate reference systems, it’s time to start learning the fundamental aspects of working with vector data in sf and R. The syntax is a little confusing at first, but once you’ve gotten a sense for the logic behind it you should be able to start piecing together the functions necessary to implement the pseudocode you write for an analysis. We’ll spend more time on vector manipulation in the coming weeks so you’ll get plenty of practice with the ideas we introduce today.",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "7: Areal Data - Vector Data"
+    ]
   },
   {
-    "objectID": "content/08-content.html#readings",
-    "href": "content/08-content.html#readings",
+    "objectID": "content/07-content.html#readings",
+    "href": "content/07-content.html#readings",
     "title": "Areal Data: Vectors",
     "section": "Readings",
-    "text": "Readings\nSame as last class really, but hopefully you’ll begin to understand them better…\n\n The introductory vignette for the sf package has a lot of useful info on sf objects and conventions.\n Section 2.2 on Vector Data and Sections 5.1-5.3 on Geographic Operations in Lovelace et al. (Lovelace et al. 2019) - for more details about vectors and geometric operations on vectors.\n Chapter 2, Sections 1-3 and Chapter 3, Section 1 of Spatial Data Science by Edzer Pebesma and Roger Bivand (of the sf, sp, rgeos, and rgdal packages)"
+    "text": "Readings\nSame as last class really, but hopefully you’ll begin to understand them better…\n\n The introductory vignette for the sf package has a lot of useful info on sf objects and conventions.\n Section 2.2 on Vector Data and Sections 5.1-5.3 on Geographic Operations in Lovelace et al. (Lovelace et al. 2019) - for more details about vectors and geometric operations on vectors.\n Chapter 2, Sections 1-3 and Chapter 3, Section 1 of Spatial Data Science by Edzer Pebesma and Roger Bivand (of the sf, sp, rgeos, and rgdal packages)",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "7: Areal Data - Vector Data"
+    ]
   },
   {
-    "objectID": "content/08-content.html#objectives",
-    "href": "content/08-content.html#objectives",
+    "objectID": "content/07-content.html#objectives",
+    "href": "content/07-content.html#objectives",
     "title": "Areal Data: Vectors",
     "section": "Objectives",
-    "text": "Objectives\nBy the end of today, you should be able to:\n\nImplement approaches for checking and reparing geometries in R\nUnderstand predicates and measures in the context of spatial operations in sf\nUse st_* to evaluate attributes of geometries and calculate measurements"
-  },
-  {
-    "objectID": "content/08-content.html#slides",
-    "href": "content/08-content.html#slides",
-    "title": "Areal Data: Vectors",
-    "section": "Slides",
-    "text": "Slides\nThe slides for today’s lesson are available online as an HTML file. Use the buttons below to open the slides either as an interactive website or as a static PDF (for printing or storing for later). You can also click in the slides below and navigate through them with your left and right arrow keys.\n\n View all slides in new window  Download PDF of all slides\n\n\n\n\nLink to Panopto Recording"
+    "text": "Objectives\nBy the end of today, you should be able to:\n\nImplement approaches for checking and repairing geometries in R\nUnderstand predicates and measures in the context of spatial operations in sf\nUse st_* to evaluate attributes of geometries and calculate measurements",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "7: Areal Data - Vector Data"
+    ]
   },
   {
     "objectID": "content/05-content.html",
@@ -1618,7 +1626,7 @@
     "href": "assignment/02-introspatial.html#the-assignment",
     "title": "Assignment 2: Intro to Spatial Data",
     "section": "The Assignment",
-    "text": "The Assignment\nFind a figure that you’d like to mimic with your research. The figure should be from a manuscript or report and present the results of a quantitative analysis (i.e., not a conceptual model or an image). Once you’ve found one you should:\n\nCreate a section called “Introduction” in your Quarto document. In that section, you should give me the citation for the article and a brief description (similar to the caption) of the figure.\nCreate a second section called “Methods” and write out the steps necessary to create the figure. These should be similar to the pseudocode we discussed in clase (e.g., “Load Data”, “Summarize by county”, “Run linear regression”, “Build Figure”). The methods section of the manuscript you’ve chosen should provide you with enough information to begin sketching this out. Don’t worry if you don’t know all of the steps, the goal is to get you thinking about the “mile markers” along the way to creating the figure.\nAdd in code blocks for each step in your pseudocode. Give each block a name that corresponds to your pseudocode steps.\nBased on the webpage linked above and the “Execution Options” section linked there, add execution options to each block that ensure that the code block will be printed, but not evaluated.\nAdd a “Results” section and use the markdown command to include an image of the figure from the manuscript you chose.",
+    "text": "The Assignment\nFind a figure that you’d like to mimic with your research. The figure should be from a manuscript or report and present the results of a quantitative analysis (i.e., not a conceptual model or an image). Once you’ve found one you should:\n\nCreate a section called “Introduction” in your Quarto document. In that section, you should give me the citation for the article and a brief description (similar to the caption) of the figure.\nCreate a second section called “Methods” and write out the steps necessary to create the figure. These should be similar to the pseudocode we discussed in clase (e.g., “Load Data”, “Summarize by county”, “Run linear regression”, “Build Figure”). The methods section of the manuscript you’ve chosen should provide you with enough information to begin sketching this out. Don’t worry if you don’t know all of the steps, the goal is to get you thinking about the “mile markers” along the way to creating the figure.\nAdd in code blocks for each step in your pseudocode. Give each block a name that corresponds to your pseudocode steps.\nBased on the webpage linked above and the “Execution Options” section linked there, add execution options to each block that ensure that the code block will be printed, but not evaluated.\nAdd a “Results” section and use the markdown command to include an image of the figure from the manuscript you chose.\n\n\n\n\n\n\n\nNote\n\n\n\nSolutions are here",
     "crumbs": [
       "Assignments",
       "Homework",
@@ -1800,7 +1808,7 @@
     "href": "assignment/final-proj.html#assessment",
     "title": "Final Project",
     "section": "Assessment",
-    "text": "Assessment\nYou’ll submit a draft of the final report on December 7 . I’ll give you feedback based on your project and on your objectives for the course. You’ll then have a chance to address my feedback before turning in your final draft on December 14 . Your final self-assessment will ask you to reflect on your objectives for the course and evaluate the degree to which your final project demonstrates that you achieved your objectives. Thus, when you are designing your project, make sure that you have your initial objectives in mind.\n\n\n\n\n\n\nTip\n\n\n\nA note on grades: You will be responsible for assessing how well your assignment demonstrates that you achieved your objectives. I reserve the right to change the grade you’ve given yourself, but will provide clear justification for why I’m doing that. Without a completed self-assessment there is no grade for your final project, so please make sure you complete it.",
+    "text": "Assessment\nYou’ll submit a draft of the final report on December 5. I’ll give you feedback based on your project and on your objectives for the course. You’ll then have a chance to address my feedback before turning in your final draft on December 12. Your final self-assessment will ask you to reflect on your objectives for the course and evaluate the degree to which your final project demonstrates that you achieved your objectives. Thus, when you are designing your project, make sure that you have your initial objectives in mind.\n\n\n\n\n\n\nTip\n\n\n\nA note on grades: You will be responsible for assessing how well your assignment demonstrates that you achieved your objectives. I reserve the right to change the grade you’ve given yourself, but will provide clear justification for why I’m doing that. Without a completed self-assessment there is no grade for your final project, so please make sure you complete it.",
     "crumbs": [
       "Assignments",
       "Final Project",
