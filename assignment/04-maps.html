@@ -177,7 +177,7 @@ ul.task-list li input[type="checkbox"] {
 
 
 <p>This is the fourth assignment of the semester for HES 505.</p>
-<p>Now that you’ve learned a bit about <em>predicates</em> and <em>measures</em> it’s time to practice on some vector and raster data. By the end of <a href="https://classroom.github.com/a/J9CXxWr2">this assignment</a>, you should be able to:</p>
+<p>Now that you’ve learned a bit about <em>predicates</em> and <em>measures</em> it’s time to practice on some vector and raster data. By the end of <a href="https://classroom.github.com/a/6cjjPDQB">this assignment</a>, you should be able to:</p>
 <ul>
 <li>Determine whether geometries are valid before analyzing any data</li>
 <li>Calculate the area of a polygon in a vector data set</li>
@@ -197,14 +197,14 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="the-data" class="level2">
 <h2 class="anchored" data-anchor-id="the-data">The Data</h2>
-<p>We will be using the landmarks data table, the shapefile from the Climate and Economic Justice Screening Tool, and the wildfire hazard raster from the previous two assignments. I’ve moved the versions for this assignment into the <code>opt/data/2023/assignment04/</code> folder to make life easier.</p>
+<p>We will be using the landmarks data table and the shapefile from the Climate and Economic Justice Screening Tool from previous assignments. I’ve moved the versions for this assignment into the <code>/opt/data/data/assignment04/</code> folder to make life easier.</p>
 </section>
 <section id="the-assignment" class="level2">
 <h2 class="anchored" data-anchor-id="the-assignment">The Assignment</h2>
 <ol type="1">
-<li><p>Load the <code>cejst_pnw.shp</code> use the correct predicates to determine whether the geometries are valid and to check for empty geometries. If there are empty geometries, determine which rows have empty geometries (show your code).</p></li>
+<li><p>Load the <code>cejst_nw.shp</code> use the correct predicates to determine whether the geometries are valid and to check for empty geometries. If there are empty geometries, determine which rows have empty geometries (show your code).</p></li>
 <li><p>Load the <code>landmarks_ID.csv</code> table and convert it to an <code>sf</code> object. Now filter to just the hospital records (<code>MTFCC == "K1231"</code>) and calculate the distance between all of the hospitals in Idaho. Note that you’ll have to figure out the CRS for the landmarks dataset…</p></li>
-<li><p>Filter the <code>cejst_pnw.shp</code> to just those records from Ada County. Then filter again to return the row with the highest annual loss rate for agriculture (2 hints: you’ll need to look at the <code>columns.csv</code> file in the data folder to figure out which column is the expected agricultural loss rate and you’ll need to set <code>na.rm=TRUE</code>when looking for the maximum value). Calculate the area of the resulting polygon.</p></li>
+<li><p>Filter the <code>cejst_nw.shp</code> to just those records from Ada County. Then filter again to return the row with the highest annual loss rate for agriculture (2 hints: you’ll need to look at the <code>columns.csv</code> file in the data folder to figure out which column is the expected agricultural loss rate and you’ll need to set <code>na.rm=TRUE</code>when looking for the maximum value). Calculate the area of the resulting polygon.</p></li>
 <li><p>Finally, look at the helpfile for the <code>terra::adjacent</code> command. How do you specify which cells you’d like to get the adjacency matrix for? How do you return only the cells touching your cells of interest? Use the example in the helpfile to illustrate how you’d do this on a toy dataset - this will help you learn to ask minimally reproducible examples.</p></li>
 </ol>
 
