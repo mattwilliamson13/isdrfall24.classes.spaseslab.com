@@ -1,0 +1,17 @@
+{
+  "hash": "679f7dc9a01bbd57cc789799aebef91d",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"Session 8 Code\"\nauthor: \"Carolyn Koehn\"\nformat: html\n---\n\n\n### Playing with resolution:\n\n\n::: {.cell}\n\n```{.r .cell-code}\nlibrary(terra)\n```\n\n::: {.cell-output .cell-output-stderr}\n\n```\nterra 1.7.78\n```\n\n\n:::\n\n```{.r .cell-code}\nr <- rast(xmin=-4, xmax=9,\n          ncols=10)\nres(r)\n```\n\n::: {.cell-output .cell-output-stdout}\n\n```\n[1] 1.3 1.0\n```\n\n\n:::\n:::\n\n::: {.cell}\n\n```{.r .cell-code}\nr2 <- rast(xmin=-4, xmax=9,\n           resolution = c(1.3, 1))\nncol(r2)\n```\n\n::: {.cell-output .cell-output-stdout}\n\n```\n[1] 10\n```\n\n\n:::\n:::\n\n::: {.cell}\n\n```{.r .cell-code}\nr3 <- rast(xmin=-4, xmax=5,\n           ncols=10)\nres(r3)\n```\n\n::: {.cell-output .cell-output-stdout}\n\n```\n[1] 0.9 1.0\n```\n\n\n:::\n:::\n\n::: {.cell}\n\n```{.r .cell-code}\nempty_rast <- rast()\n```\n:::\n\n\n### Practice questions\n\n\n::: {.cell}\n\n```{.r .cell-code}\n# Question 1\nrr <- rast(xmin=-5, xmax=5, ymin=-5, ymax=5, res=2)\n\n# By looking at the help file, we realized that res overrides nrows/ncols\n# This code uses the default global extent\nrr2 <- rast(nrows=5, ncols=5, res=2)\n```\n:::\n\n::: {.cell}\n\n```{.r .cell-code}\n# Question 2\nvalues(rr) <- runif(25)\n\n# The \"values were recycled\" error clues us in that we don't have 25 cells\nvalues(rr2) <- runif(25)\n```\n\n::: {.cell-output .cell-output-stderr}\n\n```\nWarning: [setValues] values were recycled\n```\n\n\n:::\n:::\n\n::: {.cell}\n\n```{.r .cell-code}\n# Question 3\norigin(rr)\n```\n\n::: {.cell-output .cell-output-stdout}\n\n```\n[1] 1 1\n```\n\n\n:::\n:::\n\n::: {.cell}\n\n```{.r .cell-code}\n# Question 4\nvalues(rr)[adjacent(rr, cells=12)] <- NA\nplot(rr)\n```\n\n::: {.cell-output-display}\n![](session-08-example_files/figure-html/unnamed-chunk-8-1.png){width=672}\n:::\n\n```{.r .cell-code}\n# You can do this in two steps \n# by making an object to hold the adjacent cell numbers\nadj <- adjacent(rr, cells=12)\nvalues(rr)[adj] <- NA\n```\n:::\n\n\nFor more information on subsetting, see the [Software Carpentries R for Reproducible Data Analysis: Subsetting Data lesson](https://swcarpentry.github.io/r-novice-gapminder/06-data-subsetting.html).\n\n\n::: {.cell}\n\n```{.r .cell-code}\n# Question 5\nplot(distance(rr))\n```\n\n::: {.cell-output .cell-output-stdout}\n\n```\n\n|---------|---------|---------|---------|\n=========================================\n                                          \n```\n\n\n:::\n\n::: {.cell-output-display}\n![](session-08-example_files/figure-html/unnamed-chunk-9-1.png){width=672}\n:::\n:::\n\n\n### Extra practice\n\nTo run examples of functions, go to the help file and scroll down to the \"Examples\" section. You can either copy-paste the code into your file or click the link that says \"run examples.\"\n\n\n::: {.cell}\n\n```{.r .cell-code}\n# Question 2\n\nfire_rast <- rast(\"/opt/data/data/assignment03/wildfire_hazard_agg.tif\")\nplot(distance(fire_rast))\n```\n:::\n\n\n",
+    "supporting": [
+      "session-08-example_files"
+    ],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

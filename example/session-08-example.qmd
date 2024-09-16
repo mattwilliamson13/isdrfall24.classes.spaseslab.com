@@ -89,6 +89,6 @@ plot(distance(fire_rast))
 
 # Question 2
 
-fire_rast <- rast("C:/Users/carolynkoehn/Documents/HES505_Fall_2024/data/2023/assignment03/wildfire_hazard_agg.tif")
+fire_rast <- terra::rast("C:/Users/carolynkoehn/Documents/HES505_Fall_2024/data/2023/assignment03/wildfire_hazard_agg.tif")
 plot(distance(fire_rast))
 ```
