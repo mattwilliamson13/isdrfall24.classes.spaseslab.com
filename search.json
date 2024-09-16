@@ -1320,32 +1320,40 @@
     "text": "Slides\nThe slides for today’s lesson are available online as an HTML file. Use the buttons below to open the slides either as an interactive website or as a static PDF (for printing or storing for later). You can also click in the slides below and navigate through them with your left and right arrow keys.\n\n View all slides in new window  Download PDF of all slides"
   },
   {
-    "objectID": "content/10-content.html",
-    "href": "content/10-content.html",
+    "objectID": "content/09-content.html",
+    "href": "content/09-content.html",
     "title": "Introduction to Mapping Geographic Data",
     "section": "",
-    "text": "Now that we’re getting into actual operations on spatial data and beginning to actually modify the geometries and attributes of spatial data, it’ll be important for you to be able to visualize the results. At this point, we’ll be focusing on rough visualization as a way of “gut-checking” the outcomes of your code. We’ll focus more on creating informative, aesthetically pleasing, publication quality visualizations."
+    "text": "Now that we’re getting into actual operations on spatial data and beginning to actually modify the geometries and attributes of spatial data, it’ll be important for you to be able to visualize the results. At this point, we’ll be focusing on rough visualization as a way of “gut-checking” the outcomes of your code. We’ll focus more on creating informative, aesthetically pleasing, publication quality visualizations.",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "9: Intro to Mapping Geographic Data"
+    ]
   },
   {
-    "objectID": "content/10-content.html#readings",
-    "href": "content/10-content.html#readings",
+    "objectID": "content/09-content.html#readings",
+    "href": "content/09-content.html#readings",
     "title": "Introduction to Mapping Geographic Data",
     "section": "Readings",
-    "text": "Readings\n\n Ch.3 Tmap in a nutshell from “Elegant and informative maps with tmap” by Martijn Tennekes and Jakub Nowosad provides a great “quick start” for using the tmap package for visualizing spatial data.\n Making maps with R by (Lovelace et al. 2019) introduces the tmap package for making nice maps with relatively minimal syntax.\n Making maps in R by Emily Burchfield illustrates some quick mapping syntax with base plot, ggplot, and tmap. For now, just focus on the base plot and tmap sections as we’ll take on the ggplot stuff later in the course."
+    "text": "Readings\n\n Ch.3 Tmap in a nutshell from “Elegant and informative maps with tmap” by Martijn Tennekes and Jakub Nowosad provides a great “quick start” for using the tmap package for visualizing spatial data.\n Making maps with R by (Lovelace et al. 2019) introduces the tmap package for making nice maps with relatively minimal syntax.\n Making maps in R by Emily Burchfield illustrates some quick mapping syntax with base plot, ggplot, and tmap. For now, just focus on the base plot and tmap sections as we’ll take on the ggplot stuff later in the course.",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "9: Intro to Mapping Geographic Data"
+    ]
   },
   {
-    "objectID": "content/10-content.html#objectives",
-    "href": "content/10-content.html#objectives",
+    "objectID": "content/09-content.html#objectives",
+    "href": "content/09-content.html#objectives",
     "title": "Introduction to Mapping Geographic Data",
     "section": "Objectives",
-    "text": "Objectives\nBy the end of today, you should be able to:\n\nDescribe the basic components of data visualization as a foundation for mapping syntax\nUnderstand layering in both base plot and tmap\nMake basic plots of multiple spatial data objects"
-  },
-  {
-    "objectID": "content/10-content.html#slides",
-    "href": "content/10-content.html#slides",
-    "title": "Introduction to Mapping Geographic Data",
-    "section": "Slides",
-    "text": "Slides\nThe slides for today’s lesson are available online as an HTML file. Use the buttons below to open the slides either as an interactive website or as a static PDF (for printing or storing for later). You can also click in the slides below and navigate through them with your left and right arrow keys.\n\n View all slides in new window  Download PDF of all slides\n\n\n\n\nLink to today’s Panopto Slides"
+    "text": "Objectives\nBy the end of today, you should be able to:\n\nDescribe the basic components of data visualization as a foundation for mapping syntax\nUnderstand layering in both base plot and tmap\nMake basic plots of multiple spatial data objects",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "9: Intro to Mapping Geographic Data"
+    ]
   },
   {
     "objectID": "content/07-content.html",
