@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Intro to Spatial Data in R - Introduction to Mapping Geographic Data</title>
+<title>Intro to Spatial Data in R - Operations With Vector Data I</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -92,7 +92,7 @@ div.csl-indent {
 
 </head>
 
-<body class="nav-fixed">
+<body class="nav-sidebar docked nav-fixed">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -118,7 +118,7 @@ div.csl-indent {
 <span class="menu-text">Schedule</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../content/index.html"> 
+    <a class="nav-link active" href="../content/index.html" aria-current="page"> 
 <span class="menu-text">Content</span></a>
   </li>  
   <li class="nav-item">
@@ -158,10 +158,115 @@ div.csl-indent {
 </div>
       </div> <!-- /container-fluid -->
     </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../content/01-content.html">Course content</a></li><li class="breadcrumb-item"><a href="../content/10-content.html">10: Operations with Vector Data I</a></li></ol></nav>
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
 </header>
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text">Overview</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Readings and slides</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+ <span class="menu-text">Course content</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/01-content.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">1: Introduction to the Course</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/02-content.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">2: Why Geographic Analysis</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/03-content.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">3: Introduction to Spatial Data</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/04-content.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">4: Intro to Spatial Data with R</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/05-content.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">5: Literate Programming, Quarto, Workflows</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/06-content.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">6: Areal Data - Coordinates and Geometries</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/07-content.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">7: Areal Data - Vector Data</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/08-content.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">8: Areal Data - Raster Data</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/09-content.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">9: Intro to Mapping Geographic Data</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/10-content.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">10: Operations with Vector Data I</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
@@ -170,7 +275,6 @@ div.csl-indent {
   <ul>
   <li><a href="#readings" id="toc-readings" class="nav-link active" data-scroll-target="#readings">Readings</a></li>
   <li><a href="#objectives" id="toc-objectives" class="nav-link" data-scroll-target="#objectives">Objectives</a></li>
-  <li><a href="#slides" id="toc-slides" class="nav-link" data-scroll-target="#slides">Slides</a></li>
   </ul>
 </nav>
     </div>
@@ -178,42 +282,53 @@ div.csl-indent {
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header">
-<h1 class="title display-7">Introduction to Mapping Geographic Data</h1>
+<h1 class="title display-7">Operations With Vector Data I</h1>
 
 <div class="date-block bg-content text-white p-2">
-  <p class="date">Content for Wednesday, September 20, 2023</p>
+  <p class="date">Content for Monday, September 23, 2024</p>
 </div>
 </header>
 
 
-<p>Now that we’re getting into actual operations on spatial data and beginning to actually modify the geometries and attributes of spatial data, it’ll be important for you to be able to visualize the results. At this point, we’ll be focusing on rough visualization as a way of “gut-checking” the outcomes of your code. We’ll focus more on creating informative, aesthetically pleasing, publication quality visualizations.</p>
+<p>Now that we’ve spent some time getting used to the syntax of the <code>sf</code> package and used it to assess some of the characteristics of vector objects (e.g., through <em>predicates</em> and <em>measures</em>), we’ll move into <em>transformations</em>. Transformations allow you to actually manipulate the geometries of a vector object (without necessarily changing the attributes themselves) and are a powerful tool for geting disparate data into some logical alignment. That said, transforming geometries can be complicated and often has some unanticipated consequences. That’s why we spent a little bit of time learning the mapping syntax as a means for you to be able to check yourself.</p>
 <section id="readings" class="level2">
 <h2 class="anchored" data-anchor-id="readings">Readings</h2>
 <ul>
-<li><p><i class="fas fa-external-link-square-alt"></i> <a href="https://r-tmap.github.io/tmap-book/nutshell.html">Ch.3 Tmap in a nutshell</a> from “Elegant and informative maps with tmap” by Martijn Tennekes and Jakub Nowosad provides a great “quick start” for using the <code>tmap</code> package for visualizing spatial data.</p></li>
-<li><p><i class="fas fa-external-link-square-alt"></i> <a href="https://geocompr.robinlovelace.net/adv-map.html">Making maps with <code>R</code></a> by <span class="citation" data-cites="lovelace_geocomputation_2019">(<a href="#ref-lovelace_geocomputation_2019" role="doc-biblioref">Lovelace et al. 2019</a>)</span> introduces the <code>tmap</code> package for making nice maps with relatively minimal syntax.</p></li>
-<li><p><i class="fas fa-external-link-square-alt"></i> <a href="https://www.emilyburchfield.org/courses/eds/making_maps_in_r">Making maps in <code>R</code></a> by Emily Burchfield illustrates some quick mapping syntax with base <code>plot</code>, <code>ggplot</code>, and <code>tmap</code>. For now, just focus on the base <code>plot</code> and <code>tmap</code> sections as we’ll take on the ggplot stuff later in the course.</p></li>
+<li><p><i class="fas fa-external-link-square-alt"></i> The introductory vignette for the <a href="https://r-spatial.github.io/sf/articles/sf1.html"><code>sf</code> package</a> has a lot of useful info on <code>sf</code> objects and conventions.</p></li>
+<li><p><i class="fas fa-book"></i> <a href="https://geocompr.robinlovelace.net/spatial-class.html">Section 2.2</a> on Vector Data and <a href="https://geocompr.robinlovelace.net/geometric-operations.html">Sections 5.1-5.3</a> on Geographic Operations in Lovelace et al. <span class="citation" data-cites="lovelace_geocomputation_2019">(<a href="#ref-lovelace_geocomputation_2019" role="doc-biblioref">Lovelace et al. 2019</a>)</span> - for more details about vectors and geometric operations on vectors.</p></li>
+<li><p><i class="fas fa-external-link-square-alt"></i> <a href="https://r-spatial.org/book/03-Geometries.html">Section 3.1 and 3.2</a> of Spatial Data Science, a <code>bookdown</code> project by Edzer Pebesma and Roger Bivand (of the <code>sf</code>, <code>sp</code>, <code>rgeos</code>, and <code>rgdal</code> packages).</p></li>
 </ul>
 </section>
 <section id="objectives" class="level2">
 <h2 class="anchored" data-anchor-id="objectives">Objectives</h2>
 <p>By the end of today, you should be able to:</p>
 <ul>
-<li><p>Describe the basic components of data visualization as a foundation for mapping syntax</p></li>
-<li><p>Understand layering in both base <code>plot</code> and <code>tmap</code></p></li>
-<li><p>Make basic plots of multiple spatial data objects</p></li>
+<li><p>Recognize the unary, binary, and n-ary transformers</p></li>
+<li><p>Articulate common uses for unary and binary transformers</p></li>
+<li><p>Use unary transformations to fix invalid geometries</p></li>
+<li><p>Implement common binary transformers to align and combine data</p></li>
 </ul>
-</section>
-<section id="slides" class="level2">
-<h2 class="anchored" data-anchor-id="slides">Slides</h2>
-<p>The slides for today’s lesson are available online as an HTML file. Use the buttons below to open the slides either as an interactive website or as a static PDF (for printing or storing for later). You can also click in the slides below and navigate through them with your left and right arrow keys.</p>
-<p class="text-center buttons">
-<a class="btn btn-danger" target="_blank" href="../slides/10-slides.html"><i class="fa-solid fa-arrow-up-right-from-square"></i> View all slides in new window</a> <a class="btn btn-danger" target="_blank" href="../slides/10-slides.pdf" role="button"><i class="fa-solid fa-file-pdf"></i> Download PDF of all slides</a>
-</p>
+<!--
+## Slides
+The slides for today's lesson are available online as an HTML file. Use the buttons below to open the slides either as an interactive website or as a static PDF (for printing or storing for later). You can also click in the slides below and navigate through them with your left and right arrow keys.
+
+
+<p class="text-center buttons"><a class="btn btn-danger" target="_blank" href="/slides/10-slides.html"><i class="fa-solid fa-arrow-up-right-from-square"></i> View all slides in new window</a> <a class="btn btn-danger" target="_blank" href="/slides/10-slides.pdf" role="button"><i class="fa-solid fa-file-pdf"></i> Download PDF of all slides</a></p>
+
+
 <div>
-<iframe class="slide-deck" src="../slides/10-slides.html"></iframe>
+
+
+
+```{=html}
+<iframe class="slide-deck" src="/slides/10-slides.html"></iframe>
+```
+
+
+
 </div>
-<p><a href="https://boisestate.hosted.panopto.com/Panopto/Pages/Viewer.aspx?id=fb4619f1-cd01-49ee-920e-b0830142b65f">Link to today’s Panopto Slides</a></p>
+
+![Panopto Vidoe Here](https://boisestate.hosted.panopto.com/Panopto/Pages/Viewer.aspx?id=e53c74b0-c0b4-48f8-b9d1-b0880140f55c) -->
 
 
 

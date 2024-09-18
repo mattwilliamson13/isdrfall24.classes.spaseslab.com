@@ -1151,7 +1151,7 @@
     "href": "content/09-content.html",
     "title": "Introduction to Mapping Geographic Data",
     "section": "",
-    "text": "Now that we’re getting into actual operations on spatial data and beginning to actually modify the geometries and attributes of spatial data, it’ll be important for you to be able to visualize the results. At this point, we’ll be focusing on rough visualization as a way of “gut-checking” the outcomes of your code. We’ll focus more on creating informative, aesthetically pleasing, publication quality visualizations.",
+    "text": "Now that we’re getting into actual operations on spatial data and beginning to actually modify the geometries and attributes of spatial data, it’ll be important for you to be able to visualize the results. At this point, we’ll be focusing on rough visualization as a way of “gut-checking” the outcomes of your code. We’ll focus more on creating informative, aesthetically pleasing, publication quality visualizations in section 4 of this course.",
     "crumbs": [
       "Content",
       "Course content",
@@ -1733,14 +1733,36 @@
     "href": "assignment/05-firstrevision.html",
     "title": "Assignment 5: Revisiting your code (part 1)",
     "section": "",
-    "text": "Now that you’ve had some practice with R and the format of the course, it’s time to pause and take a moment to check in on what you’ve learned. Because we haven’t had a ton of coding yet, this review is a little more conceptual (rather than focusing on particular pieces you may have done incorrectly or inefficiently). My solutions (or suggestions) for how I’d approach the first four assignments are posted (at the end of each assignment page). Your task here is to review those solutions and your own code and answer a few questions to demonstrate what you’ve learned so far and where I need to be more clear. You’ll still be using Quarto to complete This homework."
+    "text": "Now that you’ve had some practice with R and the format of the course, it’s time to pause and take a moment to check in on what you’ve learned. Because we haven’t had a ton of coding yet, this review is a little more conceptual (rather than focusing on particular pieces you may have done incorrectly or inefficiently). My soluionts (or suggestions) for how I’d approach the first four assignments are posted (at the end of each assignment page). Your task here is to review those solutions and your own code and answer a few questions to demonstrate what you’ve learned so far and where I need to be more clear. You’ll still be using Quarto to complete this homework.",
+    "crumbs": [
+      "Assignments",
+      "Self Assessments",
+      "Assignment Revision 1"
+    ]
   },
   {
     "objectID": "assignment/05-firstrevision.html#instructions",
     "href": "assignment/05-firstrevision.html#instructions",
     "title": "Assignment 5: Revisiting your code (part 1)",
     "section": "Instructions",
-    "text": "Instructions\n\nAfter you’ve joined the assignment repository, you should have this file (named Readme.md) inside of a R project named assignment-revision-1-xx where xx is your github username (or initials).\nOnce you’ve verified that you’ve correctly cloned the assignment repository, create a new Quarto document. Name this file ar1_xxx.qmd and give it a title (like M Williamson Assignment Revision 1). Make sure that you select the html output option (Quarto can do a lot of cool things, but the html format is the least-likely to cause you additional headaches). We’ll be using Quarto throughout the course so it’s worth checking out the other tutorials in the getting started section.\nCopy the questions in the assignment into your document and change the color of their text.\nSave the changes and make your first commit!\nAnswer the questions making sure save and commit at least 4 more times (having 5 commits is part of the assignment).\nRender the document (by clicking the “Render” button in RStudio) to html (you should now have at least 3 files in the repository: Readme.md, ar1_xx.qmd, and ar1_xx.html). Commit these changes and push them to the repository on GitHub. You should see the files there when you go to github.com."
+    "text": "Instructions\n\nAfter you’ve joined the assignment repository, you should have this file (named Readme.md) inside of a R project named assignment-revision-1-xx where xx is your github username (or initials).\nOnce you’ve verified that you’ve correctly cloned the assignment repository, create a new Quarto document. Name this file ar1_xxx.qmd and give it a title (like M Williamson Assignment Revision 1). Make sure that you select the html output option (Quarto can do a lot of cool things, but the html format is the least-likely to cause you additional headaches). We’ll be using Quarto throughout the course so it’s worth checking out the other tutorials in the getting started section.\nCopy the questions in the assignment into your document and change the color of their text.\nSave the changes and make your first commit!\nAnswer the questions making sure save and commit at least 4 more times (having 3 commits is part of the assignment).\nRender the document (by clicking the “Render” button in RStudio) to html (you should now have at least 3 files in the repository: Readme.md, ar1_xx.qmd, and ar1_xx.html). Commit these changes and push them to the repository on GitHub. You should see the files there when you go to github.com.",
+    "crumbs": [
+      "Assignments",
+      "Self Assessments",
+      "Assignment Revision 1"
+    ]
+  },
+  {
+    "objectID": "assignment/05-firstrevision.html#questions",
+    "href": "assignment/05-firstrevision.html#questions",
+    "title": "Assignment 5: Revisiting your code (part 1)",
+    "section": "Questions",
+    "text": "Questions\n\nHow do you introduce yourself to git? (look at some of the initial lectures for the course) How often do you need to introduce yourself when you are on the RStudio server? What is the difference between a “commit” and a “push”?\nHow do you check the Coordinate Reference System of a vector file using the sf package? What about for a raster file using the terra package? Why is the CRS important?\nWhat is the difference between a predicate and a measure?\nAs you look back on your first few assignments, what has been the biggest challenge? Do you feel like you know how to solve it? How can I help?\nAs you look back on the first few weeks of lectures, what is the one thing that you wish I would do differently (I’ll do my best!)\nTell me about your final project - what topic are you hoping to explore? What data are going to use? (Remember, this assignment works better if you’re using data that isn’t part of your thesis) If there are things I can do to help you find data or a topic, please let me know here.",
+    "crumbs": [
+      "Assignments",
+      "Self Assessments",
+      "Assignment Revision 1"
+    ]
   },
   {
     "objectID": "assignment/07-rasterops.html",
@@ -2077,32 +2099,40 @@
     ]
   },
   {
-    "objectID": "content/11-content.html",
-    "href": "content/11-content.html",
+    "objectID": "content/10-content.html",
+    "href": "content/10-content.html",
     "title": "Operations With Vector Data I",
     "section": "",
-    "text": "Now that we’ve spent some time getting used to the syntax of the sf package and used it to assess some of the characteristics of vector objects (e.g., through predicates and measures), we’ll move into transformations. Transformations allow you to actually manipulate the geometries of a vector object (without necessarily changing the attributes themselves) and are a powerful tool for geting disparate data into some logical alignment. That said, transforming geometries can be complicated and often has some unanticipated consequences. That’s why we spent a little bit of time learning the mapping syntax as a means for you to be able to check yourself."
+    "text": "Now that we’ve spent some time getting used to the syntax of the sf package and used it to assess some of the characteristics of vector objects (e.g., through predicates and measures), we’ll move into transformations. Transformations allow you to actually manipulate the geometries of a vector object (without necessarily changing the attributes themselves) and are a powerful tool for geting disparate data into some logical alignment. That said, transforming geometries can be complicated and often has some unanticipated consequences. That’s why we spent a little bit of time learning the mapping syntax as a means for you to be able to check yourself.",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "10: Operations with Vector Data I"
+    ]
   },
   {
-    "objectID": "content/11-content.html#readings",
-    "href": "content/11-content.html#readings",
+    "objectID": "content/10-content.html#readings",
+    "href": "content/10-content.html#readings",
     "title": "Operations With Vector Data I",
     "section": "Readings",
-    "text": "Readings\n\n The introductory vignette for the sf package has a lot of useful info on sf objects and conventions.\n Section 2.2 on Vector Data and Sections 5.1-5.3 on Geographic Operations in Lovelace et al. (Lovelace et al. 2019) - for more details about vectors and geometric operations on vectors.\n Section 3.1 and 3.2 of Spatial Data Science, a bookdown project by Edzer Pebesma and Roger Bivand (of the sf, sp, rgeos, and rgdal packages)."
+    "text": "Readings\n\n The introductory vignette for the sf package has a lot of useful info on sf objects and conventions.\n Section 2.2 on Vector Data and Sections 5.1-5.3 on Geographic Operations in Lovelace et al. (Lovelace et al. 2019) - for more details about vectors and geometric operations on vectors.\n Section 3.1 and 3.2 of Spatial Data Science, a bookdown project by Edzer Pebesma and Roger Bivand (of the sf, sp, rgeos, and rgdal packages).",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "10: Operations with Vector Data I"
+    ]
   },
   {
-    "objectID": "content/11-content.html#objectives",
-    "href": "content/11-content.html#objectives",
+    "objectID": "content/10-content.html#objectives",
+    "href": "content/10-content.html#objectives",
     "title": "Operations With Vector Data I",
     "section": "Objectives",
-    "text": "Objectives\nBy the end of today, you should be able to:\n\nRecognize the unary, binary, and n-ary transformers\nArticulate common uses for unary and binary transformers\nUse unary transformations to fix invalid geometries\nImplement common binary transformers to align and combine data"
-  },
-  {
-    "objectID": "content/11-content.html#slides",
-    "href": "content/11-content.html#slides",
-    "title": "Operations With Vector Data I",
-    "section": "Slides",
-    "text": "Slides\nThe slides for today’s lesson are available online as an HTML file. Use the buttons below to open the slides either as an interactive website or as a static PDF (for printing or storing for later). You can also click in the slides below and navigate through them with your left and right arrow keys.\n\n View all slides in new window  Download PDF of all slides\n\n\n\n\n\n\n\nPanopto Vidoe Here"
+    "text": "Objectives\nBy the end of today, you should be able to:\n\nRecognize the unary, binary, and n-ary transformers\nArticulate common uses for unary and binary transformers\nUse unary transformations to fix invalid geometries\nImplement common binary transformers to align and combine data",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "10: Operations with Vector Data I"
+    ]
   },
   {
     "objectID": "content/13-content.html",
@@ -3316,18 +3346,18 @@
     "text": "Objectives\n\nBy the end of today, you should be able to:\nDescribe the basic components of data visualization as a foundation for mapping syntax\nUnderstand layering in both base plot and tmap\nMake basic plots of multiple spatial data objects"
   },
   {
-    "objectID": "slides/09-slides.html#which-packages-have-plot-methods",
-    "href": "slides/09-slides.html#which-packages-have-plot-methods",
+    "objectID": "slides/09-slides.html#packages-with-plot-methods",
+    "href": "slides/09-slides.html#packages-with-plot-methods",
     "title": "Introduction to Mapping Geographic Data",
-    "section": "Which packages have plot methods?",
-    "text": "Which packages have plot methods?\n\n\n\nOften the fastest way to view data\nUse ?plot to see which packages export a method for the plot function\nOr you can use ?plot.*** to see which classes of objects have plot functions defined"
+    "section": "Packages with plot methods",
+    "text": "Packages with plot methods\n\n\n\nOften the fastest way to view data\nUse ?plot to see which packages export a method for the plot function\nOr you can use ?plot.*** to see which classes of objects have plot functions defined"
   },
   {
     "objectID": "slides/09-slides.html#plot-for-sf-objects",
     "href": "slides/09-slides.html#plot-for-sf-objects",
     "title": "Introduction to Mapping Geographic Data",
     "section": "plot for sf objects",
-    "text": "plot for sf objects\n\nCan plot outlines using plot(st_geometry(your.shapfile)) or plot(your.shapefile$geometry)\nPlotting attributes requires “extracting” the attributes (using plot(your.shapefile[\"ATTRIBUTE\"]))\nControlling aesthetics can be challenging\nlayering requires add=TRUE"
+    "text": "plot for sf objects\n\nCan plot outlines using plot(st_geometry(your.shapefile)) or plot(your.shapefile$geometry)\nPlotting attributes requires “extracting” the attributes (using plot(your.shapefile[\"ATTRIBUTE\"]))\nControlling aesthetics can be challenging\nlayering requires add=TRUE"
   },
   {
     "objectID": "slides/09-slides.html#plot-for-sf-objects-1",
@@ -3433,5 +3463,12 @@
     "title": "Introduction to Mapping Geographic Data",
     "section": "Integrating Rasters",
     "text": "Integrating Rasters"
+  },
+  {
+    "objectID": "slides/09-slides.html#todays-objectives",
+    "href": "slides/09-slides.html#todays-objectives",
+    "title": "Introduction to Mapping Geographic Data",
+    "section": "Today’s Objectives",
+    "text": "Today’s Objectives\nYou should be able to:\n\nDescribe the basic components of data visualization as a foundation for mapping syntax\nUnderstand layering in both base plot and tmap\nMake basic plots of multiple spatial data objects"
   }
 ]
