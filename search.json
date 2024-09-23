@@ -3484,6 +3484,13 @@
     "text": "Extra Practice\n\nRun the examples for costDist and gridDistance to see how those functions can be used.\nLoad the wildfire_hazard_agg.tif data from the assignment03 folder. Use the data as the input for the distance function and plot the result. How might this be useful in your research?"
   },
   {
+    "objectID": "slides/10-slides.html#announcements",
+    "href": "slides/10-slides.html#announcements",
+    "title": "Operations With Vector Data I",
+    "section": "Announcements",
+    "text": "Announcements\n\nDue this week: assignment revision 1"
+  },
+  {
     "objectID": "slides/10-slides.html#objectives",
     "href": "slides/10-slides.html#objectives",
     "title": "Operations With Vector Data I",
@@ -3594,5 +3601,19 @@
     "title": "Operations With Vector Data I",
     "section": "N-ary Transformers",
     "text": "N-ary Transformers\n\nSimilar to Binary (except st_crop)\nunion can be applied to a set of geometries to return its geometrical union\nintersection and difference take a single argument, but operate (sequentially) on all pairs, triples, quadruples, etc."
+  },
+  {
+    "objectID": "slides/10-slides.html#centroids-and-distances",
+    "href": "slides/10-slides.html#centroids-and-distances",
+    "title": "Operations With Vector Data I",
+    "section": "Centroids and Distances",
+    "text": "Centroids and Distances\nFor this exercise, you may want to refer to our session 7 example code.\nThe function system.time tells you how long a function takes to run:\n\n\n   user  system elapsed \n   0.91    0.31    1.24 \n\n\nFind the counties that are the furthest distance from each other in Idaho using the polygons, centroids, and point on surface objects we created earlier. Which distance calculation is the fastest?"
+  },
+  {
+    "objectID": "slides/10-slides.html#intersections-and-buffers",
+    "href": "slides/10-slides.html#intersections-and-buffers",
+    "title": "Operations With Vector Data I",
+    "section": "Intersections and Buffers",
+    "text": "Intersections and Buffers\ntigris::primary_secondary_roads() retrieves shapefiles for major roads in each state of the US.\n\nPlot just Ada county and the major roads within.\nMap the portion of major roads that are within 50 km (as the crow flies) of the center of Ada county. (Remember to check the units of your CRS.)\nChallenge: Include county borders in your plot for part 2."
   }
 ]
