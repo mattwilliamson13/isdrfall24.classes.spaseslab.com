@@ -3508,7 +3508,7 @@
     "href": "slides/10-slides.html#announcements",
     "title": "Operations With Vector Data I",
     "section": "Announcements",
-    "text": "Announcements\n\nDue this week: assignment revision 1"
+    "text": "Announcements\nDue this week: assignment revision 1"
   },
   {
     "objectID": "slides/10-slides.html#objectives",
@@ -3536,7 +3536,7 @@
     "href": "slides/10-slides.html#unary-transformations",
     "title": "Operations With Vector Data I",
     "section": "Unary Transformations",
-    "text": "Unary Transformations\n\n\n\n\n\n\n\n\ntransformer\nreturns a geometry …\n\n\n\n\ncentroid\nof type POINT with the geometry’s centroid\n\n\nbuffer\nthat is larger (or smaller) than the input geometry, depending on the buffer size\n\n\njitter\nthat was moved in space a certain amount, using a bivariate uniform distribution\n\n\nwrap_dateline\ncut into pieces that do no longer cover the dateline\n\n\nboundary\nwith the boundary of the input geometry\n\n\nconvex_hull\nthat forms the convex hull of the input geometry\n\n\nline_merge\nafter merging connecting LINESTRING elements of a MULTILINESTRING into longer LINESTRINGs.\n\n\nmake_valid\nthat is valid\n\n\nnode\nwith added nodes to linear geometries at intersections without a node; only works on individual linear geometries\n\n\npoint_on_surface\nwith a (arbitrary) point on a surface\n\n\npolygonize\nof type polygon, created from lines that form a closed ring"
+    "text": "Unary Transformations\n\n\n\n\n\n\n\n\ntransformer\nreturns a geometry …\n\n\n\n\ncentroid\nof type POINT with the geometry’s centroid\n\n\nbuffer\nthat is larger (or smaller) than the input geometry, depending on the buffer size\n\n\njitter\nthat was moved in space a certain amount, using a bivariate uniform distribution\n\n\nwrap_dateline\ncut into pieces that do no longer cover the dateline\n\n\nboundary\nwith the boundary of the input geometry\n\n\nconvex_hull\nthat forms the convex hull of the input geometry\n\n\nline_merge\nafter merging connecting LINESTRING elements of a MULTILINESTRING into longer LINESTRINGs.\n\n\nmake_valid\nthat is valid\n\n\nnode\nwith added nodes to linear geometries at intersections without a node; only works on individual linear geometries\n\n\npoint_on_surface\nwith an arbitrary point on a surface\n\n\npolygonize\nof type polygon, created from lines that form a closed ring"
   },
   {
     "objectID": "slides/10-slides.html#fixing-geometries",
@@ -3557,7 +3557,7 @@
     "href": "slides/10-slides.html#fixing-geometries-with-st_buffer",
     "title": "Operations With Vector Data I",
     "section": "Fixing Geometries with st_buffer",
-    "text": "Fixing Geometries with st_buffer\n\n\n-st_buffer enforces valid geometries as an output\n\nSetting a 0 distance buffer leaves most geometries unchanged\nNot all transformations do this\n\n\n\n```{r}\nz &lt;- x %&gt;% st_buffer(., dist=0)\n\nst_is_valid(z)\n```\n\n[1] TRUE"
+    "text": "Fixing Geometries with st_buffer\n\n\n\nst_buffer enforces valid geometries as an output\nSetting a 0 distance buffer leaves most geometries unchanged\nNot all transformations do this\n\n\n\n```{r}\nz &lt;- x %&gt;% st_buffer(., dist=0)\n\nst_is_valid(z)\n```\n\n[1] TRUE"
   },
   {
     "objectID": "slides/10-slides.html#changing-crs-with-st_transform",
@@ -3592,7 +3592,7 @@
     "href": "slides/10-slides.html#other-unary-transformations",
     "title": "Operations With Vector Data I",
     "section": "Other Unary Transformations",
-    "text": "Other Unary Transformations\n\n\n\n\n\n\n\n\ntransformer\nreturns a geometry …\n\n\n\n\nsegmentize\na (linear) geometry with nodes at a given density or minimal distance\n\n\nsimplify\nsimplified by removing vertices/nodes (lines or polygons)\n\n\nsplit\nthat has been split with a splitting linestring\n\n\ntransform\ntransformed or convert to a new coordinate reference system (chapter @ref(cs))\n\n\ntriangulate\nwith Delauney triangulated polygon(s) (figure @ref(fig:vor))\n\n\nvoronoi\nwith the Voronoi tessellation of an input geometry (figure @ref(fig:vor))\n\n\nzm\nwith removed or added Z and/or M coordinates\n\n\ncollection_extract\nwith subgeometries from a GEOMETRYCOLLECTION of a particular type\n\n\ncast\nthat is converted to another type\n\n\n+\nthat is shifted over a given vector\n\n\n*\nthat is multiplied by a scalar or matrix"
+    "text": "Other Unary Transformations\n\n\n\n\n\n\n\n\ntransformer\nreturns a geometry …\n\n\n\n\nsegmentize\na (linear) geometry with nodes at a given density or minimal distance\n\n\nsimplify\nsimplified by removing vertices/nodes (lines or polygons)\n\n\nsplit\nthat has been split with a splitting linestring\n\n\ntransform\ntransformed or convert to a new coordinate reference system\n\n\ntriangulate\nwith Delauney triangulated polygon(s)\n\n\nvoronoi\nwith the Voronoi tessellation of an input geometry\n\n\nzm\nwith removed or added Z and/or M coordinates\n\n\ncollection_extract\nwith subgeometries from a GEOMETRYCOLLECTION of a particular type\n\n\ncast\nthat is converted to another type\n\n\n+\nthat is shifted over a given vector\n\n\n*\nthat is multiplied by a scalar or matrix"
   },
   {
     "objectID": "slides/10-slides.html#binary-transformers-1",
@@ -3627,7 +3627,7 @@
     "href": "slides/10-slides.html#centroids-and-distances",
     "title": "Operations With Vector Data I",
     "section": "Centroids and Distances",
-    "text": "Centroids and Distances\nFor this exercise, you may want to refer to our session 7 example code.\nThe function system.time tells you how long a function takes to run:\n\n\n   user  system elapsed \n   0.97    0.36    1.33 \n\n\nFind the counties that are the furthest distance from each other in Idaho using the polygons, centroids, and point on surface objects we created earlier. Which distance calculation is the fastest?"
+    "text": "Centroids and Distances\nThe function system.time tells you how long a function takes to run:\n\nsystem.time(id.counties &lt;- tigris::counties(state = \"ID\", progress_bar=FALSE))\n\n   user  system elapsed \n   1.02    0.30    1.33 \n\n\nFind the counties that are the furthest distance from each other in Idaho using the polygons, centroids, and point on surface objects we created earlier. Which distance calculation is the fastest?\n(You may want to refer to our session 7 example code.)"
   },
   {
     "objectID": "slides/10-slides.html#intersections-and-buffers",
