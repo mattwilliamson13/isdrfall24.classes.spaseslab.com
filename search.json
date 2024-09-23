@@ -3627,7 +3627,7 @@
     "href": "slides/10-slides.html#centroids-and-distances",
     "title": "Operations With Vector Data I",
     "section": "Centroids and Distances",
-    "text": "Centroids and Distances\nFor this exercise, you may want to refer to our session 7 example code.\nThe function system.time tells you how long a function takes to run:\n\n\n   user  system elapsed \n   0.85    0.42    1.31 \n\n\nFind the counties that are the furthest distance from each other in Idaho using the polygons, centroids, and point on surface objects we created earlier. Which distance calculation is the fastest?"
+    "text": "Centroids and Distances\nFor this exercise, you may want to refer to our session 7 example code.\nThe function system.time tells you how long a function takes to run:\n\n\n   user  system elapsed \n   0.97    0.36    1.33 \n\n\nFind the counties that are the furthest distance from each other in Idaho using the polygons, centroids, and point on surface objects we created earlier. Which distance calculation is the fastest?"
   },
   {
     "objectID": "slides/10-slides.html#intersections-and-buffers",
