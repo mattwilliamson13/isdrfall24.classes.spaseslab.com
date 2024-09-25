@@ -3639,7 +3639,7 @@
     "href": "slides/10-slides.html#centroids-and-distances",
     "title": "Operations With Vector Data I",
     "section": "Centroids and Distances",
-    "text": "Centroids and Distances\nThe function system.time tells you how long a function takes to run:\n\nsystem.time(id.counties &lt;- tigris::counties(state = \"ID\", progress_bar=FALSE))\n\n   user  system elapsed \n   1.03    0.25    1.30 \n\n\nFind the counties that are the furthest distance from each other in Idaho using the polygons, centroids, and point on surface objects we created earlier. Which distance calculation is the fastest?\n(You may want to refer to our session 7 example code.)"
+    "text": "Centroids and Distances\nThe function system.time tells you how long a function takes to run:\n\nsystem.time(id.counties &lt;- tigris::counties(state = \"ID\", progress_bar=FALSE))\n\n   user  system elapsed \n   0.94    0.39    1.36 \n\n\nFind the counties that are the furthest distance from each other in Idaho using the polygons, centroids, and point on surface objects we created earlier. Which distance calculation is the fastest?\n(You may want to refer to our session 7 example code.)"
   },
   {
     "objectID": "slides/10-slides.html#intersections-and-buffers",
