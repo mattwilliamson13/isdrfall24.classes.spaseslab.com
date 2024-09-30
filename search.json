@@ -2701,32 +2701,40 @@
     ]
   },
   {
-    "objectID": "content/14-content.html",
-    "href": "content/14-content.html",
+    "objectID": "content/13-content.html",
+    "href": "content/13-content.html",
     "title": "Operations with Raster Data II",
     "section": "",
-    "text": "Now that we’ve done some “global” transformations of raster data using terra, we’ll look at some of the options for cell-wise transformations. Rather than manipulating the extent, resolution, or CRS of the raster data; we’ll actually be using functions to change the values of the cells themselves."
+    "text": "Now that we’ve done some “global” transformations of raster data using terra, we’ll look at some of the options for cell-wise transformations. Rather than manipulating the extent, resolution, or CRS of the raster data; we’ll actually be using functions to change the values of the cells themselves.",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "13: Operations with Raster Data II"
+    ]
   },
   {
-    "objectID": "content/14-content.html#readings",
-    "href": "content/14-content.html#readings",
+    "objectID": "content/13-content.html#readings",
+    "href": "content/13-content.html#readings",
     "title": "Operations with Raster Data II",
     "section": "Readings",
-    "text": "Readings\n\n The terra package vignette describes the new raster functions available in terra, their relationship to those in the raster package, and the changes in syntax between the two.\n The Raster GIS Operations in R with terra chapter from Jasper Slingsby’s “A Minimal Introduction to GIS (in R)” bookdown project has worked examples of many of the operations we’ll learn today."
+    "text": "Readings\n\n The terra package vignette describes the new raster functions available in terra, their relationship to those in the raster package, and the changes in syntax between the two.\n The Raster GIS Operations in R with terra chapter from Jasper Slingsby’s “A Minimal Introduction to GIS (in R)” bookdown project has worked examples of many of the operations we’ll learn today.",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "13: Operations with Raster Data II"
+    ]
   },
   {
-    "objectID": "content/14-content.html#objectives",
-    "href": "content/14-content.html#objectives",
+    "objectID": "content/13-content.html#objectives",
+    "href": "content/13-content.html#objectives",
     "title": "Operations with Raster Data II",
     "section": "Objectives",
-    "text": "Objectives\nBy the end of today, you should be able to:\n\nUse moving windows as a means of smoothing raster data\nReclassify data using conditional statements and reclassification tables\nUse raster math as a means of creating new data based on an existing dataset."
-  },
-  {
-    "objectID": "content/14-content.html#slides",
-    "href": "content/14-content.html#slides",
-    "title": "Operations with Raster Data II",
-    "section": "Slides",
-    "text": "Slides\nThe slides for today’s lesson are available online as an HTML file. Use the buttons below to open the slides either as an interactive website or as a static PDF (for printing or storing for later). You can also click in the slides below and navigate through them with your left and right arrow keys.\n\n View all slides in new window  Download PDF of all slides\n\n\n\n\nLink to today’s Panopto Slides"
+    "text": "Objectives\nBy the end of today, you should be able to:\n\nUse moving windows as a means of smoothing raster data\nReclassify data using conditional statements and reclassification tables\nUse raster math as a means of creating new data based on an existing dataset.",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "13: Operations with Raster Data II"
+    ]
   },
   {
     "objectID": "content/16-content.html",
@@ -4003,7 +4011,7 @@
     "href": "slides/10-slides.html#centroids-and-distances",
     "title": "Operations With Vector Data I",
     "section": "Centroids and Distances",
-    "text": "Centroids and Distances\nThe function system.time tells you how long a function takes to run:\n\nsystem.time(id.counties &lt;- tigris::counties(state = \"ID\", progress_bar=FALSE))\n\n   user  system elapsed \n   0.96    0.28    1.23 \n\n\nFind the counties that are the furthest distance from each other in Idaho using the polygons, centroids, and point on surface objects we created earlier. Which distance calculation is the fastest?\n(You may want to refer to our session 7 example code.)"
+    "text": "Centroids and Distances\nThe function system.time tells you how long a function takes to run:\n\nsystem.time(id.counties &lt;- tigris::counties(state = \"ID\", progress_bar=FALSE))\n\n   user  system elapsed \n   1.05    0.31    1.34 \n\n\nFind the counties that are the furthest distance from each other in Idaho using the polygons, centroids, and point on surface objects we created earlier. Which distance calculation is the fastest?\n(You may want to refer to our session 7 example code.)"
   },
   {
     "objectID": "slides/10-slides.html#intersections-and-buffers",
@@ -4066,7 +4074,7 @@
     "href": "slides/12-slides.html#changing-resolutions-disagg",
     "title": "Operations on Raster Data I",
     "section": "Changing resolutions: disagg",
-    "text": "Changing resolutions: disagg\n\n\n\nra &lt;- aggregate(r, 20)\nplot(ra)\n\n\n\n\n\n\n\n\n\n\nrd &lt;- disagg(r, 20)\n\n\nrd\n\nclass       : SpatRaster \ndimensions  : 3600, 7200, 1  (nrow, ncol, nlyr)\nresolution  : 0.05, 0.05  (x, y)\nextent      : -180, 180, -90, 90  (xmin, xmax, ymin, ymax)\ncoord. ref. : lon/lat WGS 84 (CRS84) (OGC:CRS84) \nsource      : spat_d6c5b6e4d0b_3436.tif \nname        : lyr.1 \nmin value   :     1 \nmax value   : 64800 \n\nplot(rd)"
+    "text": "Changing resolutions: disagg\n\n\n\nra &lt;- aggregate(r, 20)\nplot(ra)\n\n\n\n\n\n\n\n\n\n\nrd &lt;- disagg(r, 20)\n\n\nrd\n\nclass       : SpatRaster \ndimensions  : 3600, 7200, 1  (nrow, ncol, nlyr)\nresolution  : 0.05, 0.05  (x, y)\nextent      : -180, 180, -90, 90  (xmin, xmax, ymin, ymax)\ncoord. ref. : lon/lat WGS 84 (CRS84) (OGC:CRS84) \nsource      : spat_3ce040df7a4a_15584.tif \nname        : lyr.1 \nmin value   :     1 \nmax value   : 64800 \n\nplot(rd)"
   },
   {
     "objectID": "slides/12-slides.html#dealing-with-different-extents",
