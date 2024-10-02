@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Intro to Spatial Data in R - Operations with Raster Data II</title>
+<title>Intro to Spatial Data in R - Combining Spatial and Tabular Data</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,7 +20,27 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -72,7 +92,7 @@ ul.task-list li input[type="checkbox"] {
 
 </head>
 
-<body class="nav-fixed">
+<body class="nav-sidebar docked nav-fixed">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -98,7 +118,7 @@ ul.task-list li input[type="checkbox"] {
 <span class="menu-text">Schedule</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../content/index.html"> 
+    <a class="nav-link active" href="../content/index.html" aria-current="page"> 
 <span class="menu-text">Content</span></a>
   </li>  
   <li class="nav-item">
@@ -138,19 +158,147 @@ ul.task-list li input[type="checkbox"] {
 </div>
       </div> <!-- /container-fluid -->
     </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../content/01-content.html">Course content</a></li><li class="breadcrumb-item"><a href="../content/14-content.html">14: Combining Tabular and Spatial Data</a></li></ol></nav>
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
 </header>
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text">Overview</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Readings and slides</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+ <span class="menu-text">Course content</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/01-content.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">1: Introduction to the Course</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/02-content.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">2: Why Geographic Analysis</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/03-content.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">3: Introduction to Spatial Data</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/04-content.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">4: Intro to Spatial Data with R</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/05-content.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">5: Literate Programming, Quarto, Workflows</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/06-content.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">6: Areal Data - Coordinates and Geometries</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/07-content.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">7: Areal Data - Vector Data</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/08-content.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">8: Areal Data - Raster Data</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/09-content.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">9: Intro to Mapping Geographic Data</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/10-content.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">10: Operations with Vector Data I</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/11-content.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">11: Operations with Vector Data II</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/12-content.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">12: Operations with Raster Data I</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/13-content.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">13: Operations with Raster Data II</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/14-content.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">14: Combining Tabular and Spatial Data</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#readings" id="toc-readings" class="nav-link active" data-scroll-target="#readings">Readings</a></li>
+  <li><a href="#resources" id="toc-resources" class="nav-link active" data-scroll-target="#resources">Resources</a></li>
   <li><a href="#objectives" id="toc-objectives" class="nav-link" data-scroll-target="#objectives">Objectives</a></li>
-  <li><a href="#slides" id="toc-slides" class="nav-link" data-scroll-target="#slides">Slides</a></li>
   </ul>
 </nav>
     </div>
@@ -158,46 +306,71 @@ ul.task-list li input[type="checkbox"] {
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header">
-<h1 class="title display-7">Operations with Raster Data II</h1>
+<h1 class="title display-7">Combining Spatial and Tabular Data</h1>
 
 <div class="date-block bg-content text-white p-2">
-  <p class="date">Content for Wednesday, October 4, 2023</p>
+  <p class="date">Content for Monday, October 7, 2024</p>
 </div>
 </header>
 
 
-<p>Now that we’ve done some “global” transformations of raster data using <code>terra</code>, we’ll look at some of the options for cell-wise transformations. Rather than manipulating the extent, resolution, or CRS of the raster data; we’ll actually be using functions to change the values of the cells themselves.</p>
-<section id="readings" class="level2">
-<h2 class="anchored" data-anchor-id="readings">Readings</h2>
+<p>Today we’ll begin exploring typical workflows for spatial analysis by working with attribute data. Attributes generally provide additional information about a location that we can use for visualization and analysis. Unlike spatial operations that we’ll explore next week, attribute data do not all require geographic information (but they do need some means of relating to a geography). These chapters are not ‘prerequisite’ reading for the week, but provide a lot of helpful background for attribute operations in R.</p>
+<section id="resources" class="level2">
+<h2 class="anchored" data-anchor-id="resources">Resources</h2>
 <ul>
-<li><p><i class="fas fa-external-link-square-alt"></i> The <a href="https://rspatial.org/terra/pkg/1-introduction.html#"><code>terra</code> package vignette</a> describes the new raster functions available in <code>terra</code>, their relationship to those in the <code>raster</code> package, and the changes in syntax between the two.</p></li>
-<li><p><i class="fas fa-book"></i> The <a href="https://www.ecologi.st/spatial-r/raster-gis-operations-in-r-with-terra.html">Raster GIS Operations in R with terra</a> chapter from Jasper Slingsby’s “A Minimal Introduction to GIS (in R)” bookdown project has worked examples of many of the operations we’ll learn today.</p></li>
+<li><p><i class="fas fa-book"></i> The <a href="https://r4ds.had.co.nz/tidy-data.html">Tidy Data</a> and <a href="https://r4ds.had.co.nz/relational-data.html">Relational Data</a> sections from <strong>R For Data Science</strong> <span class="citation" data-cites="wickham2016r">(<a href="#ref-wickham2016r" role="doc-biblioref">Wickham and Grolemund 2016</a>)</span> provide a great overview to data cleaning and manipulation functions available in the <code>tidyverse</code>.</p></li>
+<li><p><i class="fas fa-book"></i> <a href="https://ready4r.netlify.app/labbook/part-5-doing-useful-things-with-multiple-tables.html">Doing things with multiple tables</a> has a lot of nice visual examples of for using the <code>_join</code> functions in <code>dplyr</code>.</p></li>
+<li><p><i class="fas fa-book"></i> This <a href="https://www.cell.com/trends/ecology-evolution/fulltext/S0169-5347(21)00227-5">article</a> <span class="citation" data-cites="di2021conservation">(<a href="#ref-di2021conservation" role="doc-biblioref">Di Minin et al. 2021</a>)</span> provides a recent recap of a variety of reasons why we may need to combine data from multiple, often disparate, sources.</p></li>
+<li><p><i class="fas fa-book"></i> The <a href="https://geocompr.robinlovelace.net/spatial-operations.html">Spatial Data Operations Chapter</a> in <span class="citation" data-cites="lovelace_geocomputation_2019">(<a href="#ref-lovelace_geocomputation_2019" role="doc-biblioref">Lovelace et al. 2019</a>)</span> makes the concepts of a network concrete (literally) by using a transportation route example to illustrate the various components of a network analysis in <code>R</code>.</p></li>
 </ul>
 </section>
 <section id="objectives" class="level2">
 <h2 class="anchored" data-anchor-id="objectives">Objectives</h2>
 <p>By the end of today, you should be able to:</p>
 <ul>
-<li><p>Use moving windows as a means of smoothing raster data</p></li>
-<li><p>Reclassify data using conditional statements and reclassification tables</p></li>
-<li><p>Use raster math as a means of creating new data based on an existing dataset.</p></li>
+<li><p>Define <em>spatial analysis</em></p></li>
+<li><p>Describe the steps in planning a spatial analysis</p></li>
+<li><p>Understand the structure of relational databases</p></li>
+<li><p>Use attributes and topology to subset data</p></li>
+<li><p>Generate new features using geographic data</p></li>
+<li><p>Join data based on attributes and location</p></li>
 </ul>
-</section>
-<section id="slides" class="level2">
-<h2 class="anchored" data-anchor-id="slides">Slides</h2>
-<p>The slides for today’s lesson are available online as an HTML file. Use the buttons below to open the slides either as an interactive website or as a static PDF (for printing or storing for later). You can also click in the slides below and navigate through them with your left and right arrow keys.</p>
-<p class="text-center buttons">
-<a class="btn btn-danger" target="_blank" href="../slides/14-slides.html"><i class="fa-solid fa-arrow-up-right-from-square"></i> View all slides in new window</a> <a class="btn btn-danger" target="_blank" href="../slides/14-slides.pdf" role="button"><i class="fa-solid fa-file-pdf"></i> Download PDF of all slides</a>
-</p>
+<!--
+## Slides
+The slides for today's lesson are available online as an HTML file. Use the buttons below to open the slides either as an interactive website or as a static PDF (for printing or storing for later). You can also click in the slides below and navigate through them with your left and right arrow keys.
+
+
+<p class="text-center buttons"><a class="btn btn-danger" target="_blank" href="/slides/14-slides.html"><i class="fa-solid fa-arrow-up-right-from-square"></i> View all slides in new window</a> <a class="btn btn-danger" target="_blank" href="/slides/14-slides.pdf" role="button"><i class="fa-solid fa-file-pdf"></i> Download PDF of all slides</a></p>
+
+
 <div>
-<iframe class="slide-deck" src="../slides/14-slides.html"></iframe>
+
+
+
+```{=html}
+<iframe class="slide-deck" src="/slides/14-slides.html"></iframe>
+```
+
+
+
 </div>
-<p><a href="https://boisestate.hosted.panopto.com/Panopto/Pages/Viewer.aspx?id=d67a2be8-3df8-40a7-a205-b0910143dee4">Link to today’s Panopto Slides</a></p>
+-->
+
 
 
 </section>
 
-</main> <!-- /main -->
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list">
+<div id="ref-di2021conservation" class="csl-entry" role="listitem">
+Di Minin, E., R. A. Correia, and T. Toivonen. 2021. Conservation geography. Trends in Ecology &amp; Evolution.
+</div>
+<div id="ref-lovelace_geocomputation_2019" class="csl-entry" role="listitem">
+Lovelace, R., J. Nowosad, and J. Muenchow. 2019. Geocomputation with <span>R</span>. <span>CRC Press</span>.
+</div>
+<div id="ref-wickham2016r" class="csl-entry" role="listitem">
+Wickham, H., and G. Grolemund. 2016. R for data science: Import, tidy, transform, visualize, and model data. " O’Reilly Media, Inc.".
+</div>
+</div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
