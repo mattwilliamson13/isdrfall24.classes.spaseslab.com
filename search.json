@@ -137,7 +137,7 @@
     "href": "slides/12-slides.html#changing-resolutions-disagg",
     "title": "Operations on Raster Data I",
     "section": "Changing resolutions: disagg",
-    "text": "Changing resolutions: disagg\n\n\n\nra &lt;- aggregate(r, 20)\nplot(ra)\n\n\n\n\n\n\n\n\n\n\nrd &lt;- disagg(r, 20)\n\n\nrd\n\nclass       : SpatRaster \ndimensions  : 3600, 7200, 1  (nrow, ncol, nlyr)\nresolution  : 0.05, 0.05  (x, y)\nextent      : -180, 180, -90, 90  (xmin, xmax, ymin, ymax)\ncoord. ref. : lon/lat WGS 84 (CRS84) (OGC:CRS84) \nsource      : spat_416431403817_16740.tif \nname        : lyr.1 \nmin value   :     1 \nmax value   : 64800 \n\nplot(rd)"
+    "text": "Changing resolutions: disagg\n\n\n\nra &lt;- aggregate(r, 20)\nplot(ra)\n\n\n\n\n\n\n\n\n\n\nrd &lt;- disagg(r, 20)\n\n\nrd\n\nclass       : SpatRaster \ndimensions  : 3600, 7200, 1  (nrow, ncol, nlyr)\nresolution  : 0.05, 0.05  (x, y)\nextent      : -180, 180, -90, 90  (xmin, xmax, ymin, ymax)\ncoord. ref. : lon/lat WGS 84 (CRS84) (OGC:CRS84) \nsource      : spat_3b641b19680a_15204.tif \nname        : lyr.1 \nmin value   :     1 \nmax value   : 64800 \n\nplot(rd)"
   },
   {
     "objectID": "slides/12-slides.html#dealing-with-different-extents",
@@ -312,7 +312,7 @@
     "href": "slides/10-slides.html#centroids-and-distances",
     "title": "Operations With Vector Data I",
     "section": "Centroids and Distances",
-    "text": "Centroids and Distances\nThe function system.time tells you how long a function takes to run:\n\nsystem.time(id.counties &lt;- tigris::counties(state = \"ID\", progress_bar=FALSE))\n\n   user  system elapsed \n   0.90    0.33    1.32 \n\n\nFind the counties that are the furthest distance from each other in Idaho using the polygons, centroids, and point on surface objects we created earlier. Which distance calculation is the fastest?\n(You may want to refer to our session 7 example code.)"
+    "text": "Centroids and Distances\nThe function system.time tells you how long a function takes to run:\n\nsystem.time(id.counties &lt;- tigris::counties(state = \"ID\", progress_bar=FALSE))\n\n   user  system elapsed \n   0.93    0.33    1.42 \n\n\nFind the counties that are the furthest distance from each other in Idaho using the polygons, centroids, and point on surface objects we created earlier. Which distance calculation is the fastest?\n(You may want to refer to our session 7 example code.)"
   },
   {
     "objectID": "slides/10-slides.html#intersections-and-buffers",
@@ -1818,21 +1818,36 @@
     "href": "assignment/07-rasterops.html",
     "title": "Assignment 7: Building spatial databases",
     "section": "",
-    "text": "It’s time to put together the various vector, raster, and tabular code we’ve learned in order to build a dataframe that you can use for a subsequent statistical analysis. For this assignment we’ll be using the National Forest boundaries that we used in class (I’ve written a function for you to download and unzip this in the /code/ folder), a dataset describing the cost of natural disasters fromm 1999-2020 (described in this paper and available at /assignment07/ics209-plus-wf_incidents_1999to2020.csv folder. a land use dataset (/assignment07/land_use_pnw.tif), and the wildfire hazard dataset (/assignment07/wildfire_hazard_agg.tif). Your goal is to create a dataframe that includes the total cost of all disasters that have occurred within a National Forest Boundary along with several social and ecological variables that might help explain the difference in dollars expended to contain the hazard (typically fire). By the end of this assignment you should be able to:"
+    "text": "It’s time to put together the various vector, raster, and tabular code we’ve learned in order to build a dataframe that you can use for a subsequent statistical analysis. For this assignment we’ll be using the National Forest boundaries that we used in class (I’ve written a function for you to download and unzip this in the /code/ folder), a dataset describing the cost of natural disasters from 1999-2020 (described in this paper and available at /assignment07/ics209-plus-wf_incidents_1999to2020.csv folder, a land use dataset (/assignment07/land_use_pnw.tif), and the wildfire hazard dataset (/assignment07/wildfire_hazard_agg.tif). Your goal is to create a dataframe that includes the total cost of all disasters that have occurred within a National Forest Boundary along with several social and ecological variables that might help explain the difference in dollars expended to contain the hazard (typically fire). By the end of this assignment you should be able to:",
+    "crumbs": [
+      "Assignments",
+      "Homework",
+      "Building Spatial Databases"
+    ]
   },
   {
     "objectID": "assignment/07-rasterops.html#instructions",
     "href": "assignment/07-rasterops.html#instructions",
     "title": "Assignment 7: Building spatial databases",
     "section": "Instructions",
-    "text": "Instructions\n\nAfter you’ve joined the assignment repository, you should have this file (named Readme.md) inside of a R project named assignment-7-xx where xx is your github username (or initials).\nOnce you’ve verified that you’ve correctly cloned the assignment repository, create a new Quarto document. Name this file assignment-7-xxx.qmd and give it a title (like M Williamson Assignment 7). Make sure that you select the html output option (Quarto can do a lot of cool things, but the html format is the least-likely to cause you additional headaches). We’ll be using Quarto throughout the course so it’s worth checking out the other tutorials in the getting started section.\nCopy the questions below into your document and change the color of their text.\nSave the changes and make your first commit!\nAnswer the questions making sure save and commit at least 3 more times (having 4 commits is part of the assignment).\nRender the document to html (you should now have at least 3 files in the repository: Readme.md, assignment-7-xx.qmd, and assignment-7-xx.html). Commit these changes and push them to the repository on GitHub. You should see the files there when you go to github.com."
+    "text": "Instructions\n\nAfter you’ve joined the assignment repository, you should have this file (named Readme.md) inside of a R project named assignment-7-xx where xx is your github username (or initials).\nOnce you’ve verified that you’ve correctly cloned the assignment repository, create a new Quarto document. Name this file assignment-7-xxx.qmd and give it a title (like M Williamson Assignment 7). Make sure that you select the html output option (Quarto can do a lot of cool things, but the html format is the least-likely to cause you additional headaches). We’ll be using Quarto throughout the course so it’s worth checking out the other tutorials in the getting started section.\nCopy the questions below into your document and change the color of their text.\nSave the changes and make your first commit!\nAnswer the questions making sure save and commit at least 3 more times (having 4 commits is part of the assignment).\nRender the document to html (you should now have at least 3 files in the repository: Readme.md, assignment-7-xx.qmd, and assignment-7-xx.html). Commit these changes and push them to the repository on GitHub. You should see the files there when you go to github.com.",
+    "crumbs": [
+      "Assignments",
+      "Homework",
+      "Building Spatial Databases"
+    ]
   },
   {
     "objectID": "assignment/07-rasterops.html#the-assignment",
     "href": "assignment/07-rasterops.html#the-assignment",
     "title": "Assignment 7: Building spatial databases",
     "section": "The Assignment",
-    "text": "The Assignment\n\nYou’ll need to download the FS boundary shapefiles then load in all of the different spatial and tabular datasets.\nValidate your geometries and make sure all of your data is in the same CRS.\nSmooth the wildfire hazard and land use datasets using a 5s5 moving window; use the mean for the continuos dataset and the mode for the categorical dataset.\nEstimate the total cost of the incidents within each forest (PROJECTED_FINAL_IM_COST contains this value for each incident).\nNext join 3 attributes of your choosing from the CEJST and the extracted fire and land cover values to your dataframe.\nMake a set of maps that shows the Forest-level values for all of your selected variables."
+    "text": "The Assignment\n\nYou’ll need to download the FS boundary shapefiles then load in all of the different spatial and tabular datasets.\nValidate your geometries and make sure all of your data is in the same CRS.\nSmooth the wildfire hazard and land use datasets using a 5x5 moving window; use the mean for the continuous dataset and the mode for the categorical dataset.\nEstimate the total cost of the incidents within each forest (PROJECTED_FINAL_IM_COST contains this value for each incident).\nNext join 3 attributes of your choosing from the CEJST and the extracted fire and land cover values to your dataframe.\nMake a set of maps that shows the Forest-level values for all of your selected variables.",
+    "crumbs": [
+      "Assignments",
+      "Homework",
+      "Building Spatial Databases"
+    ]
   },
   {
     "objectID": "assignment/05-firstrevision.html",
