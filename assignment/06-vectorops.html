@@ -237,7 +237,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../assignment/07-rasterops.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Building Spatial Databases</span></a>
+ <span class="menu-text">Spatial Databases</span></a>
   </div>
 </li>
       </ul>
@@ -317,7 +317,7 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="the-assignment" class="level2">
 <h2 class="anchored" data-anchor-id="the-assignment">The Assignment</h2>
-<p>We want to begin to assess the role of distance from schools in determining the education outcomes for Idahoans. We’ll use the <code>landmarks_pnw.csv</code> and <code>cejst_pnw.shp</code> datasets as the basis for this assignment. You’ll need to load the csv and convert it to an <code>sf</code> object. We want to compare the percentage of individuals age 25 or over with less than a high school degree (<code>IAHSEF</code> in the cejst dataset) for of counties within 50km of a school (<code>MTFCC == K2543</code>) to those that are more than 50km. You’ll need to follow many of the same operations in the video example from class. Your assignment is:</p>
+<p>We want to begin to assess the role of distance from schools in determining the education outcomes for Idahoans. We’ll use the <code>landmarks_pnw.csv</code> and <code>cejst_pnw.shp</code> datasets as the basis for this assignment. You’ll need to load the csv and convert it to an <code>sf</code> object. We want to compare the percentage of individuals age 25 or over with less than a high school degree (<code>HSEF</code> in the cejst dataset) for of counties within 50km of a school (<code>MTFCC == K2543</code>) to those that are more than 50km. You’ll need to follow many of the same operations in the video example from class. Your assignment is:</p>
 <ol type="1">
 <li>Write out the pseudocode for your analysis</li>
 <li>Translate the pseudocode into code chunks and create the necessary code (You’ll need to use things like <code>st_distance</code>, <code>st_buffer</code>, <code>st_sym_difference</code>)</li>
