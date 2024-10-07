@@ -4212,7 +4212,7 @@
     "href": "slides/14-slides.html#revisiting-the-tidyverse-2",
     "title": "Building Spatial Databases with Attributes",
     "section": "Revisiting the tidyverse",
-    "text": "Revisiting the tidyverse\n\nAggregating data\n\n\n\n\nworld %&gt;%\n  st_drop_geometry(.) %&gt;% \n  group_by(continent) %&gt;%\n  summarize(pop = sum(pop, na.rm = TRUE))\n\n# A tibble: 8 × 2\n  continent                      pop\n  &lt;chr&gt;                        &lt;dbl&gt;\n1 Africa                  1154946633\n2 Antarctica                       0\n3 Asia                    4311408059\n4 Europe                   669036256\n5 North America            565028684\n6 Oceania                   37757833\n7 Seven seas (open ocean)          0\n8 South America            412060811"
+    "text": "Revisiting the tidyverse\n\n\n\nAggregating data\n\n\nworld %&gt;%\n  st_drop_geometry(.) %&gt;% \n  group_by(continent) %&gt;%\n  summarize(pop = sum(pop, na.rm = TRUE))\n\n# A tibble: 8 × 2\n  continent                      pop\n  &lt;chr&gt;                        &lt;dbl&gt;\n1 Africa                  1154946633\n2 Antarctica                       0\n3 Asia                    4311408059\n4 Europe                   669036256\n5 North America            565028684\n6 Oceania                   37757833\n7 Seven seas (open ocean)          0\n8 South America            412060811"
   },
   {
     "objectID": "slides/14-slides.html#joining-aspatial-data-1",
