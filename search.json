@@ -1593,382 +1593,402 @@
     "text": "Slides\nThe slides for today’s lesson are available online as an HTML file. Use the buttons below to open the slides either as an interactive website or as a static PDF (for printing or storing for later). You can also click in the slides below and navigate through them with your left and right arrow keys.\n\n View all slides in new window  Download PDF of all slides\n\n\n\n\nLink to Panopto Video"
   },
   {
-    "objectID": "content/14-content.html",
-    "href": "content/14-content.html",
-    "title": "Building Spatial Databases with Attributes",
+    "objectID": "content/15-content.html",
+    "href": "content/15-content.html",
+    "title": "Building Databases with Location",
     "section": "",
-    "text": "Today we’ll begin exploring typical workflows for spatial analysis by working with attribute data. Attributes generally provide additional information about a location that we can use for visualization and analysis. Unlike spatial operations that we’ll explore next week, attribute data do not all require geographic information (but they do need some means of relating to a geography). These chapters are not ‘prerequisite’ reading for the week, but provide a lot of helpful background for attribute operations in R.\n\n The Tidy Data and Relational Data sections from R For Data Science (Wickham and Grolemund 2016) provide a great overview to data cleaning and manipulation functions available in the tidyverse.\n Doing things with multiple tables has a lot of nice visual examples of for using the _join functions in dplyr.\n This article (Di Minin et al. 2021) provides a recent recap of a variety of reasons why we may need to combine data from multiple, often disparate, sources.",
+    "text": "Today we’ll continue our development of attributes (or covariates) in our spatial databases. We’ll look at developing attributes that describe various geographic properties along with joining and subsetting based on locations.",
     "crumbs": [
       "Content",
       "Course content",
-      "14: Building Spatial Databases with Attributes"
+      "15: Building Databases with Location"
     ]
   },
   {
-    "objectID": "content/14-content.html#resources",
-    "href": "content/14-content.html#resources",
-    "title": "Building Spatial Databases with Attributes",
-    "section": "",
-    "text": "Today we’ll begin exploring typical workflows for spatial analysis by working with attribute data. Attributes generally provide additional information about a location that we can use for visualization and analysis. Unlike spatial operations that we’ll explore next week, attribute data do not all require geographic information (but they do need some means of relating to a geography). These chapters are not ‘prerequisite’ reading for the week, but provide a lot of helpful background for attribute operations in R.\n\n The Tidy Data and Relational Data sections from R For Data Science (Wickham and Grolemund 2016) provide a great overview to data cleaning and manipulation functions available in the tidyverse.\n Doing things with multiple tables has a lot of nice visual examples of for using the _join functions in dplyr.\n This article (Di Minin et al. 2021) provides a recent recap of a variety of reasons why we may need to combine data from multiple, often disparate, sources.",
+    "objectID": "content/15-content.html#resources",
+    "href": "content/15-content.html#resources",
+    "title": "Building Databases with Location",
+    "section": "Resources",
+    "text": "Resources\n\n The Spatial Data Operations Chapter in (Lovelace et al. 2019) makes the concepts of a network concrete (literally) by using a transportation route example to illustrate the various components of a network analysis in R.\n Attributes and Support of Spatial Data Science, a bookdown project by Edzer Pebesma and Roger Bivand (of the sf, sp, rgeos, and rgdal packages)",
     "crumbs": [
       "Content",
       "Course content",
-      "14: Building Spatial Databases with Attributes"
+      "15: Building Databases with Location"
     ]
   },
   {
-    "objectID": "content/14-content.html#objectives",
-    "href": "content/14-content.html#objectives",
-    "title": "Building Spatial Databases with Attributes",
+    "objectID": "content/15-content.html#objectives",
+    "href": "content/15-content.html#objectives",
+    "title": "Building Databases with Location",
     "section": "Objectives",
-    "text": "Objectives\nBy the end of today, you should be able to:\n\nDefine spatial analysis\nDescribe the steps in planning a spatial analysis\nUnderstand the structure of relational databases\nBegin building a database for spatial analysis",
+    "text": "Objectives\nBy the end of today, you should be able to:\n\nGenerate new features using geographic data\nUse topological subsetting to reduce features based on geography\nUse spatial joins to add attributes based on location",
     "crumbs": [
       "Content",
       "Course content",
-      "14: Building Spatial Databases with Attributes"
+      "15: Building Databases with Location"
     ]
   },
   {
-    "objectID": "content/14-content.html#slides",
-    "href": "content/14-content.html#slides",
-    "title": "Building Spatial Databases with Attributes",
+    "objectID": "content/15-content.html#slides",
+    "href": "content/15-content.html#slides",
+    "title": "Building Databases with Location",
     "section": "Slides",
-    "text": "Slides\nThe slides for today’s lesson are available online as an HTML file. Use the buttons below to open the slides either as an interactive website or as a static PDF (for printing or storing for later). You can also click in the slides below and navigate through them with your left and right arrow keys.\n\n View all slides in new window  Download PDF of all slides",
+    "text": "Slides\nThe slides for today’s lesson are available online as an HTML file. Use the buttons below to open the slides either as an interactive website or as a static PDF (for printing or storing for later). You can also click in the slides below and navigate through them with your left and right arrow keys.\n\n View all slides in new window  Download PDF of all slides\n\n\n\n\nLink to Panopto recording",
     "crumbs": [
       "Content",
       "Course content",
-      "14: Building Spatial Databases with Attributes"
+      "15: Building Databases with Location"
     ]
   },
   {
-    "objectID": "content/12-content.html",
-    "href": "content/12-content.html",
-    "title": "Operations with Raster Data I",
+    "objectID": "content/13-content.html",
+    "href": "content/13-content.html",
+    "title": "Operations with Raster Data II",
     "section": "",
-    "text": "Now that we’ve learned about predicates and measures with raster data, it’s time to learn more about some of the transformations that we can conduct with terra. We’ll start with some of the basic transformations that operate on the entire dataset then move to some of the important cell-wise operations.",
+    "text": "Now that we’ve done some “global” transformations of raster data using terra, we’ll look at some of the options for cell-wise transformations. Rather than manipulating the extent, resolution, or CRS of the raster data; we’ll actually be using functions to change the values of the cells themselves.",
     "crumbs": [
       "Content",
       "Course content",
-      "12: Operations with Raster Data I"
+      "13: Operations with Raster Data II"
     ]
   },
   {
-    "objectID": "content/12-content.html#readings",
-    "href": "content/12-content.html#readings",
-    "title": "Operations with Raster Data I",
+    "objectID": "content/13-content.html#readings",
+    "href": "content/13-content.html#readings",
+    "title": "Operations with Raster Data II",
     "section": "Readings",
     "text": "Readings\n\n The terra package vignette describes the new raster functions available in terra, their relationship to those in the raster package, and the changes in syntax between the two.\n The Raster GIS Operations in R with terra chapter from Jasper Slingsby’s “A Minimal Introduction to GIS (in R)” bookdown project has worked examples of many of the operations we’ll learn today.",
     "crumbs": [
       "Content",
       "Course content",
-      "12: Operations with Raster Data I"
+      "13: Operations with Raster Data II"
     ]
   },
   {
-    "objectID": "content/12-content.html#objectives",
-    "href": "content/12-content.html#objectives",
-    "title": "Operations with Raster Data I",
+    "objectID": "content/13-content.html#objectives",
+    "href": "content/13-content.html#objectives",
+    "title": "Operations with Raster Data II",
     "section": "Objectives",
-    "text": "Objectives\nBy the end of today, you should be able to:\n\nAlign rasters for spatial processing\nAdjust the resolution of raster data\nCombine (or reduce) rasters to match the extent of your analysis",
+    "text": "Objectives\nBy the end of today, you should be able to:\n\nUse moving windows as a means of smoothing raster data\nReclassify data using conditional statements and reclassification tables\nUse raster math as a means of creating new data based on an existing dataset.",
     "crumbs": [
       "Content",
       "Course content",
-      "12: Operations with Raster Data I"
+      "13: Operations with Raster Data II"
     ]
   },
   {
-    "objectID": "content/12-content.html#slides",
-    "href": "content/12-content.html#slides",
-    "title": "Operations with Raster Data I",
+    "objectID": "content/13-content.html#slides",
+    "href": "content/13-content.html#slides",
+    "title": "Operations with Raster Data II",
     "section": "Slides",
-    "text": "Slides\nThe slides for today’s lesson are available online as an HTML file. Use the buttons below to open the slides either as an interactive website or as a static PDF (for printing or storing for later). You can also click in the slides below and navigate through them with your left and right arrow keys.\n\n View all slides in new window  Download PDF of all slides",
+    "text": "Slides\nThe slides for today’s lesson are available online as an HTML file. Use the buttons below to open the slides either as an interactive website or as a static PDF (for printing or storing for later). You can also click in the slides below and navigate through them with your left and right arrow keys.\n\n View all slides in new window  Download PDF of all slides\n\n\n\n\nLink to today’s Panopto recording",
     "crumbs": [
       "Content",
       "Course content",
-      "12: Operations with Raster Data I"
+      "13: Operations with Raster Data II"
     ]
   },
   {
-    "objectID": "content/10-content.html",
-    "href": "content/10-content.html",
-    "title": "Operations With Vector Data I",
+    "objectID": "content/11-content.html",
+    "href": "content/11-content.html",
+    "title": "Operations With Vector Data II",
     "section": "",
-    "text": "Now that we’ve spent some time getting used to the syntax of the sf package and used it to assess some of the characteristics of vector objects (e.g., through predicates and measures), we’ll move into transformations. Transformations allow you to actually manipulate the geometries of a vector object (without necessarily changing the attributes themselves) and are a powerful tool for geting disparate data into some logical alignment. That said, transforming geometries can be complicated and often has some unanticipated consequences. That’s why we spent a little bit of time learning the mapping syntax as a means for you to be able to check yourself.",
+    "text": "Now that you have the complete picture of predicates, measures, and transformers; it’s time to use them on some actual data. This lecture is meant to be the “practical” application of the ideas you’ve learned in our previous discussions of vector data and give you enough tools to begin to subset your data to the records and attributes of interest, calculate new spatial metrics, and generate new geometries based on existing data.",
     "crumbs": [
       "Content",
       "Course content",
-      "10: Operations with Vector Data I"
+      "11: Operations with Vector Data II"
     ]
   },
   {
-    "objectID": "content/10-content.html#readings",
-    "href": "content/10-content.html#readings",
-    "title": "Operations With Vector Data I",
+    "objectID": "content/11-content.html#readings",
+    "href": "content/11-content.html#readings",
+    "title": "Operations With Vector Data II",
     "section": "Readings",
     "text": "Readings\n\n The introductory vignette for the sf package has a lot of useful info on sf objects and conventions.\n Section 2.2 on Vector Data and Sections 5.1-5.3 on Geographic Operations in Lovelace et al. (Lovelace et al. 2019) - for more details about vectors and geometric operations on vectors.\n Section 3.1 and 3.2 of Spatial Data Science, a bookdown project by Edzer Pebesma and Roger Bivand (of the sf, sp, rgeos, and rgdal packages).",
     "crumbs": [
       "Content",
       "Course content",
-      "10: Operations with Vector Data I"
+      "11: Operations with Vector Data II"
     ]
   },
   {
-    "objectID": "content/10-content.html#objectives",
-    "href": "content/10-content.html#objectives",
-    "title": "Operations With Vector Data I",
+    "objectID": "content/11-content.html#objectives",
+    "href": "content/11-content.html#objectives",
+    "title": "Operations With Vector Data II",
     "section": "Objectives",
-    "text": "Objectives\nBy the end of today, you should be able to:\n\nRecognize the unary, binary, and n-ary transformers\nArticulate common uses for unary and binary transformers\nUse unary transformations to fix invalid geometries\nImplement common binary transformers to align and combine data",
+    "text": "Objectives\nBy the end of today, you should be able to:\n\nTranslate pseudocode commands into functional workflows\nArticulate the importance of key arguments to sf functions\nGenerate new attributes and geometries from existing data.",
     "crumbs": [
       "Content",
       "Course content",
-      "10: Operations with Vector Data I"
+      "11: Operations with Vector Data II"
     ]
   },
   {
-    "objectID": "content/10-content.html#slides",
-    "href": "content/10-content.html#slides",
-    "title": "Operations With Vector Data I",
+    "objectID": "content/11-content.html#slides",
+    "href": "content/11-content.html#slides",
+    "title": "Operations With Vector Data II",
+    "section": "Slides",
+    "text": "Slides\nThe slides for today’s lesson are available online as an HTML file. Use the buttons below to open the slides either as an interactive website or as a static PDF (for printing or storing for later). You can also click in the slides below and navigate through them with your left and right arrow keys.\n\n View all slides in new window  Download PDF of all slides\n\n\n\n\nLink to Panopto recording",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "11: Operations with Vector Data II"
+    ]
+  },
+  {
+    "objectID": "content/09-content.html",
+    "href": "content/09-content.html",
+    "title": "Introduction to Mapping Geographic Data",
+    "section": "",
+    "text": "Now that we’re getting into actual operations on spatial data and beginning to actually modify the geometries and attributes of spatial data, it’ll be important for you to be able to visualize the results. At this point, we’ll be focusing on rough visualization as a way of “gut-checking” the outcomes of your code. We’ll focus more on creating informative, aesthetically pleasing, publication quality visualizations in section 4 of this course.",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "9: Intro to Mapping Geographic Data"
+    ]
+  },
+  {
+    "objectID": "content/09-content.html#readings",
+    "href": "content/09-content.html#readings",
+    "title": "Introduction to Mapping Geographic Data",
+    "section": "Readings",
+    "text": "Readings\n\n Ch.3 Tmap in a nutshell from “Elegant and informative maps with tmap” by Martijn Tennekes and Jakub Nowosad provides a great “quick start” for using the tmap package for visualizing spatial data.\n Making maps with R by (Lovelace et al. 2019) introduces the tmap package for making nice maps with relatively minimal syntax.\n Making maps in R by Emily Burchfield illustrates some quick mapping syntax with base plot, ggplot, and tmap. For now, just focus on the base plot and tmap sections as we’ll take on the ggplot stuff later in the course.",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "9: Intro to Mapping Geographic Data"
+    ]
+  },
+  {
+    "objectID": "content/09-content.html#objectives",
+    "href": "content/09-content.html#objectives",
+    "title": "Introduction to Mapping Geographic Data",
+    "section": "Objectives",
+    "text": "Objectives\nBy the end of today, you should be able to:\n\nDescribe the basic components of data visualization as a foundation for mapping syntax\nUnderstand layering in both base plot and tmap\nMake basic plots of multiple spatial data objects",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "9: Intro to Mapping Geographic Data"
+    ]
+  },
+  {
+    "objectID": "content/09-content.html#slides",
+    "href": "content/09-content.html#slides",
+    "title": "Introduction to Mapping Geographic Data",
     "section": "Slides",
     "text": "Slides\nThe slides for today’s lesson are available online as an HTML file. Use the buttons below to open the slides either as an interactive website or as a static PDF (for printing or storing for later). You can also click in the slides below and navigate through them with your left and right arrow keys.\n\n View all slides in new window  Download PDF of all slides",
     "crumbs": [
       "Content",
       "Course content",
-      "10: Operations with Vector Data I"
+      "9: Intro to Mapping Geographic Data"
     ]
   },
   {
-    "objectID": "content/08-content.html",
-    "href": "content/08-content.html",
-    "title": "Areal Data: Rasters",
+    "objectID": "content/07-content.html",
+    "href": "content/07-content.html",
+    "title": "Areal Data: Vectors",
     "section": "",
-    "text": "Now that we’ve learned a bit about how to assess some of the important quantities of vector-based spatial data, we’ll try to apply a bit of the same logic to raster data. We’ll be using the terra package for the majority of raster options in this course primarily because it of its speed. That said, it is not a tidyverse package and so some of the intuition we used to organize the sf functions will be a little harder to extend here. I’ll do my best to help you make the links!!",
+    "text": "Now that you have started working with the various components of coordinates and coordinate reference systems, it’s time to start learning the fundamental aspects of working with vector data in sf and R. The syntax is a little confusing at first, but once you’ve gotten a sense for the logic behind it you should be able to start piecing together the functions necessary to implement the pseudocode you write for an analysis. We’ll spend more time on vector manipulation in the coming weeks so you’ll get plenty of practice with the ideas we introduce today.",
     "crumbs": [
       "Content",
       "Course content",
-      "8: Areal Data - Raster Data"
+      "7: Areal Data - Vector Data"
     ]
   },
   {
-    "objectID": "content/08-content.html#readings",
-    "href": "content/08-content.html#readings",
-    "title": "Areal Data: Rasters",
+    "objectID": "content/07-content.html#readings",
+    "href": "content/07-content.html#readings",
+    "title": "Areal Data: Vectors",
     "section": "Readings",
-    "text": "Readings\n\n Chapter 4 from Paula Moraga’s Spatial Statistics for Data Science: Theory and Practice with R provides a quick intro to using terra for raster and vector data.\n The terra reference page provides a brief overview of all of the functions and their categories. We’ll only focus on the SpatRaster methods.\n Raster Data Manipulation from the Spatial Data Science with R and terra ebook provides some nice examples of terra functions in the context of spatial workflows.",
+    "text": "Readings\nSame as last class really, but hopefully you’ll begin to understand them better…\n\n The introductory vignette for the sf package has a lot of useful info on sf objects and conventions.\n Section 2.2 on Vector Data and Sections 5.1-5.3 on Geographic Operations in Lovelace et al. (Lovelace et al. 2019) - for more details about vectors and geometric operations on vectors.\n Chapter 2, Sections 1-3 and Chapter 3, Section 1 of Spatial Data Science by Edzer Pebesma and Roger Bivand (of the sf, sp, rgeos, and rgdal packages)",
     "crumbs": [
       "Content",
       "Course content",
-      "8: Areal Data - Raster Data"
+      "7: Areal Data - Vector Data"
     ]
   },
   {
-    "objectID": "content/08-content.html#objectives",
-    "href": "content/08-content.html#objectives",
-    "title": "Areal Data: Rasters",
+    "objectID": "content/07-content.html#objectives",
+    "href": "content/07-content.html#objectives",
+    "title": "Areal Data: Vectors",
     "section": "Objectives",
-    "text": "Objectives\nBy the end of today, you should be able to:\n\nAccess the elements that define a raster\nBuild rasters from scratch using matrix operations and terra\nEvaluate logical conditions with raster data\nCalculate different measures of raster data",
+    "text": "Objectives\nBy the end of today, you should be able to:\n\nImplement approaches for checking and repairing geometries in R\nUnderstand predicates and measures in the context of spatial operations in sf\nUse st_* to evaluate attributes of geometries and calculate measurements",
     "crumbs": [
       "Content",
       "Course content",
-      "8: Areal Data - Raster Data"
+      "7: Areal Data - Vector Data"
     ]
   },
   {
-    "objectID": "content/08-content.html#slides",
-    "href": "content/08-content.html#slides",
-    "title": "Areal Data: Rasters",
+    "objectID": "content/07-content.html#slides",
+    "href": "content/07-content.html#slides",
+    "title": "Areal Data: Vectors",
     "section": "Slides",
     "text": "Slides\nThe slides for today’s lesson are available online as an HTML file. Use the buttons below to open the slides either as an interactive website or as a static PDF (for printing or storing for later). You can also click in the slides below and navigate through them with your left and right arrow keys.\n\n View all slides in new window  Download PDF of all slides",
     "crumbs": [
       "Content",
       "Course content",
-      "8: Areal Data - Raster Data"
+      "7: Areal Data - Vector Data"
     ]
   },
   {
-    "objectID": "content/06-content.html",
-    "href": "content/06-content.html",
-    "title": "Areal Data: Coordinates and Geometries",
+    "objectID": "content/05-content.html",
+    "href": "content/05-content.html",
+    "title": "Literate Programming, Quarto, and Workflows",
     "section": "",
-    "text": "Now that you have a bit of the fundamentals of geographic data and have had a chance to start using R, it’s time to get into more complicated workflows. To do that, you’ll have to have a bit more of a foundation in coordinates, coordinate reference systems, and geometries and how to access those in R. We’ll start there today and move into functions that change or relate geometries in the next few classes.",
+    "text": "Today we’ll focus on some of the tools for reproducible workflows using R. We’ll introduce Quarto as a means of authoring different kinds of documents. We’ll talk about literate programming and leaving breadcrumbs for yourself (and others). Finally, we’ll begin to work through the ideas of workflow planning",
     "crumbs": [
       "Content",
       "Course content",
-      "6: Areal Data - Coordinates and Geometries"
+      "5: Literate Programming, Quarto, Workflows"
     ]
   },
   {
-    "objectID": "content/06-content.html#readings",
-    "href": "content/06-content.html#readings",
-    "title": "Areal Data: Coordinates and Geometries",
+    "objectID": "content/05-content.html#readings",
+    "href": "content/05-content.html#readings",
+    "title": "Literate Programming, Quarto, and Workflows",
     "section": "Readings",
-    "text": "Readings\n\n The introductory vignette for the sf package has a lot of useful info on sf objects and conventions.\n Section 2.2 on Vector Data and Sections 5.1-5.3 on Geographic Operations in Lovelace et al. (Lovelace et al. 2019) - for more details about vectors and geometric operations on vectors.\n Chapter 2, Sections 1-3 and Chapter 3, Section 1 of Spatial Data Science by Edzer Pebesma and Roger Bivand (of the sf, sp, rgeos, and rgdal packages)",
+    "text": "Readings\n\n Authoring in Quarto - an intro to Quarto for developing different kinds of documents. Lots of other resources linked here!!\n Pseudocode: what it is and how to write it - A nice blogpost by Sara Metawalli the sketches out the logic of pseudocode and why it can be helpful.\n The Whole Game - from Wickham et al., R for Data Science (Wickham and Grolemund 2016). Focus on the sections that begin with “Workflow” to get a sense for how we’ll start putting the pieces together.\n Scripts, algorithms, and functions - chapter 11 in in Lovelace et al., Geocomputation with R (Lovelace et al. 2019) introduces some concepts behind geospatial programming. A few of these pieces will make more sense in the next few weeks, but the general advice on constructing code and planning analyses is useful now.",
     "crumbs": [
       "Content",
       "Course content",
-      "6: Areal Data - Coordinates and Geometries"
+      "5: Literate Programming, Quarto, Workflows"
     ]
   },
   {
-    "objectID": "content/06-content.html#objectives",
-    "href": "content/06-content.html#objectives",
-    "title": "Areal Data: Coordinates and Geometries",
+    "objectID": "content/05-content.html#objectives",
+    "href": "content/05-content.html#objectives",
+    "title": "Literate Programming, Quarto, and Workflows",
     "section": "Objectives",
-    "text": "Objectives\nBy the end of today, you should be able to:\n\nDefine coordinate, coordinate system, datum, and coordinate reference system\nAccess coordinate and geometry information for simple features in R\nUnderstand the rules for simple feature geometries\nAccess and transform the coordinate reference system for vector and raster data in R",
+    "text": "Objectives\nBy the end of today you should be able to:\n\nDevelop basic docs with Quarto\nUnderstand the basics of creating readable code\nUse pseudocode to sketch out a computational problem",
     "crumbs": [
       "Content",
       "Course content",
-      "6: Areal Data - Coordinates and Geometries"
+      "5: Literate Programming, Quarto, Workflows"
     ]
   },
   {
-    "objectID": "content/06-content.html#slides",
-    "href": "content/06-content.html#slides",
-    "title": "Areal Data: Coordinates and Geometries",
-    "section": "Slides",
-    "text": "Slides\nThe slides for today’s lesson are available online as an HTML file. Use the buttons below to open the slides either as an interactive website or as a static PDF (for printing or storing for later). You can also click in the slides below and navigate through them with your left and right arrow keys.\n\n View all slides in new window  Download PDF of all slides\n\n\n\n\nLink to Panopto Recording",
-    "crumbs": [
-      "Content",
-      "Course content",
-      "6: Areal Data - Coordinates and Geometries"
-    ]
-  },
-  {
-    "objectID": "content/04-content.html",
-    "href": "content/04-content.html",
-    "title": "Introduction to Spatial Data in R",
-    "section": "",
-    "text": "Now that we’ve covered some of the conceptual bases of spatial data and geographic analysis, it’s time to get started working with actual data in R. Today’s readings and lecture are focused on the basics of getting your data into the R environment and familiarizing yourself with the different components that make up spatial data objects. We’ll do fancier things in the weeks to come!",
-    "crumbs": [
-      "Content",
-      "Course content",
-      "4: Intro to Spatial Data with R"
-    ]
-  },
-  {
-    "objectID": "content/04-content.html#readings",
-    "href": "content/04-content.html#readings",
-    "title": "Introduction to Spatial Data in R",
-    "section": "Readings",
-    "text": "Readings\n Chapter 2 in Geocomputation with R (Lovelace et al. 2019) provides and overview of using sf for vector datasets and terra for raster data.\n Chapter 2 from Moraga (2023) explores similar topics, but provides more explanation about projections, coordinates, etc.\n Simple Features for R provides a more in-depth, technical discussion of how the sf package organizes spatial data and attributes.\n Ch 2.1-2.5 from Spatial Data Science with R and terra describes the basic functionality of terra for both vector and raster datasets. For reasons we’ll discuss in class, we will rarely use terra for vector data.",
-    "crumbs": [
-      "Content",
-      "Course content",
-      "4: Intro to Spatial Data with R"
-    ]
-  },
-  {
-    "objectID": "content/04-content.html#objectives",
-    "href": "content/04-content.html#objectives",
-    "title": "Introduction to Spatial Data in R",
-    "section": "Objectives",
-    "text": "Objectives\nBy the end of today, you should be able to:\n\nRead spatial data into your R environment.\nDescribe the various aspects of spatial data files and objects.\nGenerate simple summaries describing the spatial data object.\nDetermine the projection, extent, and resolution of spatial data objects.",
-    "crumbs": [
-      "Content",
-      "Course content",
-      "4: Intro to Spatial Data with R"
-    ]
-  },
-  {
-    "objectID": "content/04-content.html#slides",
-    "href": "content/04-content.html#slides",
-    "title": "Introduction to Spatial Data in R",
+    "objectID": "content/05-content.html#slides",
+    "href": "content/05-content.html#slides",
+    "title": "Literate Programming, Quarto, and Workflows",
     "section": "Slides",
     "text": "Slides\nThe slides for today’s lesson are available online as an HTML file. Use the buttons below to open the slides either as an interactive website or as a static PDF (for printing or storing for later). You can also click in the slides below and navigate through them with your left and right arrow keys.\n\n View all slides in new window  Download PDF of all slides",
     "crumbs": [
       "Content",
       "Course content",
-      "4: Intro to Spatial Data with R"
+      "5: Literate Programming, Quarto, Workflows"
     ]
   },
   {
-    "objectID": "content/02-content.html",
-    "href": "content/02-content.html",
-    "title": "Why Geographic Analysis",
+    "objectID": "content/03-content.html",
+    "href": "content/03-content.html",
+    "title": "Introduction to Spatial Data",
     "section": "",
-    "text": "Before we get inundated with technical details and syntax, I think it’s important to remind ourselves why we need geographical analysis. We’ll spend some time on the various conceptualizations of place and space, how those things show up in geographic data, and their implications for the kinds of science we can do when we’re using geographic data. This session is meant to provide a bit of philosophical foundation for you to keep in mind as you work through various parts of the analytic pipeline.",
+    "text": "Now that you have a little more background in the breadth of philosophies, methods, and questions that geography encompasses, it’s time to start familiarizing yourself with the nature of spatial data. This lecture will be a little more conceptual, but is designed to help you make some sense for how R thinks about spatial data (or at least how the package developers have been thinking about it).",
     "crumbs": [
       "Content",
       "Course content",
-      "2: Why Geographic Analysis"
+      "3: Introduction to Spatial Data"
     ]
   },
   {
-    "objectID": "content/02-content.html#readings",
-    "href": "content/02-content.html#readings",
-    "title": "Why Geographic Analysis",
+    "objectID": "content/03-content.html#readings",
+    "href": "content/03-content.html#readings",
+    "title": "Introduction to Spatial Data",
     "section": "Readings",
-    "text": "Readings\nThe following readings are intended to give you some sense of the discussion surrounding the role of spatial data in understanding the world. They are a mix of old favorites and relatively recent reviews. You don’t need to read all of them or memorize them, but they are worth a skim. I bet you’ll find something interesting.\n Conservation biogeography: assessment and prospects by Whitaker et al. (2005) provides an overview of the of geography in understanding ecosystem function and shaping conservation strategies.\n Economic geography, politics, and policy by Rickard (2020) provides a review of the role of geography in understanding responses to globalization.\n Revolutionary and counter revolutionary theory in geography and the problem of ghetto formation by David Harvey (1972) offers a scathing critique of quantitative geography (though Harvey was one of the founders of the field). See (Barnes 2009) for a relatively recent attempt to reconcile these views.\n Does scale exist? An epistemological scale continuum for complex human–environment systems by Steven Manson (2008) is one of my favorite summaries of the various definitions and confusion surrounding scale as a concept invoked in many disciplines.\n Spatial Scaling in Ecology by John Wiens (1989) describes the fundamental challenges of scale in Ecology.",
+    "text": "Readings\n Types of Spatial Data from Paula Moraga’s new book Spatial Statistics for Data Science: Theory and Practice with R provides a nice overview of the types of spatial data from the perspective of a statistical analyst.\n Attributes and Support from Pebesma and Bivand’s Spatial Data Science with Applications in R gives more info and examples on the nature of the relationship between geometries and support.\n Scale and Projections from Mapping, Society, and Technology by Laura Matson and Melinda Kernik gives a nice overview of the challenges associated with representing location on Earth’s surface.",
     "crumbs": [
       "Content",
       "Course content",
-      "2: Why Geographic Analysis"
+      "3: Introduction to Spatial Data"
     ]
   },
   {
-    "objectID": "content/02-content.html#objectives",
-    "href": "content/02-content.html#objectives",
-    "title": "Why Geographic Analysis",
+    "objectID": "content/03-content.html#objectives",
+    "href": "content/03-content.html#objectives",
+    "title": "Introduction to Spatial Data",
     "section": "Objectives",
-    "text": "Objectives\nBy the end of today you should be able to:\n\nDefine what we mean by description, explanation, and prediction in geography.\nDescribe critiques and limitations of quantitative geographical analysis\nDefine ‘scale’ and its implications for geographic analysis\nPlace your research in the broader context of geographic analysis",
+    "text": "Objectives\nBy the end of today you should be able to:\n\nContrast the different “views” of spatial data and their incorporation in GIS.\nIdentify key elements that make data “spatial”.\nArticulate the importance of coordinate reference systems.\nRecognize the relationship between geometries and support.",
     "crumbs": [
       "Content",
       "Course content",
-      "2: Why Geographic Analysis"
+      "3: Introduction to Spatial Data"
     ]
   },
   {
-    "objectID": "content/02-content.html#slides",
-    "href": "content/02-content.html#slides",
-    "title": "Why Geographic Analysis",
+    "objectID": "content/03-content.html#slides",
+    "href": "content/03-content.html#slides",
+    "title": "Introduction to Spatial Data",
     "section": "Slides",
     "text": "Slides\nThe slides for today’s lesson are available online as an HTML file. Use the buttons below to open the slides either as an interactive website or as a static PDF (for printing or storing for later). You can also click in the slides below and navigate through them with your left and right arrow keys.\n\n View all slides in new window  Download PDF of all slides",
     "crumbs": [
       "Content",
       "Course content",
-      "2: Why Geographic Analysis"
+      "3: Introduction to Spatial Data"
     ]
   },
   {
-    "objectID": "content/32-content.html#objectives",
-    "href": "content/32-content.html#objectives",
-    "title": "Conclusion",
+    "objectID": "content/01-content.html",
+    "href": "content/01-content.html",
+    "title": "Getting Started",
+    "section": "",
+    "text": "Today we’ll focus on getting oriented to the course and the tools we’ll be using throughout the semester. Readings are designed to help understand some of the ‘rules’ of R syntax and develop an understanding for manipulating different types of data in R. I’ve added a few on open science and reproducibility because I think they help make the case for learning to build code-based workflows.",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "1: Introduction to the Course"
+    ]
+  },
+  {
+    "objectID": "content/01-content.html#readings",
+    "href": "content/01-content.html#readings",
+    "title": "Getting Started",
+    "section": "Readings",
+    "text": "Readings\n\nThe syllabus, content, examples, and assignments pages for this class\n Chapter 1 - 6 in Venables et al., An Introduction to R (Venables et al. 2009) - for a quick refresher on data types in R (it’s only 30 pages)\n Chapters 1-2 in Douglas et al., An Introduction to R - provides another intro to R that’s been updated and is an open-source book.\n Happy Git and GitHub for the useR - all you really need to know to be a proficient user of git for version control and reproducible workflows.\n Open science, reproducibility, and transparency in ecology by Powers and Hampton - discusses the importance of open science for ecologists.\n Practical Reproducibility in Geography and Geosciences by Nilst and Pebesma - describes the importance of reproducibility for geospatial analysis.",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "1: Introduction to the Course"
+    ]
+  },
+  {
+    "objectID": "content/01-content.html#objectives",
+    "href": "content/01-content.html#objectives",
+    "title": "Getting Started",
+    "section": "Objectives",
+    "text": "Objectives\nBy the end of today you should:\n\nBe able to articulate the organization of the course, the approach to grading, and the requirements for the final project\nBe able to access the RStudio Server and Github classroom\nBe able to clone the first self-reflection and know the process for submitting assignments",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "1: Introduction to the Course"
+    ]
+  },
+  {
+    "objectID": "content/01-content.html#slides",
+    "href": "content/01-content.html#slides",
+    "title": "Getting Started",
+    "section": "Slides",
+    "text": "Slides\nThe slides for today’s lesson are available online as an HTML file. Use the buttons below to open the slides either as an interactive website or as a static PDF (for printing or storing for later). You can also click in the slides below and navigate through them with your left and right arrow keys.\n\n View all slides in new window  Download PDF of all slides",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "1: Introduction to the Course"
+    ]
+  },
+  {
+    "objectID": "content/31-content.html#objectives",
+    "href": "content/31-content.html#objectives",
+    "title": "Introduction to Interactive Maps",
     "section": "Objectives",
     "text": "Objectives\nBy the end of today you should be able to:\n\n View all slides in new window  Download PDF of all slides\n\nSlides Forthcoming"
   },
   {
-    "objectID": "content/30-content.html#objectives",
-    "href": "content/30-content.html#objectives",
-    "title": "Data Visualization and Maps II",
+    "objectID": "content/29-content.html#objectives",
+    "href": "content/29-content.html#objectives",
+    "title": "Data Visualization and Maps I",
     "section": "Objectives",
     "text": "Objectives\nBy the end of today you should be able to:\n\n View all slides in new window  Download PDF of all slides\n\nSlides Forthcoming"
-  },
-  {
-    "objectID": "content/17-content.html",
-    "href": "content/17-content.html",
-    "title": "Combining Vectors and Categorical Rasters",
-    "section": "",
-    "text": "Note that the last 3 sections needed a bit of reorganization. I’ve moved to session 18 to keep the webpage aligned with the schedule."
-  },
-  {
-    "objectID": "content/17-content.html#resources",
-    "href": "content/17-content.html#resources",
-    "title": "Combining Vectors and Categorical Rasters",
-    "section": "Resources",
-    "text": "Resources"
-  },
-  {
-    "objectID": "content/17-content.html#objectives",
-    "href": "content/17-content.html#objectives",
-    "title": "Combining Vectors and Categorical Rasters",
-    "section": "Objectives",
-    "text": "Objectives\nBy the end of today you should be able to:"
-  },
-  {
-    "objectID": "content/17-content.html#slides",
-    "href": "content/17-content.html#slides",
-    "title": "Combining Vectors and Categorical Rasters",
-    "section": "Slides",
-    "text": "Slides\nThe slides for today’s lesson are available online as an HTML file. Use the buttons below to open the slides either as an interactive website or as a static PDF (for printing or storing for later). You can also click in the slides below and navigate through them with your left and right arrow keys.\n\n View all slides in new window  Download PDF of all slides\n\nSlides Forthcoming"
   },
   {
     "objectID": "syllabus.html",
@@ -2819,401 +2839,389 @@
     "text": "Intro to Spatial Data in R\n        \n        \n            Use R to load, visualize, and analyze spatial data\n        \n        \n            HES 505 • Fall 2024Human-Environment SystemsBoise State University\n        \n    \n    \n      \n        \n        \n        \n      \n    \n\n\n\n\n\n\nInstructor\n\n   Carolyn Koehn\n   4034-1 Environmental Research Building\n   carolynkoehn@u.boisestate.edu \n   Schedule an appointment\n\n\n\nCourse details\n\n   Mondays and Wednesdays\n   August 19–December 6, 2024\n   1:30-2:45 PM\n   Riverfront Hall Room 102B\n   Slack\n\n\n\nContacting me\nE-mail and Slack are the best ways to get in contact with me. I will try to respond to all course-related e-mails and Slack messages within 48 hours (really), but also remember that life can be busy and chaotic for everyone (including me!), so if I don’t respond right away, don’t worry!"
   },
   {
-    "objectID": "content/29-content.html#objectives",
-    "href": "content/29-content.html#objectives",
-    "title": "Data Visualization and Maps I",
+    "objectID": "content/30-content.html#objectives",
+    "href": "content/30-content.html#objectives",
+    "title": "Data Visualization and Maps II",
     "section": "Objectives",
     "text": "Objectives\nBy the end of today you should be able to:\n\n View all slides in new window  Download PDF of all slides\n\nSlides Forthcoming"
   },
   {
-    "objectID": "content/31-content.html#objectives",
-    "href": "content/31-content.html#objectives",
-    "title": "Introduction to Interactive Maps",
+    "objectID": "content/32-content.html#objectives",
+    "href": "content/32-content.html#objectives",
+    "title": "Conclusion",
     "section": "Objectives",
     "text": "Objectives\nBy the end of today you should be able to:\n\n View all slides in new window  Download PDF of all slides\n\nSlides Forthcoming"
   },
   {
-    "objectID": "content/01-content.html",
-    "href": "content/01-content.html",
-    "title": "Getting Started",
+    "objectID": "content/02-content.html",
+    "href": "content/02-content.html",
+    "title": "Why Geographic Analysis",
     "section": "",
-    "text": "Today we’ll focus on getting oriented to the course and the tools we’ll be using throughout the semester. Readings are designed to help understand some of the ‘rules’ of R syntax and develop an understanding for manipulating different types of data in R. I’ve added a few on open science and reproducibility because I think they help make the case for learning to build code-based workflows.",
+    "text": "Before we get inundated with technical details and syntax, I think it’s important to remind ourselves why we need geographical analysis. We’ll spend some time on the various conceptualizations of place and space, how those things show up in geographic data, and their implications for the kinds of science we can do when we’re using geographic data. This session is meant to provide a bit of philosophical foundation for you to keep in mind as you work through various parts of the analytic pipeline.",
     "crumbs": [
       "Content",
       "Course content",
-      "1: Introduction to the Course"
+      "2: Why Geographic Analysis"
     ]
   },
   {
-    "objectID": "content/01-content.html#readings",
-    "href": "content/01-content.html#readings",
-    "title": "Getting Started",
+    "objectID": "content/02-content.html#readings",
+    "href": "content/02-content.html#readings",
+    "title": "Why Geographic Analysis",
     "section": "Readings",
-    "text": "Readings\n\nThe syllabus, content, examples, and assignments pages for this class\n Chapter 1 - 6 in Venables et al., An Introduction to R (Venables et al. 2009) - for a quick refresher on data types in R (it’s only 30 pages)\n Chapters 1-2 in Douglas et al., An Introduction to R - provides another intro to R that’s been updated and is an open-source book.\n Happy Git and GitHub for the useR - all you really need to know to be a proficient user of git for version control and reproducible workflows.\n Open science, reproducibility, and transparency in ecology by Powers and Hampton - discusses the importance of open science for ecologists.\n Practical Reproducibility in Geography and Geosciences by Nilst and Pebesma - describes the importance of reproducibility for geospatial analysis.",
+    "text": "Readings\nThe following readings are intended to give you some sense of the discussion surrounding the role of spatial data in understanding the world. They are a mix of old favorites and relatively recent reviews. You don’t need to read all of them or memorize them, but they are worth a skim. I bet you’ll find something interesting.\n Conservation biogeography: assessment and prospects by Whitaker et al. (2005) provides an overview of the of geography in understanding ecosystem function and shaping conservation strategies.\n Economic geography, politics, and policy by Rickard (2020) provides a review of the role of geography in understanding responses to globalization.\n Revolutionary and counter revolutionary theory in geography and the problem of ghetto formation by David Harvey (1972) offers a scathing critique of quantitative geography (though Harvey was one of the founders of the field). See (Barnes 2009) for a relatively recent attempt to reconcile these views.\n Does scale exist? An epistemological scale continuum for complex human–environment systems by Steven Manson (2008) is one of my favorite summaries of the various definitions and confusion surrounding scale as a concept invoked in many disciplines.\n Spatial Scaling in Ecology by John Wiens (1989) describes the fundamental challenges of scale in Ecology.",
     "crumbs": [
       "Content",
       "Course content",
-      "1: Introduction to the Course"
+      "2: Why Geographic Analysis"
     ]
   },
   {
-    "objectID": "content/01-content.html#objectives",
-    "href": "content/01-content.html#objectives",
-    "title": "Getting Started",
+    "objectID": "content/02-content.html#objectives",
+    "href": "content/02-content.html#objectives",
+    "title": "Why Geographic Analysis",
     "section": "Objectives",
-    "text": "Objectives\nBy the end of today you should:\n\nBe able to articulate the organization of the course, the approach to grading, and the requirements for the final project\nBe able to access the RStudio Server and Github classroom\nBe able to clone the first self-reflection and know the process for submitting assignments",
+    "text": "Objectives\nBy the end of today you should be able to:\n\nDefine what we mean by description, explanation, and prediction in geography.\nDescribe critiques and limitations of quantitative geographical analysis\nDefine ‘scale’ and its implications for geographic analysis\nPlace your research in the broader context of geographic analysis",
     "crumbs": [
       "Content",
       "Course content",
-      "1: Introduction to the Course"
+      "2: Why Geographic Analysis"
     ]
   },
   {
-    "objectID": "content/01-content.html#slides",
-    "href": "content/01-content.html#slides",
-    "title": "Getting Started",
+    "objectID": "content/02-content.html#slides",
+    "href": "content/02-content.html#slides",
+    "title": "Why Geographic Analysis",
     "section": "Slides",
     "text": "Slides\nThe slides for today’s lesson are available online as an HTML file. Use the buttons below to open the slides either as an interactive website or as a static PDF (for printing or storing for later). You can also click in the slides below and navigate through them with your left and right arrow keys.\n\n View all slides in new window  Download PDF of all slides",
     "crumbs": [
       "Content",
       "Course content",
-      "1: Introduction to the Course"
+      "2: Why Geographic Analysis"
     ]
   },
   {
-    "objectID": "content/03-content.html",
-    "href": "content/03-content.html",
-    "title": "Introduction to Spatial Data",
+    "objectID": "content/04-content.html",
+    "href": "content/04-content.html",
+    "title": "Introduction to Spatial Data in R",
     "section": "",
-    "text": "Now that you have a little more background in the breadth of philosophies, methods, and questions that geography encompasses, it’s time to start familiarizing yourself with the nature of spatial data. This lecture will be a little more conceptual, but is designed to help you make some sense for how R thinks about spatial data (or at least how the package developers have been thinking about it).",
+    "text": "Now that we’ve covered some of the conceptual bases of spatial data and geographic analysis, it’s time to get started working with actual data in R. Today’s readings and lecture are focused on the basics of getting your data into the R environment and familiarizing yourself with the different components that make up spatial data objects. We’ll do fancier things in the weeks to come!",
     "crumbs": [
       "Content",
       "Course content",
-      "3: Introduction to Spatial Data"
+      "4: Intro to Spatial Data with R"
     ]
   },
   {
-    "objectID": "content/03-content.html#readings",
-    "href": "content/03-content.html#readings",
-    "title": "Introduction to Spatial Data",
+    "objectID": "content/04-content.html#readings",
+    "href": "content/04-content.html#readings",
+    "title": "Introduction to Spatial Data in R",
     "section": "Readings",
-    "text": "Readings\n Types of Spatial Data from Paula Moraga’s new book Spatial Statistics for Data Science: Theory and Practice with R provides a nice overview of the types of spatial data from the perspective of a statistical analyst.\n Attributes and Support from Pebesma and Bivand’s Spatial Data Science with Applications in R gives more info and examples on the nature of the relationship between geometries and support.\n Scale and Projections from Mapping, Society, and Technology by Laura Matson and Melinda Kernik gives a nice overview of the challenges associated with representing location on Earth’s surface.",
+    "text": "Readings\n Chapter 2 in Geocomputation with R (Lovelace et al. 2019) provides and overview of using sf for vector datasets and terra for raster data.\n Chapter 2 from Moraga (2023) explores similar topics, but provides more explanation about projections, coordinates, etc.\n Simple Features for R provides a more in-depth, technical discussion of how the sf package organizes spatial data and attributes.\n Ch 2.1-2.5 from Spatial Data Science with R and terra describes the basic functionality of terra for both vector and raster datasets. For reasons we’ll discuss in class, we will rarely use terra for vector data.",
     "crumbs": [
       "Content",
       "Course content",
-      "3: Introduction to Spatial Data"
+      "4: Intro to Spatial Data with R"
     ]
   },
   {
-    "objectID": "content/03-content.html#objectives",
-    "href": "content/03-content.html#objectives",
-    "title": "Introduction to Spatial Data",
+    "objectID": "content/04-content.html#objectives",
+    "href": "content/04-content.html#objectives",
+    "title": "Introduction to Spatial Data in R",
     "section": "Objectives",
-    "text": "Objectives\nBy the end of today you should be able to:\n\nContrast the different “views” of spatial data and their incorporation in GIS.\nIdentify key elements that make data “spatial”.\nArticulate the importance of coordinate reference systems.\nRecognize the relationship between geometries and support.",
+    "text": "Objectives\nBy the end of today, you should be able to:\n\nRead spatial data into your R environment.\nDescribe the various aspects of spatial data files and objects.\nGenerate simple summaries describing the spatial data object.\nDetermine the projection, extent, and resolution of spatial data objects.",
     "crumbs": [
       "Content",
       "Course content",
-      "3: Introduction to Spatial Data"
+      "4: Intro to Spatial Data with R"
     ]
   },
   {
-    "objectID": "content/03-content.html#slides",
-    "href": "content/03-content.html#slides",
-    "title": "Introduction to Spatial Data",
+    "objectID": "content/04-content.html#slides",
+    "href": "content/04-content.html#slides",
+    "title": "Introduction to Spatial Data in R",
     "section": "Slides",
     "text": "Slides\nThe slides for today’s lesson are available online as an HTML file. Use the buttons below to open the slides either as an interactive website or as a static PDF (for printing or storing for later). You can also click in the slides below and navigate through them with your left and right arrow keys.\n\n View all slides in new window  Download PDF of all slides",
     "crumbs": [
       "Content",
       "Course content",
-      "3: Introduction to Spatial Data"
+      "4: Intro to Spatial Data with R"
     ]
   },
   {
-    "objectID": "content/05-content.html",
-    "href": "content/05-content.html",
-    "title": "Literate Programming, Quarto, and Workflows",
+    "objectID": "content/06-content.html",
+    "href": "content/06-content.html",
+    "title": "Areal Data: Coordinates and Geometries",
     "section": "",
-    "text": "Today we’ll focus on some of the tools for reproducible workflows using R. We’ll introduce Quarto as a means of authoring different kinds of documents. We’ll talk about literate programming and leaving breadcrumbs for yourself (and others). Finally, we’ll begin to work through the ideas of workflow planning",
+    "text": "Now that you have a bit of the fundamentals of geographic data and have had a chance to start using R, it’s time to get into more complicated workflows. To do that, you’ll have to have a bit more of a foundation in coordinates, coordinate reference systems, and geometries and how to access those in R. We’ll start there today and move into functions that change or relate geometries in the next few classes.",
     "crumbs": [
       "Content",
       "Course content",
-      "5: Literate Programming, Quarto, Workflows"
+      "6: Areal Data - Coordinates and Geometries"
     ]
   },
   {
-    "objectID": "content/05-content.html#readings",
-    "href": "content/05-content.html#readings",
-    "title": "Literate Programming, Quarto, and Workflows",
+    "objectID": "content/06-content.html#readings",
+    "href": "content/06-content.html#readings",
+    "title": "Areal Data: Coordinates and Geometries",
     "section": "Readings",
-    "text": "Readings\n\n Authoring in Quarto - an intro to Quarto for developing different kinds of documents. Lots of other resources linked here!!\n Pseudocode: what it is and how to write it - A nice blogpost by Sara Metawalli the sketches out the logic of pseudocode and why it can be helpful.\n The Whole Game - from Wickham et al., R for Data Science (Wickham and Grolemund 2016). Focus on the sections that begin with “Workflow” to get a sense for how we’ll start putting the pieces together.\n Scripts, algorithms, and functions - chapter 11 in in Lovelace et al., Geocomputation with R (Lovelace et al. 2019) introduces some concepts behind geospatial programming. A few of these pieces will make more sense in the next few weeks, but the general advice on constructing code and planning analyses is useful now.",
+    "text": "Readings\n\n The introductory vignette for the sf package has a lot of useful info on sf objects and conventions.\n Section 2.2 on Vector Data and Sections 5.1-5.3 on Geographic Operations in Lovelace et al. (Lovelace et al. 2019) - for more details about vectors and geometric operations on vectors.\n Chapter 2, Sections 1-3 and Chapter 3, Section 1 of Spatial Data Science by Edzer Pebesma and Roger Bivand (of the sf, sp, rgeos, and rgdal packages)",
     "crumbs": [
       "Content",
       "Course content",
-      "5: Literate Programming, Quarto, Workflows"
+      "6: Areal Data - Coordinates and Geometries"
     ]
   },
   {
-    "objectID": "content/05-content.html#objectives",
-    "href": "content/05-content.html#objectives",
-    "title": "Literate Programming, Quarto, and Workflows",
+    "objectID": "content/06-content.html#objectives",
+    "href": "content/06-content.html#objectives",
+    "title": "Areal Data: Coordinates and Geometries",
     "section": "Objectives",
-    "text": "Objectives\nBy the end of today you should be able to:\n\nDevelop basic docs with Quarto\nUnderstand the basics of creating readable code\nUse pseudocode to sketch out a computational problem",
+    "text": "Objectives\nBy the end of today, you should be able to:\n\nDefine coordinate, coordinate system, datum, and coordinate reference system\nAccess coordinate and geometry information for simple features in R\nUnderstand the rules for simple feature geometries\nAccess and transform the coordinate reference system for vector and raster data in R",
     "crumbs": [
       "Content",
       "Course content",
-      "5: Literate Programming, Quarto, Workflows"
+      "6: Areal Data - Coordinates and Geometries"
     ]
   },
   {
-    "objectID": "content/05-content.html#slides",
-    "href": "content/05-content.html#slides",
-    "title": "Literate Programming, Quarto, and Workflows",
+    "objectID": "content/06-content.html#slides",
+    "href": "content/06-content.html#slides",
+    "title": "Areal Data: Coordinates and Geometries",
+    "section": "Slides",
+    "text": "Slides\nThe slides for today’s lesson are available online as an HTML file. Use the buttons below to open the slides either as an interactive website or as a static PDF (for printing or storing for later). You can also click in the slides below and navigate through them with your left and right arrow keys.\n\n View all slides in new window  Download PDF of all slides\n\n\n\n\nLink to Panopto Recording",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "6: Areal Data - Coordinates and Geometries"
+    ]
+  },
+  {
+    "objectID": "content/08-content.html",
+    "href": "content/08-content.html",
+    "title": "Areal Data: Rasters",
+    "section": "",
+    "text": "Now that we’ve learned a bit about how to assess some of the important quantities of vector-based spatial data, we’ll try to apply a bit of the same logic to raster data. We’ll be using the terra package for the majority of raster options in this course primarily because it of its speed. That said, it is not a tidyverse package and so some of the intuition we used to organize the sf functions will be a little harder to extend here. I’ll do my best to help you make the links!!",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "8: Areal Data - Raster Data"
+    ]
+  },
+  {
+    "objectID": "content/08-content.html#readings",
+    "href": "content/08-content.html#readings",
+    "title": "Areal Data: Rasters",
+    "section": "Readings",
+    "text": "Readings\n\n Chapter 4 from Paula Moraga’s Spatial Statistics for Data Science: Theory and Practice with R provides a quick intro to using terra for raster and vector data.\n The terra reference page provides a brief overview of all of the functions and their categories. We’ll only focus on the SpatRaster methods.\n Raster Data Manipulation from the Spatial Data Science with R and terra ebook provides some nice examples of terra functions in the context of spatial workflows.",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "8: Areal Data - Raster Data"
+    ]
+  },
+  {
+    "objectID": "content/08-content.html#objectives",
+    "href": "content/08-content.html#objectives",
+    "title": "Areal Data: Rasters",
+    "section": "Objectives",
+    "text": "Objectives\nBy the end of today, you should be able to:\n\nAccess the elements that define a raster\nBuild rasters from scratch using matrix operations and terra\nEvaluate logical conditions with raster data\nCalculate different measures of raster data",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "8: Areal Data - Raster Data"
+    ]
+  },
+  {
+    "objectID": "content/08-content.html#slides",
+    "href": "content/08-content.html#slides",
+    "title": "Areal Data: Rasters",
     "section": "Slides",
     "text": "Slides\nThe slides for today’s lesson are available online as an HTML file. Use the buttons below to open the slides either as an interactive website or as a static PDF (for printing or storing for later). You can also click in the slides below and navigate through them with your left and right arrow keys.\n\n View all slides in new window  Download PDF of all slides",
     "crumbs": [
       "Content",
       "Course content",
-      "5: Literate Programming, Quarto, Workflows"
+      "8: Areal Data - Raster Data"
     ]
   },
   {
-    "objectID": "content/07-content.html",
-    "href": "content/07-content.html",
-    "title": "Areal Data: Vectors",
+    "objectID": "content/10-content.html",
+    "href": "content/10-content.html",
+    "title": "Operations With Vector Data I",
     "section": "",
-    "text": "Now that you have started working with the various components of coordinates and coordinate reference systems, it’s time to start learning the fundamental aspects of working with vector data in sf and R. The syntax is a little confusing at first, but once you’ve gotten a sense for the logic behind it you should be able to start piecing together the functions necessary to implement the pseudocode you write for an analysis. We’ll spend more time on vector manipulation in the coming weeks so you’ll get plenty of practice with the ideas we introduce today.",
+    "text": "Now that we’ve spent some time getting used to the syntax of the sf package and used it to assess some of the characteristics of vector objects (e.g., through predicates and measures), we’ll move into transformations. Transformations allow you to actually manipulate the geometries of a vector object (without necessarily changing the attributes themselves) and are a powerful tool for geting disparate data into some logical alignment. That said, transforming geometries can be complicated and often has some unanticipated consequences. That’s why we spent a little bit of time learning the mapping syntax as a means for you to be able to check yourself.",
     "crumbs": [
       "Content",
       "Course content",
-      "7: Areal Data - Vector Data"
+      "10: Operations with Vector Data I"
     ]
   },
   {
-    "objectID": "content/07-content.html#readings",
-    "href": "content/07-content.html#readings",
-    "title": "Areal Data: Vectors",
-    "section": "Readings",
-    "text": "Readings\nSame as last class really, but hopefully you’ll begin to understand them better…\n\n The introductory vignette for the sf package has a lot of useful info on sf objects and conventions.\n Section 2.2 on Vector Data and Sections 5.1-5.3 on Geographic Operations in Lovelace et al. (Lovelace et al. 2019) - for more details about vectors and geometric operations on vectors.\n Chapter 2, Sections 1-3 and Chapter 3, Section 1 of Spatial Data Science by Edzer Pebesma and Roger Bivand (of the sf, sp, rgeos, and rgdal packages)",
-    "crumbs": [
-      "Content",
-      "Course content",
-      "7: Areal Data - Vector Data"
-    ]
-  },
-  {
-    "objectID": "content/07-content.html#objectives",
-    "href": "content/07-content.html#objectives",
-    "title": "Areal Data: Vectors",
-    "section": "Objectives",
-    "text": "Objectives\nBy the end of today, you should be able to:\n\nImplement approaches for checking and repairing geometries in R\nUnderstand predicates and measures in the context of spatial operations in sf\nUse st_* to evaluate attributes of geometries and calculate measurements",
-    "crumbs": [
-      "Content",
-      "Course content",
-      "7: Areal Data - Vector Data"
-    ]
-  },
-  {
-    "objectID": "content/07-content.html#slides",
-    "href": "content/07-content.html#slides",
-    "title": "Areal Data: Vectors",
-    "section": "Slides",
-    "text": "Slides\nThe slides for today’s lesson are available online as an HTML file. Use the buttons below to open the slides either as an interactive website or as a static PDF (for printing or storing for later). You can also click in the slides below and navigate through them with your left and right arrow keys.\n\n View all slides in new window  Download PDF of all slides",
-    "crumbs": [
-      "Content",
-      "Course content",
-      "7: Areal Data - Vector Data"
-    ]
-  },
-  {
-    "objectID": "content/09-content.html",
-    "href": "content/09-content.html",
-    "title": "Introduction to Mapping Geographic Data",
-    "section": "",
-    "text": "Now that we’re getting into actual operations on spatial data and beginning to actually modify the geometries and attributes of spatial data, it’ll be important for you to be able to visualize the results. At this point, we’ll be focusing on rough visualization as a way of “gut-checking” the outcomes of your code. We’ll focus more on creating informative, aesthetically pleasing, publication quality visualizations in section 4 of this course.",
-    "crumbs": [
-      "Content",
-      "Course content",
-      "9: Intro to Mapping Geographic Data"
-    ]
-  },
-  {
-    "objectID": "content/09-content.html#readings",
-    "href": "content/09-content.html#readings",
-    "title": "Introduction to Mapping Geographic Data",
-    "section": "Readings",
-    "text": "Readings\n\n Ch.3 Tmap in a nutshell from “Elegant and informative maps with tmap” by Martijn Tennekes and Jakub Nowosad provides a great “quick start” for using the tmap package for visualizing spatial data.\n Making maps with R by (Lovelace et al. 2019) introduces the tmap package for making nice maps with relatively minimal syntax.\n Making maps in R by Emily Burchfield illustrates some quick mapping syntax with base plot, ggplot, and tmap. For now, just focus on the base plot and tmap sections as we’ll take on the ggplot stuff later in the course.",
-    "crumbs": [
-      "Content",
-      "Course content",
-      "9: Intro to Mapping Geographic Data"
-    ]
-  },
-  {
-    "objectID": "content/09-content.html#objectives",
-    "href": "content/09-content.html#objectives",
-    "title": "Introduction to Mapping Geographic Data",
-    "section": "Objectives",
-    "text": "Objectives\nBy the end of today, you should be able to:\n\nDescribe the basic components of data visualization as a foundation for mapping syntax\nUnderstand layering in both base plot and tmap\nMake basic plots of multiple spatial data objects",
-    "crumbs": [
-      "Content",
-      "Course content",
-      "9: Intro to Mapping Geographic Data"
-    ]
-  },
-  {
-    "objectID": "content/09-content.html#slides",
-    "href": "content/09-content.html#slides",
-    "title": "Introduction to Mapping Geographic Data",
-    "section": "Slides",
-    "text": "Slides\nThe slides for today’s lesson are available online as an HTML file. Use the buttons below to open the slides either as an interactive website or as a static PDF (for printing or storing for later). You can also click in the slides below and navigate through them with your left and right arrow keys.\n\n View all slides in new window  Download PDF of all slides",
-    "crumbs": [
-      "Content",
-      "Course content",
-      "9: Intro to Mapping Geographic Data"
-    ]
-  },
-  {
-    "objectID": "content/11-content.html",
-    "href": "content/11-content.html",
-    "title": "Operations With Vector Data II",
-    "section": "",
-    "text": "Now that you have the complete picture of predicates, measures, and transformers; it’s time to use them on some actual data. This lecture is meant to be the “practical” application of the ideas you’ve learned in our previous discussions of vector data and give you enough tools to begin to subset your data to the records and attributes of interest, calculate new spatial metrics, and generate new geometries based on existing data.",
-    "crumbs": [
-      "Content",
-      "Course content",
-      "11: Operations with Vector Data II"
-    ]
-  },
-  {
-    "objectID": "content/11-content.html#readings",
-    "href": "content/11-content.html#readings",
-    "title": "Operations With Vector Data II",
+    "objectID": "content/10-content.html#readings",
+    "href": "content/10-content.html#readings",
+    "title": "Operations With Vector Data I",
     "section": "Readings",
     "text": "Readings\n\n The introductory vignette for the sf package has a lot of useful info on sf objects and conventions.\n Section 2.2 on Vector Data and Sections 5.1-5.3 on Geographic Operations in Lovelace et al. (Lovelace et al. 2019) - for more details about vectors and geometric operations on vectors.\n Section 3.1 and 3.2 of Spatial Data Science, a bookdown project by Edzer Pebesma and Roger Bivand (of the sf, sp, rgeos, and rgdal packages).",
     "crumbs": [
       "Content",
       "Course content",
-      "11: Operations with Vector Data II"
+      "10: Operations with Vector Data I"
     ]
   },
   {
-    "objectID": "content/11-content.html#objectives",
-    "href": "content/11-content.html#objectives",
-    "title": "Operations With Vector Data II",
+    "objectID": "content/10-content.html#objectives",
+    "href": "content/10-content.html#objectives",
+    "title": "Operations With Vector Data I",
     "section": "Objectives",
-    "text": "Objectives\nBy the end of today, you should be able to:\n\nTranslate pseudocode commands into functional workflows\nArticulate the importance of key arguments to sf functions\nGenerate new attributes and geometries from existing data.",
+    "text": "Objectives\nBy the end of today, you should be able to:\n\nRecognize the unary, binary, and n-ary transformers\nArticulate common uses for unary and binary transformers\nUse unary transformations to fix invalid geometries\nImplement common binary transformers to align and combine data",
     "crumbs": [
       "Content",
       "Course content",
-      "11: Operations with Vector Data II"
+      "10: Operations with Vector Data I"
     ]
   },
   {
-    "objectID": "content/11-content.html#slides",
-    "href": "content/11-content.html#slides",
-    "title": "Operations With Vector Data II",
+    "objectID": "content/10-content.html#slides",
+    "href": "content/10-content.html#slides",
+    "title": "Operations With Vector Data I",
     "section": "Slides",
-    "text": "Slides\nThe slides for today’s lesson are available online as an HTML file. Use the buttons below to open the slides either as an interactive website or as a static PDF (for printing or storing for later). You can also click in the slides below and navigate through them with your left and right arrow keys.\n\n View all slides in new window  Download PDF of all slides\n\n\n\n\nLink to Panopto recording",
+    "text": "Slides\nThe slides for today’s lesson are available online as an HTML file. Use the buttons below to open the slides either as an interactive website or as a static PDF (for printing or storing for later). You can also click in the slides below and navigate through them with your left and right arrow keys.\n\n View all slides in new window  Download PDF of all slides",
     "crumbs": [
       "Content",
       "Course content",
-      "11: Operations with Vector Data II"
+      "10: Operations with Vector Data I"
     ]
   },
   {
-    "objectID": "content/13-content.html",
-    "href": "content/13-content.html",
-    "title": "Operations with Raster Data II",
+    "objectID": "content/12-content.html",
+    "href": "content/12-content.html",
+    "title": "Operations with Raster Data I",
     "section": "",
-    "text": "Now that we’ve done some “global” transformations of raster data using terra, we’ll look at some of the options for cell-wise transformations. Rather than manipulating the extent, resolution, or CRS of the raster data; we’ll actually be using functions to change the values of the cells themselves.",
+    "text": "Now that we’ve learned about predicates and measures with raster data, it’s time to learn more about some of the transformations that we can conduct with terra. We’ll start with some of the basic transformations that operate on the entire dataset then move to some of the important cell-wise operations.",
     "crumbs": [
       "Content",
       "Course content",
-      "13: Operations with Raster Data II"
+      "12: Operations with Raster Data I"
     ]
   },
   {
-    "objectID": "content/13-content.html#readings",
-    "href": "content/13-content.html#readings",
-    "title": "Operations with Raster Data II",
+    "objectID": "content/12-content.html#readings",
+    "href": "content/12-content.html#readings",
+    "title": "Operations with Raster Data I",
     "section": "Readings",
     "text": "Readings\n\n The terra package vignette describes the new raster functions available in terra, their relationship to those in the raster package, and the changes in syntax between the two.\n The Raster GIS Operations in R with terra chapter from Jasper Slingsby’s “A Minimal Introduction to GIS (in R)” bookdown project has worked examples of many of the operations we’ll learn today.",
     "crumbs": [
       "Content",
       "Course content",
-      "13: Operations with Raster Data II"
+      "12: Operations with Raster Data I"
     ]
   },
   {
-    "objectID": "content/13-content.html#objectives",
-    "href": "content/13-content.html#objectives",
-    "title": "Operations with Raster Data II",
+    "objectID": "content/12-content.html#objectives",
+    "href": "content/12-content.html#objectives",
+    "title": "Operations with Raster Data I",
     "section": "Objectives",
-    "text": "Objectives\nBy the end of today, you should be able to:\n\nUse moving windows as a means of smoothing raster data\nReclassify data using conditional statements and reclassification tables\nUse raster math as a means of creating new data based on an existing dataset.",
+    "text": "Objectives\nBy the end of today, you should be able to:\n\nAlign rasters for spatial processing\nAdjust the resolution of raster data\nCombine (or reduce) rasters to match the extent of your analysis",
     "crumbs": [
       "Content",
       "Course content",
-      "13: Operations with Raster Data II"
+      "12: Operations with Raster Data I"
     ]
   },
   {
-    "objectID": "content/13-content.html#slides",
-    "href": "content/13-content.html#slides",
-    "title": "Operations with Raster Data II",
+    "objectID": "content/12-content.html#slides",
+    "href": "content/12-content.html#slides",
+    "title": "Operations with Raster Data I",
     "section": "Slides",
-    "text": "Slides\nThe slides for today’s lesson are available online as an HTML file. Use the buttons below to open the slides either as an interactive website or as a static PDF (for printing or storing for later). You can also click in the slides below and navigate through them with your left and right arrow keys.\n\n View all slides in new window  Download PDF of all slides\n\n\n\n\nLink to today’s Panopto recording",
+    "text": "Slides\nThe slides for today’s lesson are available online as an HTML file. Use the buttons below to open the slides either as an interactive website or as a static PDF (for printing or storing for later). You can also click in the slides below and navigate through them with your left and right arrow keys.\n\n View all slides in new window  Download PDF of all slides",
     "crumbs": [
       "Content",
       "Course content",
-      "13: Operations with Raster Data II"
+      "12: Operations with Raster Data I"
     ]
   },
   {
-    "objectID": "content/15-content.html",
-    "href": "content/15-content.html",
-    "title": "Building Databases with Location",
+    "objectID": "content/14-content.html",
+    "href": "content/14-content.html",
+    "title": "Building Spatial Databases with Attributes",
     "section": "",
-    "text": "Today we’ll continue our development of attributes (or covariates) in our spatial databases. We’ll look at developing attributes that describe various geographic properties along with joining and subsetting based on locations.",
+    "text": "Today we’ll begin exploring typical workflows for spatial analysis by working with attribute data. Attributes generally provide additional information about a location that we can use for visualization and analysis. Unlike spatial operations that we’ll explore next week, attribute data do not all require geographic information (but they do need some means of relating to a geography). These chapters are not ‘prerequisite’ reading for the week, but provide a lot of helpful background for attribute operations in R.\n\n The Tidy Data and Relational Data sections from R For Data Science (Wickham and Grolemund 2016) provide a great overview to data cleaning and manipulation functions available in the tidyverse.\n Doing things with multiple tables has a lot of nice visual examples of for using the _join functions in dplyr.\n This article (Di Minin et al. 2021) provides a recent recap of a variety of reasons why we may need to combine data from multiple, often disparate, sources.",
     "crumbs": [
       "Content",
       "Course content",
-      "15: Building Databases with Location"
+      "14: Building Spatial Databases with Attributes"
     ]
   },
   {
-    "objectID": "content/15-content.html#resources",
-    "href": "content/15-content.html#resources",
-    "title": "Building Databases with Location",
-    "section": "Resources",
-    "text": "Resources\n\n The Spatial Data Operations Chapter in (Lovelace et al. 2019) makes the concepts of a network concrete (literally) by using a transportation route example to illustrate the various components of a network analysis in R.\n Attributes and Support of Spatial Data Science, a bookdown project by Edzer Pebesma and Roger Bivand (of the sf, sp, rgeos, and rgdal packages)",
+    "objectID": "content/14-content.html#resources",
+    "href": "content/14-content.html#resources",
+    "title": "Building Spatial Databases with Attributes",
+    "section": "",
+    "text": "Today we’ll begin exploring typical workflows for spatial analysis by working with attribute data. Attributes generally provide additional information about a location that we can use for visualization and analysis. Unlike spatial operations that we’ll explore next week, attribute data do not all require geographic information (but they do need some means of relating to a geography). These chapters are not ‘prerequisite’ reading for the week, but provide a lot of helpful background for attribute operations in R.\n\n The Tidy Data and Relational Data sections from R For Data Science (Wickham and Grolemund 2016) provide a great overview to data cleaning and manipulation functions available in the tidyverse.\n Doing things with multiple tables has a lot of nice visual examples of for using the _join functions in dplyr.\n This article (Di Minin et al. 2021) provides a recent recap of a variety of reasons why we may need to combine data from multiple, often disparate, sources.",
     "crumbs": [
       "Content",
       "Course content",
-      "15: Building Databases with Location"
+      "14: Building Spatial Databases with Attributes"
     ]
   },
   {
-    "objectID": "content/15-content.html#objectives",
-    "href": "content/15-content.html#objectives",
-    "title": "Building Databases with Location",
+    "objectID": "content/14-content.html#objectives",
+    "href": "content/14-content.html#objectives",
+    "title": "Building Spatial Databases with Attributes",
     "section": "Objectives",
-    "text": "Objectives\nBy the end of today, you should be able to:\n\nGenerate new features using geographic data\nUse topological subsetting to reduce features based on geography\nUse spatial joins to add attributes based on location",
+    "text": "Objectives\nBy the end of today, you should be able to:\n\nDefine spatial analysis\nDescribe the steps in planning a spatial analysis\nUnderstand the structure of relational databases\nBegin building a database for spatial analysis",
     "crumbs": [
       "Content",
       "Course content",
-      "15: Building Databases with Location"
+      "14: Building Spatial Databases with Attributes"
     ]
   },
   {
-    "objectID": "content/15-content.html#slides",
-    "href": "content/15-content.html#slides",
-    "title": "Building Databases with Location",
+    "objectID": "content/14-content.html#slides",
+    "href": "content/14-content.html#slides",
+    "title": "Building Spatial Databases with Attributes",
     "section": "Slides",
-    "text": "Slides\nThe slides for today’s lesson are available online as an HTML file. Use the buttons below to open the slides either as an interactive website or as a static PDF (for printing or storing for later). You can also click in the slides below and navigate through them with your left and right arrow keys.\n\n View all slides in new window  Download PDF of all slides\n\n\n\n\nLink to Panopto recording",
+    "text": "Slides\nThe slides for today’s lesson are available online as an HTML file. Use the buttons below to open the slides either as an interactive website or as a static PDF (for printing or storing for later). You can also click in the slides below and navigate through them with your left and right arrow keys.\n\n View all slides in new window  Download PDF of all slides",
     "crumbs": [
       "Content",
       "Course content",
-      "15: Building Databases with Location"
+      "14: Building Spatial Databases with Attributes"
+    ]
+  },
+  {
+    "objectID": "content/16-content.html",
+    "href": "content/16-content.html",
+    "title": "Combining Vectors and Categorical Rasters",
+    "section": "",
+    "text": "As we move towards a complete geospatial statistical workflow, we’ll need to be able to combine data from both raster and vector datasets. Sometimes that will mean simply converting from one format to another. In other cases, we’ll need to create new datasets based on calculations that integrate different data models.",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "16: Combining Vectors and Rasters"
+    ]
+  },
+  {
+    "objectID": "content/16-content.html#resources",
+    "href": "content/16-content.html#resources",
+    "title": "Combining Vectors and Categorical Rasters",
+    "section": "Resources",
+    "text": "Resources\n\n The Integrating rasters and vectors chapter of Michael Dorman’s Introduction to Spatial Data Programming with R online textbook has a number of worked examples combining vector and raster data.\n Raster-vector interactions Chapter 6 in Lovelace et al., Geocomputation with R (Lovelace et al. 2019) has a great description of why you might do some of these things in your analysis.",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "16: Combining Vectors and Rasters"
+    ]
+  },
+  {
+    "objectID": "content/16-content.html#objectives",
+    "href": "content/16-content.html#objectives",
+    "title": "Combining Vectors and Categorical Rasters",
+    "section": "Objectives",
+    "text": "Objectives\nBy the end of today you should be able to:\n\nConvert between raster and vector datasets\nGenerate new rasters describing the spatial arrangement of vector data\nExtract raster values as attributes of vector data",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "16: Combining Vectors and Rasters"
     ]
   },
   {
@@ -3305,7 +3313,7 @@
     "href": "schedule.html",
     "title": "Schedule",
     "section": "",
-    "text": "Here’s your roadmap for the semester!\n\nContent (): This page contains the readings, slides, and recorded lectures for the week. Read and watch these before our in-person class.\nLesson (): This page contains additional annotated R code and other supplementary information that you can use as a reference for your assignments and project. This is only a reference page—you don’t have to necessarily do anything here, but it will be helpful as you work on your assignments.\nExample (): This page the scripts that we work on in class as a reminder of some of the live-coding exercises. These are provided as a reference to help you link your notes to the syntax we use in class.\nAssignment (): This page contains the instructions for each assignment. Assignments are due by 11:59 PM on the day they’re listed.\n\n\n\n\n\n\n\nSubscribe!\n\n\n\nYou can subscribe to this calendar URL in Outlook, Google Calendar, or Apple Calendar:\n\n\n\n Download\n\n\n\n\n\n\n\n\n\n\n\nGetting started\n\n\n\n\n\n\nTitle\n\n\nContent\n\n\nLesson\n\n\nExample\n\n\nAssignment\n\n\n\n\n\n\nAugust 19(Session 1)\n\n\nIntroduction to the course\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nAugust 21(Session 2)\n\n\nWhy Geographic Analysis\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nAugust 23\n\n\n Self-Evaluation 1 due  (submit by 11:59 PM)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nAugust 26(Session 3)\n\n\nIntroduction to Spatial Data\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nAugust 28(Session 4)\n\n\nIntroduction to Spatial Data with R\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nAugust 29\n\n\n Homework 1  (submit by 11:59 PM)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSeptember 2\n\n\nNo Class(Labor Day)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSeptember 4(Session 5)\n\n\nLiterate Programming, Quarto, Workflows\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSeptember 5\n\n\n Homework 2  (submit by 11:59 PM)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSpatial Data Operations in R\n\n\n\n\n\n\nTitle\n\n\nContent\n\n\nLesson\n\n\nExample\n\n\nAssignment\n\n\n\n\n\n\nSeptember 9(Session 6)\n\n\nAreal Data: Coordinates and Geometries\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSeptember 11(Session 7)\n\n\nAreal Data: Vector Data\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSeptember 12\n\n\n Homework 3\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSeptember 16(Session 8)\n\n\nAreal Data: Rasters\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSeptember 18(Session 9)\n\n\nMapping Geographic Data\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSeptember 19\n\n\n Homework 4\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSeptember 23(Session 10)\n\n\nOperations With Vectors I\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSeptember 25(Session 11)\n\n\nOperations With Vectors II\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSeptember 26\n\n\n Assignment Revision 1  (submit by 11:59 PM)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSeptember 30(Session 12)\n\n\nOperations With Rasters I\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nOctober 2(Session 13)\n\n\nOperations With Rasters II\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nOctober 3\n\n\n Homework 6  (submit by 11:59 PM)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nOctober 7(Session 14)\n\n\nBuilding Spatial Databases with Attributes\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nOctober 9(Session 15)\n\n\nBuilding Spatial Databases with Location\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nOctober 14(Session 16)\n\n\nCombining Vectors and Rasters\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nOctober 15\n\n\n Homework 7  (submit by 11:59 PM)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nStatistical Workflows for Spatial Data\n\n\n\n\n\n\nTitle\n\n\nContent\n\n\nLesson\n\n\nExample\n\n\nAssignment\n\n\n\n\n\n\nOctober 16(Session 17)\n\n\nPoint Patterns\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nOctober 21(Session 18)\n\n\nInterpolation\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nOctober 22\n\n\n Assignment Revision 2  (submit by 11:59 PM)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nOctober 23(Session 19)\n\n\nProximity and Areal Data\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nOctober 28(Session 20)\n\n\nSpatial Autocorrelation\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nOctober 29\n\n\n Homework 8  (submit by 11:59 PM)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nOctober 30(Session 21)\n\n\nStatistical Modelling I\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nNovember 4(Session 22)\n\n\nStatistical Modelling II\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nNovember 6(Session 23)\n\n\nStatistical Modelling III\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nNovember 7\n\n\n Homework 9  (submit by 11:59 PM)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nNovember 11(Session 24)\n\n\nMovement and Networks I\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nNovember 13(Session 25)\n\n\nMovement and Networks II\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nNovember 14\n\n\n Homework 10  (submit by 11:59 PM)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nVisualizing Spatial Data\n\n\n\n\n\n\nTitle\n\n\nContent\n\n\nLesson\n\n\nExample\n\n\nAssignment\n\n\n\n\n\n\nNovember 18(Session 26)\n\n\nData Visualization and Maps I\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nNovember 20(Session 27)\n\n\nData Visualization and Maps II\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nNovember 21\n\n\n Assignment Revision 3  (submit by 11:59 PM)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nNovember 25\n\n\nNo Class(Fall Break)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nNovember 27\n\n\nNo Class(Fall Break)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nDecember 2(Session 28)\n\n\nIntroduction to Interactive Maps\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nWrapup\n\n\n\n\n\n\nTitle\n\n\nContent\n\n\nLesson\n\n\nExample\n\n\nAssignment\n\n\n\n\n\n\nDecember 4(Session 29)\n\n\nConclusion\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nDecember 5\n\n\n Final Project Draft  (submit by 11:59 PM)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nDecember 11\n\n\nFinal Project Workday(optional)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nDecember 12\n\n\n Final Project Due  (submit by 11:59 PM)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nDecember 13\n\n\n Final Self-Evaluation Due  (submit by 11:59 PM)"
+    "text": "Here’s your roadmap for the semester!\n\nContent (): This page contains the readings, slides, and recorded lectures for the week. Read and watch these before our in-person class.\nLesson (): This page contains additional annotated R code and other supplementary information that you can use as a reference for your assignments and project. This is only a reference page—you don’t have to necessarily do anything here, but it will be helpful as you work on your assignments.\nExample (): This page the scripts that we work on in class as a reminder of some of the live-coding exercises. These are provided as a reference to help you link your notes to the syntax we use in class.\nAssignment (): This page contains the instructions for each assignment. Assignments are due by 11:59 PM on the day they’re listed.\n\n\n\n\n\n\n\nSubscribe!\n\n\n\nYou can subscribe to this calendar URL in Outlook, Google Calendar, or Apple Calendar:\n\n\n\n Download\n\n\n\n\n\n\n\n\n\n\n\nGetting started\n\n\n\n\n\n\nTitle\n\n\nContent\n\n\nLesson\n\n\nExample\n\n\nAssignment\n\n\n\n\n\n\nAugust 19(Session 1)\n\n\nIntroduction to the course\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nAugust 21(Session 2)\n\n\nWhy Geographic Analysis\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nAugust 23\n\n\n Self-Evaluation 1 due  (submit by 11:59 PM)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nAugust 26(Session 3)\n\n\nIntroduction to Spatial Data\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nAugust 28(Session 4)\n\n\nIntroduction to Spatial Data with R\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nAugust 29\n\n\n Homework 1  (submit by 11:59 PM)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSeptember 2\n\n\nNo Class(Labor Day)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSeptember 4(Session 5)\n\n\nLiterate Programming, Quarto, Workflows\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSeptember 5\n\n\n Homework 2  (submit by 11:59 PM)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSpatial Data Operations in R\n\n\n\n\n\n\nTitle\n\n\nContent\n\n\nLesson\n\n\nExample\n\n\nAssignment\n\n\n\n\n\n\nSeptember 9(Session 6)\n\n\nAreal Data: Coordinates and Geometries\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSeptember 11(Session 7)\n\n\nAreal Data: Vector Data\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSeptember 12\n\n\n Homework 3\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSeptember 16(Session 8)\n\n\nAreal Data: Rasters\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSeptember 18(Session 9)\n\n\nMapping Geographic Data\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSeptember 19\n\n\n Homework 4\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSeptember 23(Session 10)\n\n\nOperations With Vectors I\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSeptember 25(Session 11)\n\n\nOperations With Vectors II\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSeptember 26\n\n\n Assignment Revision 1  (submit by 11:59 PM)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSeptember 30(Session 12)\n\n\nOperations With Rasters I\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nOctober 2(Session 13)\n\n\nOperations With Rasters II\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nOctober 3\n\n\n Homework 6  (submit by 11:59 PM)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nOctober 7(Session 14)\n\n\nBuilding Spatial Databases with Attributes\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nOctober 9(Session 15)\n\n\nBuilding Spatial Databases with Location\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nOctober 14(Session 16)\n\n\nCombining Vectors and Rasters\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nOctober 15\n\n\n Homework 7  (submit by 11:59 PM)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nStatistical Workflows for Spatial Data\n\n\n\n\n\n\nTitle\n\n\nContent\n\n\nLesson\n\n\nExample\n\n\nAssignment\n\n\n\n\n\n\nOctober 16(Session 17)\n\n\nPoint Patterns\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nOctober 21(Session 18)\n\n\nInterpolation\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nOctober 23(Session 19)\n\n\nProximity and Areal Data\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nOctober 24\n\n\n Assignment Revision 2  (submit by 11:59 PM)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nOctober 28(Session 20)\n\n\nSpatial Autocorrelation\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nOctober 30(Session 21)\n\n\nStatistical Modelling I\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nOctober 31\n\n\n Homework 8  (submit by 11:59 PM)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nNovember 4(Session 22)\n\n\nStatistical Modelling II\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nNovember 6(Session 23)\n\n\nStatistical Modelling III\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nNovember 7\n\n\n Homework 9  (submit by 11:59 PM)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nNovember 11(Session 24)\n\n\nMovement and Networks I\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nNovember 13(Session 25)\n\n\nMovement and Networks II\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nNovember 14\n\n\n Homework 10  (submit by 11:59 PM)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nVisualizing Spatial Data\n\n\n\n\n\n\nTitle\n\n\nContent\n\n\nLesson\n\n\nExample\n\n\nAssignment\n\n\n\n\n\n\nNovember 18(Session 26)\n\n\nData Visualization and Maps I\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nNovember 20(Session 27)\n\n\nData Visualization and Maps II\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nNovember 21\n\n\n Assignment Revision 3  (submit by 11:59 PM)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nNovember 25\n\n\nNo Class(Fall Break)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nNovember 27\n\n\nNo Class(Fall Break)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nDecember 2(Session 28)\n\n\nIntroduction to Interactive Maps\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nWrapup\n\n\n\n\n\n\nTitle\n\n\nContent\n\n\nLesson\n\n\nExample\n\n\nAssignment\n\n\n\n\n\n\nDecember 4(Session 29)\n\n\nConclusion\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nDecember 5\n\n\n Final Project Draft  (submit by 11:59 PM)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nDecember 11\n\n\nFinal Project Workday(optional)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nDecember 12\n\n\n Final Project Due  (submit by 11:59 PM)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nDecember 13\n\n\n Final Self-Evaluation Due  (submit by 11:59 PM)"
   },
   {
     "objectID": "slides/05-slides.html#for-today",
@@ -3577,7 +3585,7 @@
     "href": "example/session-15-example.html#create-new-spatial-attributes",
     "title": "Session 15 Code",
     "section": "Create new spatial attributes",
-    "text": "Create new spatial attributes\n\n\nCode\nnz.sf &lt;- nz %&gt;% \n  mutate(area = st_area(nz))\nhead(nz.sf$area, 3)\n\n\nUnits: [m^2]\n[1] 12890576439  4911565037 24588819863\n\n\n\n\nCode\n# generate random points\nrandom_long_lat &lt;- \n  data.frame(\n    long = sample(runif(2000, min = 1090144, max = 2089533), replace = F),\n    lat = sample(runif(2000, min = 4748537, max = 6191874), replace = F)\n  )\n\nrandom_long_lat_sf &lt;- random_long_lat %&gt;% \n  st_as_sf(coords = c(\"long\", \"lat\"), crs = st_crs(nz))\n\nrandom_nz &lt;- random_long_lat_sf[nz.sf,]\n\n# code from slides\nnz.df &lt;- nz %&gt;% \nmutate(counts = lengths(st_intersects(., random_nz)),\n       area = st_area(nz),\n       density = counts/area)\nhead(st_drop_geometry(nz.df[,7:10]))\n\n\n  counts              area              density\n1     17 12890576439 [m^2] 1.318793e-09 [1/m^2]\n2     11  4911565037 [m^2] 2.239612e-09 [1/m^2]\n3     30 24588819863 [m^2] 1.220067e-09 [1/m^2]\n4     21 12271015945 [m^2] 1.711350e-09 [1/m^2]\n5     10  8364554416 [m^2] 1.195521e-09 [1/m^2]\n6     19 14242517871 [m^2] 1.334034e-09 [1/m^2]\n\n\n\n\nCode\ncanterbury = nz %&gt;% filter(Name == \"Canterbury\")\ncanterbury_height = nz_height[canterbury, ]\nco = filter(nz, grepl(\"Canter|Otag\", Name))\nst_distance(nz_height[1:3, ], co)\n\n\nUnits: [m]\n          [,1]     [,2]\n[1,] 123537.16 15497.72\n[2,]  94282.77     0.00\n[3,]  93018.56     0.00\n\n\n\n\nCode\nlibrary(tigris)\n\n\nTo enable caching of data, set `options(tigris_use_cache = TRUE)`\nin your R script or .Rprofile.\n\n\nCode\nua &lt;- urban_areas(cb = FALSE, progress_bar = FALSE) %&gt;% \n  filter(., UATYP10 == \"U\") %&gt;% \n  filter(., str_detect(NAME10, \"ID\")) %&gt;% \n  st_transform(., crs=2163)\n\n\nRetrieving data for the year 2022\n\n\nWarning in CPL_crs_from_input(x): GDAL Message 1: CRS EPSG:2163 is deprecated.\nIts non-deprecated replacement EPSG:9311 will be used instead. To use the\noriginal CRS, set the OSR_USE_NON_DEPRECATED configuration option to NO.\n\n\nCode\n#get index of nearest ID city\nnearest &lt;-  st_nearest_feature(ua)\n#estimate distance\n(dist = st_distance(ua, ua[nearest,], by_element=TRUE))\n\n\nUnits: [m]\n[1]  61373.575  61373.575   1647.128   1647.128 136917.546 136917.546\n\n\nCode\nua$dist_to_neighbor &lt;- dist\n\n\n\nTopological Subsetting\n\n\nCode\nctby_height &lt;-  nz_height[canterbury, ]\n\nctby_height_diffpred &lt;- nz_height[canterbury, ,op=st_touches]\n\n\n\n\nCode\ncanterbury_height3 = nz_height %&gt;%\n  filter(st_intersects(x = ., y = canterbury, sparse = FALSE))\n\n\nWarning: Using one column matrices in `filter()` was deprecated in dplyr 1.1.0.\nℹ Please use one dimensional logical vectors instead.\n\n\nCode\n# to fix warning\ncanterbury_height3 = nz_height %&gt;%\n  filter(as.vector(st_intersects(x = ., y = canterbury, sparse = FALSE)))\n\n\n\n\nSpatial Joins\n\n\nCode\nset.seed(2018)\n(bb = st_bbox(world)) # the world's bounds\n\n\n      xmin       ymin       xmax       ymax \n-180.00000  -89.90000  179.99999   83.64513 \n\n\nCode\n#&gt;   xmin   ymin   xmax   ymax \n#&gt; -180.0  -89.9  180.0   83.6\n\nrandom_df = data.frame(\n  x = runif(n = 10, min = bb[1], max = bb[3]),\n  y = runif(n = 10, min = bb[2], max = bb[4])\n)\nrandom_points &lt;- random_df %&gt;% \n  st_as_sf(coords = c(\"x\", \"y\")) %&gt;% # set coordinates\n  st_set_crs(\"EPSG:4326\") # set geographic CRS\n\nrandom_joined = st_join(random_points, world[\"name_long\"])\n\n\n\n\nCode\nany(st_touches(cycle_hire, cycle_hire_osm, sparse = FALSE))\n\n\n[1] FALSE\n\n\n\n\nCode\nz = st_join(cycle_hire, cycle_hire_osm, st_is_within_distance, dist = 20)\nnrow(cycle_hire)\n\n\n[1] 742\n\n\n\n\nCode\nnc &lt;- st_read(system.file(\"shape/nc.shp\", package=\"sf\")) %&gt;%\n  st_transform(crs=4326)\n\n\nReading layer `nc' from data source \n  `C:\\Users\\carolynkoehn\\AppData\\Local\\R\\cache\\R\\renv\\cache\\v5\\R-4.3\\x86_64-w64-mingw32\\sf\\1.0-16\\ad57b543f7c3fca05213ba78ff63df9b\\sf\\shape\\nc.shp' \n  using driver `ESRI Shapefile'\nSimple feature collection with 100 features and 14 fields\nGeometry type: MULTIPOLYGON\nDimension:     XY\nBounding box:  xmin: -84.32385 ymin: 33.88199 xmax: -75.45698 ymax: 36.58965\nGeodetic CRS:  NAD27\n\n\nCode\nbb &lt;- st_bbox(nc)\nnc_points &lt;- data.frame(\n  x = runif(n = 2, min = bb[1], max = bb[3]),\n  y = runif(n = 2, min = bb[2], max = bb[4])\n) %&gt;%\n  st_as_sf(., coords = c(\"x\", \"y\"), crs=4326)\ntr_buff &lt;- st_buffer(nc_points, units::set_units(100, \"km\")) %&gt;%\n  st_transform(crs=4326)\n\nintersect_pct &lt;- st_intersection(nc, tr_buff) %&gt;% \n   mutate(intersect_area = st_area(.)) %&gt;%   # create new column with shape area\n   dplyr::select(NAME, intersect_area) %&gt;%   # only select columns needed to merge\n   st_drop_geometry()\n\n\nWarning: attribute variables are assumed to be spatially constant throughout\nall geometries\n\n\nCode\nnc &lt;- mutate(nc, county_area = st_area(nc))\n\n# Merge by county name\nnc &lt;- left_join(nc, intersect_pct)\n\n\nJoining with `by = join_by(NAME)`\n\n\nCode\n# Calculate coverage\nnc &lt;- nc %&gt;% \n   mutate(coverage = as.numeric(intersect_area/county_area)) %&gt;%\n  mutate(coverage = ifelse(test = is.na(coverage),\n                           yes = 0,\n                           no = coverage))\n\nplot(nc[\"coverage\"])\n\n\n\n\n\n\n\n\n\n\n\nPractice\nWhat is the relationship between observations of golden eagles and distance to a main road?\n\n\nCode\nidaho &lt;- tigris::states() %&gt;%\n  filter(NAME == \"Idaho\")\n\n\nRetrieving data for the year 2021\n\n\n\n  |                                                                            \n  |                                                                      |   0%\n  |                                                                            \n  |=========                                                             |  13%\n  |                                                                            \n  |===================                                                   |  27%\n  |                                                                            \n  |====================                                                  |  29%\n  |                                                                            \n  |=====================                                                 |  29%\n  |                                                                            \n  |=====================                                                 |  30%\n  |                                                                            \n  |=====================                                                 |  31%\n  |                                                                            \n  |======================                                                |  31%\n  |                                                                            \n  |======================                                                |  32%\n  |                                                                            \n  |=======================                                               |  32%\n  |                                                                            \n  |=======================                                               |  33%\n  |                                                                            \n  |========================                                              |  34%\n  |                                                                            \n  |========================                                              |  35%\n  |                                                                            \n  |=========================                                             |  35%\n  |                                                                            \n  |=========================                                             |  36%\n  |                                                                            \n  |==========================                                            |  37%\n  |                                                                            \n  |==========================                                            |  38%\n  |                                                                            \n  |===========================                                           |  38%\n  |                                                                            \n  |===========================                                           |  39%\n  |                                                                            \n  |============================                                          |  40%\n  |                                                                            \n  |=============================                                         |  41%\n  |                                                                            \n  |=============================                                         |  42%\n  |                                                                            \n  |==================================                                    |  49%\n  |                                                                            \n  |============================================                          |  62%\n  |                                                                            \n  |=====================================================                 |  76%\n  |                                                                            \n  |========================================================              |  80%\n  |                                                                            \n  |=========================================================             |  81%\n  |                                                                            \n  |=========================================================             |  82%\n  |                                                                            \n  |==========================================================            |  82%\n  |                                                                            \n  |==========================================================            |  83%\n  |                                                                            \n  |===========================================================           |  84%\n  |                                                                            \n  |===========================================================           |  85%\n  |                                                                            \n  |============================================================          |  85%\n  |                                                                            \n  |============================================================          |  86%\n  |                                                                            \n  |=============================================================         |  86%\n  |                                                                            \n  |=============================================================         |  87%\n  |                                                                            \n  |=============================================================         |  88%\n  |                                                                            \n  |==============================================================        |  88%\n  |                                                                            \n  |==============================================================        |  89%\n  |                                                                            \n  |===============================================================       |  89%\n  |                                                                            \n  |===============================================================       |  90%\n  |                                                                            \n  |================================================================      |  91%\n  |                                                                            \n  |================================================================      |  92%\n  |                                                                            \n  |=================================================================     |  92%\n  |                                                                            \n  |=================================================================     |  93%\n  |                                                                            \n  |==================================================================    |  94%\n  |                                                                            \n  |==================================================================    |  95%\n  |                                                                            \n  |===================================================================   |  95%\n  |                                                                            \n  |===================================================================   |  96%\n  |                                                                            \n  |====================================================================  |  97%\n  |                                                                            \n  |====================================================================  |  98%\n  |                                                                            \n  |===================================================================== |  98%\n  |                                                                            \n  |===================================================================== |  99%\n  |                                                                            \n  |======================================================================|  99%\n  |                                                                            \n  |======================================================================| 100%\n\n\nCode\n# get a selection of 1000 observations from rgbif\ngold_eagles_us &lt;- occ_search(scientificName = \"Aquila chrysaetos\", \n                    country = \"US\",\n                    hasCoordinate = TRUE,\n                    limit=1000)\n\n# This step has to be separate, it can't be piped into the next bit of code\ngold_eagles_us &lt;- gold_eagles_us$data\n\n# convert to spatial object\ngold_eagle_dat_sf &lt;- gold_eagles_us %&gt;%\n  filter(!is.na(decimalLatitude) & !is.na(decimalLongitude)) %&gt;%\n  st_as_sf(coords = c(\"decimalLongitude\", \"decimalLatitude\"), crs = 4326)\n\n# get roads\nroads &lt;- tigris::primary_secondary_roads(\"ID\") %&gt;%\n  st_transform(crs=4326)\n\n\nRetrieving data for the year 2022\n\n\n\n  |                                                                            \n  |                                                                      |   0%\n  |                                                                            \n  |===                                                                   |   5%\n  |                                                                            \n  |=====                                                                 |   8%\n  |                                                                            \n  |======                                                                |   8%\n  |                                                                            \n  |======                                                                |   9%\n  |                                                                            \n  |========                                                              |  12%\n  |                                                                            \n  |=========                                                             |  12%\n  |                                                                            \n  |=========                                                             |  13%\n  |                                                                            \n  |===========                                                           |  15%\n  |                                                                            \n  |===========                                                           |  16%\n  |                                                                            \n  |=============                                                         |  18%\n  |                                                                            \n  |=============                                                         |  19%\n  |                                                                            \n  |==============                                                        |  19%\n  |                                                                            \n  |===============                                                       |  21%\n  |                                                                            \n  |===============                                                       |  22%\n  |                                                                            \n  |=================                                                     |  24%\n  |                                                                            \n  |=================                                                     |  25%\n  |                                                                            \n  |===================                                                   |  27%\n  |                                                                            \n  |===================                                                   |  28%\n  |                                                                            \n  |====================                                                  |  28%\n  |                                                                            \n  |======================                                                |  31%\n  |                                                                            \n  |======================                                                |  32%\n  |                                                                            \n  |=======================                                               |  33%\n  |                                                                            \n  |========================                                              |  34%\n  |                                                                            \n  |=========================                                             |  36%\n  |                                                                            \n  |==========================                                            |  37%\n  |                                                                            \n  |============================                                          |  39%\n  |                                                                            \n  |============================                                          |  40%\n  |                                                                            \n  |=============================                                         |  41%\n  |                                                                            \n  |==============================                                        |  43%\n  |                                                                            \n  |===============================                                       |  44%\n  |                                                                            \n  |===============================                                       |  45%\n  |                                                                            \n  |================================                                      |  46%\n  |                                                                            \n  |=================================                                     |  46%\n  |                                                                            \n  |=================================                                     |  47%\n  |                                                                            \n  |==================================                                    |  49%\n  |                                                                            \n  |===================================                                   |  50%\n  |                                                                            \n  |====================================                                  |  52%\n  |                                                                            \n  |=====================================                                 |  53%\n  |                                                                            \n  |=======================================                               |  55%\n  |                                                                            \n  |===============================================                       |  68%\n  |                                                                            \n  |============================================================          |  85%\n  |                                                                            \n  |===============================================================       |  90%\n  |                                                                            \n  |======================================================================| 100%\n\n\nCode\n# check plot\nplot(st_geometry(idaho))\nplot(st_geometry(roads), col=\"red\", add=TRUE)\nplot(st_geometry(gold_eagle_dat_sf), add=TRUE)\n\n\n\n\n\n\n\n\n\nCode\n# spatial subset to points in Idaho\nidaho &lt;- st_transform(idaho, crs=4326)\n\ngold_eagle_dat_sf_id &lt;- gold_eagle_dat_sf[idaho, ]\n\n# check plot\nplot(st_geometry(idaho))\nplot(st_geometry(roads), col=\"red\", add=TRUE)\nplot(st_geometry(gold_eagle_dat_sf_id), add=TRUE)\n\n\n\n\n\n\n\n\n\nCode\n# get nearest road for each point\nnearest_road &lt;- st_nearest_feature(gold_eagle_dat_sf_id, roads)\n\n# get distance to nearest road for each point\ngold_eagle_dat_sf_id &lt;- gold_eagle_dat_sf_id %&gt;%\n  mutate(dist_to_road = st_distance(., roads[nearest_road,], by_element = TRUE))\n\n# now we can investigate\n# for example...\nhist(gold_eagle_dat_sf_id$dist_to_road)",
+    "text": "Create new spatial attributes\n\n\nCode\nnz.sf &lt;- nz %&gt;% \n  mutate(area = st_area(nz))\nhead(nz.sf$area, 3)\n\n\nUnits: [m^2]\n[1] 12890576439  4911565037 24588819863\n\n\n\n\nCode\n# generate random points\nrandom_long_lat &lt;- \n  data.frame(\n    long = sample(runif(2000, min = 1090144, max = 2089533), replace = F),\n    lat = sample(runif(2000, min = 4748537, max = 6191874), replace = F)\n  )\n\nrandom_long_lat_sf &lt;- random_long_lat %&gt;% \n  st_as_sf(coords = c(\"long\", \"lat\"), crs = st_crs(nz))\n\nrandom_nz &lt;- random_long_lat_sf[nz.sf,]\n\n# code from slides\nnz.df &lt;- nz %&gt;% \nmutate(counts = lengths(st_intersects(., random_nz)),\n       area = st_area(nz),\n       density = counts/area)\nhead(st_drop_geometry(nz.df[,7:10]))\n\n\n  counts              area              density\n1     20 12890576439 [m^2] 1.551521e-09 [1/m^2]\n2      4  4911565037 [m^2] 8.144044e-10 [1/m^2]\n3     40 24588819863 [m^2] 1.626756e-09 [1/m^2]\n4     21 12271015945 [m^2] 1.711350e-09 [1/m^2]\n5      9  8364554416 [m^2] 1.075969e-09 [1/m^2]\n6     18 14242517871 [m^2] 1.263821e-09 [1/m^2]\n\n\n\n\nCode\ncanterbury = nz %&gt;% filter(Name == \"Canterbury\")\ncanterbury_height = nz_height[canterbury, ]\nco = filter(nz, grepl(\"Canter|Otag\", Name))\nst_distance(nz_height[1:3, ], co)\n\n\nUnits: [m]\n          [,1]     [,2]\n[1,] 123537.16 15497.72\n[2,]  94282.77     0.00\n[3,]  93018.56     0.00\n\n\n\n\nCode\nlibrary(tigris)\n\n\nTo enable caching of data, set `options(tigris_use_cache = TRUE)`\nin your R script or .Rprofile.\n\n\nCode\nua &lt;- urban_areas(cb = FALSE, progress_bar = FALSE) %&gt;% \n  filter(., UATYP10 == \"U\") %&gt;% \n  filter(., str_detect(NAME10, \"ID\")) %&gt;% \n  st_transform(., crs=2163)\n\n\nRetrieving data for the year 2022\n\n\nWarning in CPL_crs_from_input(x): GDAL Message 1: CRS EPSG:2163 is deprecated.\nIts non-deprecated replacement EPSG:9311 will be used instead. To use the\noriginal CRS, set the OSR_USE_NON_DEPRECATED configuration option to NO.\n\n\nCode\n#get index of nearest ID city\nnearest &lt;-  st_nearest_feature(ua)\n#estimate distance\n(dist = st_distance(ua, ua[nearest,], by_element=TRUE))\n\n\nUnits: [m]\n[1]  61373.575  61373.575   1647.128   1647.128 136917.546 136917.546\n\n\nCode\nua$dist_to_neighbor &lt;- dist\n\n\n\nTopological Subsetting\n\n\nCode\nctby_height &lt;-  nz_height[canterbury, ]\n\nctby_height_diffpred &lt;- nz_height[canterbury, ,op=st_touches]\n\n\n\n\nCode\ncanterbury_height3 = nz_height %&gt;%\n  filter(st_intersects(x = ., y = canterbury, sparse = FALSE))\n\n\nWarning: Using one column matrices in `filter()` was deprecated in dplyr 1.1.0.\nℹ Please use one dimensional logical vectors instead.\n\n\nCode\n# to fix warning\ncanterbury_height3 = nz_height %&gt;%\n  filter(as.vector(st_intersects(x = ., y = canterbury, sparse = FALSE)))\n\n\n\n\nSpatial Joins\n\n\nCode\nset.seed(2018)\n(bb = st_bbox(world)) # the world's bounds\n\n\n      xmin       ymin       xmax       ymax \n-180.00000  -89.90000  179.99999   83.64513 \n\n\nCode\n#&gt;   xmin   ymin   xmax   ymax \n#&gt; -180.0  -89.9  180.0   83.6\n\nrandom_df = data.frame(\n  x = runif(n = 10, min = bb[1], max = bb[3]),\n  y = runif(n = 10, min = bb[2], max = bb[4])\n)\nrandom_points &lt;- random_df %&gt;% \n  st_as_sf(coords = c(\"x\", \"y\")) %&gt;% # set coordinates\n  st_set_crs(\"EPSG:4326\") # set geographic CRS\n\nrandom_joined = st_join(random_points, world[\"name_long\"])\n\n\n\n\nCode\nany(st_touches(cycle_hire, cycle_hire_osm, sparse = FALSE))\n\n\n[1] FALSE\n\n\n\n\nCode\nz = st_join(cycle_hire, cycle_hire_osm, st_is_within_distance, dist = 20)\nnrow(cycle_hire)\n\n\n[1] 742\n\n\n\n\nCode\nnc &lt;- st_read(system.file(\"shape/nc.shp\", package=\"sf\")) %&gt;%\n  st_transform(crs=4326)\n\n\nReading layer `nc' from data source \n  `C:\\Users\\carolynkoehn\\AppData\\Local\\R\\cache\\R\\renv\\cache\\v5\\R-4.3\\x86_64-w64-mingw32\\sf\\1.0-16\\ad57b543f7c3fca05213ba78ff63df9b\\sf\\shape\\nc.shp' \n  using driver `ESRI Shapefile'\nSimple feature collection with 100 features and 14 fields\nGeometry type: MULTIPOLYGON\nDimension:     XY\nBounding box:  xmin: -84.32385 ymin: 33.88199 xmax: -75.45698 ymax: 36.58965\nGeodetic CRS:  NAD27\n\n\nCode\nbb &lt;- st_bbox(nc)\nnc_points &lt;- data.frame(\n  x = runif(n = 2, min = bb[1], max = bb[3]),\n  y = runif(n = 2, min = bb[2], max = bb[4])\n) %&gt;%\n  st_as_sf(., coords = c(\"x\", \"y\"), crs=4326)\ntr_buff &lt;- st_buffer(nc_points, units::set_units(100, \"km\")) %&gt;%\n  st_transform(crs=4326)\n\nintersect_pct &lt;- st_intersection(nc, tr_buff) %&gt;% \n   mutate(intersect_area = st_area(.)) %&gt;%   # create new column with shape area\n   dplyr::select(NAME, intersect_area) %&gt;%   # only select columns needed to merge\n   st_drop_geometry()\n\n\nWarning: attribute variables are assumed to be spatially constant throughout\nall geometries\n\n\nCode\nnc &lt;- mutate(nc, county_area = st_area(nc))\n\n# Merge by county name\nnc &lt;- left_join(nc, intersect_pct)\n\n\nJoining with `by = join_by(NAME)`\n\n\nCode\n# Calculate coverage\nnc &lt;- nc %&gt;% \n   mutate(coverage = as.numeric(intersect_area/county_area)) %&gt;%\n  mutate(coverage = ifelse(test = is.na(coverage),\n                           yes = 0,\n                           no = coverage))\n\nplot(nc[\"coverage\"])\n\n\n\n\n\n\n\n\n\n\n\nPractice\nWhat is the relationship between observations of golden eagles and distance to a main road?\n\n\nCode\nidaho &lt;- tigris::states(progress_bar = FALSE) %&gt;%\n  filter(NAME == \"Idaho\")\n\n\nRetrieving data for the year 2021\n\n\nCode\n# get a selection of 1000 observations from rgbif\ngold_eagles_us &lt;- occ_search(scientificName = \"Aquila chrysaetos\", \n                    country = \"US\",\n                    hasCoordinate = TRUE,\n                    limit=1000)\n\n# This step has to be separate, it can't be piped into the next bit of code\ngold_eagles_us &lt;- gold_eagles_us$data\n\n# convert to spatial object\ngold_eagle_dat_sf &lt;- gold_eagles_us %&gt;%\n  filter(!is.na(decimalLatitude) & !is.na(decimalLongitude)) %&gt;%\n  st_as_sf(coords = c(\"decimalLongitude\", \"decimalLatitude\"), crs = 4326)\n\n# get roads\nroads &lt;- tigris::primary_secondary_roads(\"ID\", progress_bar = FALSE) %&gt;%\n  st_transform(crs=4326)\n\n\nRetrieving data for the year 2022\n\n\nCode\n# check plot\nplot(st_geometry(idaho))\nplot(st_geometry(roads), col=\"red\", add=TRUE)\nplot(st_geometry(gold_eagle_dat_sf), add=TRUE)\n\n\n\n\n\n\n\n\n\nCode\n# spatial subset to points in Idaho\nidaho &lt;- st_transform(idaho, crs=4326)\n\ngold_eagle_dat_sf_id &lt;- gold_eagle_dat_sf[idaho, ]\n\n# check plot\nplot(st_geometry(idaho))\nplot(st_geometry(roads), col=\"red\", add=TRUE)\nplot(st_geometry(gold_eagle_dat_sf_id), add=TRUE)\n\n\n\n\n\n\n\n\n\nCode\n# get nearest road for each point\nnearest_road &lt;- st_nearest_feature(gold_eagle_dat_sf_id, roads)\n\n# get distance to nearest road for each point\ngold_eagle_dat_sf_id &lt;- gold_eagle_dat_sf_id %&gt;%\n  mutate(dist_to_road = st_distance(., roads[nearest_road,], by_element = TRUE))\n\n# now we can investigate\n# for example...\nhist(gold_eagle_dat_sf_id$dist_to_road)",
     "crumbs": [
       "Examples",
       "Spatial operations in R",

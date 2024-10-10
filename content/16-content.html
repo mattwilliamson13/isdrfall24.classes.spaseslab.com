@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Integrating Rasters and Vector Data – Intro to Spatial Data in R</title>
+<title>Combining Vectors and Categorical Rasters – Intro to Spatial Data in R</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -92,7 +92,7 @@ div.csl-indent {
 
 </head>
 
-<body class="nav-fixed">
+<body class="nav-sidebar docked nav-fixed">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -118,7 +118,7 @@ div.csl-indent {
 <span class="menu-text">Schedule</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../content/index.html"> 
+    <a class="nav-link active" href="../content/index.html" aria-current="page"> 
 <span class="menu-text">Content</span></a>
   </li>  
   <li class="nav-item">
@@ -158,10 +158,151 @@ div.csl-indent {
 </div>
       </div> <!-- /container-fluid -->
     </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../content/01-content.html">Course content</a></li><li class="breadcrumb-item"><a href="../content/16-content.html">16: Combining Vectors and Rasters</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
 </header>
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Overview</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Readings and slides</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Course content</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/01-content.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">1: Introduction to the Course</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/02-content.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">2: Why Geographic Analysis</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/03-content.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">3: Introduction to Spatial Data</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/04-content.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">4: Intro to Spatial Data with R</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/05-content.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">5: Literate Programming, Quarto, Workflows</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/06-content.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">6: Areal Data - Coordinates and Geometries</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/07-content.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">7: Areal Data - Vector Data</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/08-content.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">8: Areal Data - Raster Data</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/09-content.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">9: Intro to Mapping Geographic Data</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/10-content.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">10: Operations with Vector Data I</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/11-content.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">11: Operations with Vector Data II</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/12-content.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">12: Operations with Raster Data I</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/13-content.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">13: Operations with Raster Data II</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/14-content.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">14: Building Spatial Databases with Attributes</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/15-content.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">15: Building Databases with Location</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/16-content.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">16: Combining Vectors and Rasters</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
@@ -170,7 +311,6 @@ div.csl-indent {
   <ul>
   <li><a href="#resources" id="toc-resources" class="nav-link active" data-scroll-target="#resources">Resources</a></li>
   <li><a href="#objectives" id="toc-objectives" class="nav-link" data-scroll-target="#objectives">Objectives</a></li>
-  <li><a href="#slides" id="toc-slides" class="nav-link" data-scroll-target="#slides">Slides</a></li>
   </ul>
 </nav>
     </div>
@@ -178,44 +318,60 @@ div.csl-indent {
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header">
-<h1 class="title display-7">Integrating Rasters and Vector Data</h1>
+<h1 class="title display-7">Combining Vectors and Categorical Rasters</h1>
 
 <div class="date-block bg-content text-white p-2">
-  <p class="date">Content for Monday, October 16, 2023</p>
+  <p class="date">Content for Monday, October 14, 2024</p>
 </div>
 </header>
 
 
-<p>The goal of much of our spatial data “munging” is to create a dataframe that can be used in subsequent statistical analyses. It can be difficult to link all of the steps of filtering, selecting, extracting, etc into a coherent problem when you are just being exposed to the syntax (as we discovered last week). Today, I’ll try to use a motivating example to help you see a path forward.</p>
+<p>As we move towards a complete geospatial statistical workflow, we’ll need to be able to combine data from both raster and vector datasets. Sometimes that will mean simply converting from one format to another. In other cases, we’ll need to create new datasets based on calculations that integrate different data models.</p>
 <section id="resources" class="level2">
 <h2 class="anchored" data-anchor-id="resources">Resources</h2>
 <ul>
-<li><p><i class="fas fa-book"></i> The <a href="https://geocompr.robinlovelace.net/spatial-operations.html">Spatial Data Operations Chapter</a> in <span class="citation" data-cites="lovelace_geocomputation_2019">(<a href="#ref-lovelace_geocomputation_2019" role="doc-biblioref">Lovelace et al. 2019</a>)</span> makes the concepts of a network concrete (literally) by using a transportation route example to illustrate the various components of a network analysis in <code>R</code>.</p></li>
-<li><p><i class="fas fa-book"></i> <a href="https://bookdown.org/mcwimberly/gdswr-book/tables.html">Chapter 3. Processing Tabular Data</a> from <em>Geographic Data Science with R</em> by Michael C. Wimberly has a nice introduction to many of the <code>dplyr</code> verbs for manipulating tabular data.</p></li>
-<li><p><i class="fas fa-book"></i> <a href="https://bookdown.org/mcwimberly/gdswr-book/combining-vector-data-with-continuous-raster-data.html">Chapter 9. Combining Vector Data with Continuous Raster Data</a> from <em>Geographic Data Science with R</em> by Michael C. Wimberly introduces data extraction and zonal statistics for raster data.</p></li>
-<li><p><i class="fas fa-book"></i> <a href="https://bookdown.org/mcwimberly/gdswr-book/tables.html">Chapter 10. Combining Vector Data with Discrete Raster Data</a> from <em>Geographic Data Science with R</em> by Michael C. Wimberly extends Chapter 9 for discrete rasters, but also adds some additional buffering and data manipulation syntax.</p></li>
+<li><p><i class="fas fa-external-link-square-alt"></i> The <a href="http://132.72.155.230:3838/r/combining-rasters-and-vector-layers.html">Integrating rasters and vectors</a> chapter of Michael Dorman’s <strong>Introduction to Spatial Data Programming with R</strong> online textbook has a number of worked examples combining vector and raster data.</p></li>
+<li><p><i class="fas fa-book"></i> <a href="https://geocompr.robinlovelace.net/raster-vector.html">Raster-vector interactions</a> Chapter 6 in Lovelace et al., <em>Geocomputation with R</em> <span class="citation" data-cites="lovelace_geocomputation_2019">(<a href="#ref-lovelace_geocomputation_2019" role="doc-biblioref">Lovelace et al. 2019</a>)</span> has a great description of why you might do some of these things in your analysis.</p></li>
 </ul>
 </section>
 <section id="objectives" class="level2">
 <h2 class="anchored" data-anchor-id="objectives">Objectives</h2>
 <p>By the end of today you should be able to:</p>
 <ul>
-<li><p>Use <code>dplyr</code> with <code>predicates</code> and <code>measures</code> to subset and manipulate data</p></li>
-<li><p>Use <code>extract</code> to access raster data</p></li>
-<li><p>Use <code>zonal</code> to summarize access data</p></li>
-<li><p>Join data into a single analyzable dataframe</p></li>
+<li><p>Convert between raster and vector datasets</p></li>
+<li><p>Generate new rasters describing the spatial arrangement of vector data</p></li>
+<li><p>Extract raster values as attributes of vector data</p></li>
 </ul>
-</section>
-<section id="slides" class="level2">
-<h2 class="anchored" data-anchor-id="slides">Slides</h2>
-<p>The slides for today’s lesson are available online as an HTML file. Use the buttons below to open the slides either as an interactive website or as a static PDF (for printing or storing for later). You can also click in the slides below and navigate through them with your left and right arrow keys.</p>
-<p class="text-center buttons">
-<a class="btn btn-danger" target="_blank" href="../slides/16-slides.html"><i class="fa-solid fa-arrow-up-right-from-square"></i> View all slides in new window</a> <a class="btn btn-danger" target="_blank" href="../slides/16-slides.pdf" role="button"><i class="fa-solid fa-file-pdf"></i> Download PDF of all slides</a>
-</p>
+<!--
+## Slides
+
+The slides for today's lesson are available online as an HTML file. Use the buttons below to open the slides either as an interactive website or as a static PDF (for printing or storing for later). You can also click in the slides below and navigate through them with your left and right arrow keys.
+
+
+
+
+<p class="text-center buttons"><a class="btn btn-danger" target="_blank" href="/slides/15-slides.html"><i class="fa-solid fa-arrow-up-right-from-square"></i> View all slides in new window</a> <a class="btn btn-danger" target="_blank" href="/slides/15-slides.pdf" role="button"><i class="fa-solid fa-file-pdf"></i> Download PDF of all slides</a></p>
+
+
+
+
 <div>
-<iframe class="slide-deck" src="../slides/16-slides.html"></iframe>
+
+
+
+
+
+```{=html}
+<iframe class="slide-deck" src="/slides/15-slides.html"></iframe>
+```
+
+
+
+
+
 </div>
-<p><a href="https://boisestate.zoom.us/rec/share/VWjWFUjEP0QUAw0gbDCfB8AwskdY0qUx_z534eYjuyimlqs1BdQhfYZTfJusTAg2.WMmVMKEYMcahXAG2">Link to Zoom Recording</a></p>
+
+[Link to Panopto recording](https://boisestate.hosted.panopto.com/Panopto/Pages/Viewer.aspx?id=96e2fd65-d0f8-4308-a52b-b20401421fc5) -->
 
 
 

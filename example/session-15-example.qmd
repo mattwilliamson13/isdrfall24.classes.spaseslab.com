@@ -150,7 +150,7 @@ plot(nc["coverage"])
 What is the relationship between observations of golden eagles and distance to a main road?
 
 ```{r}
-idaho <- tigris::states() %>%
+idaho <- tigris::states(progress_bar = FALSE) %>%
   filter(NAME == "Idaho")
 
 # get a selection of 1000 observations from rgbif
@@ -168,7 +168,7 @@ gold_eagle_dat_sf <- gold_eagles_us %>%
   st_as_sf(coords = c("decimalLongitude", "decimalLatitude"), crs = 4326)
 
 # get roads
-roads <- tigris::primary_secondary_roads("ID") %>%
+roads <- tigris::primary_secondary_roads("ID", progress_bar = FALSE) %>%
   st_transform(crs=4326)
 
 # check plot
