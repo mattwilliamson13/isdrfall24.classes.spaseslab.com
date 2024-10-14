@@ -1755,7 +1755,7 @@
     "href": "content/16-content.html#slides",
     "title": "Combining Vectors and Rasters",
     "section": "Slides",
-    "text": "Slides\nThe slides for today’s lesson are available online as an HTML file. Use the buttons below to open the slides either as an interactive website or as a static PDF (for printing or storing for later). You can also click in the slides below and navigate through them with your left and right arrow keys.\n\n View all slides in new window  Download PDF of all slides",
+    "text": "Slides\nThe slides for today’s lesson are available online as an HTML file. Use the buttons below to open the slides either as an interactive website or as a static PDF (for printing or storing for later). You can also click in the slides below and navigate through them with your left and right arrow keys.\n\n View all slides in new window  Download PDF of all slides\n\n\n\n\nLink to Panopto recording",
     "crumbs": [
       "Content",
       "Course content",
@@ -2700,7 +2700,7 @@
     "href": "assignment/10-secondrevision.html#questions",
     "title": "Assignment Revision 2: Revisiting your code",
     "section": "Questions",
-    "text": "Questions\n\n\n\n\nAs you look back on assignments 6-7, what has been the biggest challenge? Do you feel like you know how to solve it? How can I help?\nAs you look back on the past few weeks of lectures, what is the one thing you appreciate and one thing that you wish I would do differently? (I’ll do my best!)\nTell me about your final project - how have your plans progressed since the last time you checked in with me?"
+    "text": "Questions\n\nImagine you have a spatial analysis planned that uses one tabular dataset, 2 vector datasets, and 2 raster datasets. What are the basic steps that you need to do before you can build a spatial database from all the data sources in R? You can write the steps in pseudocode, bullet point, or paragraph form.\nWhat are your strategies for checking that an operation resulted in the output you expected? How do you identify syntax errors and semantic errors (see session 6 for definitions) in your work?\n\nAs you look back on assignments 6-7, what has been the biggest challenge? Do you feel like you know how to solve it? How can I help?\nAs you look back on the past few weeks of lectures, what is the one thing you appreciate and one thing that you wish I would do differently? (I’ll do my best!)\nTell me about your final project - how have your plans progressed since the last time you checked in with me?"
   },
   {
     "objectID": "assignment/12-nets.html",
