@@ -3373,32 +3373,40 @@
     ]
   },
   {
-    "objectID": "content/18-content.html",
-    "href": "content/18-content.html",
+    "objectID": "content/17-content.html",
+    "href": "content/17-content.html",
     "title": "Combining Data and Point Patterns",
     "section": "",
-    "text": "Today we’ll finish up our example of combining data for analysis and introduce point process models as a first version of spatial analysis. We’ll need a few new packages here, but many of the key data management processes will remain the same."
+    "text": "Today we’ll finish up our example of combining data for analysis and introduce point process models as a first version of spatial analysis. We’ll need a few new packages here, but many of the key data management processes will remain the same.",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "17: Point Patterns"
+    ]
   },
   {
-    "objectID": "content/18-content.html#resources",
-    "href": "content/18-content.html#resources",
+    "objectID": "content/17-content.html#resources",
+    "href": "content/17-content.html#resources",
     "title": "Combining Data and Point Patterns",
     "section": "Resources",
-    "text": "Resources\n\n The Chapters 17 and 18 on Spatial Point Processes and the spatstat package in Paula Moraga’s book Spatial Statistics for Data Science: Theory and Practice with R.\n Rings, circles, and null-models for point pattern analysis in ecology by (Wiegand and A. Moloney 2004) provides an introduction to metrics for spatial clustering with applications in ecology.\n Improving the usability of spatial point process methodology: an interdisciplinary dialogue between statistics and ecology by Janine Illian (a major contributor to modern point pattern analyses) and David Burslem (a Scottish plant ecologist) (Illian and Burslem 2017) is a fairly modern take on the challenges associated with point process modeling in ecology.\n Chapter 11: Point Pattern Analysis in Manuel Gimond’s Introduction to GIS and Spatial Analysis bookdown project provides a nice (and free) introduction to some of these introductory point process methods."
+    "text": "Resources\n\n The Chapters 17 and 18 on Spatial Point Processes and the spatstat package in Paula Moraga’s book Spatial Statistics for Data Science: Theory and Practice with R.\n Rings, circles, and null-models for point pattern analysis in ecology by (Wiegand and A. Moloney 2004) provides an introduction to metrics for spatial clustering with applications in ecology.\n Improving the usability of spatial point process methodology: an interdisciplinary dialogue between statistics and ecology by Janine Illian (a major contributor to modern point pattern analyses) and David Burslem (a Scottish plant ecologist) (Illian and Burslem 2017) is a fairly modern take on the challenges associated with point process modeling in ecology.\n Chapter 11: Point Pattern Analysis in Manuel Gimond’s Introduction to GIS and Spatial Analysis bookdown project provides a nice (and free) introduction to some of these introductory point process methods.",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "17: Point Patterns"
+    ]
   },
   {
-    "objectID": "content/18-content.html#objectives",
-    "href": "content/18-content.html#objectives",
+    "objectID": "content/17-content.html#objectives",
+    "href": "content/17-content.html#objectives",
     "title": "Combining Data and Point Patterns",
     "section": "Objectives",
-    "text": "Objectives\nBy the end of today you should be able to:\n\nComplete the creation of a dataset for analysis using vector and raster data\nDefine a point process and their utility for ecological applications\nDefine first and second-order Complete Spatial Randomness\nUse several common functions to explore point patterns"
-  },
-  {
-    "objectID": "content/18-content.html#slides",
-    "href": "content/18-content.html#slides",
-    "title": "Combining Data and Point Patterns",
-    "section": "Slides",
-    "text": "Slides\nThe slides for today’s lesson are available online as an HTML file. Use the buttons below to open the slides either as an interactive website or as a static PDF (for printing or storing for later). You can also click in the slides below and navigate through them with your left and right arrow keys.\n\n View all slides in new window  Download PDF of all slides\n\n\n\n\nLink to Panopto Video"
+    "text": "Objectives\nBy the end of today you should be able to:\n\nDefine a point process and their utility for ecological applications\nDefine first and second-order Complete Spatial Randomness\nUse several common functions to explore point patterns",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "17: Point Patterns"
+    ]
   },
   {
     "objectID": "content/20-content.html",
