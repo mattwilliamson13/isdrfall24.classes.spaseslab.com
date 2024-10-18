@@ -2577,21 +2577,36 @@
     "href": "assignment/10-secondrevision.html",
     "title": "Assignment Revision 2: Revisiting your code",
     "section": "",
-    "text": "This is your second opportunity to reconsider your answers to the previous two assignments and evaluate what you might have done differently now that you’ve had a little more practice. Solutions (or suggestions) for how I’d approach past assignments are posted (at the end of each assignment page). Your task here is to review those solutions and your own code and answer a few questions to demonstrate what you’ve learned so far and where I need to be more clear. I’ve also asked some specific questions based on common mistakes across the assignments. You’ll still be using Quarto to complete this homework."
+    "text": "This is your second opportunity to reconsider your answers to the previous two assignments and evaluate what you might have done differently now that you’ve had a little more practice. Solutions (or suggestions) for how I’d approach past assignments are posted (at the end of each assignment page). Your task here is to review those solutions and your own code and answer a few questions to demonstrate what you’ve learned so far and where I need to be more clear. I’ve also asked some specific questions based on common challenges across the assignments. You’ll still be using Quarto to complete this homework.",
+    "crumbs": [
+      "Assignments",
+      "Self Assessments",
+      "Assignment Revision 2"
+    ]
   },
   {
     "objectID": "assignment/10-secondrevision.html#instructions",
     "href": "assignment/10-secondrevision.html#instructions",
     "title": "Assignment Revision 2: Revisiting your code",
     "section": "Instructions",
-    "text": "Instructions\n\nAfter you’ve joined the assignment repository, you should have this file (named Readme.md) inside of a R project named assignment-revision-1-xx where xx is your github username (or initials).\nOnce you’ve verified that you’ve correctly cloned the assignment repository, create a new Quarto document. Name this file ar1_xxx.qmd and give it a title (like M Williamson Assignment Revision 1). Make sure that you select the html output option (Quarto can do a lot of cool things, but the html format is the least-likely to cause you additional headaches). We’ll be using Quarto throughout the course so it’s worth checking out the other tutorials in the getting started section.\nCopy the questions in the assignment into your document and change the color of their text.\nSave the changes and make your first commit!\nAnswer the questions making sure save and commit at least 4 more times (having 3 commits is part of the assignment).\nRender the document (by clicking the “Render” button in RStudio) to html (you should now have at least 3 files in the repository: Readme.md, ar1_xx.qmd, and ar1_xx.html). Commit these changes and push them to the repository on GitHub. You should see the files there when you go to github.com."
+    "text": "Instructions\n\nAfter you’ve joined the assignment repository, you should have this file (named Readme.md) inside of a R project named assignment-revision-2-xx where xx is your github username (or initials).\nOnce you’ve verified that you’ve correctly cloned the assignment repository, create a new Quarto document. Name this file ar2_xxx.qmd and give it a title (like M Williamson Assignment Revision 1). Make sure that you select the html output option (Quarto can do a lot of cool things, but the html format is the least-likely to cause you additional headaches). We’ll be using Quarto throughout the course so it’s worth checking out the other tutorials in the getting started section.\nCopy the questions in the assignment into your document and change the color of their text.\nSave the changes and make your first commit!\nAnswer the questions making sure save and commit at least 2 more times (having 3 commits is part of the assignment).\nRender the document (by clicking the “Render” button in RStudio) to html (you should now have at least 3 files in the repository: Readme.md, ar1_xx.qmd, and ar1_xx.html). Commit these changes and push them to the repository on GitHub. You should see the files there when you go to github.com.",
+    "crumbs": [
+      "Assignments",
+      "Self Assessments",
+      "Assignment Revision 2"
+    ]
   },
   {
     "objectID": "assignment/10-secondrevision.html#questions",
     "href": "assignment/10-secondrevision.html#questions",
     "title": "Assignment Revision 2: Revisiting your code",
     "section": "Questions",
-    "text": "Questions\n\nImagine you have a spatial analysis planned that uses one tabular dataset, 2 vector datasets, and 2 raster datasets. What are the basic steps that you need to do before you can build a spatial database from all the data sources in R? You can write the steps in pseudocode, bullet point, or paragraph form.\nWhat are your strategies for checking that an operation resulted in the output you expected? How do you identify syntax errors and semantic errors (see session 6 for definitions) in your work?\n\nAs you look back on assignments 6-7, what has been the biggest challenge? Do you feel like you know how to solve it? How can I help?\nAs you look back on the past few weeks of lectures, what is the one thing you appreciate and one thing that you wish I would do differently? (I’ll do my best!)\nTell me about your final project - how have your plans progressed since the last time you checked in with me?"
+    "text": "Questions\n\nImagine you have a spatial analysis planned that uses one tabular dataset, 2 vector datasets, and 2 raster datasets. What are the basic steps that you need to do before you can build a spatial database from all the data sources in R? You can write the steps in pseudocode, bullet point, or paragraph form.\nWhat are your strategies for checking that an operation resulted in the output you expected? In general, how do you identify and correct syntax errors and semantic errors (see session 6 for definitions) in your work? If you don’t, what strategies would you like to try going forward?\nCompare your assignments 6-7 with the posted solutions. Were you able to answer all the questions? If not, correct and notate your code and push the changes to GitHub.\nAs you look back on assignments 6-7, what has been the biggest challenge? Do you feel like you know how to solve it? How can I help?\nAs you look back on the past few weeks of lectures, what is the one thing you appreciate and one thing that you wish I would do differently? (I’ll do my best!)\nTell me about your final project - how have your plans progressed since the last time you checked in with me?",
+    "crumbs": [
+      "Assignments",
+      "Self Assessments",
+      "Assignment Revision 2"
+    ]
   },
   {
     "objectID": "assignment/08-combinations.html",
@@ -3561,25 +3576,40 @@
     ]
   },
   {
-    "objectID": "content/19-content.html",
-    "href": "content/19-content.html",
+    "objectID": "content/18-content.html",
+    "href": "content/18-content.html",
     "title": "Interpolation",
     "section": "",
-    "text": "Point patterns give us the foundation for beginning geostatistical analyses. In geostatistical analyses, we have observations or a spatial process from a limited sample of locations, but would like to be able to infer the values of that process across the entire study region (or at least an area larger than we initially sampled). Interpolation provides one simple way of doing this that relies on the notion that we can learn something about the process simply from our measurements and the location those measurements were taken. We can extend these approaches by adding additional covariates and model structures, but we’ll start simple for now."
+    "text": "Point patterns give us the foundation for beginning geostatistical analyses. In geostatistical analyses, we have observations or a spatial process from a limited sample of locations, but would like to be able to infer the values of that process across the entire study region (or at least an area larger than we initially sampled). Interpolation provides one simple way of doing this that relies on the notion that we can learn something about the process simply from our measurements and the location those measurements were taken. We can extend these approaches by adding additional covariates and model structures, but we’ll start simple for now.",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "18: Interpolation"
+    ]
   },
   {
-    "objectID": "content/19-content.html#resources",
-    "href": "content/19-content.html#resources",
+    "objectID": "content/18-content.html#resources",
+    "href": "content/18-content.html#resources",
     "title": "Interpolation",
     "section": "Resources",
-    "text": "Resources\n\n Chapter 2: Scale in (Fletcher and Fortin 2018) provides a thorough introduction to the ecologist’s conceptualization of scale with R examples.\n This article by Steven Manson (Manson 2008) provides a more comprehensive view of conceptualizations of scale.\n The Hypothesis Testing and Autocorrelation chapters of Manuel Gimond’s Introduction to GIS and Spatial Analysis bookdown project provide concrete examples of attempts to find process from spatial patterns.\n Chapter 12: Spatial Interpolation in Spatial Data Science by Edzer Pebesma and Roger Bivand provides examples of different types of kriging and interpolation using sf and stars."
+    "text": "Resources\n\n Chapter 2: Scale in (Fletcher and Fortin 2018) provides a thorough introduction to the ecologist’s conceptualization of scale with R examples.\n This article by Steven Manson (Manson 2008) provides a more comprehensive view of conceptualizations of scale.\n The Hypothesis Testing and Autocorrelation chapters of Manuel Gimond’s Introduction to GIS and Spatial Analysis bookdown project provide concrete examples of attempts to find process from spatial patterns.\n Chapter 12: Spatial Interpolation in Spatial Data Science by Edzer Pebesma and Roger Bivand provides examples of different types of kriging and interpolation using sf and stars.",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "18: Interpolation"
+    ]
   },
   {
-    "objectID": "content/19-content.html#objectives",
-    "href": "content/19-content.html#objectives",
+    "objectID": "content/18-content.html#objectives",
+    "href": "content/18-content.html#objectives",
     "title": "Interpolation",
     "section": "Objectives",
-    "text": "Objectives\nBy the end of today you should be able to:\n\nDistinguish deterministic and stochastic processes\nDefine autocorrelation and describe its estimation\nArticulate the benefits and drawbacks of autocorrelation\nLeverage point patterns and autocorrelation to interpolate missing data\n\n\n View all slides in new window  Download PDF of all slides\n\n\n\n\nLink to Panopto Recording"
+    "text": "Objectives\nBy the end of today you should be able to:\n\nDistinguish deterministic and stochastic processes\nDefine autocorrelation and describe its estimation\nArticulate the benefits and drawbacks of autocorrelation\nLeverage point patterns and autocorrelation to interpolate missing data",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "18: Interpolation"
+    ]
   },
   {
     "objectID": "content/21-content.html",
