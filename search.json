@@ -3585,25 +3585,40 @@
     ]
   },
   {
-    "objectID": "content/20-content.html",
-    "href": "content/20-content.html",
+    "objectID": "content/19-content.html",
+    "href": "content/19-content.html",
     "title": "Proximity and Areal Data",
     "section": "",
-    "text": "Last class we started to explore ways to leverage spatial autocorrelation as a means of using interpolation to generate values at unobserved locations. We’ll continue that discussion using variograms and kriging. We then move to a discussion of areal data and the need to identify “neighbors” as a means of understanding how to weight observations when the actual point location of the observation may be unknown or impossible to assign."
+    "text": "Last class we started to explore ways to leverage spatial autocorrelation as a means of using interpolation to generate values at unobserved locations. We’ll continue that discussion using variograms and kriging. We then move to a discussion of areal data and the need to identify “neighbors” as a means of understanding how to weight observations when the actual point location of the observation may be unknown or impossible to assign.",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "19: Proximity and Areal Data"
+    ]
   },
   {
-    "objectID": "content/20-content.html#resources",
-    "href": "content/20-content.html#resources",
+    "objectID": "content/19-content.html#resources",
+    "href": "content/19-content.html#resources",
     "title": "Proximity and Areal Data",
     "section": "Resources",
-    "text": "Resources\n\n Ch. 7: Spatial Neighborhood Matrices in from Paula Moraga’s new book Spatial Statistics for Data Science: Theory and Practice with R gives a little gentler introduction to spatial neighbors specifically in the context of statistical models.\n Chapter 14 Proximity and Areal Data in Spatial Data Science by Edzer Pebesma and Roger Bivand provides explanations of how the spdep package can be used to construct neighborhood weights."
+    "text": "Resources\n\n Ch. 7: Spatial Neighborhood Matrices in from Paula Moraga’s new book Spatial Statistics for Data Science: Theory and Practice with R gives a little gentler introduction to spatial neighbors specifically in the context of statistical models.\n Chapter 14 Proximity and Areal Data in Spatial Data Science by Edzer Pebesma and Roger Bivand provides explanations of how the spdep package can be used to construct neighborhood weights.",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "19: Proximity and Areal Data"
+    ]
   },
   {
-    "objectID": "content/20-content.html#objectives",
-    "href": "content/20-content.html#objectives",
+    "objectID": "content/19-content.html#objectives",
+    "href": "content/19-content.html#objectives",
     "title": "Proximity and Areal Data",
     "section": "Objectives",
-    "text": "Objectives\nBy the end of today you should be able to:\n\nDescribe and implement statistical approaches to interpolation\nDescribe the case for identifying neighbors with areal data\nImplement contiguity-based neighborhood detection approaches\nImplement graph-based neighborhood detection approaches\n\n\n View all slides in new window  Download PDF of all slides\n\n\n\n\nPanopto Recording"
+    "text": "Objectives\nBy the end of today you should be able to:\n\nDescribe and implement statistical approaches to interpolation\nDescribe the case for identifying neighbors with areal data\nImplement contiguity-based neighborhood detection approaches\nImplement graph-based neighborhood detection approaches",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "19: Proximity and Areal Data"
+    ]
   },
   {
     "objectID": "content/22-content.html",
