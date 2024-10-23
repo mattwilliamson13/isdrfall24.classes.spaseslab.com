@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Proximity and Areal Data – Intro to Spatial Data in R</title>
+<title>Spatial Autocorrelation – Intro to Spatial Data in R</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -72,7 +72,7 @@ ul.task-list li input[type="checkbox"] {
 
 </head>
 
-<body class="nav-fixed">
+<body class="nav-sidebar docked nav-fixed">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -98,7 +98,7 @@ ul.task-list li input[type="checkbox"] {
 <span class="menu-text">Schedule</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../content/index.html"> 
+    <a class="nav-link active" href="../content/index.html" aria-current="page"> 
 <span class="menu-text">Content</span></a>
   </li>  
   <li class="nav-item">
@@ -138,10 +138,175 @@ ul.task-list li input[type="checkbox"] {
 </div>
       </div> <!-- /container-fluid -->
     </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../content/01-content.html">Course content</a></li><li class="breadcrumb-item"><a href="../content/20-content.html">20: Spatial Autocorrelation</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
 </header>
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Overview</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Readings and slides</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Course content</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/01-content.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">1: Introduction to the Course</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/02-content.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">2: Why Geographic Analysis</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/03-content.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">3: Introduction to Spatial Data</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/04-content.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">4: Intro to Spatial Data with R</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/05-content.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">5: Literate Programming, Quarto, Workflows</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/06-content.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">6: Areal Data - Coordinates and Geometries</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/07-content.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">7: Areal Data - Vector Data</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/08-content.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">8: Areal Data - Raster Data</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/09-content.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">9: Intro to Mapping Geographic Data</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/10-content.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">10: Operations with Vector Data I</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/11-content.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">11: Operations with Vector Data II</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/12-content.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">12: Operations with Raster Data I</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/13-content.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">13: Operations with Raster Data II</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/14-content.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">14: Building Spatial Databases with Attributes</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/15-content.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">15: Building Databases with Location</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/16-content.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">16: Combining Vectors and Rasters</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/17-content.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">17: Point Patterns</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/18-content.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">18: Interpolation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/19-content.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">19: Interpolation II</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/20-content.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">20: Spatial Autocorrelation</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
@@ -157,38 +322,39 @@ ul.task-list li input[type="checkbox"] {
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header">
-<h1 class="title display-7">Proximity and Areal Data</h1>
+<h1 class="title display-7">Spatial Autocorrelation</h1>
 
 <div class="date-block bg-content text-white p-2">
-  <p class="date">Content for Wednesday, October 25, 2023</p>
+  <p class="date">Content for Monday, October 30, 2023</p>
 </div>
 </header>
 
 
-<p>Last class we started to explore ways to leverage spatial autocorrelation as a means of using interpolation to generate values at unobserved locations. We’ll continue that discussion using variograms and kriging. We then move to a discussion of areal data and the need to identify “neighbors” as a means of understanding how to weight observations when the actual point location of the observation may be unknown or impossible to assign.</p>
+<p>Now that we’ve learned about the power of spatial autocorrelation for interpolation from point data, it’s time to explore methods for spatial autocorrelation with areal data. We’ll have to define neighbors because distance is a little more ambiguous here and then look at some global and local measures of autocorrelation.</p>
 <section id="resources" class="level2">
 <h2 class="anchored" data-anchor-id="resources">Resources</h2>
 <ul>
 <li><p><i class="fas fa-external-link-square-alt"></i> <a href="https://www.paulamoraga.com/book-spatial/spatial-neighborhood-matrices.html">Ch. 7: Spatial Neighborhood Matrices</a> in from Paula Moraga’s new book Spatial Statistics for Data Science: Theory and Practice with <code>R</code> gives a little gentler introduction to spatial neighbors specifically in the context of statistical models.</p></li>
 <li><p><i class="fas fa-book"></i> <a href="https://r-spatial.org/book/14-Areal.html">Chapter 14 Proximity and Areal Data</a> in Spatial Data Science by Edzer Pebesma and Roger Bivand provides explanations of how the <code>spdep</code> package can be used to construct neighborhood weights.</p></li>
 </ul>
+<p><i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i> <a href="https://mgimond.github.io/Spatial/spatial-autocorrelation-in-r.html">Spatial Autocorrelation in R</a> provides some easy code for working through neighbors with areal data and calculating spatial autocorrelation measures.</p>
 </section>
 <section id="objectives" class="level2">
 <h2 class="anchored" data-anchor-id="objectives">Objectives</h2>
 <p>By the end of today you should be able to:</p>
 <ul>
-<li><p>Describe and implement statistical approaches to interpolation</p></li>
-<li><p>Describe the case for identifying neighbors with areal data</p></li>
-<li><p>Implement contiguity-based neighborhood detection approaches</p></li>
-<li><p>Implement graph-based neighborhood detection approaches</p></li>
+<li><p>Use the <code>spdep</code> package to identify the neighbors of a given polygon based on proximity, distance, and minimum number</p></li>
+<li><p>Understand the underlying mechanics of Moran’s I and calculate it for various neighbors</p></li>
+<li><p>Distinguish between global and local measures of spatial autocorrelation</p></li>
+<li><p>Visualize neighbors and clusters</p></li>
 </ul>
 <p class="text-center buttons">
-<a class="btn btn-danger" target="_blank" href="../slides/20-slides.html"><i class="fa-solid fa-arrow-up-right-from-square"></i> View all slides in new window</a> <a class="btn btn-danger" target="_blank" href="../slides/20-slides.pdf" role="button"><i class="fa-solid fa-file-pdf"></i> Download PDF of all slides</a>
+<a class="btn btn-danger" target="_blank" href="../slides/21-slides.html"><i class="fa-solid fa-arrow-up-right-from-square"></i> View all slides in new window</a> <a class="btn btn-danger" target="_blank" href="../slides/21-slides.pdf" role="button"><i class="fa-solid fa-file-pdf"></i> Download PDF of all slides</a>
 </p>
 <div>
-<iframe class="slide-deck" src="../slides/20-slides.html"></iframe>
+<iframe class="slide-deck" src="../slides/21-slides.html"></iframe>
 </div>
-<p><a href="https://boisestate.hosted.panopto.com/Panopto/Pages/Viewer.aspx?id=976ea29f-b083-4c97-a25d-b0a601435034">Panopto Recording</a></p>
+<p><a href="https://boisestate.hosted.panopto.com/Panopto/Pages/Viewer.aspx?id=4e8ef8ee-2dd0-4681-91b5-b0ab01431905">Link to Panopto Video</a></p>
 
 
 </section>
