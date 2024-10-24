@@ -2902,7 +2902,7 @@
     "href": "assignment/09-pointpatterns.html",
     "title": "Assignment 8: Spatial Autocorrelation and Interpolation",
     "section": "",
-    "text": "Exploring and exploiting spatial autocorrelation in our data is an important tool for interpolating missing values in geographic data. It’s also an important diagnostic to check before additional statistical analyses. You’ll get to try some of that out here. We’ll the cost of natural disasters dataset fromm 1999-2020 (described in this paper and available at /assignment07/ics209-plus-wf_incidents_1999to2020.csv folder and focusing on the data describing the structures lost to natural disaster (STR_DESTROYED_TOTAL). For this assignment, we’ll use this data to:",
+    "text": "Exploring and exploiting spatial autocorrelation in our data is an important tool for interpolating missing values in geographic data. It’s also an important diagnostic to check before additional statistical analyses. You’ll get to try some of that out here. We’ll the cost of natural disasters dataset from 1999-2020 (described in this paper and available at /assignment07/ics209-plus-wf_incidents_1999to2020.csv folder and focusing on the data describing the structures lost to natural disaster (STR_DESTROYED_TOTAL). For this assignment, we’ll use this data to:",
     "crumbs": [
       "Assignments",
       "Homework",
