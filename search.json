@@ -1966,21 +1966,36 @@
     "href": "content/21-content.html",
     "title": "Statistical Modelling I",
     "section": "",
-    "text": "Now that we’ve spent some time building dataframes and assessing the spatial correlation (or covariation) for different data, we can move beyond just describing the nature of the data we have or interpolating based on simple predictions. We’ll introduce two fairly simple spatial analysis approaches - overlays and logistic regression - and talk about some of the key assumptions and extensions of these approaches."
+    "text": "Now that we’ve spent some time building dataframes and assessing the spatial correlation (or covariation) for different data, we can move beyond just describing the nature of the data we have or interpolating based on simple predictions. We’ll introduce two fairly simple spatial analysis approaches - overlays and logistic regression - and talk about some of the key assumptions and extensions of these approaches.",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "21: Statistical Modelling I"
+    ]
   },
   {
     "objectID": "content/21-content.html#resources",
     "href": "content/21-content.html#resources",
     "title": "Statistical Modelling I",
     "section": "Resources",
-    "text": "Resources\n\n Overlay analysis provides an overview of the logic of overlay analysis.\n Predicting site location with simple additive raster sensitivity analysis using R from Ben Markwick has a complete example of using a weights of evidence approach to overlays.\n Logistic regression: a brief primer by (Stoltzfus 2011) is a nice introduction to logistic regression.\n Is my species distribution model fit for purpose? Matching data and models to applications by (Guillera-Arroita et al. 2015) is an excellent, concise description of the relations between data collection, statistical models, and inference.\n Predicting species distributions for conservation decisions by (Guisan et al. 2013) is a foundational paper describing some of the challenges with making conservation decisions based on the outcomes of species distribution models."
+    "text": "Resources\n\n Overlay analysis provides an overview of the logic of overlay analysis.\n Predicting site location with simple additive raster sensitivity analysis using R from Ben Markwick has a complete example of using a weights of evidence approach to overlays.\n Logistic regression: a brief primer by (Stoltzfus 2011) is a nice introduction to logistic regression.\n Is my species distribution model fit for purpose? Matching data and models to applications by (Guillera-Arroita et al. 2015) is an excellent, concise description of the relations between data collection, statistical models, and inference.\n Predicting species distributions for conservation decisions by (Guisan et al. 2013) is a foundational paper describing some of the challenges with making conservation decisions based on the outcomes of species distribution models.",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "21: Statistical Modelling I"
+    ]
   },
   {
     "objectID": "content/21-content.html#objectives",
     "href": "content/21-content.html#objectives",
     "title": "Statistical Modelling I",
     "section": "Objectives",
-    "text": "Objectives\nBy the end of today you should be able to:\n\nIdentify nearest neighbors based on distance\nDescribe and implement overlay analyses\nExtend overlay analysis to statistical modeling\nGenerate spatial predictions from statistical models\n\n\n View all slides in new window  Download PDF of all slides\n\n\n\n\nLink to Panopto Video"
+    "text": "Objectives\nBy the end of today you should be able to:\n\nIdentify nearest neighbors based on distance\nDescribe and implement overlay analyses\nExtend overlay analysis to statistical modeling\nGenerate spatial predictions from statistical models\n\n\n View all slides in new window  Download PDF of all slides\n\n\n\n\nLink to Panopto Video",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "21: Statistical Modelling I"
+    ]
   },
   {
     "objectID": "content/19-content.html",
