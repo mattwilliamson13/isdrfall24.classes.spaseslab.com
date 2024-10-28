@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Spatial Autocorrelation – Intro to Spatial Data in R</title>
+<title>Statistical Modelling I – Intro to Spatial Data in R</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,7 +20,27 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -157,44 +177,57 @@ ul.task-list li input[type="checkbox"] {
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header">
-<h1 class="title display-7">Spatial Autocorrelation</h1>
+<h1 class="title display-7">Statistical Modelling I</h1>
 
 <div class="date-block bg-content text-white p-2">
-  <p class="date">Content for Monday, October 30, 2023</p>
+  <p class="date">Content for Wednesday, November 1, 2023</p>
 </div>
 </header>
 
 
-<p>Now that we’ve learned about the power of spatial autocorrelation for interpolation from point data, it’s time to explore methods for spatial autocorrelation with areal data. We’ll have to define neighbors because distance is a little more ambiguous here and then look at some global and local measures of autocorrelation.</p>
+<p>Now that we’ve spent some time building dataframes and assessing the spatial correlation (or covariation) for different data, we can move beyond just describing the nature of the data we have or interpolating based on simple predictions. We’ll introduce two fairly simple spatial analysis approaches - overlays and logistic regression - and talk about some of the key assumptions and extensions of these approaches.</p>
 <section id="resources" class="level2">
 <h2 class="anchored" data-anchor-id="resources">Resources</h2>
 <ul>
-<li><p><i class="fas fa-external-link-square-alt"></i> <a href="https://www.paulamoraga.com/book-spatial/spatial-neighborhood-matrices.html">Ch. 7: Spatial Neighborhood Matrices</a> in from Paula Moraga’s new book Spatial Statistics for Data Science: Theory and Practice with <code>R</code> gives a little gentler introduction to spatial neighbors specifically in the context of statistical models.</p></li>
-<li><p><i class="fas fa-book"></i> <a href="https://r-spatial.org/book/14-Areal.html">Chapter 14 Proximity and Areal Data</a> in Spatial Data Science by Edzer Pebesma and Roger Bivand provides explanations of how the <code>spdep</code> package can be used to construct neighborhood weights.</p></li>
+<li><p><i class="fas fa-external-link-square-alt"></i> <a href="https://gistbok.ucgis.org/bok-topics/overlay">Overlay analysis</a> provides an overview of the logic of overlay analysis.</p></li>
+<li><p><i class="fas fa-external-link-square-alt"></i> <a href="https://benmarwick.github.io/How-To-Do-Archaeological-Science-Using-R/predicting-site-location-with-simple-additive-raster-sensitivity-analysis-using-r.html">Predicting site location with simple additive raster sensitivity analysis using R</a> from Ben Markwick has a complete example of using a weights of evidence approach to overlays.</p></li>
+<li><p><i class="fas fa-external-link-square-alt"></i> <a href="https://onlinelibrary.wiley.com/doi/10.1111/j.1553-2712.2011.01185.x">Logistic regression: a brief primer</a> by <span class="citation" data-cites="Stoltzfus2011">(<a href="#ref-Stoltzfus2011" role="doc-biblioref">Stoltzfus 2011</a>)</span> is a nice introduction to logistic regression.</p></li>
+<li><p><i class="fas fa-external-link-square-alt"></i> <a href="https://onlinelibrary.wiley.com/doi/full/10.1111/geb.12268">Is my species distribution model fit for purpose? Matching data and models to applications</a> by <span class="citation" data-cites="Guillera-Arroita2015">(<a href="#ref-Guillera-Arroita2015" role="doc-biblioref">Guillera-Arroita et al. 2015</a>)</span> is an excellent, concise description of the relations between data collection, statistical models, and inference.</p></li>
+<li><p><i class="fas fa-external-link-square-alt"></i> <a href="https://onlinelibrary.wiley.com/doi/full/10.1111/ele.12189">Predicting species distributions for conservation decisions</a> by <span class="citation" data-cites="Guisan2013">(<a href="#ref-Guisan2013" role="doc-biblioref">Guisan et al. 2013</a>)</span> is a foundational paper describing some of the challenges with making conservation decisions based on the outcomes of species distribution models.</p></li>
 </ul>
-<p><i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i> <a href="https://mgimond.github.io/Spatial/spatial-autocorrelation-in-r.html">Spatial Autocorrelation in R</a> provides some easy code for working through neighbors with areal data and calculating spatial autocorrelation measures.</p>
 </section>
 <section id="objectives" class="level2">
 <h2 class="anchored" data-anchor-id="objectives">Objectives</h2>
 <p>By the end of today you should be able to:</p>
 <ul>
-<li><p>Use the <code>spdep</code> package to identify the neighbors of a given polygon based on proximity, distance, and minimum number</p></li>
-<li><p>Understand the underlying mechanics of Moran’s I and calculate it for various neighbors</p></li>
-<li><p>Distinguish between global and local measures of spatial autocorrelation</p></li>
-<li><p>Visualize neighbors and clusters</p></li>
+<li><p>Identify nearest neighbors based on distance</p></li>
+<li><p>Describe and implement overlay analyses</p></li>
+<li><p>Extend overlay analysis to statistical modeling</p></li>
+<li><p>Generate spatial predictions from statistical models</p></li>
 </ul>
 <p class="text-center buttons">
-<a class="btn btn-danger" target="_blank" href="../slides/21-slides.html"><i class="fa-solid fa-arrow-up-right-from-square"></i> View all slides in new window</a> <a class="btn btn-danger" target="_blank" href="../slides/21-slides.pdf" role="button"><i class="fa-solid fa-file-pdf"></i> Download PDF of all slides</a>
+<a class="btn btn-danger" target="_blank" href="../slides/22-slides.html"><i class="fa-solid fa-arrow-up-right-from-square"></i> View all slides in new window</a> <a class="btn btn-danger" target="_blank" href="../slides/22-slides.pdf" role="button"><i class="fa-solid fa-file-pdf"></i> Download PDF of all slides</a>
 </p>
 <div>
-<iframe class="slide-deck" src="../slides/21-slides.html"></iframe>
+<iframe class="slide-deck" src="../slides/22-slides.html"></iframe>
 </div>
-<p><a href="https://boisestate.hosted.panopto.com/Panopto/Pages/Viewer.aspx?id=4e8ef8ee-2dd0-4681-91b5-b0ab01431905">Link to Panopto Video</a></p>
+<p><a href="https://boisestate.hosted.panopto.com/Panopto/Pages/Viewer.aspx?id=b580562a-00cd-4fe7-8f33-b0ad014183fc">Link to Panopto Video</a></p>
+
 
 
 </section>
 
-</main> <!-- /main -->
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list">
+<div id="ref-Guillera-Arroita2015" class="csl-entry" role="listitem">
+Guillera-Arroita, G., J. J. Lahoz-Monfort, J. Elith, A. Gordon, H. Kujala, P. E. Lentini, M. A. McCarthy, R. Tingley, and B. A. Wintle. 2015. Is my species distribution model fit for purpose? Matching data and models to applications. Glob. Ecol. Biogeogr. 24:276–292.
+</div>
+<div id="ref-Guisan2013" class="csl-entry" role="listitem">
+Guisan, A., R. Tingley, J. B. Baumgartner, I. Naujokaitis-Lewis, P. R. Sutcliffe, A. I. T. Tulloch, T. J. Regan, L. Brotons, E. McDonald-Madden, C. Mantyka-Pringle, T. G. Martin, J. R. Rhodes, R. Maggini, S. A. Setterfield, J. Elith, M. W. Schwartz, B. A. Wintle, O. Broennimann, M. Austin, S. Ferrier, M. R. Kearney, H. P. Possingham, and Y. M. Buckley. 2013. Predicting species distributions for conservation decisions. Ecol. Lett. 16:1424–1435.
+</div>
+<div id="ref-Stoltzfus2011" class="csl-entry" role="listitem">
+Stoltzfus, J. C. 2011. Logistic regression: A brief primer. Acad. Emerg. Med. 18:1099–1104.
+</div>
+</div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
