@@ -487,21 +487,21 @@
     "href": "slides/21-slides.html#an-example-1",
     "title": "Statistical Modelling I",
     "section": "An Example",
-    "text": "An Example\nThe sample data\n\n\n\nhead(pres.abs)\n\nSimple feature collection with 6 features and 1 field\nGeometry type: POINT\nDimension:     XY\nBounding box:  xmin: -74.94368 ymin: -14.5071 xmax: -71.98333 ymax: -12.85\nGeodetic CRS:  WGS 84\n    y                    geometry\n804 0 POINT (-74.94368 -13.30268)\n419 1       POINT (-74.85 -12.85)\n683 0 POINT (-74.06374 -13.52932)\n563 1 POINT (-71.98333 -13.51667)\n767 0  POINT (-72.06618 -14.5071)\n267 1   POINT (-73.2758 -13.8255)"
+    "text": "An Example\nThe sample data\n\n\n\nhead(pres.abs)\n\nSimple feature collection with 6 features and 1 field\nGeometry type: POINT\nDimension:     XY\nBounding box:  xmin: -106.75 ymin: 31.25 xmax: -98.75 ymax: 37.75\nGeodetic CRS:  +proj=longlat +datum=WGS84 +no_defs\n  y              geometry\n1 0  POINT (-99.25 35.25)\n2 1  POINT (-98.75 36.25)\n3 1 POINT (-106.75 35.25)\n4 0 POINT (-100.75 31.25)\n5 1  POINT (-99.75 37.75)\n6 1 POINT (-104.25 36.75)"
   },
   {
     "objectID": "slides/21-slides.html#an-example-2",
     "href": "slides/21-slides.html#an-example-2",
     "title": "Statistical Modelling I",
     "section": "An Example",
-    "text": "An Example\nBuilding our dataframe\n\npts.df &lt;- terra::extract(pred.stack, vect(pres.abs), df=TRUE)\nhead(pts.df)\n\n  ID MeanAnnTemp TotalPrecip PrecipWetMonth PrecipDryMonth MinTempCold\n1  1    4.975000         760            151              3        -5.9\n2  2    6.391667         830            146             10        -4.1\n3  3   11.816667         845            181              7         1.3\n4  4   11.241667         694            150              4        -0.4\n5  5    6.875000         909            199              4        -6.4\n6  6    5.750000        1002            190             12        -5.4\n  TempRange\n1       6.3\n2       5.7\n3       4.6\n4       6.6\n5       8.3\n6       6.4"
+    "text": "An Example\nBuilding our dataframe\n\npts.df &lt;- terra::extract(pred.stack, vect(pres.abs), df=TRUE)\nhead(pts.df)\n\n  ID MeanAnnTemp TotalPrecip PrecipWetQuarter PrecipDryQuarter MinTempCold\n1  1         155         667              253               71         350\n2  2         147         678              266               66         351\n3  3         123         261              117               40         329\n4  4         181         533              198               69         348\n5  5         127         589              257               48         338\n6  6          83         438              213               38         278\n  TempRange\n1       -45\n2       -58\n3       -64\n4        -5\n5       -81\n6      -107"
   },
   {
     "objectID": "slides/21-slides.html#an-example-3",
     "href": "slides/21-slides.html#an-example-3",
     "title": "Statistical Modelling I",
     "section": "An Example",
-    "text": "An Example\nBuilding our dataframe\n\npts.df[,2:7] &lt;- scale(pts.df[,2:7])\nsummary(pts.df)\n\n       ID         MeanAnnTemp       TotalPrecip       PrecipWetMonth   \n Min.   : 1.00   Min.   :-1.5372   Min.   :-2.40213   Min.   :-3.1103  \n 1st Qu.:19.25   1st Qu.:-0.6294   1st Qu.:-0.51638   1st Qu.:-0.4595  \n Median :37.50   Median :-0.2416   Median : 0.02767   Median : 0.1910  \n Mean   :37.50   Mean   : 0.0000   Mean   : 0.00000   Mean   : 0.0000  \n 3rd Qu.:55.75   3rd Qu.: 0.5984   3rd Qu.: 0.41766   3rd Qu.: 0.5697  \n Max.   :74.00   Max.   : 3.5301   Max.   : 5.24357   Max.   : 3.2982  \n PrecipDryMonth     MinTempCold        TempRange       \n Min.   :-0.8282   Min.   :-1.4490   Min.   :-2.38574  \n 1st Qu.:-0.6660   1st Qu.:-0.7159   1st Qu.:-0.69892  \n Median :-0.2607   Median :-0.2996   Median :-0.09947  \n Mean   : 0.0000   Mean   : 0.0000   Mean   : 0.00000  \n 3rd Qu.: 0.4283   3rd Qu.: 0.7033   3rd Qu.: 0.80668  \n Max.   : 5.0085   Max.   : 3.5710   Max.   : 1.90799"
+    "text": "An Example\nBuilding our dataframe\n\npts.df[,2:7] &lt;- scale(pts.df[,2:7])\nsummary(pts.df)\n\n       ID          MeanAnnTemp       TotalPrecip      PrecipWetQuarter \n Min.   :  1.00   Min.   :-3.3729   Min.   :-1.3377   Min.   :-1.6926  \n 1st Qu.: 25.75   1st Qu.:-0.4594   1st Qu.:-0.7980   1st Qu.:-0.6895  \n Median : 50.50   Median : 0.2282   Median :-0.2373   Median :-0.2224  \n Mean   : 50.50   Mean   : 0.0000   Mean   : 0.0000   Mean   : 0.0000  \n 3rd Qu.: 75.25   3rd Qu.: 0.7118   3rd Qu.: 0.7140   3rd Qu.: 0.6508  \n Max.   :100.00   Max.   : 1.4285   Max.   : 2.4843   Max.   : 2.2713  \n PrecipDryQuarter   MinTempCold        TempRange      \n Min.   :-1.0828   Min.   :-3.9919   Min.   :-2.7924  \n 1st Qu.:-0.7013   1st Qu.:-0.0598   1st Qu.:-0.5216  \n Median :-0.3770   Median : 0.3582   Median : 0.2075  \n Mean   : 0.0000   Mean   : 0.0000   Mean   : 0.0000  \n 3rd Qu.: 0.4290   3rd Qu.: 0.5495   3rd Qu.: 0.6450  \n Max.   : 3.1713   Max.   : 1.1092   Max.   : 2.0407"
   },
   {
     "objectID": "slides/21-slides.html#an-example-4",
@@ -522,42 +522,42 @@
     "href": "slides/21-slides.html#an-example-6",
     "title": "Statistical Modelling I",
     "section": "An Example",
-    "text": "An Example\nFitting some models\n\npts.df &lt;- cbind(pts.df, pres.abs$y)\ncolnames(pts.df)[8] &lt;- \"y\"\nlogistic.global &lt;- glm(y~., family=binomial(link=\"logit\"), data=pts.df[,2:8])\nlogistic.simple &lt;- glm(y ~ MeanAnnTemp + TotalPrecip, family=binomial(link=\"logit\"), data=pts.df[,2:8])\nlogistic.rich &lt;- glm(y ~ MeanAnnTemp + PrecipWetMonth + PrecipDryMonth, family=binomial(link=\"logit\"), data=pts.df[,2:8])"
+    "text": "An Example\nFitting some models\n\npts.df &lt;- cbind(pts.df, pres.abs$y)\ncolnames(pts.df)[8] &lt;- \"y\"\nlogistic.global &lt;- glm(y~., family=binomial(link=\"logit\"), data=pts.df[,2:8])\nlogistic.simple &lt;- glm(y ~ MeanAnnTemp + TotalPrecip, family=binomial(link=\"logit\"), data=pts.df[,2:8])\nlogistic.rich &lt;- glm(y ~ MeanAnnTemp + PrecipWetQuarter + PrecipDryQuarter, family=binomial(link=\"logit\"), data=pts.df[,2:8])"
   },
   {
     "objectID": "slides/21-slides.html#an-example-7",
     "href": "slides/21-slides.html#an-example-7",
     "title": "Statistical Modelling I",
     "section": "An Example",
-    "text": "An Example\nChecking out the results\n\nsummary(logistic.global)\n\n\nCall:\nglm(formula = y ~ ., family = binomial(link = \"logit\"), data = pts.df[, \n    2:8])\n\nCoefficients:\n               Estimate Std. Error z value Pr(&gt;|z|)\n(Intercept)    -0.08264    0.25052  -0.330    0.741\nMeanAnnTemp    -0.62712    3.36175  -0.187    0.852\nTotalPrecip    -1.41121    0.86351  -1.634    0.102\nPrecipWetMonth  0.71202    0.50360   1.414    0.157\nPrecipDryMonth  1.06540    0.80825   1.318    0.187\nMinTempCold     2.02792    4.88923   0.415    0.678\nTempRange       1.84210    1.98680   0.927    0.354\n\n(Dispersion parameter for binomial family taken to be 1)\n\n    Null deviance: 102.532  on 73  degrees of freedom\nResidual deviance:  92.993  on 67  degrees of freedom\nAIC: 106.99\n\nNumber of Fisher Scoring iterations: 4"
+    "text": "An Example\nChecking out the results\n\nsummary(logistic.global)\n\n\nCall:\nglm(formula = y ~ ., family = binomial(link = \"logit\"), data = pts.df[, \n    2:8])\n\nCoefficients:\n                 Estimate Std. Error z value Pr(&gt;|z|)   \n(Intercept)       -1.4461     0.5096  -2.837  0.00455 **\nMeanAnnTemp       -6.3578     6.1645  -1.031  0.30237   \nTotalPrecip        7.1453     4.5577   1.568  0.11694   \nPrecipWetQuarter  -5.4207     3.0432  -1.781  0.07487 . \nPrecipDryQuarter  -1.3110     2.2482  -0.583  0.55981   \nMinTempCold        3.0890     2.6334   1.173  0.24080   \nTempRange         -0.6213     4.5470  -0.137  0.89131   \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n(Dispersion parameter for binomial family taken to be 1)\n\n    Null deviance: 125.374  on 99  degrees of freedom\nResidual deviance:  51.764  on 93  degrees of freedom\nAIC: 65.764\n\nNumber of Fisher Scoring iterations: 7"
   },
   {
     "objectID": "slides/21-slides.html#an-example-8",
     "href": "slides/21-slides.html#an-example-8",
     "title": "Statistical Modelling I",
     "section": "An Example",
-    "text": "An Example\nChecking out the results\n\nsummary(logistic.simple)\n\n\nCall:\nglm(formula = y ~ MeanAnnTemp + TotalPrecip, family = binomial(link = \"logit\"), \n    data = pts.df[, 2:8])\n\nCoefficients:\n            Estimate Std. Error z value Pr(&gt;|z|)\n(Intercept) -0.05085    0.23676  -0.215    0.830\nMeanAnnTemp  0.35247    0.24825   1.420    0.156\nTotalPrecip -0.18792    0.24423  -0.769    0.442\n\n(Dispersion parameter for binomial family taken to be 1)\n\n    Null deviance: 102.532  on 73  degrees of freedom\nResidual deviance:  99.953  on 71  degrees of freedom\nAIC: 105.95\n\nNumber of Fisher Scoring iterations: 4"
+    "text": "An Example\nChecking out the results\n\nsummary(logistic.simple)\n\n\nCall:\nglm(formula = y ~ MeanAnnTemp + TotalPrecip, family = binomial(link = \"logit\"), \n    data = pts.df[, 2:8])\n\nCoefficients:\n            Estimate Std. Error z value Pr(&gt;|z|)    \n(Intercept)  -0.9880     0.3145  -3.141  0.00168 ** \nMeanAnnTemp  -2.9990     0.6647  -4.512 6.42e-06 ***\nTotalPrecip   0.3924     0.3827   1.025  0.30517    \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n(Dispersion parameter for binomial family taken to be 1)\n\n    Null deviance: 125.374  on 99  degrees of freedom\nResidual deviance:  68.108  on 97  degrees of freedom\nAIC: 74.108\n\nNumber of Fisher Scoring iterations: 6"
   },
   {
     "objectID": "slides/21-slides.html#an-example-9",
     "href": "slides/21-slides.html#an-example-9",
     "title": "Statistical Modelling I",
     "section": "An Example",
-    "text": "An Example\nChecking out the results\n\nsummary(logistic.rich)\n\n\nCall:\nglm(formula = y ~ MeanAnnTemp + PrecipWetMonth + PrecipDryMonth, \n    family = binomial(link = \"logit\"), data = pts.df[, 2:8])\n\nCoefficients:\n               Estimate Std. Error z value Pr(&gt;|z|)  \n(Intercept)    -0.05522    0.23813  -0.232   0.8166  \nMeanAnnTemp     0.51136    0.28979   1.765   0.0776 .\nPrecipWetMonth  0.15989    0.27013   0.592   0.5539  \nPrecipDryMonth -0.33762    0.28827  -1.171   0.2415  \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n(Dispersion parameter for binomial family taken to be 1)\n\n    Null deviance: 102.532  on 73  degrees of freedom\nResidual deviance:  99.104  on 70  degrees of freedom\nAIC: 107.1\n\nNumber of Fisher Scoring iterations: 4"
+    "text": "An Example\nChecking out the results\n\nsummary(logistic.rich)\n\n\nCall:\nglm(formula = y ~ MeanAnnTemp + PrecipWetQuarter + PrecipDryQuarter, \n    family = binomial(link = \"logit\"), data = pts.df[, 2:8])\n\nCoefficients:\n                 Estimate Std. Error z value Pr(&gt;|z|)    \n(Intercept)      -0.96504    0.35650  -2.707  0.00679 ** \nMeanAnnTemp      -2.85446    0.66142  -4.316 1.59e-05 ***\nPrecipWetQuarter  0.03212    0.43102   0.075  0.94060    \nPrecipDryQuarter  0.16759    0.64935   0.258  0.79634    \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n(Dispersion parameter for binomial family taken to be 1)\n\n    Null deviance: 125.374  on 99  degrees of freedom\nResidual deviance:  69.006  on 96  degrees of freedom\nAIC: 77.006\n\nNumber of Fisher Scoring iterations: 6"
   },
   {
     "objectID": "slides/21-slides.html#an-example-10",
     "href": "slides/21-slides.html#an-example-10",
     "title": "Statistical Modelling I",
     "section": "An Example",
-    "text": "An Example\nComparing models\n\nAIC(logistic.global, logistic.simple, logistic.rich)\n\n                df      AIC\nlogistic.global  7 106.9931\nlogistic.simple  3 105.9526\nlogistic.rich    4 107.1040"
+    "text": "An Example\nComparing models\n\nAIC(logistic.global, logistic.simple, logistic.rich)\n\n                df      AIC\nlogistic.global  7 65.76394\nlogistic.simple  3 74.10760\nlogistic.rich    4 77.00622"
   },
   {
     "objectID": "slides/21-slides.html#an-example-11",
     "href": "slides/21-slides.html#an-example-11",
     "title": "Statistical Modelling I",
     "section": "An Example",
-    "text": "An Example\nGenerating predictions\n\npreds &lt;- predict(object=pred.stack, model=logistic.simple)\nplot(preds)\nplot(pres.pts$geometry, add=TRUE, pch=3, col=\"blue\")\nplot(abs.pts$geometry, add=TRUE, pch =\"-\", col=\"red\", cex=2)"
+    "text": "An Example\nGenerating predictions\n\npreds &lt;- predict(object=pred.stack, model=logistic.simple)\nplot(preds)\nplot(pres.pts$geometry, add=TRUE, pch=3, col=\"blue\")\nplot(abs.pts$geometry, add=TRUE, pch =\"-\", col=\"red\")"
   },
   {
     "objectID": "slides/21-slides.html#an-example-12",
