@@ -4402,25 +4402,40 @@
     ]
   },
   {
-    "objectID": "content/24-content.html",
-    "href": "content/24-content.html",
+    "objectID": "content/23-content.html",
+    "href": "content/23-content.html",
     "title": "Statistical Modelling III",
     "section": "",
-    "text": "In our last class on multivariate analysis, we’ll take on one of the more underappreciated elements of modeling: understanding if your model is good enough for prediction or inference. We’ll spend a bit of time differentiating the uses of models as a means of understanding what it means to be a “good” model."
+    "text": "In our last class on multivariate analysis, we’ll take on one of the more underappreciated elements of modeling: understanding if your model is good enough for prediction or inference. We’ll spend a bit of time differentiating the uses of models as a means of understanding what it means to be a “good” model.",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "23: Statistical Modelling III"
+    ]
   },
   {
-    "objectID": "content/24-content.html#resources",
-    "href": "content/24-content.html#resources",
+    "objectID": "content/23-content.html#resources",
+    "href": "content/23-content.html#resources",
     "title": "Statistical Modelling III",
     "section": "Resources",
-    "text": "Resources\n\n A practical guide to selecting models for exploration, inference, and prediction in ecology by (Tredennick et al. 2021) highlights the importance of understanding model performance before making inference on predictor effects.\n Model selection using information criteria, but is the “best” model any good? by (Mac Nally et al. 2018) highlights the importance of understanding model performance before making inference on predictor effects.\n Standards for distribution models in biodiversity assessments by (Araújo et al. 2019) highlights the importance of understanding model performance before making inference on predictor effects."
+    "text": "Resources\n\n A practical guide to selecting models for exploration, inference, and prediction in ecology by (Tredennick et al. 2021) highlights the importance of understanding model performance before making inference on predictor effects.\n Model selection using information criteria, but is the “best” model any good? by (Mac Nally et al. 2018) highlights the importance of understanding model performance before making inference on predictor effects.\n Standards for distribution models in biodiversity assessments by (Araújo et al. 2019) highlights the importance of understanding model performance before making inference on predictor effects.",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "23: Statistical Modelling III"
+    ]
   },
   {
-    "objectID": "content/24-content.html#objectives",
-    "href": "content/24-content.html#objectives",
+    "objectID": "content/23-content.html#objectives",
+    "href": "content/23-content.html#objectives",
     "title": "Statistical Modelling III",
     "section": "Objectives",
-    "text": "Objectives\nBy the end of today you should be able to:\n\nArticulate three different reasons for modeling and how they link to assessments of fit\nDescribe and implement several test statistics for assessing model fit\nDescribe and implement several assessments of classification\nDescribe and implement resampling techniques to estimate predictive performance\n\n\n View all slides in new window  Download PDF of all slides"
+    "text": "Objectives\nBy the end of today you should be able to:\n\nArticulate three different reasons for modeling and how they link to assessments of fit\nDescribe and implement several test statistics for assessing model fit\nDescribe and implement several assessments of classification\nDescribe and implement resampling techniques to estimate predictive performance",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "23: Statistical Modelling III"
+    ]
   },
   {
     "objectID": "content/26-content.html",
