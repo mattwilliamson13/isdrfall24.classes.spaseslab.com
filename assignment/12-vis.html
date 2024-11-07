@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Why Geographic Analysis – Intro to Spatial Data in R</title>
+<title>Assignment 10: Data Visualization – Intro to Spatial Data in R</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,27 +20,7 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for citations */
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
-  margin-bottom: 0em;
-}
-.hanging-indent div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
-}
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
-}
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}</style>
+</style>
 
 
 <script src="../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -92,7 +72,7 @@ div.csl-indent {
 
 </head>
 
-<body class="nav-sidebar docked nav-fixed">
+<body class="nav-fixed">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -118,7 +98,7 @@ div.csl-indent {
 <span class="menu-text">Schedule</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="../content/index.html" aria-current="page"> 
+    <a class="nav-link" href="../content/index.html"> 
 <span class="menu-text">Content</span></a>
   </li>  
   <li class="nav-item">
@@ -158,277 +138,72 @@ div.csl-indent {
 </div>
       </div> <!-- /container-fluid -->
     </nav>
-  <nav class="quarto-secondary-nav">
-    <div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
-        <i class="bi bi-layout-text-sidebar-reverse"></i>
-      </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../content/01-content.html">Course content</a></li><li class="breadcrumb-item"><a href="../content/02-content.html">2: Why Geographic Analysis</a></li></ol></nav>
-        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
-        </a>
-    </div>
-  </nav>
 </header>
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
-    <div class="sidebar-menu-container"> 
-    <ul class="list-unstyled mt-1">
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
- <span class="menu-text">Overview</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../content/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Readings and slides</span></a>
-  </div>
-</li>
-      </ul>
-  </li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
- <span class="menu-text">Course content</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../content/01-content.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">1: Introduction to the Course</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../content/02-content.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">2: Why Geographic Analysis</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../content/03-content.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">3: Introduction to Spatial Data</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../content/04-content.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">4: Intro to Spatial Data with R</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../content/05-content.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">5: Literate Programming, Quarto, Workflows</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../content/06-content.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">6: Areal Data - Coordinates and Geometries</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../content/07-content.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">7: Areal Data - Vector Data</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../content/08-content.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">8: Areal Data - Raster Data</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../content/09-content.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">9: Intro to Mapping Geographic Data</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../content/10-content.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">10: Operations with Vector Data I</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../content/11-content.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">11: Operations with Vector Data II</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../content/12-content.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">12: Operations with Raster Data I</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../content/13-content.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">13: Operations with Raster Data II</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../content/14-content.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">14: Building Spatial Databases with Attributes</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../content/15-content.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">15: Building Databases with Location</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../content/16-content.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">16: Combining Vectors and Rasters</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../content/17-content.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">17: Point Patterns</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../content/18-content.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">18: Interpolation</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../content/19-content.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">19: Interpolation II</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../content/20-content.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">20: Spatial Autocorrelation</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../content/21-content.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">21: Statistical Modelling I</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../content/22-content.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">22: Statistical Modelling II</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../content/23-content.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">23: Statistical Modelling III</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../content/24-content.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">24: Data Visualization and Maps I</span></a>
-  </div>
-</li>
-      </ul>
-  </li>
-    </ul>
-    </div>
-</nav>
-<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#readings" id="toc-readings" class="nav-link active" data-scroll-target="#readings">Readings</a></li>
-  <li><a href="#objectives" id="toc-objectives" class="nav-link" data-scroll-target="#objectives">Objectives</a></li>
-  <li><a href="#slides" id="toc-slides" class="nav-link" data-scroll-target="#slides">Slides</a></li>
+  <li><a href="#instructions" id="toc-instructions" class="nav-link active" data-scroll-target="#instructions">Instructions</a></li>
+  <li><a href="#the-assignment" id="toc-the-assignment" class="nav-link" data-scroll-target="#the-assignment">The Assignment</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header">
-<h1 class="title display-7">Why Geographic Analysis</h1>
-
-<div class="date-block bg-content text-white p-2">
-  <p class="date">Content for Wednesday, August 21, 2024</p>
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Assignment 10: Data Visualization</h1>
 </div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
 </header>
 
 
-<p>Before we get inundated with technical details and syntax, I think it’s important to remind ourselves why we need geographical analysis. We’ll spend some time on the various conceptualizations of place and space, how those things show up in geographic data, and their implications for the kinds of science we can do when we’re using geographic data. This session is meant to provide a bit of philosophical foundation for you to keep in mind as you work through various parts of the analytic pipeline.</p>
-<section id="readings" class="level2">
-<h2 class="anchored" data-anchor-id="readings">Readings</h2>
-<p>The following readings are intended to give you some sense of the discussion surrounding the role of spatial data in understanding the world. They are a mix of old favorites and relatively recent reviews. You don’t need to read all of them or memorize them, but they are worth a skim. I bet you’ll find something interesting.</p>
-<p><i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i> <a href="https://onlinelibrary.wiley.com/doi/full/10.1111/j.1366-9516.2005.00143.x">Conservation biogeography: assessment and prospects</a> by Whitaker et al. <span class="citation" data-cites="whittaker2005">(<a href="#ref-whittaker2005" role="doc-biblioref">2005</a>)</span> provides an overview of the of geography in understanding ecosystem function and shaping conservation strategies.</p>
-<p><i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i> <a href="https://www.annualreviews.org/doi/abs/10.1146/annurev-polisci-050718-033649">Economic geography, politics, and policy</a> by Rickard <span class="citation" data-cites="rickard2020">(<a href="#ref-rickard2020" role="doc-biblioref">2020</a>)</span> provides a review of the role of geography in understanding responses to globalization.</p>
-<p><i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i> <a href="https://onlinelibrary.wiley.com/doi/epdf/10.1111/j.1467-8330.1972.tb00486.x">Revolutionary and counter revolutionary theory in geography and the problem of ghetto formation</a> by David Harvey <span class="citation" data-cites="Harvey1972">(<a href="#ref-Harvey1972" role="doc-biblioref">1972</a>)</span> offers a scathing critique of quantitative geography (though Harvey was one of the founders of the field). See <span class="citation" data-cites="Barnes2009">(<a href="#ref-Barnes2009" role="doc-biblioref">Barnes 2009</a>)</span> for a relatively recent attempt to reconcile these views.</p>
-<p><i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i> <a href="https://www.sciencedirect.com/science/article/pii/S0016718506001564">Does scale exist? An epistemological scale continuum for complex human–environment systems</a> by Steven Manson <span class="citation" data-cites="MANSON2008">(<a href="#ref-MANSON2008" role="doc-biblioref">2008</a>)</span> is one of my favorite summaries of the various definitions and confusion surrounding scale as a concept invoked in many disciplines.</p>
-<p><i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i> <a href="https://www.jstor.org/stable/2389612">Spatial Scaling in Ecology</a> by John Wiens <span class="citation" data-cites="Wiens1989">(<a href="#ref-Wiens1989" role="doc-biblioref">1989</a>)</span> describes the fundamental challenges of scale in Ecology.</p>
-</section>
-<section id="objectives" class="level2">
-<h2 class="anchored" data-anchor-id="objectives">Objectives</h2>
-<p>By the end of today you should be able to:</p>
+<!-- The first part of the course was designed to introduce some of the foundations of working in R, developing programming workflows, and getting help. These topics are important for building robust spatial workflows, but their utility extends beyond that to most things you'll do in R during the course of your graduate research. [This homework](https://classroom.github.com/a/VQuj0UjY) is meant to help reinforce those concepts and identify any gaps that I need to fill in as we go. Make sure to check out the example too!.  -->
+<p>By the end of this assignment you should be able to:</p>
 <ul>
-<li><p><strong>Define</strong> what we mean by description, explanation, and prediction in geography.</p></li>
-<li><p><strong>Describe</strong> critiques and limitations of quantitative geographical analysis</p></li>
-<li><p><strong>Define</strong> ‘scale’ and its implications for geographic analysis</p></li>
-<li><p><strong>Place</strong> your research in the broader context of geographic analysis</p></li>
+<li><p>Prepare geospatial data in tidy format for plotting.</p></li>
+<li><p>Construct a map using <code>ggplot2</code> and <code>tmap</code>.</p></li>
+<li><p>Combine vector and raster data in the same map.</p></li>
 </ul>
+<p>You’ll need to accept the link to access the questions.</p>
+<section id="instructions" class="level2">
+<h2 class="anchored" data-anchor-id="instructions">Instructions</h2>
+<ol type="1">
+<li><p>After you’ve joined the assignment repository, you should have this file (named Readme.md) inside of a R project named assignment-10-xx where xx is your github username (or initials).</p></li>
+<li><p>Once you’ve verified that you’ve correctly cloned the assignment repository, create a new Quarto document. Name this file assignment-10-xxx.qmd and give it a title (like M Williamson Assignment 10). Make sure that you select the html output option (Quarto can do a lot of cool things, but the html format is the least-likely to cause you additional headaches). We’ll be using Quarto throughout the course so it’s worth checking out the other tutorials in the getting started section.</p></li>
+<li><p>Copy the questions below into your document and change the color of their text.</p></li>
+<li><p>Save the changes and make your first commit!</p></li>
+<li><p>Answer the questions making sure save and commit at least 3 more times (having 4 commits is part of the assignment).</p></li>
+<li><p>Render the document to html (you should now have at least 3 files in the repository: Readme.md, assignment-10-xx.qmd, and assignment-10-xx.html). Commit these changes and push them to the repository on GitHub. You should see the files there when you go to github.com.</p></li>
+</ol>
 </section>
-<section id="slides" class="level2">
-<h2 class="anchored" data-anchor-id="slides">Slides</h2>
-<p>The slides for today’s lesson are available online as an HTML file. Use the buttons below to open the slides either as an interactive website or as a static PDF (for printing or storing for later). You can also click in the slides below and navigate through them with your left and right arrow keys.</p>
-<p class="text-center buttons">
-<a class="btn btn-danger" target="_blank" href="../slides/02-slides.html"><i class="fa-solid fa-arrow-up-right-from-square"></i> View all slides in new window</a> <a class="btn btn-danger" target="_blank" href="../slides/02-slides.pdf" role="button"><i class="fa-solid fa-file-pdf"></i> Download PDF of all slides</a>
-</p>
-<div>
-<iframe class="slide-deck" src="../slides/02-slides.html"></iframe>
-</div>
-
+<section id="the-assignment" class="level2">
+<h2 class="anchored" data-anchor-id="the-assignment">The Assignment</h2>
+<ol type="1">
+<li></li>
+</ol>
 
 
 </section>
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list">
-<div id="ref-Barnes2009" class="csl-entry" role="listitem">
-Barnes, T. J. 2009. <a href="https://doi.org/10.1080/00330120902931937"><span>“Not only … but also”</span>: Quantitative and critical geography</a>. The Professional Geographer 61:292–300.
-</div>
-<div id="ref-Harvey1972" class="csl-entry" role="listitem">
-Harvey, D. 1972. <a href="https://doi.org/10.1111/j.1467-8330.1972.tb00486.x">REVOLUTIONARY AND COUNTER REVOLUTIONARY THEORY IN GEOGRAPHY AND THE PROBLEM OF GHETTO FORMATION</a>. Antipode 4:1–13.
-</div>
-<div id="ref-MANSON2008" class="csl-entry" role="listitem">
-Manson, S. M. 2008. <a href="https://doi.org/10.1016/j.geoforum.2006.09.010">Does scale exist? An epistemological scale continuum for complex human–environment systems</a>. Geoforum 39:776–788.
-</div>
-<div id="ref-rickard2020" class="csl-entry" role="listitem">
-Rickard, S. J. 2020. Economic geography, politics, and policy. Annual Review of Political Science 23:187–202.
-</div>
-<div id="ref-whittaker2005" class="csl-entry" role="listitem">
-Whittaker, R. J., M. B. Araújo, P. Jepson, R. J. Ladle, J. E. Watson, and K. J. Willis. 2005. Conservation biogeography: Assessment and prospect. Diversity and distributions 11:3–23.
-</div>
-<div id="ref-Wiens1989" class="csl-entry" role="listitem">
-Wiens, J. A. 1989. <a href="http://www.jstor.org/stable/2389612">Spatial scaling in ecology</a>. Functional Ecology 3:385–397.
-</div>
-</div></section></div></main> <!-- /main -->
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {

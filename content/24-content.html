@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Movement and Networks I – Intro to Spatial Data in R</title>
+<title>Data Visualization and Maps I – Intro to Spatial Data in R</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -163,7 +163,7 @@ div.csl-indent {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../content/01-content.html">Course content</a></li><li class="breadcrumb-item"><a href="../content/24-content.html">24: Movement and Networks I</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../content/01-content.html">Course content</a></li><li class="breadcrumb-item"><a href="../content/24-content.html">24: Data Visualization and Maps I</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -342,7 +342,7 @@ div.csl-indent {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../content/24-content.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">24: Movement and Networks I</span></a>
+ <span class="menu-text">24: Data Visualization and Maps I</span></a>
   </div>
 </li>
       </ul>
@@ -366,7 +366,7 @@ div.csl-indent {
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header">
-<h1 class="title display-7">Movement and Networks I</h1>
+<h1 class="title display-7">Data Visualization and Maps I</h1>
 
 <div class="date-block bg-content text-white p-2">
   <p class="date">Content for Monday, November 11, 2024</p>
@@ -374,22 +374,23 @@ div.csl-indent {
 </header>
 
 
-<p>Today we’re going to finish up some of the model evaluation and prediction pieces from last week and then take a brief detour into the use of spatial information in networks. To do that, we’ll need to introduce some basic concepts of networks before getting too far down the road of the syntax.</p>
+<p>We’ve spent the last few weeks learning about operations to compile geographic information into databases for visualization and analysis. Because analysis requires you to know something about your data and because visualization is a great way to explore your data (especially when there’s a lot of it), we’ll turn to that next. For the next few weeks, we’ll be looking at different ways to visualize spatial data and the associated approaches in <code>R</code>. Note that this could be an entire course by itself, but hopefully you’ll get enough to get started making publication quality maps by the time we’re done</p>
 <section id="resources" class="level2">
 <h2 class="anchored" data-anchor-id="resources">Resources</h2>
 <ul>
-<li><p><i class="fas fa-external-link-square-alt"></i> <a href="https://esajournals.onlinelibrary.wiley.com/doi/full/10.1890/0012-9658%282001%29082%5B1205%3ALCAGTP%5D2.0.CO%3B2">Landscape connectivity: A graph-theoretic perspective</a> by <span class="citation" data-cites="urban">(<a href="#ref-urban" role="doc-biblioref">Urban and Keitt 2001</a>)</span> introduces the notion of using networks and graphs to understand ecological connectivity.</p></li>
-<li><p><i class="fas fa-external-link-square-alt"></i> <a href="https://esajournals.onlinelibrary.wiley.com/doi/full/10.1890/09-2190.1">Connectivity for conservation: a framework to classify network measures</a> by <span class="citation" data-cites="rayfield">(<a href="#ref-rayfield" role="doc-biblioref">Rayfield et al. 2011</a>)</span> helps simplify the (often overwhelming nature) of terminology and network metrics.</p></li>
-<li><p><i class="fas fa-external-link-square-alt"></i> <a href="https://livebook.manning.com/book/graphs-and-network-science-an-introduction/chapter-1/">Graphs and network science: and introduction</a> provides a little simpler, but less spatially informed introduction to the tasks of network analysis.</p></li>
+<li><p><i class="fas fa-external-link-square-alt"></i> The <a href="https://f0nzie.github.io/dataviz-wilke-2020/introduction.html">Introduction</a> and <a href="https://f0nzie.github.io/dataviz-wilke-2020/geospatial-data.html">Visualizing Geospatial Data</a> chapters <a href="https://f0nzie.github.io/dataviz-wilke-2020/proportional-ink.html">Principles of Figure Design</a> section in <span class="citation" data-cites="wilke2019fundamentals">(<a href="#ref-wilke2019fundamentals" role="doc-biblioref">Wilke 2019</a>)</span> provide a useful set of general introductions to data visualization principles and practice that is “platform agnostic” (though much of Wilke’s work is done in <code>R</code>).</p></li>
+<li><p><i class="fas fa-external-link-square-alt"></i> The <a href="https://f0nzie.github.io/dataviz-wilke-2020/introduction.html">Look at Data</a> and <a href="https://f0nzie.github.io/dataviz-wilke-2020/geospatial-data.html">Draw Maps</a> chapters in <span class="citation" data-cites="healy2018data">(<a href="#ref-healy2018data" role="doc-biblioref">Healy 2018</a>)</span> revisits many of the same ideas, but focuses specifically on <code>R</code> and <code>ggplot2</code>.</p></li>
+<li><p><i class="fas fa-external-link-square-alt"></i> This post on <a href="https://www.esri.com/news/arcuser/0112/make-maps-people-want-to-look-at.html">making maps people want to look at</a> from ESRI is a nice, concise depiction of some core principles for planning a cartographic project.</p></li>
+<li><p><i class="fas fa-external-link-square-alt"></i> <a href="https://geocompr.robinlovelace.net/adv-map.html">Making maps with <code>R</code></a> by <span class="citation" data-cites="lovelace_geocomputation_2019">(<a href="#ref-lovelace_geocomputation_2019" role="doc-biblioref">Lovelace et al. 2019</a>)</span> introduces the <code>tmap</code> package for making nice maps with relatively minimal syntax.</p></li>
 </ul>
 </section>
 <section id="objectives" class="level2">
 <h2 class="anchored" data-anchor-id="objectives">Objectives</h2>
 <p>By the end of today you should be able to:</p>
 <ul>
-<li><p>Use cross-validation to evaluate your models</p></li>
-<li><p>Define a network and it’s key components</p></li>
-<li><p>Identify major questions that we can address with networks</p></li>
+<li><p>Describe some basic principles of data visualization</p></li>
+<li><p>Extend principles of data visualization to the development of maps</p></li>
+<li><p>Distinguish between several common types of spatial data visualization</p></li>
 </ul>
 <!--
 
@@ -424,11 +425,14 @@ div.csl-indent {
 </section>
 
 <div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list">
-<div id="ref-rayfield" class="csl-entry" role="listitem">
-Rayfield, B., M.-J. Fortin, and A. Fall. 2011. <a href="https://doi.org/10.1890/09-2190.1">Connectivity for conservation: A framework to classify network measures</a>. Ecology 92:847–858.
+<div id="ref-healy2018data" class="csl-entry" role="listitem">
+Healy, K. 2018. Data visualization: A practical introduction. Princeton University Press.
 </div>
-<div id="ref-urban" class="csl-entry" role="listitem">
-Urban, D., and T. Keitt. 2001. <a href="https://doi.org/10.1890/0012-9658(2001)082[1205:LCAGTP]2.0.CO;2">LANDSCAPE CONNECTIVITY: A GRAPH-THEORETIC PERSPECTIVE</a>. Ecology 82:1205–1218.
+<div id="ref-lovelace_geocomputation_2019" class="csl-entry" role="listitem">
+Lovelace, R., J. Nowosad, and J. Muenchow. 2019. Geocomputation with <span>R</span>. <span>CRC Press</span>.
+</div>
+<div id="ref-wilke2019fundamentals" class="csl-entry" role="listitem">
+Wilke, C. O. 2019. Fundamentals of data visualization: A primer on making informative and compelling figures. O’Reilly Media.
 </div>
 </div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
