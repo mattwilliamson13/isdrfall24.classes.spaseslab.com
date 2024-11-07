@@ -4493,25 +4493,40 @@
     ]
   },
   {
-    "objectID": "content/25-content.html",
-    "href": "content/25-content.html",
+    "objectID": "content/24-content.html",
+    "href": "content/24-content.html",
     "title": "Movement and Networks I",
     "section": "",
-    "text": "Today we’re going to finish up some of the model evaluation and prediction pieces from last week and then take a brief detour into the use of spatial information in networks. To do that, we’ll need to introduce some basic concepts of networks before getting too far down the road of the syntax."
+    "text": "Today we’re going to finish up some of the model evaluation and prediction pieces from last week and then take a brief detour into the use of spatial information in networks. To do that, we’ll need to introduce some basic concepts of networks before getting too far down the road of the syntax.",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "24: Movement and Networks I"
+    ]
   },
   {
-    "objectID": "content/25-content.html#resources",
-    "href": "content/25-content.html#resources",
+    "objectID": "content/24-content.html#resources",
+    "href": "content/24-content.html#resources",
     "title": "Movement and Networks I",
     "section": "Resources",
-    "text": "Resources\n\n Landscape connectivity: A graph-theoretic perspective by (Urban and Keitt 2001) introduces the notion of using networks and graphs to understand ecological connectivity.\n Connectivity for conservation: a framework to classify network measures by (Rayfield et al. 2011) helps simplify the (often overwhelming nature) of terminology and network metrics.\n Graphs and network science: and introduction provides a little simpler, but less spatially informed introduction to the tasks of network analysis."
+    "text": "Resources\n\n Landscape connectivity: A graph-theoretic perspective by (Urban and Keitt 2001) introduces the notion of using networks and graphs to understand ecological connectivity.\n Connectivity for conservation: a framework to classify network measures by (Rayfield et al. 2011) helps simplify the (often overwhelming nature) of terminology and network metrics.\n Graphs and network science: and introduction provides a little simpler, but less spatially informed introduction to the tasks of network analysis.",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "24: Movement and Networks I"
+    ]
   },
   {
-    "objectID": "content/25-content.html#objectives",
-    "href": "content/25-content.html#objectives",
+    "objectID": "content/24-content.html#objectives",
+    "href": "content/24-content.html#objectives",
     "title": "Movement and Networks I",
     "section": "Objectives",
-    "text": "Objectives\nBy the end of today you should be able to:\n\nUse cross-validation to evaluate your models\nDefine a network and it’s key components\nIdentify major questions that we can address with networks\n\n\n View all slides in new window  Download PDF of all slides"
+    "text": "Objectives\nBy the end of today you should be able to:\n\nUse cross-validation to evaluate your models\nDefine a network and it’s key components\nIdentify major questions that we can address with networks",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "24: Movement and Networks I"
+    ]
   },
   {
     "objectID": "schedule.html",

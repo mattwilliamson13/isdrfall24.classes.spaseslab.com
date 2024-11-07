@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Statistical Modelling III – Intro to Spatial Data in R</title>
+<title>Movement and Networks I – Intro to Spatial Data in R</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -92,7 +92,7 @@ div.csl-indent {
 
 </head>
 
-<body class="nav-fixed">
+<body class="nav-sidebar docked nav-fixed">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -118,7 +118,7 @@ div.csl-indent {
 <span class="menu-text">Schedule</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../content/index.html"> 
+    <a class="nav-link active" href="../content/index.html" aria-current="page"> 
 <span class="menu-text">Content</span></a>
   </li>  
   <li class="nav-item">
@@ -158,10 +158,199 @@ div.csl-indent {
 </div>
       </div> <!-- /container-fluid -->
     </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../content/01-content.html">Course content</a></li><li class="breadcrumb-item"><a href="../content/24-content.html">24: Movement and Networks I</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
 </header>
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Overview</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Readings and slides</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Course content</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/01-content.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">1: Introduction to the Course</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/02-content.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">2: Why Geographic Analysis</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/03-content.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">3: Introduction to Spatial Data</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/04-content.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">4: Intro to Spatial Data with R</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/05-content.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">5: Literate Programming, Quarto, Workflows</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/06-content.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">6: Areal Data - Coordinates and Geometries</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/07-content.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">7: Areal Data - Vector Data</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/08-content.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">8: Areal Data - Raster Data</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/09-content.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">9: Intro to Mapping Geographic Data</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/10-content.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">10: Operations with Vector Data I</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/11-content.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">11: Operations with Vector Data II</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/12-content.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">12: Operations with Raster Data I</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/13-content.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">13: Operations with Raster Data II</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/14-content.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">14: Building Spatial Databases with Attributes</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/15-content.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">15: Building Databases with Location</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/16-content.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">16: Combining Vectors and Rasters</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/17-content.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">17: Point Patterns</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/18-content.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">18: Interpolation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/19-content.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">19: Interpolation II</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/20-content.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">20: Spatial Autocorrelation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/21-content.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">21: Statistical Modelling I</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/22-content.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">22: Statistical Modelling II</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/23-content.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">23: Statistical Modelling III</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/24-content.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">24: Movement and Networks I</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
@@ -177,52 +366,69 @@ div.csl-indent {
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header">
-<h1 class="title display-7">Statistical Modelling III</h1>
+<h1 class="title display-7">Movement and Networks I</h1>
 
 <div class="date-block bg-content text-white p-2">
-  <p class="date">Content for Wednesday, November 8, 2023</p>
+  <p class="date">Content for Monday, November 11, 2024</p>
 </div>
 </header>
 
 
-<p>In our last class on multivariate analysis, we’ll take on one of the more underappreciated elements of modeling: understanding if your model is good enough for prediction or inference. We’ll spend a bit of time differentiating the uses of models as a means of understanding what it means to be a “good” model.</p>
+<p>Today we’re going to finish up some of the model evaluation and prediction pieces from last week and then take a brief detour into the use of spatial information in networks. To do that, we’ll need to introduce some basic concepts of networks before getting too far down the road of the syntax.</p>
 <section id="resources" class="level2">
 <h2 class="anchored" data-anchor-id="resources">Resources</h2>
 <ul>
-<li><p><i class="fas fa-external-link-square-alt"></i> <a href="https://esajournals.onlinelibrary.wiley.com/doi/full/10.1002/ecy.3336">A practical guide to selecting models for exploration, inference, and prediction in ecology</a> by <span class="citation" data-cites="Tredennick2021">(<a href="#ref-Tredennick2021" role="doc-biblioref">Tredennick et al. 2021</a>)</span> highlights the importance of understanding model performance before making inference on predictor effects.</p></li>
-<li><p><i class="fas fa-external-link-square-alt"></i> <a href="https://besjournals.onlinelibrary.wiley.com/doi/10.1111/1365-2664.13060">Model selection using information criteria, but is the “best” model any good?</a> by <span class="citation" data-cites="Mac_Nally2018">(<a href="#ref-Mac_Nally2018" role="doc-biblioref">Mac Nally et al. 2018</a>)</span> highlights the importance of understanding model performance before making inference on predictor effects.</p></li>
-<li><p><i class="fas fa-external-link-square-alt"></i> <a href="https://www.science.org/doi/10.1126/sciadv.aat4858">Standards for distribution models in biodiversity assessments</a> by <span class="citation" data-cites="Araujo2019">(<a href="#ref-Araujo2019" role="doc-biblioref">Araújo et al. 2019</a>)</span> highlights the importance of understanding model performance before making inference on predictor effects.</p></li>
+<li><p><i class="fas fa-external-link-square-alt"></i> <a href="https://esajournals.onlinelibrary.wiley.com/doi/full/10.1890/0012-9658%282001%29082%5B1205%3ALCAGTP%5D2.0.CO%3B2">Landscape connectivity: A graph-theoretic perspective</a> by <span class="citation" data-cites="urban">(<a href="#ref-urban" role="doc-biblioref">Urban and Keitt 2001</a>)</span> introduces the notion of using networks and graphs to understand ecological connectivity.</p></li>
+<li><p><i class="fas fa-external-link-square-alt"></i> <a href="https://esajournals.onlinelibrary.wiley.com/doi/full/10.1890/09-2190.1">Connectivity for conservation: a framework to classify network measures</a> by <span class="citation" data-cites="rayfield">(<a href="#ref-rayfield" role="doc-biblioref">Rayfield et al. 2011</a>)</span> helps simplify the (often overwhelming nature) of terminology and network metrics.</p></li>
+<li><p><i class="fas fa-external-link-square-alt"></i> <a href="https://livebook.manning.com/book/graphs-and-network-science-an-introduction/chapter-1/">Graphs and network science: and introduction</a> provides a little simpler, but less spatially informed introduction to the tasks of network analysis.</p></li>
 </ul>
 </section>
 <section id="objectives" class="level2">
 <h2 class="anchored" data-anchor-id="objectives">Objectives</h2>
 <p>By the end of today you should be able to:</p>
 <ul>
-<li><p>Articulate three different reasons for modeling and how they link to assessments of fit</p></li>
-<li><p>Describe and implement several test statistics for assessing model fit</p></li>
-<li><p>Describe and implement several assessments of classification</p></li>
-<li><p>Describe and implement resampling techniques to estimate predictive performance</p></li>
+<li><p>Use cross-validation to evaluate your models</p></li>
+<li><p>Define a network and it’s key components</p></li>
+<li><p>Identify major questions that we can address with networks</p></li>
 </ul>
-<p class="text-center buttons">
-<a class="btn btn-danger" target="_blank" href="../slides/24-slides.html"><i class="fa-solid fa-arrow-up-right-from-square"></i> View all slides in new window</a> <a class="btn btn-danger" target="_blank" href="../slides/24-slides.pdf" role="button"><i class="fa-solid fa-file-pdf"></i> Download PDF of all slides</a>
-</p>
+<!--
+
+
+
+
+<p class="text-center buttons"><a class="btn btn-danger" target="_blank" href="/slides/24-slides.html"><i class="fa-solid fa-arrow-up-right-from-square"></i> View all slides in new window</a> <a class="btn btn-danger" target="_blank" href="/slides/24-slides.pdf" role="button"><i class="fa-solid fa-file-pdf"></i> Download PDF of all slides</a></p>
+
+
+
+
 <div>
-<iframe class="slide-deck" src="../slides/24-slides.html"></iframe>
+
+
+
+
+
+```{=html}
+<iframe class="slide-deck" src="/slides/24-slides.html"></iframe>
+```
+
+
+
+
+
 </div>
+
+-->
 
 
 
 </section>
 
 <div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list">
-<div id="ref-Araujo2019" class="csl-entry" role="listitem">
-Araújo, M. B., R. P. Anderson, A. M. Barbosa, C. M. Beale, C. F. Dormann, R. Early, R. A. Garcia, A. Guisan, L. Maiorano, B. Naimi, R. B. O’Hara, N. E. Zimmermann, and C. Rahbek. 2019. <a href="https://doi.org/10.1126/sciadv.aat4858">Standards for distribution models in biodiversity assessments</a>. Science Advances 5:eaat4858.
+<div id="ref-rayfield" class="csl-entry" role="listitem">
+Rayfield, B., M.-J. Fortin, and A. Fall. 2011. <a href="https://doi.org/10.1890/09-2190.1">Connectivity for conservation: A framework to classify network measures</a>. Ecology 92:847–858.
 </div>
-<div id="ref-Mac_Nally2018" class="csl-entry" role="listitem">
-Mac Nally, R., R. P. Duncan, J. R. Thomson, and J. D. L. Yen. 2018. Model selection using information criteria, but is the <span>“best”</span> model any good? J. Appl. Ecol. 55:1441–1444.
-</div>
-<div id="ref-Tredennick2021" class="csl-entry" role="listitem">
-Tredennick, A. T., G. Hooker, S. P. Ellner, and P. B. Adler. 2021. <a href="https://doi.org/10.1002/ecy.3336">A practical guide to selecting models for exploration, inference, and prediction in ecology</a>. Ecology 102:e03336.
+<div id="ref-urban" class="csl-entry" role="listitem">
+Urban, D., and T. Keitt. 2001. <a href="https://doi.org/10.1890/0012-9658(2001)082[1205:LCAGTP]2.0.CO;2">LANDSCAPE CONNECTIVITY: A GRAPH-THEORETIC PERSPECTIVE</a>. Ecology 82:1205–1218.
 </div>
 </div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
