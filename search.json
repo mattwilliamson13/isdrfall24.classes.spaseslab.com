@@ -3026,7 +3026,7 @@
     "href": "slides/24-slides.html#bad-and-wrong",
     "title": "Data Visualization and Maps I",
     "section": "Bad and Wrong",
-    "text": "Bad and Wrong\n\nPresentation of the data is (intentionally?) decieving\nPresentation is just incorrect\n\n\n\n\n\n\nTricky (from Healy 2018)\n\n\n\n\n\n\nWrong"
+    "text": "Bad and Wrong\n\nPresentation of the data is (intentionally?) decieving\nPresentation is just incorrect\n\n\n\n\n\n\nTricky (from Healy 2018)\n\n\n\n\n\n\nWrong\n\n\n\n\nTricky because: countries were asked slightly different questions, data is scaled and raw data shows different trend"
   },
   {
     "objectID": "slides/24-slides.html#grammar-of-graphics-wilkinson-2005",
@@ -3158,13 +3158,6 @@
     "objectID": "content/31-content.html#objectives",
     "href": "content/31-content.html#objectives",
     "title": "Introduction to Interactive Maps",
-    "section": "Objectives",
-    "text": "Objectives\nBy the end of today you should be able to:\n\n View all slides in new window  Download PDF of all slides\n\nSlides Forthcoming"
-  },
-  {
-    "objectID": "content/29-content.html#objectives",
-    "href": "content/29-content.html#objectives",
-    "title": "Data Visualization and Maps I",
     "section": "Objectives",
     "text": "Objectives\nBy the end of today you should be able to:\n\n View all slides in new window  Download PDF of all slides\n\nSlides Forthcoming"
   },
@@ -4111,13 +4104,6 @@
     "text": "Intro to Spatial Data in R\n        \n        \n            Use R to load, visualize, and analyze spatial data\n        \n        \n            HES 505 • Fall 2024Human-Environment SystemsBoise State University\n        \n    \n    \n      \n        \n        \n        \n      \n    \n\n\n\n\n\n\nInstructor\n\n   Carolyn Koehn\n   4034-1 Environmental Research Building\n   carolynkoehn@u.boisestate.edu \n   Schedule an appointment\n\n\n\nCourse details\n\n   Mondays and Wednesdays\n   August 19–December 6, 2024\n   1:30-2:45 PM\n   Riverfront Hall Room 102B\n   Slack\n\n\n\nContacting me\nE-mail and Slack are the best ways to get in contact with me. I will try to respond to all course-related e-mails and Slack messages within 48 hours (really), but also remember that life can be busy and chaotic for everyone (including me!), so if I don’t respond right away, don’t worry!"
   },
   {
-    "objectID": "content/30-content.html#objectives",
-    "href": "content/30-content.html#objectives",
-    "title": "Data Visualization and Maps II",
-    "section": "Objectives",
-    "text": "Objectives\nBy the end of today you should be able to:\n\n View all slides in new window  Download PDF of all slides\n\nSlides Forthcoming"
-  },
-  {
     "objectID": "content/32-content.html#objectives",
     "href": "content/32-content.html#objectives",
     "title": "Conclusion",
@@ -4665,25 +4651,40 @@
     ]
   },
   {
-    "objectID": "content/26-content.html",
-    "href": "content/26-content.html",
-    "title": "Movement and Networks II",
+    "objectID": "content/25-content.html",
+    "href": "content/25-content.html",
+    "title": "Data Visualization and Maps II",
     "section": "",
-    "text": "Now that we’ve chatted briefly about what a network is and how we represent it for analysis, it’s time to take some first steps toward building spatial networks in R. The backbone of most network analysis is igraph, a package that is available for a number of programming languages. There are also a growing number of spatial network packages being developed for R. We’ll introduce a few of those today."
+    "text": "R provides a number of different packages for generating plots of your data, but ggplot2 is probably the most common owing to its ability to use consistent syntax to produce a variety of different graphics. In addition to plots of data and model objects, ggplot2 can also be used with sf objects and some raster datasets to generate publication quality maps. We’ll also take a little more time to understand some of the options for building static maps in R and look at a few packages that can help you build publication-quality maps without having to move into a new software.",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "25: Data Visualization and Maps II"
+    ]
   },
   {
-    "objectID": "content/26-content.html#resources",
-    "href": "content/26-content.html#resources",
-    "title": "Movement and Networks II",
+    "objectID": "content/25-content.html#resources",
+    "href": "content/25-content.html#resources",
+    "title": "Data Visualization and Maps II",
     "section": "Resources",
-    "text": "Resources\n\n Network Data in R and Spatial Networks from the Online Companion to Network Science in Archaelogy introduces a variety of approaches for handling and visualizing network data with R using examples from archaeology.\n CMRnet: An R package to derive networks of social interactions and movement from mark-recapture data by (Silk et al. 2021) describes a package for developing networks from common wildlife sampling techniques.\n The sfnetworks package github page provides a variety of vignettes for manipulating spatial network data within the sf framework for spatial objects."
+    "text": "Resources\n\n The Data Visualization: A Practical Introduction by Healy (2018) provides a lot of examples of Tufte-style graphics built with ggplot2.\n Graphic design with ggplot2 is an entire course devoted to making beautiful visualizations with ggplot2. If nothing else, check out some of the examples!\n The patchwork package website provides a lot of examples of building complicated layouts with ggplot2 objects with intuitive syntax.\n The Drawing Beautiful Maps Programatically with R, sf, and ggplot2 chapter by Mel Moreno and Mathieu Basille provides a nice series of blog posts designed to help you build maps with sf objects.\n Creating beautiful demographic maps in R with the tidycensus and tmap packages by Zev Ross illustrates the simplicity of mapping with tmap.\n Displaying time series, spatial and space-time data with R by Oscar Perpiñán Lamigueiro has a bunch of interesting code for producing maps contained in the book by the same name.",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "25: Data Visualization and Maps II"
+    ]
   },
   {
-    "objectID": "content/26-content.html#objectives",
-    "href": "content/26-content.html#objectives",
-    "title": "Movement and Networks II",
+    "objectID": "content/25-content.html#objectives",
+    "href": "content/25-content.html#objectives",
+    "title": "Data Visualization and Maps II",
     "section": "Objectives",
-    "text": "Objectives\nBy the end of today you should be able to:\n\nGenerate an adjacency matrix for network analysis\nCalculate network density, centrality, and other common measures\nGenerate landscape connectivity models using terra and gDistance\n\n\n View all slides in new window  Download PDF of all slides"
+    "text": "Objectives\nBy the end of today you should be able to:\n\nUnderstand the relationship between the Grammar of Graphics and ggplot syntax\nDescribe the various options for customizing ggplots and their syntactic conventions\nGenerate complicated plot layouts without additional pre-processing\nConstruct a map using ggplot2 and tmap\nCombine vector and raster data in the same map",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "25: Data Visualization and Maps II"
+    ]
   },
   {
     "objectID": "slides/02-slides.html#checking-in",
