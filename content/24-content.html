@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Data Visualization and Maps I – Intro to Spatial Data in R</title>
+<title>Statistical Modelling Review – Intro to Spatial Data in R</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,27 +20,7 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for citations */
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
-  margin-bottom: 0em;
-}
-.hanging-indent div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
-}
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
-}
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}</style>
+</style>
 
 
 <script src="../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -163,7 +143,7 @@ div.csl-indent {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../content/01-content.html">Course content</a></li><li class="breadcrumb-item"><a href="../content/24-content.html">24: Data Visualization and Maps I</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../content/01-content.html">Course content</a></li><li class="breadcrumb-item"><a href="../content/24-content.html">24: Statisitcal Modelling Review</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -342,13 +322,19 @@ div.csl-indent {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../content/24-content.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">24: Data Visualization and Maps I</span></a>
+ <span class="menu-text">24: Statisitcal Modelling Review</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../content/25-content.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">25: Data Visualization and Maps II</span></a>
+ <span class="menu-text">25: Data Visualization and Maps I</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../content/26-content.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">26: Data Visualization and Maps II</span></a>
   </div>
 </li>
       </ul>
@@ -363,8 +349,7 @@ div.csl-indent {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#resources" id="toc-resources" class="nav-link active" data-scroll-target="#resources">Resources</a></li>
-  <li><a href="#objectives" id="toc-objectives" class="nav-link" data-scroll-target="#objectives">Objectives</a></li>
+  <li><a href="#objectives" id="toc-objectives" class="nav-link active" data-scroll-target="#objectives">Objectives</a></li>
   </ul>
 </nav>
     </div>
@@ -372,7 +357,7 @@ div.csl-indent {
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header">
-<h1 class="title display-7">Data Visualization and Maps I</h1>
+<h1 class="title display-7">Statistical Modelling Review</h1>
 
 <div class="date-block bg-content text-white p-2">
   <p class="date">Content for Monday, November 11, 2024</p>
@@ -380,46 +365,20 @@ div.csl-indent {
 </header>
 
 
-<p>We’ve spent the last few weeks learning about operations to compile geographic information into databases for visualization and analysis. Because analysis requires you to know something about your data and because visualization is a great way to explore your data (especially when there’s a lot of it), we’ll turn to that next. For the next few weeks, we’ll be looking at different ways to visualize spatial data and the associated approaches in <code>R</code>. Note that this could be an entire course by itself, but hopefully you’ll get enough to get started making publication quality maps by the time we’re done</p>
-<section id="resources" class="level2">
-<h2 class="anchored" data-anchor-id="resources">Resources</h2>
-<ul>
-<li><p><i class="fas fa-external-link-square-alt"></i> The <a href="https://f0nzie.github.io/dataviz-wilke-2020/introduction.html">Introduction</a> and <a href="https://f0nzie.github.io/dataviz-wilke-2020/geospatial-data.html">Visualizing Geospatial Data</a> chapters <a href="https://f0nzie.github.io/dataviz-wilke-2020/proportional-ink.html">Principles of Figure Design</a> section in <span class="citation" data-cites="wilke2019fundamentals">(<a href="#ref-wilke2019fundamentals" role="doc-biblioref">Wilke 2019</a>)</span> provide a useful set of general introductions to data visualization principles and practice that is “platform agnostic” (though much of Wilke’s work is done in <code>R</code>).</p></li>
-<li><p><i class="fas fa-external-link-square-alt"></i> The <a href="https://f0nzie.github.io/dataviz-wilke-2020/introduction.html">Look at Data</a> and <a href="https://f0nzie.github.io/dataviz-wilke-2020/geospatial-data.html">Draw Maps</a> chapters in <span class="citation" data-cites="healy2018data">(<a href="#ref-healy2018data" role="doc-biblioref">Healy 2018</a>)</span> revisits many of the same ideas, but focuses specifically on <code>R</code> and <code>ggplot2</code>.</p></li>
-<li><p><i class="fas fa-external-link-square-alt"></i> This post on <a href="https://www.esri.com/news/arcuser/0112/make-maps-people-want-to-look-at.html">making maps people want to look at</a> from ESRI is a nice, concise depiction of some core principles for planning a cartographic project.</p></li>
-<li><p><i class="fas fa-external-link-square-alt"></i> <a href="https://geocompr.robinlovelace.net/adv-map.html">Making maps with <code>R</code></a> by <span class="citation" data-cites="lovelace_geocomputation_2019">(<a href="#ref-lovelace_geocomputation_2019" role="doc-biblioref">Lovelace et al. 2019</a>)</span> introduces the <code>tmap</code> package for making nice maps with relatively minimal syntax.</p></li>
-</ul>
-</section>
+<p>We reviewed the solutions to Assignment 9: Statistical Analyses found <a href="https://isdrfall24.classes.spaseslab.com/assignment/11-statmodsolutions.html">here</a>.</p>
 <section id="objectives" class="level2">
 <h2 class="anchored" data-anchor-id="objectives">Objectives</h2>
 <p>By the end of today you should be able to:</p>
 <ul>
-<li><p>Describe some basic principles of data visualization</p></li>
-<li><p>Extend principles of data visualization to the development of maps</p></li>
-<li><p>Distinguish between several common types of spatial data visualization</p></li>
+<li>Fit multiple types of models to your data</li>
+<li>Evaluate the performance of your model</li>
+<li>Generate predictions based on your model</li>
 </ul>
-<p class="text-center buttons">
-<a class="btn btn-danger" target="_blank" href="../slides/24-slides.html"><i class="fa-solid fa-arrow-up-right-from-square"></i> View all slides in new window</a> <a class="btn btn-danger" target="_blank" href="../slides/24-slides.pdf" role="button"><i class="fa-solid fa-file-pdf"></i> Download PDF of all slides</a>
-</p>
-<div>
-<iframe class="slide-deck" src="../slides/24-slides.html"></iframe>
-</div>
-
 
 
 </section>
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list">
-<div id="ref-healy2018data" class="csl-entry" role="listitem">
-Healy, K. 2018. Data visualization: A practical introduction. Princeton University Press.
-</div>
-<div id="ref-lovelace_geocomputation_2019" class="csl-entry" role="listitem">
-Lovelace, R., J. Nowosad, and J. Muenchow. 2019. Geocomputation with <span>R</span>. <span>CRC Press</span>.
-</div>
-<div id="ref-wilke2019fundamentals" class="csl-entry" role="listitem">
-Wilke, C. O. 2019. Fundamentals of data visualization: A primer on making informative and compelling figures. O’Reilly Media.
-</div>
-</div></section></div></main> <!-- /main -->
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
