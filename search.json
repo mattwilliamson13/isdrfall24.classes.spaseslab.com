@@ -3850,21 +3850,36 @@
     "href": "assignment/13-thirdrevision.html",
     "title": "Assignment Revision 3: Revisiting your code",
     "section": "",
-    "text": "This is your final opportunity to reconsider your answers to the last few assignments and evaluate what you might have done differently now that you’ve had a little more practice. I’ve also asked some specific questions based on common mistakes across the assignments. You’ll still be using Quarto to complete this homework."
+    "text": "This is your final opportunity to reconsider your answers to the last few assignments and evaluate what you might have done differently now that you’ve had a little more practice. I’ve also asked some specific questions based on common mistakes across the assignments. You’ll still be using Quarto to complete this homework.",
+    "crumbs": [
+      "Assignments",
+      "Self Assessments",
+      "Assignment Revision 3"
+    ]
   },
   {
     "objectID": "assignment/13-thirdrevision.html#instructions",
     "href": "assignment/13-thirdrevision.html#instructions",
     "title": "Assignment Revision 3: Revisiting your code",
     "section": "Instructions",
-    "text": "Instructions\n\nAfter you’ve joined the assignment repository, you should have this file (named Readme.md) inside of a R project named assignment-revision-3-xx where xx is your github username (or initials).\nOnce you’ve verified that you’ve correctly cloned the assignment repository, create a new Quarto document. Name this file ar3_xxx.qmd and give it a title (like M Williamson Assignment Revision 3). Make sure that you select the html output option (Quarto can do a lot of cool things, but the html format is the least-likely to cause you additional headaches). We’ll be using Quarto throughout the course so it’s worth checking out the other tutorials in the getting started section.\nCopy the questions in the assignment into your document and change the color of their text.\nSave the changes and make your first commit!\nAnswer the questions making sure save and commit at least 2 more times (having 3 commits is part of the assignment).\nRender the document (by clicking the “Render” button in RStudio) to html (you should now have at least 3 files in the repository: Readme.md, ar3_xx.qmd, and ar3_xx.html). Commit these changes and push them to the repository on GitHub. You should see the files there when you go to github.com."
+    "text": "Instructions\n\nAfter you’ve joined the assignment repository, you should have this file (named Readme.md) inside of a R project named assignment-revision-3-xx where xx is your github username (or initials).\nOnce you’ve verified that you’ve correctly cloned the assignment repository, create a new Quarto document. Name this file ar3_xxx.qmd and give it a title (like M Williamson Assignment Revision 3). Make sure that you select the html output option (Quarto can do a lot of cool things, but the html format is the least-likely to cause you additional headaches). We’ll be using Quarto throughout the course so it’s worth checking out the other tutorials in the getting started section.\nCopy the questions in the assignment into your document and change the color of their text.\nSave the changes and make your first commit!\nAnswer the questions making sure save and commit at least 2 more times (having 3 commits is part of the assignment).\nRender the document (by clicking the “Render” button in RStudio) to html (you should now have at least 3 files in the repository: Readme.md, ar3_xx.qmd, and ar3_xx.html). Commit these changes and push them to the repository on GitHub. You should see the files there when you go to github.com.",
+    "crumbs": [
+      "Assignments",
+      "Self Assessments",
+      "Assignment Revision 3"
+    ]
   },
   {
     "objectID": "assignment/13-thirdrevision.html#questions",
     "href": "assignment/13-thirdrevision.html#questions",
     "title": "Assignment Revision 3: Revisiting your code",
     "section": "Questions",
-    "text": "Questions\n\n\nWhat can a Ripley’s K curve tell you about spatial autocorrelation? (b) What about Moran’s I? (c) Look at the posted answers for assignment 8. What do the Ripley’s K curve and the Moran’s I slope shown there tell you about the spatial autocorrelation of the data?\n\nWhen kriging, you need both a spatial trend surface and an experimental variogram. What is the role of each of these components in kriging?\n\n\nIf you made changes to your assignment 9 during our class review time, notate those changes and push them to GitHub.\nAs you look back on assignments 8-9, what has been the biggest challenge? Do you feel like you know how to solve it? How can I help?\nWhich statistical approach do you plan to use for the final project? What challenges do you anticipate working through during your final project?"
+    "text": "Questions\n\n\nWhat can a Ripley’s K curve tell you about spatial autocorrelation? (b) What about Moran’s I? (c) Look at the posted answers for assignment 8. What do the Ripley’s K curve and the Moran’s I slope shown there tell you about the spatial autocorrelation of the data?\n\nWhen kriging, you need both a spatial trend surface and an experimental variogram. What is the role of each of these components in kriging?\nWhy are confusion matrices and ROC/AUC plots only useful for categorical data?\nWhat is the difference between a training/testing data split and k-fold or leave-one-out cross validation?\nIf you made changes to your assignment 9 during our class review time, notate those changes and push them to GitHub.\nAs you look back on assignments 8-9, what has been the biggest challenge? Do you feel like you know how to solve it? How can I help?\nWhich statistical approach do you plan to use for the final project? What challenges do you anticipate working through during your final project?",
+    "crumbs": [
+      "Assignments",
+      "Self Assessments",
+      "Assignment Revision 3"
+    ]
   },
   {
     "objectID": "assignment/final-proj.html",
