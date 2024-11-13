@@ -1,0 +1,10 @@
+---
+title: "Assignment 10 Solutions: Data Visualization"
+---
+
+```{r}
+# spitballing
+
+# get worldclim and gbif data (any area, any species)
+```
+
