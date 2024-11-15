@@ -1,0 +1,17 @@
+{
+  "hash": "ffe7e8b9cc898802fb0678dac7593f1c",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"Session 25 code\"\nauthor: \"Carolyn Koehn\"\nformat: html\n---\n\n\n\n\nLoad library and data:\n\n\n\n\n::: {.cell}\n\n```{.r .cell-code}\nlibrary(ggplot2)\n\nbikes <- readr::read_csv(\"https://raw.githubusercontent.com/z3tt/graphic-design-ggplot2/main/data/london-bikes-custom.csv\",\n                         col_types = \"Dcfffilllddddc\"\n)\nbikes$season <- forcats::fct_inorder(bikes$season)\n```\n:::\n\n\n\n\nPlaying with aesthetics, scales, facets, and coordinates:\n\n\n\n\n::: {.cell}\n\n```{.r .cell-code}\nggplot(bikes, aes(x=temp_feel, y=count)) +\n  geom_point(aes(color = day_night,\n                 shape = is_workday),\n             size=1.5) +\n  geom_smooth()\n```\n\n::: {.cell-output .cell-output-stderr}\n\n```\n`geom_smooth()` using method = 'gam' and formula = 'y ~ s(x, bs = \"cs\")'\n```\n\n\n:::\n\n::: {.cell-output-display}\n![](session-25-example_files/figure-html/unnamed-chunk-2-1.png){width=672}\n:::\n\n```{.r .cell-code}\nggplot(bikes, aes(x=temp_feel, y=count, color = day_night)) +\n  geom_point(aes(shape = is_workday),\n             size=1.5) +\n  geom_smooth() +\n  facet_wrap(~is_workday) +\n  coord_flip()\n```\n\n::: {.cell-output .cell-output-stderr}\n\n```\n`geom_smooth()` using method = 'loess' and formula = 'y ~ x'\n```\n\n\n:::\n\n::: {.cell-output-display}\n![](session-25-example_files/figure-html/unnamed-chunk-2-2.png){width=672}\n:::\n\n```{.r .cell-code}\nggplot(bikes, aes(x=count, y=temp_feel, color = day_night)) +\n  geom_point(aes(shape = is_workday),\n             size=1.5) +\n  geom_smooth() +\n  facet_wrap(~is_workday)\n```\n\n::: {.cell-output .cell-output-stderr}\n\n```\n`geom_smooth()` using method = 'loess' and formula = 'y ~ x'\n```\n\n\n:::\n\n::: {.cell-output-display}\n![](session-25-example_files/figure-html/unnamed-chunk-2-3.png){width=672}\n:::\n:::\n",
+    "supporting": [
+      "session-25-example_files"
+    ],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

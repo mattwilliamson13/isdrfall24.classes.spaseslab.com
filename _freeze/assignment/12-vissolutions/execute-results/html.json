@@ -1,0 +1,17 @@
+{
+  "hash": "8b0e785e02f1b11988302b2e50f849c4",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"Assignment 10 Solutions: Data Visualization\"\n---\n\n::: {.cell}\n\n```{.r .cell-code}\nlibrary(rgbif)\nlibrary(geodata)\nlibrary(sf)\nlibrary(terra)\nlibrary(tidyverse)\nlibrary(tidycensus)\n\nsoils <- geodata::soil_world(var = \"nitrogen\", depth=5, path=tempfile())\n# if there are problems, path = \"/home/carolyn\"\n\n\n# get a selection of 1000 observations from rgbif\nvflytrap_us <- occ_search(scientificName = \"Dionaea muscipula\", \n                             country = \"US\",\n                             hasCoordinate = TRUE,\n                             limit=1000)\n\n# This step has to be separate, it can't be piped into the next bit of code\nvflytrap_us <- vflytrap_us$data\n\n# convert to spatial object\nvflytrap_dat_sf <- vflytrap_us %>%\n  filter(!is.na(decimalLatitude) & !is.na(decimalLongitude)) %>%\n  st_as_sf(coords = c(\"decimalLongitude\", \"decimalLatitude\"), crs = 4326)\n\n# prep\naoi <- tigris::states() %>%\n  filter(NAME %in% c(\"North Carolina\", \"South Carolina\")) %>%\n  st_transform(4326)\n\nvflytrap_sub <- st_crop(vflytrap_dat_sf, aoi)\n\nsoils_plot <- crop(soils, aoi, mask=TRUE) %>%\n  as.data.frame(soils, xy=TRUE)\n\n#plot\n# challenge to change the color scale of raster\n# change legend name\n# add title\n# change theme\nggplot(data = soils_plot, aes(x=x, y=y, fill=`nitrogen_0-5cm`)) +\n  geom_raster() +\n  geom_sf(data=vflytrap_sub, inherit.aes = FALSE, alpha=0.4) +\n  scale_fill_viridis_c() +\n  coord_sf() +\n  theme_void()\n\nbounds <- geodata::gadm(\"USA\", level=1, path=tempfile()) %>%\n  st_as_sf() %>%\n  st_filter(., vflytrap_sub)\n\nggplot(data = soils_plot, aes(x=x, y=y, fill=`nitrogen_0-5cm`)) +\n  geom_raster() +\n  geom_sf(data=vflytrap_sub, inherit.aes = FALSE, alpha=0.4) +\n  geom_sf(data=bounds, inherit.aes = FALSE, fill=NA, color=\"black\") +\n  scale_fill_viridis_c() +\n  coord_sf() +\n  theme_void()\n\n# census_api_key(\"2817397abca2bd851d59398a187e91c800495d9e\")\n# demdat <- get_acs(geography=\"tract\",\n#                  variable = \"B25010_001\",\n#                  state = c(\"NC\", \"SC\"),\n#                  survey=\"acs5\",\n#                  geometry = TRUE)\n# \n# geodata::osm\n# \n# ggplot(data = demdat, aes(fill=estimate)) +\n#   geom_sf(color=NA) +\n#   geom_sf(data=vflytrap_sub, inherit.aes = FALSE, alpha=0.4, color=\"red\") +\n#   scale_fill_viridis_c() +\n#   coord_sf() +\n#   theme_void()\n```\n:::\n",
+    "supporting": [
+      "12-vissolutions_files"
+    ],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}
