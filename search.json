@@ -3433,11 +3433,16 @@
     ]
   },
   {
-    "objectID": "content/31-content.html#objectives",
-    "href": "content/31-content.html#objectives",
+    "objectID": "content/27-content.html#objectives",
+    "href": "content/27-content.html#objectives",
     "title": "Introduction to Interactive Maps",
     "section": "Objectives",
-    "text": "Objectives\nBy the end of today you should be able to:\n\n View all slides in new window  Download PDF of all slides\n\nSlides Forthcoming"
+    "text": "Objectives\nBy the end of today you should be able to:\n\n View all slides in new window  Download PDF of all slides\n\nSlides Forthcoming",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "27: Introduction to Interactive Maps"
+    ]
   },
   {
     "objectID": "syllabus.html",
@@ -7501,7 +7506,7 @@
     "href": "slides/26-slides.html#convert-raster-to-tidy-format",
     "title": "Data Visualization and Maps II",
     "section": "Convert raster to tidy format",
-    "text": "Convert raster to tidy format\nTo visualize rasters in ggplot2, they need to be converted to a dataframe.\n\nfire.haz &lt;- rast(\"/opt/data/data/assignment01/wildfire_hazard_agg.tif\")\n\nfire.haz_df &lt;- as.data.frame(fire.haz)\n\nstr(fire.haz_df)"
+    "text": "Convert raster to tidy format\nTo visualize rasters in ggplot2, they need to be converted to a dataframe.\n\nfire.haz &lt;- rast(\"/opt/data/data/assignment01/wildfire_hazard_agg.tif\")\n\nfire.haz_df &lt;- as.data.frame(fire.haz)\n\nstr(fire.haz_df)\n\n\n\n'data.frame':   11152346 obs. of  3 variables:\n $ x     : num  -1979745 -1979505 -1979265 -1979745 -1979505 ...\n $ y     : num  3172215 3172215 3172215 3171975 3171975 ...\n $ WHP_ID: num  3.5 3.48 2.95 4.97 3.47 ..."
   },
   {
     "objectID": "slides/26-slides.html#use-geom_raster",
@@ -7522,7 +7527,7 @@
     "href": "slides/26-slides.html#layering-rasters-and-vectors",
     "title": "Data Visualization and Maps II",
     "section": "Layering rasters and vectors",
-    "text": "Layering rasters and vectors\n\nstates &lt;- tigris::states(progress_bar=FALSE) %&gt;% \n  filter(., STUSPS %in% c(\"WA\", \"OR\", \"ID\")) %&gt;%\n  st_transform(crs = st_crs(fire.haz))\n\nRetrieving data for the year 2021\n\np2 &lt;- ggplot(data = fire.haz_df, aes(x=x, y=y, fill = WHP_ID)) +\n  geom_raster() +\n  geom_sf(data = states, fill=NA, color=\"red\", inherit.aes = FALSE) +\n  coord_sf(default_crs = crs(fire.haz))\n\np3 &lt;- ggplot() +\n  geom_raster(data = fire.haz_df, aes(x=x, y=y, fill = WHP_ID)) +\n  geom_sf(data = states, fill=NA, color=\"red\") +\n  coord_sf(default_crs = crs(fire.haz))"
+    "text": "Layering rasters and vectors\n\n# get data\nstates &lt;- tigris::states(progress_bar=FALSE) %&gt;% \n  filter(., STUSPS %in% c(\"WA\", \"OR\", \"ID\")) %&gt;%\n  st_transform(crs = st_crs(fire.haz))\n\n# method 1\n# first dataset in ggplot() and use inherit.aes=FALSE\np2 &lt;- ggplot(data = fire.haz_df, aes(x=x, y=y, fill = WHP_ID)) +\n  geom_raster() +\n  geom_sf(data = states, fill=NA, color=\"red\", inherit.aes = FALSE) +\n  coord_sf(default_crs = crs(fire.haz))\n\n# method 2\n# first dataset in geom so inherit.aes isn't necessary\np3 &lt;- ggplot() +\n  geom_raster(data = fire.haz_df, aes(x=x, y=y, fill = WHP_ID)) +\n  geom_sf(data = states, fill=NA, color=\"red\") +\n  coord_sf(default_crs = crs(fire.haz))"
   },
   {
     "objectID": "slides/26-slides.html#layering-rasters-and-vectors-1",
@@ -7557,7 +7562,7 @@
     "href": "slides/26-slides.html#map-insets",
     "title": "Data Visualization and Maps II",
     "section": "Map insets",
-    "text": "Map insets\n\nconus &lt;- tigris::states() %&gt;%\n  filter(!(DIVISION == 0 | STUSPS %in% c(\"HI\", \"AK\"))) %&gt;%\n  st_transform(st_crs(fire.haz))\n\ninset &lt;- ggplot(data = conus) +\n  geom_sf(fill=\"white\") +\n  geom_sf(data = filter(conus, STUSPS %in% c(\"ID\", \"OR\", \"WA\")),\n          fill = \"gray70\", color=\"red\") +\n  theme_void() +\n  theme(panel.background = element_rect(fill=\"white\", color=\"black\")) +\n  coord_sf()"
+    "text": "Map insets\n\n# get data (filter to continuous US)\nconus &lt;- tigris::states() %&gt;%\n  filter(!(DIVISION == 0 | STUSPS %in% c(\"HI\", \"AK\"))) %&gt;%\n  st_transform(st_crs(fire.haz))\n\n# create inset map\ninset &lt;- ggplot(data = conus) +\n  geom_sf(fill=\"white\") +\n  # fill study area states by filtering to those states and setting color parameters\n  geom_sf(data = filter(conus, STUSPS %in% c(\"ID\", \"OR\", \"WA\")),\n          fill = \"gray70\", color=\"red\") +\n  theme_void() +\n  theme(panel.background = element_rect(fill=\"white\", color=\"black\")) +\n  coord_sf()"
   },
   {
     "objectID": "slides/26-slides.html#map-insets-1",

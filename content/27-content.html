@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Interpolation – Intro to Spatial Data in R</title>
+<title>Introduction to Interactive Maps – Intro to Spatial Data in R</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,27 +20,7 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for citations */
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
-  margin-bottom: 0em;
-}
-.hanging-indent div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
-}
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
-}
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}</style>
+</style>
 
 
 <script src="../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -163,7 +143,7 @@ div.csl-indent {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../content/01-content.html">Course content</a></li><li class="breadcrumb-item"><a href="../content/18-content.html">18: Interpolation</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../content/01-content.html">Course content</a></li><li class="breadcrumb-item"><a href="../content/27-content.html">27: Introduction to Interactive Maps</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -305,7 +285,7 @@ div.csl-indent {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../content/18-content.html" class="sidebar-item-text sidebar-link active">
+  <a href="../content/18-content.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">18: Interpolation</span></a>
   </div>
 </li>
@@ -359,7 +339,7 @@ div.csl-indent {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../content/27-content.html" class="sidebar-item-text sidebar-link">
+  <a href="../content/27-content.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">27: Introduction to Interactive Maps</span></a>
   </div>
 </li>
@@ -384,54 +364,29 @@ div.csl-indent {
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header">
-<h1 class="title display-7">Interpolation</h1>
+<h1 class="title display-7">Introduction to Interactive Maps</h1>
 
 <div class="date-block bg-content text-white p-2">
-  <p class="date">Content for Monday, October 21, 2024</p>
+  <p class="date">Content for Monday, December 4, 2023</p>
 </div>
 </header>
 
 
-<p>Point patterns give us the foundation for beginning geostatistical analyses. In geostatistical analyses, we have observations or a spatial process from a limited sample of locations, but would like to be able to infer the values of that process across the entire study region (or at least an area larger than we initially sampled). Interpolation provides one simple way of doing this that relies on the notion that we can learn something about the process simply from our measurements and the location those measurements were taken. We can extend these approaches by adding additional covariates and model structures, but we’ll start simple for now.</p>
 <section id="resources" class="level2">
 <h2 class="anchored" data-anchor-id="resources">Resources</h2>
-<ul>
-<li><p><i class="fas fa-book"></i> <a href="https://boisestatecanvas.instructure.com/files/4856927/download?download_frd=1">Chapter 2: Scale</a> in <span class="citation" data-cites="fletcher2018spatial">(<a href="#ref-fletcher2018spatial" role="doc-biblioref">Fletcher and Fortin 2018</a>)</span> provides a thorough introduction to the ecologist’s conceptualization of scale with <code>R</code> examples.</p></li>
-<li><p><i class="fas fa-external-link-square-alt"></i> This <a href="https://www.sciencedirect.com/science/article/pii/S0016718506001564#:~:text=The%20epistemological%20scale%20continuum%20runs,readily%20accessible%20to%20objective%20observers">article</a> by Steven Manson <span class="citation" data-cites="manson2008does">(<a href="#ref-manson2008does" role="doc-biblioref">Manson 2008</a>)</span> provides a more comprehensive view of conceptualizations of scale.</p></li>
-<li><p><i class="fas fa-external-link-square-alt"></i> The <a href="https://mgimond.github.io/Spatial/hypothesis-testing.html">Hypothesis Testing and Autocorrelation</a> chapters of Manuel Gimond’s Introduction to GIS and Spatial Analysis <code>bookdown</code> project provide concrete examples of attempts to find process from spatial patterns.</p></li>
-<li><p><i class="fas fa-book"></i> <a href="https://r-spatial.org/book/12-Interpolation.html">Chapter 12: Spatial Interpolation</a> in Spatial Data Science by Edzer Pebesma and Roger Bivand provides examples of different types of kriging and interpolation using <code>sf</code> and <code>stars</code>.</p></li>
-</ul>
 </section>
 <section id="objectives" class="level2">
 <h2 class="anchored" data-anchor-id="objectives">Objectives</h2>
 <p>By the end of today you should be able to:</p>
-<ul>
-<li><p>Distinguish deterministic and stochastic processes</p></li>
-<li><p>Define autocorrelation and describe its estimation</p></li>
-<li><p>Articulate the benefits and drawbacks of autocorrelation</p></li>
-<li><p>Leverage point patterns and autocorrelation to interpolate missing data</p></li>
-</ul>
 <p class="text-center buttons">
-<a class="btn btn-danger" target="_blank" href="../slides/18-slides.html"><i class="fa-solid fa-arrow-up-right-from-square"></i> View all slides in new window</a> <a class="btn btn-danger" target="_blank" href="../slides/18-slides.pdf" role="button"><i class="fa-solid fa-file-pdf"></i> Download PDF of all slides</a>
+<a class="btn btn-danger" target="_blank" href="../slides/31-slides.html"><i class="fa-solid fa-arrow-up-right-from-square"></i> View all slides in new window</a> <a class="btn btn-danger" target="_blank" href="../slides/31-slides.pdf" role="button"><i class="fa-solid fa-file-pdf"></i> Download PDF of all slides</a>
 </p>
-<div>
-<iframe class="slide-deck" src="../slides/18-slides.html"></iframe>
-</div>
-<!--
-[Link to Panopto Recording](https://boisestate.hosted.panopto.com/Panopto/Pages/Viewer.aspx?id=9b0b208a-44fc-4c86-bab5-b0a4014222c9) -->
-
+<p>Slides Forthcoming</p>
 
 
 </section>
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list">
-<div id="ref-fletcher2018spatial" class="csl-entry" role="listitem">
-Fletcher, R., and M. Fortin. 2018. Spatial ecology and conservation modeling. Springer.
-</div>
-<div id="ref-manson2008does" class="csl-entry" role="listitem">
-Manson, S. M. 2008. Does scale exist? An epistemological scale continuum for complex human–environment systems. Geoforum 39:776–788.
-</div>
-</div></section></div></main> <!-- /main -->
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
