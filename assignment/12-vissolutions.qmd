@@ -2,8 +2,12 @@
 title: "Assignment 10 Solutions: Data Visualization"
 ---
 
+<span style="color:#9F281A;">Get data to visualize.</span>
+
+> I chose to visualize Venus flytrap locations and soil nitrogen.
+
 ```{r}
-#| eval: false
+# load libraries
 library(rgbif)
 library(geodata)
 library(sf)
@@ -11,72 +15,18 @@ library(terra)
 library(tidyverse)
 library(tidycensus)
 
-soils <- geodata::soil_world(var = "nitrogen", depth=5, path=tempfile())
-# if there are problems, path = "/home/carolyn"
-
-
-# get a selection of 1000 observations from rgbif
+# load data
+# get a selection of 1000 Vensu flytrap observations from rgbif
 vflytrap_us <- occ_search(scientificName = "Dionaea muscipula", 
                              country = "US",
                              hasCoordinate = TRUE,
                              limit=1000)
 
-# This step has to be separate, it can't be piped into the next bit of code
-vflytrap_us <- vflytrap_us$data
+# geodata raster
+soils <- geodata::soil_world(var = "nitrogen", depth=5, path=tempfile())
 
-# convert to spatial object
-vflytrap_dat_sf <- vflytrap_us %>%
-  filter(!is.na(decimalLatitude) & !is.na(decimalLongitude)) %>%
-  st_as_sf(coords = c("decimalLongitude", "decimalLatitude"), crs = 4326)
-
-# prep
-aoi <- tigris::states() %>%
-  filter(NAME %in% c("North Carolina", "South Carolina")) %>%
-  st_transform(4326)
-
-vflytrap_sub <- st_crop(vflytrap_dat_sf, aoi)
-
-soils_plot <- crop(soils, aoi, mask=TRUE) %>%
-  as.data.frame(soils, xy=TRUE)
-
-#plot
-# challenge to change the color scale of raster
-# change legend name
-# add title
-# change theme
-ggplot(data = soils_plot, aes(x=x, y=y, fill=`nitrogen_0-5cm`)) +
-  geom_raster() +
-  geom_sf(data=vflytrap_sub, inherit.aes = FALSE, alpha=0.4) +
-  scale_fill_viridis_c() +
-  coord_sf() +
-  theme_void()
-
-bounds <- geodata::gadm("USA", level=1, path=tempfile()) %>%
-  st_as_sf() %>%
-  st_filter(., vflytrap_sub)
-
-ggplot(data = soils_plot, aes(x=x, y=y, fill=`nitrogen_0-5cm`)) +
-  geom_raster() +
-  geom_sf(data=vflytrap_sub, inherit.aes = FALSE, alpha=0.4) +
-  geom_sf(data=bounds, inherit.aes = FALSE, fill=NA, color="black") +
-  scale_fill_viridis_c() +
-  coord_sf() +
-  theme_void()
-
-# census_api_key("2817397abca2bd851d59398a187e91c800495d9e")
-# demdat <- get_acs(geography="tract",
-#                  variable = "B25010_001",
-#                  state = c("NC", "SC"),
-#                  survey="acs5",
-#                  geometry = TRUE)
-# 
-# geodata::osm
-# 
-# ggplot(data = demdat, aes(fill=estimate)) +
-#   geom_sf(color=NA) +
-#   geom_sf(data=vflytrap_sub, inherit.aes = FALSE, alpha=0.4, color="red") +
-#   scale_fill_viridis_c() +
-#   coord_sf() +
-#   theme_void()
+# boundaries
+geodata::gadm(country = "USA", level=1, path=tempfile())
 ```
 
+<span style="color:#9F281A;">Write pseudocode for how you will prepare your data for visualization, then execute your plan. Some possible objectives might be cropping your data to an area of interest and transforming the data to tidy format.</span>

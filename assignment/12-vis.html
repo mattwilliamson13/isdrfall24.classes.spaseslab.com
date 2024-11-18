@@ -357,7 +357,7 @@ ul.task-list li input[type="checkbox"] {
 <li>Use the <code>geodata</code> package to pull in state/province/equivalent level boundaries for your country of choice using <code>geodata::gadm(country = "Your Country", level=1, path=tempfile())</code>. The same <code>tempfile()</code> instructions for part b apply here. This data will be downloaded as a <code>SpatVector</code> and can be transformed to an <code>sf</code> object with <code>st_as_sf()</code>.</li>
 </ol>
 <ol start="2" type="1">
-<li><p>Write pseudocode for how you will prepare your data for visualization. Some possible objectives might be cropping your data to an area of interest and transforming the data to tidy format.</p></li>
+<li><p>Write pseudocode for how you will prepare your data for visualization, then execute your plan. Some possible objectives might be cropping your data to an area of interest and transforming the data to tidy format.</p></li>
 <li><p>Use <code>ggplot2</code> to create a map of the raster data with the species presence points overlayed on top. Add state/province/equivalent level boundaries.</p></li>
 <li><p>Change the raster color scale, legend name, title, and theme from <code>ggplot2</code> defaults. You can try any other <code>ggplot</code> customization you’d like now as well.</p></li>
 <li><p>Use <code>tmap</code> to recreate this plot with zooming functionality and any other interactive elements you’d like to add. Optionally, you can substitute the raster for <code>tidycensus</code> or other polygon data at this stage.</p></li>
