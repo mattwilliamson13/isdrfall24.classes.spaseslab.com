@@ -20,7 +20,27 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -367,26 +387,45 @@ ul.task-list li input[type="checkbox"] {
 <h1 class="title display-7">Introduction to Interactive Maps</h1>
 
 <div class="date-block bg-content text-white p-2">
-  <p class="date">Content for Monday, December 4, 2023</p>
+  <p class="date">Content for Wednesday, November 20, 2024</p>
 </div>
 </header>
 
 
+<p>Now that you’ve had a chance to practice building a few maps and learning some of the core ideas behind the Grammar of Graphics, we can extend those ideas into the development of interactive webmaps and more expansive data visualizations that can be served on the internet and accessed by collaborators and members of the public. Like the previous unit on static maps, this could be a course unto itself, but we should be able to introduce you to enough ideas to get started.</p>
 <section id="resources" class="level2">
 <h2 class="anchored" data-anchor-id="resources">Resources</h2>
+<ul>
+<li><p><i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i> The <a href="https://gistbok-topics.ucgis.org/CV-05-015">Web-mapping</a> section from the University Consortium for Geographic Information Science’s GIS &amp; Technology Body of Knowledge has a nice overview of the topic and it’s origins.</p></li>
+<li><p><i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i> This post on <a href="https://xd.adobe.com/ideas/principles/human-computer-interaction/user-centered-design/">User-Centered Design</a> from Adobe provides a concise, general introduction to the core elements of User-Centered Design.</p></li>
+<li><p><i class="fa-solid fa-book" aria-hidden="true"></i> The <a href="https://plotly-r.com/maps.html">Maps</a> chapter in <span class="citation" data-cites="sievert2020interactive">Sievert (<a href="#ref-sievert2020interactive" role="doc-biblioref">2020</a>)</span> gives a nice demonstration of using <code>plotly</code> to build interactive maps. More importantly, the book provides a comprehensive resource for building interactive web-based visualization in R.</p></li>
+</ul>
 </section>
 <section id="objectives" class="level2">
 <h2 class="anchored" data-anchor-id="objectives">Objectives</h2>
 <p>By the end of today you should be able to:</p>
+<ul>
+<li><p>Define an API and their use in interactive visualization</p></li>
+<li><p>Obtain a token for common mapping APIs</p></li>
+<li><p>Build interactive maps using common packages</p></li>
+<li><p>Recognize other opportunities for interactive visuals with R</p></li>
+</ul>
 <p class="text-center buttons">
-<a class="btn btn-danger" target="_blank" href="../slides/31-slides.html"><i class="fa-solid fa-arrow-up-right-from-square"></i> View all slides in new window</a> <a class="btn btn-danger" target="_blank" href="../slides/31-slides.pdf" role="button"><i class="fa-solid fa-file-pdf"></i> Download PDF of all slides</a>
+<a class="btn btn-danger" target="_blank" href="../slides/27-slides.html"><i class="fa-solid fa-arrow-up-right-from-square"></i> View all slides in new window</a> <a class="btn btn-danger" target="_blank" href="../slides/27-slides.pdf" role="button"><i class="fa-solid fa-file-pdf"></i> Download PDF of all slides</a>
 </p>
-<p>Slides Forthcoming</p>
+<div>
+<iframe class="slide-deck" src="../slides/27-slides.html"></iframe>
+</div>
+
 
 
 </section>
 
-</main> <!-- /main -->
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list">
+<div id="ref-sievert2020interactive" class="csl-entry" role="listitem">
+Sievert, C. 2020. Interactive web-based data visualization with r, plotly, and shiny. CRC Press.
+</div>
+</div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
