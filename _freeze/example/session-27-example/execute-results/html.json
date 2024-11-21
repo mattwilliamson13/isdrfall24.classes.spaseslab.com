@@ -1,0 +1,17 @@
+{
+  "hash": "79d98d5cfc6282a84c2af42f1b7d6f41",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"Session 27 code\"\nauthor: \"Carolyn Koehn\"\nformat: html\nexecute: \n  eval: false\n---\n\n\n\n\nLoad libraries:\n\n\n\n\n::: {.cell}\n\n```{.r .cell-code}\nlibrary(mapview)\nlibrary(sf)\nlibrary(terra)\nlibrary(tidyverse)\n```\n:::\n\n\n\n\nLoad data:\n\n\n\n\n::: {.cell}\n\n```{.r .cell-code}\nlandmarks <- read_csv(\"/opt/data/data/assignment04/landmarks_ID.csv\") %>%\n  st_as_sf(., coords=c(\"longitude\", \"lattitude\"), crs=4326)\n\nfire.haz <- rast(\"/opt/data/data/assignment01/wildfire_hazard_agg.tif\")\n```\n:::\n\n\n\n\n\n\nInteractivity with mapview:\n\n\n\n\n::: {.cell}\n\n```{.r .cell-code}\nmapview(landmarks)\n```\n:::\n\n::: {.cell}\n\n```{.r .cell-code}\nmapview(raster::raster(fire.haz))\n```\n:::\n\n\n\n\nAPI with tidycensus:\n\n\n\n\n::: {.cell}\n\n```{.r .cell-code}\nlibrary(tidycensus)\n\nv20 <- load_variables(2020, \"acs5\")\n\ncounty_pop_white <- get_acs(geography = \"county\",\n                            year = 2020,\n                            variables = c(\"B02001_001\", \"B02001_002\"),\n                            state = \"ID\",\n                            geometry = TRUE)\n\ncounty_perc_white <- county_pop_white %>%\n  st_make_valid(.) %>%\n  filter(!st_is_empty(.)) %>%\n  st_transform(., crs=st_crs(landmarks)) %>%\n  dplyr::select(-moe) %>%\n  pivot_wider(names_from = variable, values_from = estimate) %>%\n  mutate(perc_white = B02001_002/B02001_001*100)\n```\n:::\n\n\n\n\nInteractivity with tmap:\n\nStatic map:\n\n\n\n\n::: {.cell}\n\n```{.r .cell-code}\nlibrary(tmap)\n\ntm_shape(county_perc_white) +\n  tm_polygons(col=\"perc_white\")\n```\n:::\n\n\n\n\nZoom map:\n\n\n\n\n::: {.cell}\n\n```{.r .cell-code}\ntmap_mode(\"view\")\n\ntm_shape(county_perc_white) +\n  tm_polygons(col=\"perc_white\")\n```\n:::\n\n\n\n\nChange pop-up value:\n\n\n\n\n::: {.cell}\n\n```{.r .cell-code}\ntm_shape(county_perc_white) +\n  tm_polygons(col=\"perc_white\", id = \"perc_white\")\n```\n:::\n\n\n\n\nAdd layer:\n\n\n\n\n::: {.cell}\n\n```{.r .cell-code}\ntm_shape(county_perc_white) +\n  tm_polygons(col=\"perc_white\") +\n  tm_shape(landmarks) +\n  tm_dots()\n```\n:::\n\n\n\n\nChange interactivity of different layers:\n\n\n\n\n::: {.cell}\n\n```{.r .cell-code}\ntm_shape(county_perc_white) +\n  tm_polygons(col=\"perc_white\", interactive=FALSE) +\n  tm_shape(landmarks) +\n  tm_dots(id=\"FULLNAME\")\n```\n:::\n",
+    "supporting": [
+      "session-27-example_files"
+    ],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}
