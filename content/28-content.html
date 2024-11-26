@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Operations With Vector Data I – Intro to Spatial Data in R</title>
+<title>Interactive Dashboards – Intro to Spatial Data in R</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,27 +20,7 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for citations */
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
-  margin-bottom: 0em;
-}
-.hanging-indent div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
-}
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
-}
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}</style>
+</style>
 
 
 <script src="../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -163,7 +143,7 @@ div.csl-indent {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../content/01-content.html">Course content</a></li><li class="breadcrumb-item"><a href="../content/10-content.html">10: Operations with Vector Data I</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../content/01-content.html">Course content</a></li><li class="breadcrumb-item"><a href="../content/28-content.html">28: Interactive Dashboards</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -257,7 +237,7 @@ div.csl-indent {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../content/10-content.html" class="sidebar-item-text sidebar-link active">
+  <a href="../content/10-content.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">10: Operations with Vector Data I</span></a>
   </div>
 </li>
@@ -365,7 +345,7 @@ div.csl-indent {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../content/28-content.html" class="sidebar-item-text sidebar-link">
+  <a href="../content/28-content.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">28: Interactive Dashboards</span></a>
   </div>
 </li>
@@ -381,9 +361,8 @@ div.csl-indent {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#readings" id="toc-readings" class="nav-link active" data-scroll-target="#readings">Readings</a></li>
+  <li><a href="#resources" id="toc-resources" class="nav-link active" data-scroll-target="#resources">Resources</a></li>
   <li><a href="#objectives" id="toc-objectives" class="nav-link" data-scroll-target="#objectives">Objectives</a></li>
-  <li><a href="#slides" id="toc-slides" class="nav-link" data-scroll-target="#slides">Slides</a></li>
   </ul>
 </nav>
     </div>
@@ -391,52 +370,40 @@ div.csl-indent {
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header">
-<h1 class="title display-7">Operations With Vector Data I</h1>
+<h1 class="title display-7">Interactive Dashboards</h1>
 
 <div class="date-block bg-content text-white p-2">
-  <p class="date">Content for Monday, September 23, 2024</p>
+  <p class="date">Content for Monday, December 2, 2024</p>
 </div>
 </header>
 
 
-<p>Now that we’ve spent some time getting used to the syntax of the <code>sf</code> package and used it to assess some of the characteristics of vector objects (e.g., through <em>predicates</em> and <em>measures</em>), we’ll move into <em>transformations</em>. Transformations allow you to actually manipulate the geometries of a vector object (without necessarily changing the attributes themselves) and are a powerful tool for geting disparate data into some logical alignment. That said, transforming geometries can be complicated and often has some unanticipated consequences. That’s why we spent a little bit of time learning the mapping syntax as a means for you to be able to check yourself.</p>
-<section id="readings" class="level2">
-<h2 class="anchored" data-anchor-id="readings">Readings</h2>
+<p>Now that you’ve had a chance to practice building a few maps and learning some of the core ideas behind the Grammar of Graphics, we can extend those ideas into the development of interactive webmaps and more expansive data visualizations that can be served on the internet and accessed by collaborators and members of the public. Like the previous unit on static maps, this could be a course unto itself, but we should be able to introduce you to enough ideas to get started.</p>
+<section id="resources" class="level2">
+<h2 class="anchored" data-anchor-id="resources">Resources</h2>
 <ul>
-<li><p><i class="fas fa-external-link-square-alt"></i> The introductory vignette for the <a href="https://r-spatial.github.io/sf/articles/sf1.html"><code>sf</code> package</a> has a lot of useful info on <code>sf</code> objects and conventions.</p></li>
-<li><p><i class="fas fa-book"></i> <a href="https://geocompr.robinlovelace.net/spatial-class.html">Section 2.2</a> on Vector Data and <a href="https://geocompr.robinlovelace.net/geometric-operations.html">Sections 5.1-5.3</a> on Geographic Operations in Lovelace et al. <span class="citation" data-cites="lovelace_geocomputation_2019">(<a href="#ref-lovelace_geocomputation_2019" role="doc-biblioref">Lovelace et al. 2019</a>)</span> - for more details about vectors and geometric operations on vectors.</p></li>
-<li><p><i class="fas fa-external-link-square-alt"></i> <a href="https://r-spatial.org/book/03-Geometries.html">Section 3.1 and 3.2</a> of Spatial Data Science, a <code>bookdown</code> project by Edzer Pebesma and Roger Bivand (of the <code>sf</code>, <code>sp</code>, <code>rgeos</code>, and <code>rgdal</code> packages).</p></li>
+<li><i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i> The <a href="https://rstudio.github.io/flexdashboard/articles/shiny.html"><code>flexdashboard</code> vignette</a> has a simple working example of an interactive dashboard and links to other examples with source code.</li>
 </ul>
 </section>
 <section id="objectives" class="level2">
 <h2 class="anchored" data-anchor-id="objectives">Objectives</h2>
-<p>By the end of today, you should be able to:</p>
+<p>By the end of today you should be able to:</p>
 <ul>
-<li><p>Recognize the unary, binary, and n-ary transformers</p></li>
-<li><p>Articulate common uses for unary and binary transformers</p></li>
-<li><p>Use unary transformations to fix invalid geometries</p></li>
-<li><p>Implement common binary transformers to align and combine data</p></li>
+<li><p>List the necessary elements of an interactive dashboard</p></li>
+<li><p>Outline the structure of code needed to build a <code>flexdashboard</code></p></li>
+<li><p>Build a simple interactive dashboard with spatial data</p></li>
 </ul>
-</section>
-<section id="slides" class="level2">
-<h2 class="anchored" data-anchor-id="slides">Slides</h2>
-<p>The slides for today’s lesson are available online as an HTML file. Use the buttons below to open the slides either as an interactive website or as a static PDF (for printing or storing for later). You can also click in the slides below and navigate through them with your left and right arrow keys.</p>
 <p class="text-center buttons">
-<a class="btn btn-danger" target="_blank" href="../slides/10-slides.html"><i class="fa-solid fa-arrow-up-right-from-square"></i> View all slides in new window</a> <a class="btn btn-danger" target="_blank" href="../slides/10-slides.pdf" role="button"><i class="fa-solid fa-file-pdf"></i> Download PDF of all slides</a>
+<a class="btn btn-danger" target="_blank" href="../slides/28-slides.html"><i class="fa-solid fa-arrow-up-right-from-square"></i> View all slides in new window</a> <a class="btn btn-danger" target="_blank" href="../slides/28-slides.pdf" role="button"><i class="fa-solid fa-file-pdf"></i> Download PDF of all slides</a>
 </p>
 <div>
-<iframe class="slide-deck" src="../slides/10-slides.html"></iframe>
+<iframe class="slide-deck" src="../slides/28-slides.html"></iframe>
 </div>
-
 
 
 </section>
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list">
-<div id="ref-lovelace_geocomputation_2019" class="csl-entry" role="listitem">
-Lovelace, R., J. Nowosad, and J. Muenchow. 2019. Geocomputation with <span>R</span>. <span>CRC Press</span>.
-</div>
-</div></section></div></main> <!-- /main -->
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {

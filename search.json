@@ -2611,244 +2611,257 @@
     "text": "How does geographic analysis fit into your goals for your research? Given our discussion of the aims and limitations of geographic analysis, are there particular issues that you would like to know more about or guard against?\n\nMy research is based almost entirely on geographic analysis, between estimating ecosystem services and studying agricultural change through time in different Idaho locations. One issue I face is that I integrate ecosystem services data collected and estimated at multiple scales into one analysis. I have to be careful I don’t fall into any pitfalls or fallacies when I combine multiple sources of data. In other cases, I have county level data and have to acknowledge the measurement bias that comes with data collection along those policial boundaries.\n\nWhat are the primary components that describe spatial data?\n\nI would say that the primary components are the coordinate reference system (because it helps us understand where we actually are on Earth), the extent of the data (because that helps me know what scale we’re working with and the size of the computational problem), the resolution (same reason as extent), the geometry, and spatial support. I don’t think about this last one often enough, but it really is the key to honest interpretation of the spatial data that you have.\n\nWhat is the coordinate reference system and why is it important\n\nThe CRS consists of the information necessary to locate points in 2 or 3 dimensional space. Coordinates are only meaningful in the context of a CRS (i.e., (2,2) could describe any number of places in the world - we need to know the origin and the datum to actually know where that is). The CRS becomes particularly important when we need to align datasets that were not collected in the same CRS originally or when we need to transfer locations from the globe to a flat surface (e.g., map, screen, etc).\n\nFind two maps of the same area in different projections? How does the projection affect your perception of the data being displayed?\n\nHere’s a fun article on projections that shows what I’m talking about!\n\nRead in the cejst_nw.shp file in the assignment01 folder. How many attributes describe each object? How many unique geometries are there? What is the coordinate reference system?\nI can read in the data using st_read or read_sf\n\nlibrary(sf)\n\ncejst.sf &lt;- read_sf(\"/opt/data/data/assignment01/cejst_nw.shp\")\ncejst.st &lt;- st_read(\"/opt/data/data/assignment01/cejst_nw.shp\")\n\nYou can inspect the differences between the resulting object classes by calling class\n\n```{r}\n#| message: false\n\nclass(cejst.sf)\nclass(cejst.st)\n```\n\n[1] \"sf\"         \"tbl_df\"     \"tbl\"        \"data.frame\"\n[1] \"sf\"         \"data.frame\"\n\n\nYou’ll notice that using st_read assigns the object to an sf and data.frame class meaning that functions defined for those two classes will work. Alternatively, read_sf assigns the object to sf, tbl_df, tbl, and data.frame classes meaning that a much broader set of functions can be run on the cejst.sf object.\nBecause the data are in wide format, we can assume that there is only 1 observation for each location (because sf requires that there is a geometry entry for every observation (even if it’s empty)). Probably the easiest way to get the number of observations is:\n\n```{r}\nnrow(cejst.sf)\n```\n\n[1] 2590\n\n\nSimilarly, if we wanted to know how many attributes are collected for each observation we could use ncol:\n\n```{r}\nncol(cejst.sf)\n```\n\n[1] 124\n\n\nNote that these are really only approximate estimates. There’s usually a lot of extra ID-style columns in spatial data such that the number of columns with useful information is less than the total number of columns, but we won’t worry about that for now."
   },
   {
-    "objectID": "example/session-11-example.html",
-    "href": "example/session-11-example.html",
-    "title": "Session 11 Code",
+    "objectID": "example/session-5-example.html",
+    "href": "example/session-5-example.html",
+    "title": "Session 5 Live Code",
     "section": "",
-    "text": "Code for questions 1 and 2 can be found in Session 11, in both the slides and the Panopto recording.",
+    "text": "This is the html output of the Quarto options we tested in class today.",
     "crumbs": [
       "Examples",
-      "Spatial operations in R",
-      "Vector Operations II"
+      "Getting started",
+      "Quarto formatting"
     ]
   },
   {
-    "objectID": "example/session-11-example.html#question-3",
-    "href": "example/session-11-example.html#question-3",
-    "title": "Session 11 Code",
-    "section": "Question 3",
-    "text": "Question 3\n\nWhat do we need to know?\n\n\n\nPseudocode\n\n\n\nStep 1: Get cdc data and project if necessary\nWe did this in the previous questions – the dataset is cdc.idaho.\n\n\nStep 2: Get hospital data and project if necessary\nWe did this in the previous questions – the dataset is hospital.sf.proj.\n\n\nStep 3: Buffer service areas around hospitals\nWe did this in the previous questions – the dataset is hospital.buf.\n\n\nStep 4: Find intersections of service areas\nWe did this in the previous questions – the dataset is hospital.int.overlaps. However, we re-projected it, so now we need to project cdc.idaho to the same projection. A plot shows that they are aligned.\n\n\nCode\ncdc.idaho.proj &lt;- st_transform(cdc.idaho, crs=st_crs(hospital.int.overlaps))\n\nplot(st_geometry(cdc.idaho.proj), col=\"purple\")\nplot(st_geometry(hospital.int.overlaps), add=TRUE)\n\n\n\n\n\n\n\n\n\n\n\nStep 5: Find tracts that overlap those intersections\n\n\nCode\noverlap.tracts.matrix &lt;- st_intersects(cdc.idaho.proj, hospital.int.overlaps, sparse = FALSE)\n\noverlap.tracts.matrix[1:12, 1:5]\n\n\n       [,1]  [,2]  [,3]  [,4]  [,5]\n [1,] FALSE FALSE FALSE FALSE FALSE\n [2,] FALSE FALSE FALSE FALSE FALSE\n [3,] FALSE FALSE FALSE FALSE FALSE\n [4,] FALSE FALSE FALSE FALSE FALSE\n [5,] FALSE FALSE  TRUE FALSE FALSE\n [6,] FALSE FALSE  TRUE FALSE FALSE\n [7,] FALSE FALSE  TRUE FALSE FALSE\n [8,] FALSE FALSE  TRUE FALSE FALSE\n [9,] FALSE FALSE  TRUE FALSE FALSE\n[10,] FALSE FALSE  TRUE FALSE FALSE\n[11,] FALSE FALSE  TRUE FALSE FALSE\n[12,] FALSE FALSE  TRUE FALSE FALSE\n\n\nThis creates a logical matrix where each row corresponds to a tract, and the cells in the matrix show whether it overlaps with each overlap area (TRUE) or whether it does not (FALSE). The cool thing about logicals is that they also count as numbers (TRUE = 1, FALSE = 0). By finding the rowSums, we can see which tracts overlap with 2+ hospital areas (rowSum &gt;= 1) and which don’t (rowSum = 0).\n\n\nCode\noverlap.tracts.filter &lt;- rowSums(overlap.tracts.matrix)\n\noverlap.tracts &lt;- cdc.idaho.proj[overlap.tracts.filter&gt;=1, ]\n\nplot(st_geometry(overlap.tracts), col=\"cornflowerblue\")\nplot(st_geometry(hospital.int.overlaps), add=TRUE, col=\"orange\")\n\n\n\n\n\n\n\n\n\nFor an alternate tidyverse integration, see this Stack Overflow question.\n\n\nStep 6: Find tracts outside of service buffers\nWe’ll use the same process as step 5, but this time we’ll keep the rowSums that are equal to 0.\n\n\nCode\nnohosp.tracts.matrix &lt;- st_intersects(cdc.idaho.proj, hospital.buf, sparse = FALSE)\nnohosp.tracts.matrix[1:12, 1:5]\n\n\n       [,1]  [,2]  [,3]  [,4]  [,5]\n [1,] FALSE FALSE FALSE FALSE FALSE\n [2,] FALSE FALSE FALSE FALSE FALSE\n [3,] FALSE FALSE FALSE FALSE FALSE\n [4,] FALSE FALSE FALSE FALSE FALSE\n [5,] FALSE FALSE  TRUE FALSE FALSE\n [6,] FALSE FALSE  TRUE FALSE FALSE\n [7,] FALSE FALSE  TRUE FALSE FALSE\n [8,] FALSE FALSE  TRUE FALSE FALSE\n [9,] FALSE FALSE  TRUE FALSE FALSE\n[10,] FALSE FALSE  TRUE FALSE FALSE\n[11,] FALSE FALSE  TRUE FALSE FALSE\n[12,] FALSE FALSE  TRUE FALSE FALSE\n\n\nCode\nnohosp.tracts.filter &lt;- rowSums(nohosp.tracts.matrix)\n\nnohosp.tracts &lt;- cdc.idaho.proj[nohosp.tracts.filter==0, ]\n\nplot(st_geometry(nohosp.tracts), col=\"firebrick\")\nplot(st_geometry(hospital.buf), add=TRUE, col=\"orange\")\n\n\n\n\n\n\n\n\n\n\n\nStep 7: Calculate average chronic heart disease rate for both groups of tracts\n\n\nCode\navg.nohosp.rate &lt;- mean(nohosp.tracts$chd_crudep)\n\navg.overlaps.rate &lt;- mean(overlap.tracts$chd_crudep)\n\n\n\n\nStep 8: Find the difference\n\n\nCode\navg.overlaps.rate - avg.nohosp.rate\n\n\n[1] 0.36875\n\n\nThe rates of chronic heart disease are on average higher in tracts with multiple hospitals than those with no hospitals. Maybe there’s less access to a diagnosis, or heart disease is more fatal to people with less hospital access…?",
+    "objectID": "example/session-5-example.html#code-chunk-output-options",
+    "href": "example/session-5-example.html#code-chunk-output-options",
+    "title": "Session 5 Live Code",
+    "section": "Code chunk output options",
+    "text": "Code chunk output options\nCommon code chunk options (all true by default):\n\ninclude\neval\necho\nwarning\nmessage\n\n\n\n\nThis table shows what occurs when these options are set to false.\n\n\nWe used the following code to test code chunk options to generate this table. We also added code chunk labels.\n\n\nCode\n```{r}\n#| output: false\n#| label: \"read libraries\"\n\nlibrary(tidyverse)\nlibrary(sf)\n```\n\n\nI’m getting data from this source. In literate programming, we would add more detail!\n\n\nCode\ncejst &lt;- st_read(\"/opt/data/data/assignment01/cejst_nw.shp\")\n\n\n\n\nCode\n```{r}\n#| warning: false\n\nggplot(data = cejst, aes(x = AGE_10, y = AGE_MIDDLE)) +\n  geom_point()\n```\n\n\n\n\n\n\n\n\n\nYou can find more information on code chunk options here.",
     "crumbs": [
       "Examples",
-      "Spatial operations in R",
-      "Vector Operations II"
+      "Getting started",
+      "Quarto formatting"
     ]
   },
   {
-    "objectID": "lesson/vector_intro.html",
-    "href": "lesson/vector_intro.html",
-    "title": "Intro to Vector Data",
+    "objectID": "example/session-5-example.html#inline-code",
+    "href": "example/session-5-example.html#inline-code",
+    "title": "Session 5 Live Code",
+    "section": "Inline code",
+    "text": "Inline code\nWe implemented inline code by with the formula: `, r, a single space, some code, `.\nThe mean proportion of children 10 and under in the Northwest is 0.1140576.\nYou can find more information on inline code here.",
+    "crumbs": [
+      "Examples",
+      "Getting started",
+      "Quarto formatting"
+    ]
+  },
+  {
+    "objectID": "example/session-5-example.html#heading-styles",
+    "href": "example/session-5-example.html#heading-styles",
+    "title": "Session 5 Live Code",
+    "section": "Heading Styles",
+    "text": "Heading Styles\n# Heading 1\n## Heading 2\n### Heading 3\n#### Heading 4\n##### Heading 5\n###### Heading 6\nrenders as:",
+    "crumbs": [
+      "Examples",
+      "Getting started",
+      "Quarto formatting"
+    ]
+  },
+  {
+    "objectID": "example/session-5-example.html#heading-2",
+    "href": "example/session-5-example.html#heading-2",
+    "title": "Session 5 Live Code",
+    "section": "Heading 2",
+    "text": "Heading 2\n\nHeading 3\n\nHeading 4\n\nHeading 5\n\nHeading 6",
+    "crumbs": [
+      "Examples",
+      "Getting started",
+      "Quarto formatting"
+    ]
+  },
+  {
+    "objectID": "example/session-5-example.html#text-formatting",
+    "href": "example/session-5-example.html#text-formatting",
+    "title": "Session 5 Live Code",
+    "section": "Text formatting",
+    "text": "Text formatting\n**bold** renders as bold\n_italics_ renders as italics",
+    "crumbs": [
+      "Examples",
+      "Getting started",
+      "Quarto formatting"
+    ]
+  },
+  {
+    "objectID": "example/session-5-example.html#lists",
+    "href": "example/session-5-example.html#lists",
+    "title": "Session 5 Live Code",
+    "section": "Lists",
+    "text": "Lists\n\nBullet List\n- bullet 1\n- bullet 2\n- another sub-bullet\n- bullet 3\nrenders as:\n\nbullet 1\n\nbullet 2\n\nanother sub-bullet\n\n\nbullet 3\n\n\n\nNumbered List\n1. number 1\n2. number 2\nrenders as:\n\nnumber 1\nnumber 2",
+    "crumbs": [
+      "Examples",
+      "Getting started",
+      "Quarto formatting"
+    ]
+  },
+  {
+    "objectID": "example/session-5-example.html#commenting",
+    "href": "example/session-5-example.html#commenting",
+    "title": "Session 5 Live Code",
+    "section": "Commenting",
+    "text": "Commenting\nTo comment out text outside code chunks, use &lt;!-- at the beginning of a comment and --&gt; at the end.\nMore information about text formatting in Quarto can be found here.",
+    "crumbs": [
+      "Examples",
+      "Getting started",
+      "Quarto formatting"
+    ]
+  },
+  {
+    "objectID": "lesson/dataclasses.html",
+    "href": "lesson/dataclasses.html",
+    "title": "Data Structures",
     "section": "",
-    "text": "Today we’ll build on the introductory discussion we were having about vector operations and the sf package. We’ll build a few vectors from scratch and then move on to explore a broader suite of common vector operations implemented by the sf package.",
+    "text": "Okay, now that we have all of those details out of the way, let’s take a look at data structures in R. As we discussed,R has six basic types of data: numeric, integer, logical, complex, character, and raw. For this class, we won’t bother with complex or raw as you are unlikely to encounter them in your introductory spatial explorations.\n\nNumeric data are numbers that contain a decimal. They can also be whole numbers\nIntegers are whole numbers (those numbers without a decimal point).\nLogical data take on the value of either TRUE or FALSE. There’s also another special type of logical called NA to represent missing values.\nCharacter data represent string values. You can think of character strings as something like a word (or multiple words). A special type of character string is a factor, which is a string but with additional attributes (like levels or an order). Factors become important in the analyses and visualizations we’ll attempt later in the course.\n\nThere are a variety of ways to learn more about the structure of different data types:\n\nclass() - returns the type of object (high level)\ntypeof() - returns the type of object (low level)\nlength() tells you about the length of an object\nattributes() - does the object have any metadata\n\n\n\nCode\nnum &lt;- 2.2\nclass(num)\n\n\n[1] \"numeric\"\n\n\nCode\ntypeof(num)\n\n\n[1] \"double\"\n\n\nCode\ny &lt;- 1:10 \ny\n\n\n [1]  1  2  3  4  5  6  7  8  9 10\n\n\nCode\nclass(y)\n\n\n[1] \"integer\"\n\n\nCode\ntypeof(y)\n\n\n[1] \"integer\"\n\n\nCode\nlength(y)\n\n\n[1] 10\n\n\nCode\nb &lt;- \"3\"\nclass(b)\n\n\n[1] \"character\"\n\n\nCode\nis.numeric(b)\n\n\n[1] FALSE\n\n\nCode\nc &lt;- as.numeric(b)\nclass(c)\n\n\n[1] \"numeric\"\n\n\n\n\n\nYou can store information in a variety of ways in R. The types we are most likely to encounter this semester are:\n\nVectors: a collection of elements that are typically character, logical, integer, or numeric.\n\n\n\nCode\n#sometimes we'll need to make sequences of numbers to facilitate joins\nseries &lt;- 1:10\nseries.2 &lt;- seq(10)\nseries.3 &lt;- seq(from = 1, to = 10, by = 0.1)\nseries\n\n\n [1]  1  2  3  4  5  6  7  8  9 10\n\n\nCode\nseries.2\n\n\n [1]  1  2  3  4  5  6  7  8  9 10\n\n\nCode\nseries.3\n\n\n [1]  1.0  1.1  1.2  1.3  1.4  1.5  1.6  1.7  1.8  1.9  2.0  2.1  2.2  2.3  2.4\n[16]  2.5  2.6  2.7  2.8  2.9  3.0  3.1  3.2  3.3  3.4  3.5  3.6  3.7  3.8  3.9\n[31]  4.0  4.1  4.2  4.3  4.4  4.5  4.6  4.7  4.8  4.9  5.0  5.1  5.2  5.3  5.4\n[46]  5.5  5.6  5.7  5.8  5.9  6.0  6.1  6.2  6.3  6.4  6.5  6.6  6.7  6.8  6.9\n[61]  7.0  7.1  7.2  7.3  7.4  7.5  7.6  7.7  7.8  7.9  8.0  8.1  8.2  8.3  8.4\n[76]  8.5  8.6  8.7  8.8  8.9  9.0  9.1  9.2  9.3  9.4  9.5  9.6  9.7  9.8  9.9\n[91] 10.0\n\n\nCode\nc(series.2, series.3)\n\n\n  [1]  1.0  2.0  3.0  4.0  5.0  6.0  7.0  8.0  9.0 10.0  1.0  1.1  1.2  1.3  1.4\n [16]  1.5  1.6  1.7  1.8  1.9  2.0  2.1  2.2  2.3  2.4  2.5  2.6  2.7  2.8  2.9\n [31]  3.0  3.1  3.2  3.3  3.4  3.5  3.6  3.7  3.8  3.9  4.0  4.1  4.2  4.3  4.4\n [46]  4.5  4.6  4.7  4.8  4.9  5.0  5.1  5.2  5.3  5.4  5.5  5.6  5.7  5.8  5.9\n [61]  6.0  6.1  6.2  6.3  6.4  6.5  6.6  6.7  6.8  6.9  7.0  7.1  7.2  7.3  7.4\n [76]  7.5  7.6  7.7  7.8  7.9  8.0  8.1  8.2  8.3  8.4  8.5  8.6  8.7  8.8  8.9\n [91]  9.0  9.1  9.2  9.3  9.4  9.5  9.6  9.7  9.8  9.9 10.0\n\n\nCode\nclass(series.3)\n\n\n[1] \"numeric\"\n\n\nCode\ntypeof(series.3)\n\n\n[1] \"double\"\n\n\nCode\nlength(series.3)\n\n\n[1] 91\n\n\n\nMissing Data: R supports missing data in most of the data structures we use, but they can lead to some strange behaviors. Here are a few ways to find missing data:\n\n\n\nCode\nx &lt;- c(\"a\", NA, \"c\", \"d\", NA)\nis.na(x)\n\n\n[1] FALSE  TRUE FALSE FALSE  TRUE\n\n\nCode\nanyNA(x)\n\n\n[1] TRUE\n\n\n\nMatrices: are an extension of the numeric or character vectors. They are not a separate type of object but simply an atomic vector with dimensions; the number of rows and columns. As with atomic vectors, the elements of a matrix must be of the same data. Matrices are the foundation of rasters, which we’ll be discussing frequently throughout the course\n\n\n\nCode\n#matrices are filled columnwise in R\nm &lt;- matrix(1:6, nrow = 2, ncol = 3)\ndim(m)\n\n\n[1] 2 3\n\n\nCode\nx &lt;- 1:3\ny &lt;- 10:12\n\na &lt;- cbind(x, y)\ndim(a)\n\n\n[1] 3 2\n\n\nCode\na[3,1]\n\n\nx \n3 \n\n\nCode\nb &lt;- rbind(x, y)\ndim(b)\n\n\n[1] 2 3\n\n\nCode\nb[1,3]\n\n\nx \n3 \n\n\n\nLists: Lists essentially act like containers in R - they can hold a variety of different data types and structures including more lists. We use lists a lot for functional programming in R where we can apply a function to each element in a list. We’ll see this with extracting values from multiple rasters. We can extract elements of lists usin [] and [[]]\n\n\n\nCode\nx &lt;- list(1, \"a\", TRUE, 1+4i)\nx\n\n\n[[1]]\n[1] 1\n\n[[2]]\n[1] \"a\"\n\n[[3]]\n[1] TRUE\n\n[[4]]\n[1] 1+4i\n\n\nCode\n#adding names\nxlist &lt;- list(a = \"Waldo\", b = 1:10, data = head(mtcars))\nxlist\n\n\n$a\n[1] \"Waldo\"\n\n$b\n [1]  1  2  3  4  5  6  7  8  9 10\n\n$data\n                   mpg cyl disp  hp drat    wt  qsec vs am gear carb\nMazda RX4         21.0   6  160 110 3.90 2.620 16.46  0  1    4    4\nMazda RX4 Wag     21.0   6  160 110 3.90 2.875 17.02  0  1    4    4\nDatsun 710        22.8   4  108  93 3.85 2.320 18.61  1  1    4    1\nHornet 4 Drive    21.4   6  258 110 3.08 3.215 19.44  1  0    3    1\nHornet Sportabout 18.7   8  360 175 3.15 3.440 17.02  0  0    3    2\nValiant           18.1   6  225 105 2.76 3.460 20.22  1  0    3    1\n\n\nCode\nxlist[[1]]\n\n\n[1] \"Waldo\"\n\n\nCode\nxlist[[3]]\n\n\n                   mpg cyl disp  hp drat    wt  qsec vs am gear carb\nMazda RX4         21.0   6  160 110 3.90 2.620 16.46  0  1    4    4\nMazda RX4 Wag     21.0   6  160 110 3.90 2.875 17.02  0  1    4    4\nDatsun 710        22.8   4  108  93 3.85 2.320 18.61  1  1    4    1\nHornet 4 Drive    21.4   6  258 110 3.08 3.215 19.44  1  0    3    1\nHornet Sportabout 18.7   8  360 175 3.15 3.440 17.02  0  0    3    2\nValiant           18.1   6  225 105 2.76 3.460 20.22  1  0    3    1\n\n\nCode\nxlist[[3]][1]\n\n\n                   mpg\nMazda RX4         21.0\nMazda RX4 Wag     21.0\nDatsun 710        22.8\nHornet 4 Drive    21.4\nHornet Sportabout 18.7\nValiant           18.1\n\n\nCode\nxlist[[3]][1,2]\n\n\n[1] 6\n\n\nCode\nxlist[3][1]\n\n\n$data\n                   mpg cyl disp  hp drat    wt  qsec vs am gear carb\nMazda RX4         21.0   6  160 110 3.90 2.620 16.46  0  1    4    4\nMazda RX4 Wag     21.0   6  160 110 3.90 2.875 17.02  0  1    4    4\nDatsun 710        22.8   4  108  93 3.85 2.320 18.61  1  1    4    1\nHornet 4 Drive    21.4   6  258 110 3.08 3.215 19.44  1  0    3    1\nHornet Sportabout 18.7   8  360 175 3.15 3.440 17.02  0  0    3    2\nValiant           18.1   6  225 105 2.76 3.460 20.22  1  0    3    1\n\n\n\nData Frames: data frames resemble that tabular datasets you might be used to in spreadsheet programs and are probably one of the most common types of data in R. A data frame is a special type of list where every element has the same length (but can have different types of data). We’ll be reading in a number of data frames for this first assignment.\n\n\n\nCode\ndat &lt;- data.frame(id = letters[1:10], x = 1:10, y = 11:20)\ndat\n\n\n   id  x  y\n1   a  1 11\n2   b  2 12\n3   c  3 13\n4   d  4 14\n5   e  5 15\n6   f  6 16\n7   g  7 17\n8   h  8 18\n9   i  9 19\n10  j 10 20\n\n\nCode\nis.list(dat)\n\n\n[1] TRUE\n\n\nCode\nclass(dat)\n\n\n[1] \"data.frame\"\n\n\nCode\n#lots of ways to look at data in data frames\nstr(dat) #compact summary of the structure of a dataframe\n\n\n'data.frame':   10 obs. of  3 variables:\n $ id: chr  \"a\" \"b\" \"c\" \"d\" ...\n $ x : int  1 2 3 4 5 6 7 8 9 10\n $ y : int  11 12 13 14 15 16 17 18 19 20\n\n\nCode\nhead(dat) #gives the first 6 rows similar to tail()\n\n\n  id x  y\n1  a 1 11\n2  b 2 12\n3  c 3 13\n4  d 4 14\n5  e 5 15\n6  f 6 16\n\n\nCode\ndim(dat)\n\n\n[1] 10  3\n\n\nCode\ncolnames(dat)\n\n\n[1] \"id\" \"x\"  \"y\" \n\n\nCode\n## accessing elements of a dataframe\ndat[1,3]\n\n\n[1] 11\n\n\nCode\ndat[[\"y\"]]\n\n\n [1] 11 12 13 14 15 16 17 18 19 20\n\n\nCode\ndat$y\n\n\n [1] 11 12 13 14 15 16 17 18 19 20\n\n\n\nTibbles: are similar to data frames, but allow for lists within columns. They are designed for use with the tidyverse (which we’ll explore more in future classes), but the primary reason for introducing them here is because they are the foundation of sf objects which we’ll use frequently in the weeks to come.\n\n\n\nCode\nlibrary(tidyverse)\n\n\n── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──\n✔ dplyr     1.1.4     ✔ readr     2.1.5\n✔ forcats   1.0.0     ✔ stringr   1.4.0\n✔ ggplot2   3.5.1     ✔ tibble    3.2.1\n✔ lubridate 1.9.3     ✔ tidyr     1.3.1\n✔ purrr     1.0.2     \n── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──\n✖ dplyr::filter() masks stats::filter()\n✖ dplyr::lag()    masks stats::lag()\nℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors\n\n\nCode\ndat.tib &lt;- tibble(dat)\nis.list(dat.tib)\n\n\n[1] TRUE\n\n\nCode\nclass(dat.tib)\n\n\n[1] \"tbl_df\"     \"tbl\"        \"data.frame\"\n\n\nCode\n#lots of ways to look at data in data frames\nstr(dat.tib) #compact summary of the structure of a dataframe\n\n\ntibble [10 × 3] (S3: tbl_df/tbl/data.frame)\n $ id: chr [1:10] \"a\" \"b\" \"c\" \"d\" ...\n $ x : int [1:10] 1 2 3 4 5 6 7 8 9 10\n $ y : int [1:10] 11 12 13 14 15 16 17 18 19 20\n\n\nCode\nhead(dat.tib) #gives the first 6 rows similar to tail()\n\n\n# A tibble: 6 × 3\n  id        x     y\n  &lt;chr&gt; &lt;int&gt; &lt;int&gt;\n1 a         1    11\n2 b         2    12\n3 c         3    13\n4 d         4    14\n5 e         5    15\n6 f         6    16\n\n\nCode\ndim(dat.tib)\n\n\n[1] 10  3\n\n\nCode\ncolnames(dat.tib)\n\n\n[1] \"id\" \"x\"  \"y\" \n\n\nCode\n## accessing elements of a dataframe\ndat.tib[1,3]\n\n\n# A tibble: 1 × 1\n      y\n  &lt;int&gt;\n1    11\n\n\nCode\ndat.tib[[\"y\"]]\n\n\n [1] 11 12 13 14 15 16 17 18 19 20\n\n\nCode\ndat.tib$y\n\n\n [1] 11 12 13 14 15 16 17 18 19 20\n\n\nMany of the packages used for spatial operations in R rely on special objects (e.g., sf, SpatRasters) that are combinations of these various elemental data types. That is why we are taking a little time to understand them before jumping into spatial data.",
     "crumbs": [
       "Lessons",
-      "Spatial operations in R",
-      "Vector data"
+      "Getting started",
+      "Data Classes"
     ]
   },
   {
-    "objectID": "lesson/vector_intro.html#a-reminder-about-vector-geometries-in-r",
-    "href": "lesson/vector_intro.html#a-reminder-about-vector-geometries-in-r",
-    "title": "Intro to Vector Data",
-    "section": "A reminder about vector geometries in R",
-    "text": "A reminder about vector geometries in R\nYou’ll recall that the sf package organizes the different types of vectors (e.g., points, lines, polygons) in to a hierarchical structure organized by complexity of geometries contained within an R object. For example, a single point will be a POINT, several points will be a MULTIPOINT, and an object containing points, polygons, and lines will be a GEOMETRYCOLLECTION. We need to be aware of what types of geometries and objects we have becasue some operations are restricted to particular types of objects or geometries as indicated by errors that read:\nError in UseMethod(\"st_crs&lt;-\") :    no applicable method for 'st_crs&lt;-' applied to an object of class \"c('XY', 'POINT', 'sfg')\"\nwhich indicates that the function (st_crs) does not have a method defined for the type of object it’s being applied to. Note that the function inside UseMethod will be replaced by whichever function you’re attempting to apply to your object and the object of class component will vary based on the function and the object class.\n\n\n\n\n\n\n\ntype\ndescription\n\n\n\n\nPOINT\nsingle point geometry\n\n\nMULTIPOINT\nset of points\n\n\nLINESTRING\nsingle linestring (two or more points connected by straight lines)\n\n\nMULTILINESTRING\nset of linestrings\n\n\nPOLYGON\nexterior ring with zero or more inner rings, denoting holes\n\n\nMULTIPOLYGON\nset of polygons\n\n\nGEOMETRYCOLLECTION\nset of the geometries above\n\n\n\nAs is, these geometries are built on vertices with coordinates that are based on the Cartesian plane and thus are “spatial”, but not georeferenced or geographic. In order to convert these sf geometries to a geogrphic object (i.e., one with a CRS and whose location depicts and actual spot on the earth’s surface), we use st_sfc() to create a simple feature geography list column (see ?st_sfc for an example of this workflow).",
+    "objectID": "lesson/dataclasses.html#data-types-and-structures",
+    "href": "lesson/dataclasses.html#data-types-and-structures",
+    "title": "Data Structures",
+    "section": "",
+    "text": "Okay, now that we have all of those details out of the way, let’s take a look at data structures in R. As we discussed,R has six basic types of data: numeric, integer, logical, complex, character, and raw. For this class, we won’t bother with complex or raw as you are unlikely to encounter them in your introductory spatial explorations.\n\nNumeric data are numbers that contain a decimal. They can also be whole numbers\nIntegers are whole numbers (those numbers without a decimal point).\nLogical data take on the value of either TRUE or FALSE. There’s also another special type of logical called NA to represent missing values.\nCharacter data represent string values. You can think of character strings as something like a word (or multiple words). A special type of character string is a factor, which is a string but with additional attributes (like levels or an order). Factors become important in the analyses and visualizations we’ll attempt later in the course.\n\nThere are a variety of ways to learn more about the structure of different data types:\n\nclass() - returns the type of object (high level)\ntypeof() - returns the type of object (low level)\nlength() tells you about the length of an object\nattributes() - does the object have any metadata\n\n\n\nCode\nnum &lt;- 2.2\nclass(num)\n\n\n[1] \"numeric\"\n\n\nCode\ntypeof(num)\n\n\n[1] \"double\"\n\n\nCode\ny &lt;- 1:10 \ny\n\n\n [1]  1  2  3  4  5  6  7  8  9 10\n\n\nCode\nclass(y)\n\n\n[1] \"integer\"\n\n\nCode\ntypeof(y)\n\n\n[1] \"integer\"\n\n\nCode\nlength(y)\n\n\n[1] 10\n\n\nCode\nb &lt;- \"3\"\nclass(b)\n\n\n[1] \"character\"\n\n\nCode\nis.numeric(b)\n\n\n[1] FALSE\n\n\nCode\nc &lt;- as.numeric(b)\nclass(c)\n\n\n[1] \"numeric\"\n\n\n\n\n\nYou can store information in a variety of ways in R. The types we are most likely to encounter this semester are:\n\nVectors: a collection of elements that are typically character, logical, integer, or numeric.\n\n\n\nCode\n#sometimes we'll need to make sequences of numbers to facilitate joins\nseries &lt;- 1:10\nseries.2 &lt;- seq(10)\nseries.3 &lt;- seq(from = 1, to = 10, by = 0.1)\nseries\n\n\n [1]  1  2  3  4  5  6  7  8  9 10\n\n\nCode\nseries.2\n\n\n [1]  1  2  3  4  5  6  7  8  9 10\n\n\nCode\nseries.3\n\n\n [1]  1.0  1.1  1.2  1.3  1.4  1.5  1.6  1.7  1.8  1.9  2.0  2.1  2.2  2.3  2.4\n[16]  2.5  2.6  2.7  2.8  2.9  3.0  3.1  3.2  3.3  3.4  3.5  3.6  3.7  3.8  3.9\n[31]  4.0  4.1  4.2  4.3  4.4  4.5  4.6  4.7  4.8  4.9  5.0  5.1  5.2  5.3  5.4\n[46]  5.5  5.6  5.7  5.8  5.9  6.0  6.1  6.2  6.3  6.4  6.5  6.6  6.7  6.8  6.9\n[61]  7.0  7.1  7.2  7.3  7.4  7.5  7.6  7.7  7.8  7.9  8.0  8.1  8.2  8.3  8.4\n[76]  8.5  8.6  8.7  8.8  8.9  9.0  9.1  9.2  9.3  9.4  9.5  9.6  9.7  9.8  9.9\n[91] 10.0\n\n\nCode\nc(series.2, series.3)\n\n\n  [1]  1.0  2.0  3.0  4.0  5.0  6.0  7.0  8.0  9.0 10.0  1.0  1.1  1.2  1.3  1.4\n [16]  1.5  1.6  1.7  1.8  1.9  2.0  2.1  2.2  2.3  2.4  2.5  2.6  2.7  2.8  2.9\n [31]  3.0  3.1  3.2  3.3  3.4  3.5  3.6  3.7  3.8  3.9  4.0  4.1  4.2  4.3  4.4\n [46]  4.5  4.6  4.7  4.8  4.9  5.0  5.1  5.2  5.3  5.4  5.5  5.6  5.7  5.8  5.9\n [61]  6.0  6.1  6.2  6.3  6.4  6.5  6.6  6.7  6.8  6.9  7.0  7.1  7.2  7.3  7.4\n [76]  7.5  7.6  7.7  7.8  7.9  8.0  8.1  8.2  8.3  8.4  8.5  8.6  8.7  8.8  8.9\n [91]  9.0  9.1  9.2  9.3  9.4  9.5  9.6  9.7  9.8  9.9 10.0\n\n\nCode\nclass(series.3)\n\n\n[1] \"numeric\"\n\n\nCode\ntypeof(series.3)\n\n\n[1] \"double\"\n\n\nCode\nlength(series.3)\n\n\n[1] 91\n\n\n\nMissing Data: R supports missing data in most of the data structures we use, but they can lead to some strange behaviors. Here are a few ways to find missing data:\n\n\n\nCode\nx &lt;- c(\"a\", NA, \"c\", \"d\", NA)\nis.na(x)\n\n\n[1] FALSE  TRUE FALSE FALSE  TRUE\n\n\nCode\nanyNA(x)\n\n\n[1] TRUE\n\n\n\nMatrices: are an extension of the numeric or character vectors. They are not a separate type of object but simply an atomic vector with dimensions; the number of rows and columns. As with atomic vectors, the elements of a matrix must be of the same data. Matrices are the foundation of rasters, which we’ll be discussing frequently throughout the course\n\n\n\nCode\n#matrices are filled columnwise in R\nm &lt;- matrix(1:6, nrow = 2, ncol = 3)\ndim(m)\n\n\n[1] 2 3\n\n\nCode\nx &lt;- 1:3\ny &lt;- 10:12\n\na &lt;- cbind(x, y)\ndim(a)\n\n\n[1] 3 2\n\n\nCode\na[3,1]\n\n\nx \n3 \n\n\nCode\nb &lt;- rbind(x, y)\ndim(b)\n\n\n[1] 2 3\n\n\nCode\nb[1,3]\n\n\nx \n3 \n\n\n\nLists: Lists essentially act like containers in R - they can hold a variety of different data types and structures including more lists. We use lists a lot for functional programming in R where we can apply a function to each element in a list. We’ll see this with extracting values from multiple rasters. We can extract elements of lists usin [] and [[]]\n\n\n\nCode\nx &lt;- list(1, \"a\", TRUE, 1+4i)\nx\n\n\n[[1]]\n[1] 1\n\n[[2]]\n[1] \"a\"\n\n[[3]]\n[1] TRUE\n\n[[4]]\n[1] 1+4i\n\n\nCode\n#adding names\nxlist &lt;- list(a = \"Waldo\", b = 1:10, data = head(mtcars))\nxlist\n\n\n$a\n[1] \"Waldo\"\n\n$b\n [1]  1  2  3  4  5  6  7  8  9 10\n\n$data\n                   mpg cyl disp  hp drat    wt  qsec vs am gear carb\nMazda RX4         21.0   6  160 110 3.90 2.620 16.46  0  1    4    4\nMazda RX4 Wag     21.0   6  160 110 3.90 2.875 17.02  0  1    4    4\nDatsun 710        22.8   4  108  93 3.85 2.320 18.61  1  1    4    1\nHornet 4 Drive    21.4   6  258 110 3.08 3.215 19.44  1  0    3    1\nHornet Sportabout 18.7   8  360 175 3.15 3.440 17.02  0  0    3    2\nValiant           18.1   6  225 105 2.76 3.460 20.22  1  0    3    1\n\n\nCode\nxlist[[1]]\n\n\n[1] \"Waldo\"\n\n\nCode\nxlist[[3]]\n\n\n                   mpg cyl disp  hp drat    wt  qsec vs am gear carb\nMazda RX4         21.0   6  160 110 3.90 2.620 16.46  0  1    4    4\nMazda RX4 Wag     21.0   6  160 110 3.90 2.875 17.02  0  1    4    4\nDatsun 710        22.8   4  108  93 3.85 2.320 18.61  1  1    4    1\nHornet 4 Drive    21.4   6  258 110 3.08 3.215 19.44  1  0    3    1\nHornet Sportabout 18.7   8  360 175 3.15 3.440 17.02  0  0    3    2\nValiant           18.1   6  225 105 2.76 3.460 20.22  1  0    3    1\n\n\nCode\nxlist[[3]][1]\n\n\n                   mpg\nMazda RX4         21.0\nMazda RX4 Wag     21.0\nDatsun 710        22.8\nHornet 4 Drive    21.4\nHornet Sportabout 18.7\nValiant           18.1\n\n\nCode\nxlist[[3]][1,2]\n\n\n[1] 6\n\n\nCode\nxlist[3][1]\n\n\n$data\n                   mpg cyl disp  hp drat    wt  qsec vs am gear carb\nMazda RX4         21.0   6  160 110 3.90 2.620 16.46  0  1    4    4\nMazda RX4 Wag     21.0   6  160 110 3.90 2.875 17.02  0  1    4    4\nDatsun 710        22.8   4  108  93 3.85 2.320 18.61  1  1    4    1\nHornet 4 Drive    21.4   6  258 110 3.08 3.215 19.44  1  0    3    1\nHornet Sportabout 18.7   8  360 175 3.15 3.440 17.02  0  0    3    2\nValiant           18.1   6  225 105 2.76 3.460 20.22  1  0    3    1\n\n\n\nData Frames: data frames resemble that tabular datasets you might be used to in spreadsheet programs and are probably one of the most common types of data in R. A data frame is a special type of list where every element has the same length (but can have different types of data). We’ll be reading in a number of data frames for this first assignment.\n\n\n\nCode\ndat &lt;- data.frame(id = letters[1:10], x = 1:10, y = 11:20)\ndat\n\n\n   id  x  y\n1   a  1 11\n2   b  2 12\n3   c  3 13\n4   d  4 14\n5   e  5 15\n6   f  6 16\n7   g  7 17\n8   h  8 18\n9   i  9 19\n10  j 10 20\n\n\nCode\nis.list(dat)\n\n\n[1] TRUE\n\n\nCode\nclass(dat)\n\n\n[1] \"data.frame\"\n\n\nCode\n#lots of ways to look at data in data frames\nstr(dat) #compact summary of the structure of a dataframe\n\n\n'data.frame':   10 obs. of  3 variables:\n $ id: chr  \"a\" \"b\" \"c\" \"d\" ...\n $ x : int  1 2 3 4 5 6 7 8 9 10\n $ y : int  11 12 13 14 15 16 17 18 19 20\n\n\nCode\nhead(dat) #gives the first 6 rows similar to tail()\n\n\n  id x  y\n1  a 1 11\n2  b 2 12\n3  c 3 13\n4  d 4 14\n5  e 5 15\n6  f 6 16\n\n\nCode\ndim(dat)\n\n\n[1] 10  3\n\n\nCode\ncolnames(dat)\n\n\n[1] \"id\" \"x\"  \"y\" \n\n\nCode\n## accessing elements of a dataframe\ndat[1,3]\n\n\n[1] 11\n\n\nCode\ndat[[\"y\"]]\n\n\n [1] 11 12 13 14 15 16 17 18 19 20\n\n\nCode\ndat$y\n\n\n [1] 11 12 13 14 15 16 17 18 19 20\n\n\n\nTibbles: are similar to data frames, but allow for lists within columns. They are designed for use with the tidyverse (which we’ll explore more in future classes), but the primary reason for introducing them here is because they are the foundation of sf objects which we’ll use frequently in the weeks to come.\n\n\n\nCode\nlibrary(tidyverse)\n\n\n── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──\n✔ dplyr     1.1.4     ✔ readr     2.1.5\n✔ forcats   1.0.0     ✔ stringr   1.4.0\n✔ ggplot2   3.5.1     ✔ tibble    3.2.1\n✔ lubridate 1.9.3     ✔ tidyr     1.3.1\n✔ purrr     1.0.2     \n── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──\n✖ dplyr::filter() masks stats::filter()\n✖ dplyr::lag()    masks stats::lag()\nℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors\n\n\nCode\ndat.tib &lt;- tibble(dat)\nis.list(dat.tib)\n\n\n[1] TRUE\n\n\nCode\nclass(dat.tib)\n\n\n[1] \"tbl_df\"     \"tbl\"        \"data.frame\"\n\n\nCode\n#lots of ways to look at data in data frames\nstr(dat.tib) #compact summary of the structure of a dataframe\n\n\ntibble [10 × 3] (S3: tbl_df/tbl/data.frame)\n $ id: chr [1:10] \"a\" \"b\" \"c\" \"d\" ...\n $ x : int [1:10] 1 2 3 4 5 6 7 8 9 10\n $ y : int [1:10] 11 12 13 14 15 16 17 18 19 20\n\n\nCode\nhead(dat.tib) #gives the first 6 rows similar to tail()\n\n\n# A tibble: 6 × 3\n  id        x     y\n  &lt;chr&gt; &lt;int&gt; &lt;int&gt;\n1 a         1    11\n2 b         2    12\n3 c         3    13\n4 d         4    14\n5 e         5    15\n6 f         6    16\n\n\nCode\ndim(dat.tib)\n\n\n[1] 10  3\n\n\nCode\ncolnames(dat.tib)\n\n\n[1] \"id\" \"x\"  \"y\" \n\n\nCode\n## accessing elements of a dataframe\ndat.tib[1,3]\n\n\n# A tibble: 1 × 1\n      y\n  &lt;int&gt;\n1    11\n\n\nCode\ndat.tib[[\"y\"]]\n\n\n [1] 11 12 13 14 15 16 17 18 19 20\n\n\nCode\ndat.tib$y\n\n\n [1] 11 12 13 14 15 16 17 18 19 20\n\n\nMany of the packages used for spatial operations in R rely on special objects (e.g., sf, SpatRasters) that are combinations of these various elemental data types. That is why we are taking a little time to understand them before jumping into spatial data.",
     "crumbs": [
       "Lessons",
-      "Spatial operations in R",
-      "Vector data"
+      "Getting started",
+      "Data Classes"
     ]
   },
   {
-    "objectID": "lesson/vector_intro.html#conventions-in-sf-and-the-tidyverse",
-    "href": "lesson/vector_intro.html#conventions-in-sf-and-the-tidyverse",
-    "title": "Intro to Vector Data",
-    "section": "Conventions in sf and the tidyverse",
-    "text": "Conventions in sf and the tidyverse\nOne of the benefits of the sf package is that it is designed to interface with the tidyverse suite of packages. One of the appealing parts of working with tidyverse packages is that they share an underlying philosophy, data structure, and grammar. This can make life a lot easier as you move from getting your data into R, constructing a set of covariates (including those derived from spatial data), analyzing, and plotting (or mapping) those data. People have strong opinions about the tidyverse, but I find it to be an (eventually) useful way for people to gain some intuition for working in R. One of the grammatical conventions used in the tidyverse suite of packages is the use _ in function calls (this is known as snake case should you ever need to know that at a dinner party). The _ is typically used to separate the verb in a function call from its predicate. For example, bind_rows() in the dplyr package “binds” (the verb) rows (the predicate) wheras bind_cols() binds columns. For the sf package it’s slightly different in that most of the functions begin with a st_ or sf_ prefix to indicate that the function is designed to work on spatial objects followed by a word (or words) describing what the operation does (e.g., st_centroid() returns a MULTIPOINT object with each point located at the centroid of a polygon). We can classify these functions based on what they are expected to return:\n\nPredicates: evaluate a logical statement asserting that a property is TRUE\nMeasures: return a numeric value with units based on the units of the CRS\nTransformations: create new geometries based on input geometries.\n\nWe can also distinguish these functions based on how many geometries that operate on:\n\nUnary: operate on a single geometry at a time (meaning that if you have a MULTI* object the function works on each geometry individually)\nBinary: operate on pairs of geometries\nn-ary: operate on sets of geometries\n\nWe’ll focus on the unary operators for now, but the binary and n-ary operators will become more important as we move to develop databases for spatial analysis.\n\nUnary predicates\nUnary predicates are helpful ‘checks’ to make sure the object you are working with has the properties you might expect. Are the geometries valid? Is the data projected? Because we are asking a set of TRUE/FALSE questions, these functions are specified as st_is_:\n\n\n\n\n\n\n\npredicate\nasks…\n\n\n\n\nsimple\nis the geometry self-intersecting (i.e., simple)?\n\n\nvalid\nis the geometry valid?\n\n\nempty\nis the geometry column of an object empty?\n\n\nlonglat\ndoes the object have geographic coordinates? (FALSE if coords are projected, NA if no crs)\n\n\nis(geometry, class)\nis the geometry of a particular class?\n\n\n\n\n\nCode\nnc &lt;- st_read(system.file(\"shape/nc.shp\", package=\"sf\"))\n\n\nReading layer `nc' from data source \n  `C:\\Users\\carolynkoehn\\AppData\\Local\\R\\cache\\R\\renv\\cache\\v5\\R-4.3\\x86_64-w64-mingw32\\sf\\1.0-16\\ad57b543f7c3fca05213ba78ff63df9b\\sf\\shape\\nc.shp' \n  using driver `ESRI Shapefile'\nSimple feature collection with 100 features and 14 fields\nGeometry type: MULTIPOLYGON\nDimension:     XY\nBounding box:  xmin: -84.32385 ymin: 33.88199 xmax: -75.45698 ymax: 36.58965\nGeodetic CRS:  NAD27\n\n\nCode\nst_is_longlat(nc)\n\n\n[1] TRUE\n\n\nCode\nst_is_valid(nc)\n\n\n  [1] TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE\n [16] TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE\n [31] TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE\n [46] TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE\n [61] TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE\n [76] TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE\n [91] TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE\n\n\n\n\nUnary measures\nMeasures return a quantity that describes the geometry\n\n\n\n\n\n\n\nmeasure\nreturns\n\n\n\n\ndimension\n0 for points, 1 for linear, 2 for polygons, possibly NA for empty geometries\n\n\narea\nthe area of a geometry\n\n\nlength\nthe length of a linear geometry\n\n\n\ndistance is a binary measure that returns the distance between pairs of geometries either within a single object or between features in multiple objects\n\n\nCode\nhead(st_area(nc))\n\n\nUnits: [m^2]\n[1] 1137107793  610916077 1423145355  694378925 1520366979  967504822\n\n\nCode\nst_distance(nc)[1:5,1:5]\n\n\nUnits: [m]\n         [,1]     [,2]     [,3]      [,4]      [,5]\n[1,]      0.0      0.0  25591.8 439493.26 299049.94\n[2,]      0.0      0.0      0.0 408416.68 268284.09\n[3,]  25591.8      0.0      0.0 366648.94 226461.23\n[4,] 439493.3 408416.7 366648.9      0.00  67066.43\n[5,] 299049.9 268284.1 226461.2  67066.43      0.00\n\n\n\n\nUnary transformers\nUnary transformations work on a per object basis and return a new geometry for each geometry. These are a few of the most common, we’ll encounter a few more as the semester continues.\n\n\n\ntransformer\nreturns a geometry …\n\n\n\n\ncentroid\nof type POINT with the geometry’s centroid\n\n\nbuffer\nthat is this larger (or smaller) than the input geometry, depending on the buffer size\n\n\njitter\nthat was moved in space a certain amount, using a bivariate uniform distribution\n\n\nboundary\nwith the boundary of the input geometry\n\n\nconvex_hull\nthat forms the convex hull of the input geometry\n\n\nline_merge\nafter merging connecting LINESTRING elements of a MULTILINESTRING into longer LINESTRINGs.\n\n\nmake_valid\nthat is valid\n\n\nnode\nwith added nodes to linear geometries at intersections without a node; only works on individual linear geometries\n\n\npoint_on_surface\nwith a (arbitrary) point on a surface\n\n\npolygonize\nof type polygon, created from lines that form a closed ring\n\n\nsegmentize\na (linear) geometry with nodes at a given density or minimal distance\n\n\nsimplify\nsimplified by removing vertices/nodes (lines or polygons)\n\n\nsplit\nthat has been split with a splitting linestring\n\n\ntransform\ntransformed or convert to a new coordinate reference system (last week)\n\n\ncollection_extract\nwith subgeometries from a GEOMETRYCOLLECTION of a particular type\n\n\ncast\nthat is converted to another type\n\n\n\n\n\nCode\nplot(st_geometry(nc))\nplot(st_geometry(st_centroid(nc)), add=TRUE, col='red')\n\n\nWarning: st_centroid assumes attributes are constant over geometries",
-    "crumbs": [
-      "Lessons",
-      "Spatial operations in R",
-      "Vector data"
-    ]
+    "objectID": "slides/05-slides.html#for-today",
+    "href": "slides/05-slides.html#for-today",
+    "title": "Literate Programming, Quarto, and Workflows",
+    "section": "For today",
+    "text": "For today\n\nIntroduce literate programming\nDescribe pseudocode and its utility for designing an analysis\nIntroduce Quarto as a means of documenting your work\nPractice workflow"
   },
   {
-    "objectID": "lesson/vector_intro.html#using-sf-and-the-tidyverse",
-    "href": "lesson/vector_intro.html#using-sf-and-the-tidyverse",
-    "title": "Intro to Vector Data",
-    "section": "Using sf and the tidyverse",
-    "text": "Using sf and the tidyverse\nAs I mentioned, one of the benefits of using the sf package is that commands from the other tidyverse package have defined methods for spatial objects. The dplyr package has a ton of helpful functions for maniputlating data in R. For example, we might select a single row from a shapefile based on the value of its attributes by using the dplyr::filter() command:\n\n\nCode\ndurham.cty &lt;- nc %&gt;% \n  filter(., NAME == \"Durham\")\n## We can also use the bracket approach\ndurham.cty2 &lt;- nc[nc$NAME == \"Durham\",]\n\nplot(st_geometry(nc))\nplot(st_geometry(durham.cty), add=TRUE, col=\"blue\")\n\n\n\n\n\n\n\n\n\nOr perhaps we only want a few of the columns in the dataset (because shapefiles always have lots of extra stuff). We can use dplyr::select() to choose columns by name:\n\n\nCode\nnc.select &lt;- nc %&gt;% \n  select(., c(\"CNTY_ID\", \"NAME\", \"FIPS\"))\nplot(nc.select)\n\n\n\n\n\n\n\n\n\nNotice that the geometries are sticky, this will be important later",
-    "crumbs": [
-      "Lessons",
-      "Spatial operations in R",
-      "Vector data"
-    ]
+    "objectID": "slides/05-slides.html#why-do-we-need-reproducibility",
+    "href": "slides/05-slides.html#why-do-we-need-reproducibility",
+    "title": "Literate Programming, Quarto, and Workflows",
+    "section": "Why Do We Need Reproducibility?",
+    "text": "Why Do We Need Reproducibility?\n\n\n\nNoise!!\nConfirmation bias\nHindsight bias\n\n\n\n\n\nMunafo et al. 2017. Nat Hum Beh."
   },
   {
-    "objectID": "slides/02-slides.html#checking-in",
-    "href": "slides/02-slides.html#checking-in",
-    "title": "Why Geographic Analysis",
-    "section": "Checking in",
-    "text": "Checking in\n\nWhat are some advantages and disadvantages of using R for spatial analysis\nWhat can I clarify about the course?\nHow do you feel about git and github classroom? How can I make that easier for you?"
+    "objectID": "slides/05-slides.html#reproducibility-and-your-code",
+    "href": "slides/05-slides.html#reproducibility-and-your-code",
+    "title": "Literate Programming, Quarto, and Workflows",
+    "section": "Reproducibility and your code",
+    "text": "Reproducibility and your code\n\nScripts: may make your code reproducible (but not your analysis)\nCommenting and formatting can help!\n\n\n```{r}\n#| eval: false\n#|\n## load the packages necessary\nlibrary(tidyverse)\n## read in the data\nlandmarks.csv &lt;- read_csv(\"/Users/mattwilliamson/Google Drive/My Drive/TEACHING/Intro_Spatial_Data_R/Data/2023/assignment01/landmarks_ID.csv\")\n\n## How many in each feature class\ntable(landmarks.csv$MTFCC)\n```"
   },
   {
-    "objectID": "slides/02-slides.html#todays-plan",
-    "href": "slides/02-slides.html#todays-plan",
-    "title": "Why Geographic Analysis",
-    "section": "Today’s Plan",
-    "text": "Today’s Plan\n\n\nWhat can we do with geographic information?\nConceptual challenges\nAnalytical challenges\nCritiques of quantitative geography"
+    "objectID": "slides/05-slides.html#reproducible-scripts",
+    "href": "slides/05-slides.html#reproducible-scripts",
+    "title": "Literate Programming, Quarto, and Workflows",
+    "section": "Reproducible scripts",
+    "text": "Reproducible scripts\n\nComments explain what the code is doing\nOperations are ordered logically\nOnly relevant commands are presented\nUseful object and function names\nScript runs without errors (on your machine and someone else’s)"
   },
   {
-    "objectID": "slides/02-slides.html#what-is-geography",
-    "href": "slides/02-slides.html#what-is-geography",
-    "title": "Why Geographic Analysis",
-    "section": "What is geography",
-    "text": "What is geography\n\nGeo: land, earth, terrain\nGraph: writing, discourse\nTuan: Space (extent) and Place (location)\nAnalysis of the effects of extent and location on events or features"
+    "objectID": "slides/05-slides.html#toward-efficient-reproducible-analyses",
+    "href": "slides/05-slides.html#toward-efficient-reproducible-analyses",
+    "title": "Literate Programming, Quarto, and Workflows",
+    "section": "Toward Efficient Reproducible Analyses",
+    "text": "Toward Efficient Reproducible Analyses\n\nScripts can document what you did, but not why you did it!\nScripts separate your analysis products from your report/manuscript"
   },
   {
-    "objectID": "slides/02-slides.html#five-themes-in-geography",
-    "href": "slides/02-slides.html#five-themes-in-geography",
-    "title": "Why Geographic Analysis",
-    "section": "Five Themes in Geography",
-    "text": "Five Themes in Geography\n\n\n\nLocation\nPlace\nRegion\nMovement\nHuman-Environment Interaction\n\n\n\n\n\nWGBH Educational Foundation"
+    "objectID": "slides/05-slides.html#what-is-literate-programming",
+    "href": "slides/05-slides.html#what-is-literate-programming",
+    "title": "Literate Programming, Quarto, and Workflows",
+    "section": "What is literate programming?",
+    "text": "What is literate programming?\n\nLet us change our traditional attitude to the construction of programs: Instead of imagining that our main task is to instruct a computer what to do, let us concentrate rather on explaining to human beings what we want a computer to do.\n\n— Donald Knuth, CSLI, 1984"
   },
   {
-    "objectID": "slides/02-slides.html#location",
-    "href": "slides/02-slides.html#location",
-    "title": "Why Geographic Analysis",
-    "section": "Location",
-    "text": "Location\nThe place (on Earth) of a particular geographic feature"
+    "objectID": "slides/05-slides.html#what-is-literate-programming-1",
+    "href": "slides/05-slides.html#what-is-literate-programming-1",
+    "title": "Literate Programming, Quarto, and Workflows",
+    "section": "What is literate programming?",
+    "text": "What is literate programming?\n\nDocumentation containing code (not vice versa!)\nDirect connection between code and explanation\nConvey meaning to humans rather than telling computer what to do!\nMultiple “scales” possible"
   },
   {
-    "objectID": "slides/02-slides.html#location-1",
-    "href": "slides/02-slides.html#location-1",
-    "title": "Why Geographic Analysis",
-    "section": "Location",
-    "text": "Location\nThe place (on Earth) of a particular geographic feature"
+    "objectID": "slides/05-slides.html#why-literate-programming",
+    "href": "slides/05-slides.html#why-literate-programming",
+    "title": "Literate Programming, Quarto, and Workflows",
+    "section": "Why literate programming?",
+    "text": "Why literate programming?\n\nYour analysis scripts are computer software\nIntegrate math, figures, code, and narrative in one place\nExplaining something helps you learn it"
   },
   {
-    "objectID": "slides/02-slides.html#place",
-    "href": "slides/02-slides.html#place",
-    "title": "Why Geographic Analysis",
-    "section": "Place",
-    "text": "Place\nWhat is a location like?\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nForest cover map by Robert Simmons via Wikimedia Commons; temp map from GISgeography.com"
+    "objectID": "slides/05-slides.html#planning-an-analysis",
+    "href": "slides/05-slides.html#planning-an-analysis",
+    "title": "Literate Programming, Quarto, and Workflows",
+    "section": "Planning an analysis",
+    "text": "Planning an analysis\n\n\n\nOutline your project\nWrite pseudocode\nIdentify potential packages\nBorrow (and attribute) code from others (including yourself!)"
   },
   {
-    "objectID": "slides/02-slides.html#place-1",
-    "href": "slides/02-slides.html#place-1",
-    "title": "Why Geographic Analysis",
-    "section": "Place",
-    "text": "Place\nWhat is a location like?"
+    "objectID": "slides/05-slides.html#pseudocode-and-literate-programming",
+    "href": "slides/05-slides.html#pseudocode-and-literate-programming",
+    "title": "Literate Programming, Quarto, and Workflows",
+    "section": "Pseudocode and literate programming",
+    "text": "Pseudocode and literate programming\n\nAn informal way of writing the ‘logic’ of your program\nBalance between readability and precision\nAvoid syntactic drift"
   },
   {
-    "objectID": "slides/02-slides.html#region",
-    "href": "slides/02-slides.html#region",
-    "title": "Why Geographic Analysis",
-    "section": "Region",
-    "text": "Region\nHow are different areas similar or different?"
+    "objectID": "slides/05-slides.html#writing-pseudocode",
+    "href": "slides/05-slides.html#writing-pseudocode",
+    "title": "Literate Programming, Quarto, and Workflows",
+    "section": "Writing pseudocode",
+    "text": "Writing pseudocode\n\n\n\nFocus on statements\nMathematical operations\nConditionals\nIteration\nExceptions"
   },
   {
-    "objectID": "slides/02-slides.html#region-1",
-    "href": "slides/02-slides.html#region-1",
-    "title": "Why Geographic Analysis",
-    "section": "Region",
-    "text": "Region\nHow are different areas similar or different?"
+    "objectID": "slides/05-slides.html#pseudocode-1",
+    "href": "slides/05-slides.html#pseudocode-1",
+    "title": "Literate Programming, Quarto, and Workflows",
+    "section": "Pseudocode",
+    "text": "Pseudocode\n\nStart function\nInput information\nLogical test: if TRUE\n  (what to do if TRUE)\nelse\n  (what to do if FALSE)\nEnd function"
   },
   {
-    "objectID": "slides/02-slides.html#movement",
-    "href": "slides/02-slides.html#movement",
-    "title": "Why Geographic Analysis",
-    "section": "Movement",
-    "text": "Movement\nHow do genes, individuals, populations, ideas, goods, etc traverse the landscape."
+    "objectID": "slides/05-slides.html#what-is-quarto",
+    "href": "slides/05-slides.html#what-is-quarto",
+    "title": "Literate Programming, Quarto, and Workflows",
+    "section": "What is Quarto?",
+    "text": "What is Quarto?\n\nA multi-language platform for developing reproducible documents\nA ‘lab notebook’ for your analyses\nAllows transparent, reproducible scientific reports and presentations"
   },
   {
-    "objectID": "slides/02-slides.html#movement-1",
-    "href": "slides/02-slides.html#movement-1",
-    "title": "Why Geographic Analysis",
-    "section": "Movement",
-    "text": "Movement\nHow do genes, individuals, populations, ideas, goods, etc traverse the landscape.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nBoth maps courtesy of High Country News"
+    "objectID": "slides/05-slides.html#key-components",
+    "href": "slides/05-slides.html#key-components",
+    "title": "Literate Programming, Quarto, and Workflows",
+    "section": "Key components",
+    "text": "Key components\n\nMetadata and global options: YAML\nText, figures, and tables: Markdown and LaTeX\nCode: knitr (or jupyter if you’re into that sort of thing)"
   },
   {
-    "objectID": "slides/02-slides.html#human-environment-interactions",
-    "href": "slides/02-slides.html#human-environment-interactions",
-    "title": "Why Geographic Analysis",
-    "section": "Human-Environment Interactions",
-    "text": "Human-Environment Interactions\nHow do people relate to and change the physical world to meet their needs?\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSmoke map courtesy of Capital Public Radio; Nightlights courtesy of NASA Earth Observatory."
+    "objectID": "slides/05-slides.html#yaml---yet-another-markup-language",
+    "href": "slides/05-slides.html#yaml---yet-another-markup-language",
+    "title": "Literate Programming, Quarto, and Workflows",
+    "section": "YAML - Yet Another Markup Language",
+    "text": "YAML - Yet Another Markup Language\n\nAllows you to set (or change) output format\nProvide options that apply to the entire document\nSpacing matters!"
   },
   {
-    "objectID": "slides/02-slides.html#description",
-    "href": "slides/02-slides.html#description",
-    "title": "Why Geographic Analysis",
-    "section": "Description",
-    "text": "Description\n\n\n\nCoordinates\nDistances\nNeighbors\nSummary statistics\n\n\n\n\n\n\ncourtesy of innovative GIS"
+    "objectID": "slides/05-slides.html#formatting-text",
+    "href": "slides/05-slides.html#formatting-text",
+    "title": "Literate Programming, Quarto, and Workflows",
+    "section": "Formatting Text",
+    "text": "Formatting Text\n\nBasic formatting via Markdown\nFancier options using Divs and spans via Pandoc\nFenced Divs start and end with ::: (can be any number &gt;3 but must match)"
   },
   {
-    "objectID": "slides/02-slides.html#description-1",
-    "href": "slides/02-slides.html#description-1",
-    "title": "Why Geographic Analysis",
-    "section": "Description",
-    "text": "Description\n\n\n\nRange Maps\nHotspots\nIndices"
+    "objectID": "slides/05-slides.html#adding-code-chunks",
+    "href": "slides/05-slides.html#adding-code-chunks",
+    "title": "Literate Programming, Quarto, and Workflows",
+    "section": "Adding Code Chunks",
+    "text": "Adding Code Chunks\n\nUse 3x ``` on each end\nInclude the engine {r} (or python or Julia)\nInclude options beneath the “fence” using a hashpipe (#|)"
   },
   {
-    "objectID": "slides/02-slides.html#explanation-and-inference",
-    "href": "slides/02-slides.html#explanation-and-inference",
-    "title": "Why Geographic Analysis",
-    "section": "Explanation and Inference",
-    "text": "Explanation and Inference\n\nCognitive Description: collection ordering and classification of data\nCause and Effect: design-based or model-based testing of the factors that give rise to geographic distributions\nSystems Analysis: describes the entire complex set of interactions that structure an activity"
+    "objectID": "slides/05-slides.html#additional-considerations",
+    "href": "slides/05-slides.html#additional-considerations",
+    "title": "Literate Programming, Quarto, and Workflows",
+    "section": "Additional considerations",
+    "text": "Additional considerations\n\nFile locations and Quarto\nCaching for slow operations\nModularizing code and functional programming"
   },
   {
-    "objectID": "slides/02-slides.html#prediction",
-    "href": "slides/02-slides.html#prediction",
-    "title": "Why Geographic Analysis",
-    "section": "Prediction",
-    "text": "Prediction\n\n\n\n\n\nExtend description or explanation into unmeasured space\nStationarity: the rules governing a process do not drift over space-time"
-  },
-  {
-    "objectID": "slides/02-slides.html#scale",
-    "href": "slides/02-slides.html#scale",
-    "title": "Why Geographic Analysis",
-    "section": "Scale",
-    "text": "Scale\n\nWhat do we even mean?\n\n\n\n\n\n\nGrain: the smallest unit of measurement\nExtent: the areal coverage of the measurement\n\n\n\n\nFrom Manson 2008"
-  },
-  {
-    "objectID": "slides/02-slides.html#scale-1",
-    "href": "slides/02-slides.html#scale-1",
-    "title": "Why Geographic Analysis",
-    "section": "Scale",
-    "text": "Scale\n\nEven if it exists, how do we know we are measuring at the right scale?"
-  },
-  {
-    "objectID": "slides/02-slides.html#fallacies",
-    "href": "slides/02-slides.html#fallacies",
-    "title": "Why Geographic Analysis",
-    "section": "Fallacies",
-    "text": "Fallacies\n\n\n\nLocational Fallacy: Error due to the spatial characterization chosen for elements of study\nAtomic Fallacy: Applying conclusions from individuals to entire spatial units\nEcological Fallacy: Applying conclusions from aggregated information to individuals"
-  },
-  {
-    "objectID": "slides/02-slides.html#measurement-error-and-mismatch",
-    "href": "slides/02-slides.html#measurement-error-and-mismatch",
-    "title": "Why Geographic Analysis",
-    "section": "Measurement Error and Mismatch",
-    "text": "Measurement Error and Mismatch"
-  },
-  {
-    "objectID": "slides/02-slides.html#spatial-autocorrelation",
-    "href": "slides/02-slides.html#spatial-autocorrelation",
-    "title": "Why Geographic Analysis",
-    "section": "Spatial Autocorrelation",
-    "text": "Spatial Autocorrelation\n\nFrom Manuel Gimond"
-  },
-  {
-    "objectID": "slides/02-slides.html#stationarity",
-    "href": "slides/02-slides.html#stationarity",
-    "title": "Why Geographic Analysis",
-    "section": "Stationarity",
-    "text": "Stationarity\nThe rules governing a process do not drift over space-time\n\n\n\nFirst Order effects: any event has an equal probability of occurring in a location\nSecond Order effects: the location of one event is independent of the other events\n\n\n\n\n\nFrom Manuel Gimond"
-  },
-  {
-    "objectID": "slides/02-slides.html#not-all-geography-needs-to-be-quantitative",
-    "href": "slides/02-slides.html#not-all-geography-needs-to-be-quantitative",
-    "title": "Why Geographic Analysis",
-    "section": "Not all geography needs to be quantitative",
-    "text": "Not all geography needs to be quantitative\n\nAbstraction removes the interesting part\nWhat “is” may require assumptions we don’t want to accept\nWholly dependent on the military-industrial complex"
+    "objectID": "schedule.html",
+    "href": "schedule.html",
+    "title": "Schedule",
+    "section": "",
+    "text": "Here’s your roadmap for the semester!\n\nContent (): This page contains the readings, slides, and recorded lectures for the week. Read and watch these before our in-person class.\nLesson (): This page contains additional annotated R code and other supplementary information that you can use as a reference for your assignments and project. This is only a reference page—you don’t have to necessarily do anything here, but it will be helpful as you work on your assignments.\nExample (): This page the scripts that we work on in class as a reminder of some of the live-coding exercises. These are provided as a reference to help you link your notes to the syntax we use in class.\nAssignment (): This page contains the instructions for each assignment. Assignments are due by 11:59 PM on the day they’re listed.\n\n\n\n\n\n\n\nSubscribe!\n\n\n\nYou can subscribe to this calendar URL in Outlook, Google Calendar, or Apple Calendar:\n\n\n\n Download\n\n\n\n\n\n\n\n\n\n\n\nGetting started\n\n\n\n\n\n\nTitle\n\n\nContent\n\n\nLesson\n\n\nExample\n\n\nAssignment\n\n\n\n\n\n\nAugust 19(Session 1)\n\n\nIntroduction to the course\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nAugust 21(Session 2)\n\n\nWhy Geographic Analysis\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nAugust 23\n\n\n Self-Evaluation 1 due  (submit by 11:59 PM)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nAugust 26(Session 3)\n\n\nIntroduction to Spatial Data\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nAugust 28(Session 4)\n\n\nIntroduction to Spatial Data with R\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nAugust 29\n\n\n Homework 1  (submit by 11:59 PM)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSeptember 2\n\n\nNo Class(Labor Day)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSeptember 4(Session 5)\n\n\nLiterate Programming, Quarto, Workflows\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSeptember 5\n\n\n Homework 2  (submit by 11:59 PM)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSpatial Data Operations in R\n\n\n\n\n\n\nTitle\n\n\nContent\n\n\nLesson\n\n\nExample\n\n\nAssignment\n\n\n\n\n\n\nSeptember 9(Session 6)\n\n\nAreal Data: Coordinates and Geometries\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSeptember 11(Session 7)\n\n\nAreal Data: Vector Data\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSeptember 12\n\n\n Homework 3\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSeptember 16(Session 8)\n\n\nAreal Data: Rasters\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSeptember 18(Session 9)\n\n\nMapping Geographic Data\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSeptember 19\n\n\n Homework 4\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSeptember 23(Session 10)\n\n\nOperations With Vectors I\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSeptember 25(Session 11)\n\n\nOperations With Vectors II\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSeptember 26\n\n\n Assignment Revision 1  (submit by 11:59 PM)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSeptember 30(Session 12)\n\n\nOperations With Rasters I\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nOctober 2(Session 13)\n\n\nOperations With Rasters II\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nOctober 3\n\n\n Homework 6  (submit by 11:59 PM)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nOctober 7(Session 14)\n\n\nBuilding Spatial Databases with Attributes\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nOctober 9(Session 15)\n\n\nBuilding Spatial Databases with Location\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nOctober 14(Session 16)\n\n\nCombining Vectors and Rasters\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nOctober 15\n\n\n Homework 7  (submit by 11:59 PM)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nStatistical Workflows for Spatial Data\n\n\n\n\n\n\nTitle\n\n\nContent\n\n\nLesson\n\n\nExample\n\n\nAssignment\n\n\n\n\n\n\nOctober 16(Session 17)\n\n\nPoint Patterns\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nOctober 21(Session 18)\n\n\nInterpolation\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nOctober 23(Session 19)\n\n\nProximity and Areal Data\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nOctober 24\n\n\n Assignment Revision 2  (submit by 11:59 PM)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nOctober 28(Session 20)\n\n\nSpatial Autocorrelation\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nOctober 30(Session 21)\n\n\nStatistical Modelling I\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nOctober 31\n\n\n Homework 8  (submit by 11:59 PM)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nNovember 4(Session 22)\n\n\nStatistical Modelling II\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nNovember 6(Session 23)\n\n\nStatistical Modelling III\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nNovember 7\n\n\n Homework 9  (submit by 11:59 PM)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nNovember 11(Session 24)\n\n\nStatistical Modelling Review\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nNovember 13(Session 25)\n\n\nData Visualization and Maps I\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nNovember 14\n\n\n Assignment Revision 3  (submit by 11:59 PM)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nVisualizing Spatial Data\n\n\n\n\n\n\nTitle\n\n\nContent\n\n\nLesson\n\n\nExample\n\n\nAssignment\n\n\n\n\n\n\nNovember 18(Session 26)\n\n\nData Visualization and Maps II\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nNovember 20(Session 27)\n\n\nIntroduction to Interactive Maps\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nNovember 21\n\n\n Homework 10  (submit by 11:59 PM)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nNovember 25\n\n\nNo Class(Fall Break)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nNovember 27\n\n\nNo Class(Fall Break)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nDecember 2(Session 28)\n\n\nInteractive Dashboards\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nWrapup\n\n\n\n\n\n\nTitle\n\n\nContent\n\n\nLesson\n\n\nExample\n\n\nAssignment\n\n\n\n\n\n\nDecember 4(Session 29)\n\n\nConclusion\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nDecember 5\n\n\n Final Project Draft  (submit by 11:59 PM)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nDecember 11\n\n\nFinal Project Workday(optional)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nDecember 12\n\n\n Final Project Due  (submit by 11:59 PM)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nDecember 13\n\n\n Final Self-Evaluation Due  (submit by 11:59 PM)"
   },
   {
     "objectID": "content/27-content.html",
@@ -5006,257 +5019,364 @@
     ]
   },
   {
-    "objectID": "schedule.html",
-    "href": "schedule.html",
-    "title": "Schedule",
+    "objectID": "content/28-content.html",
+    "href": "content/28-content.html",
+    "title": "Interactive Dashboards",
     "section": "",
-    "text": "Here’s your roadmap for the semester!\n\nContent (): This page contains the readings, slides, and recorded lectures for the week. Read and watch these before our in-person class.\nLesson (): This page contains additional annotated R code and other supplementary information that you can use as a reference for your assignments and project. This is only a reference page—you don’t have to necessarily do anything here, but it will be helpful as you work on your assignments.\nExample (): This page the scripts that we work on in class as a reminder of some of the live-coding exercises. These are provided as a reference to help you link your notes to the syntax we use in class.\nAssignment (): This page contains the instructions for each assignment. Assignments are due by 11:59 PM on the day they’re listed.\n\n\n\n\n\n\n\nSubscribe!\n\n\n\nYou can subscribe to this calendar URL in Outlook, Google Calendar, or Apple Calendar:\n\n\n\n Download\n\n\n\n\n\n\n\n\n\n\n\nGetting started\n\n\n\n\n\n\nTitle\n\n\nContent\n\n\nLesson\n\n\nExample\n\n\nAssignment\n\n\n\n\n\n\nAugust 19(Session 1)\n\n\nIntroduction to the course\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nAugust 21(Session 2)\n\n\nWhy Geographic Analysis\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nAugust 23\n\n\n Self-Evaluation 1 due  (submit by 11:59 PM)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nAugust 26(Session 3)\n\n\nIntroduction to Spatial Data\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nAugust 28(Session 4)\n\n\nIntroduction to Spatial Data with R\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nAugust 29\n\n\n Homework 1  (submit by 11:59 PM)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSeptember 2\n\n\nNo Class(Labor Day)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSeptember 4(Session 5)\n\n\nLiterate Programming, Quarto, Workflows\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSeptember 5\n\n\n Homework 2  (submit by 11:59 PM)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSpatial Data Operations in R\n\n\n\n\n\n\nTitle\n\n\nContent\n\n\nLesson\n\n\nExample\n\n\nAssignment\n\n\n\n\n\n\nSeptember 9(Session 6)\n\n\nAreal Data: Coordinates and Geometries\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSeptember 11(Session 7)\n\n\nAreal Data: Vector Data\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSeptember 12\n\n\n Homework 3\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSeptember 16(Session 8)\n\n\nAreal Data: Rasters\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSeptember 18(Session 9)\n\n\nMapping Geographic Data\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSeptember 19\n\n\n Homework 4\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSeptember 23(Session 10)\n\n\nOperations With Vectors I\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSeptember 25(Session 11)\n\n\nOperations With Vectors II\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSeptember 26\n\n\n Assignment Revision 1  (submit by 11:59 PM)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSeptember 30(Session 12)\n\n\nOperations With Rasters I\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nOctober 2(Session 13)\n\n\nOperations With Rasters II\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nOctober 3\n\n\n Homework 6  (submit by 11:59 PM)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nOctober 7(Session 14)\n\n\nBuilding Spatial Databases with Attributes\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nOctober 9(Session 15)\n\n\nBuilding Spatial Databases with Location\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nOctober 14(Session 16)\n\n\nCombining Vectors and Rasters\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nOctober 15\n\n\n Homework 7  (submit by 11:59 PM)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nStatistical Workflows for Spatial Data\n\n\n\n\n\n\nTitle\n\n\nContent\n\n\nLesson\n\n\nExample\n\n\nAssignment\n\n\n\n\n\n\nOctober 16(Session 17)\n\n\nPoint Patterns\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nOctober 21(Session 18)\n\n\nInterpolation\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nOctober 23(Session 19)\n\n\nProximity and Areal Data\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nOctober 24\n\n\n Assignment Revision 2  (submit by 11:59 PM)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nOctober 28(Session 20)\n\n\nSpatial Autocorrelation\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nOctober 30(Session 21)\n\n\nStatistical Modelling I\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nOctober 31\n\n\n Homework 8  (submit by 11:59 PM)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nNovember 4(Session 22)\n\n\nStatistical Modelling II\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nNovember 6(Session 23)\n\n\nStatistical Modelling III\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nNovember 7\n\n\n Homework 9  (submit by 11:59 PM)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nNovember 11(Session 24)\n\n\nStatistical Modelling Review\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nNovember 13(Session 25)\n\n\nData Visualization and Maps I\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nNovember 14\n\n\n Assignment Revision 3  (submit by 11:59 PM)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nVisualizing Spatial Data\n\n\n\n\n\n\nTitle\n\n\nContent\n\n\nLesson\n\n\nExample\n\n\nAssignment\n\n\n\n\n\n\nNovember 18(Session 26)\n\n\nData Visualization and Maps II\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nNovember 20(Session 27)\n\n\nIntroduction to Interactive Maps\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nNovember 21\n\n\n Homework 10  (submit by 11:59 PM)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nNovember 25\n\n\nNo Class(Fall Break)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nNovember 27\n\n\nNo Class(Fall Break)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nDecember 2(Session 28)\n\n\nInteractive Maps and Apps with R Shiny\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nWrapup\n\n\n\n\n\n\nTitle\n\n\nContent\n\n\nLesson\n\n\nExample\n\n\nAssignment\n\n\n\n\n\n\nDecember 4(Session 29)\n\n\nConclusion\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nDecember 5\n\n\n Final Project Draft  (submit by 11:59 PM)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nDecember 11\n\n\nFinal Project Workday(optional)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nDecember 12\n\n\n Final Project Due  (submit by 11:59 PM)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nDecember 13\n\n\n Final Self-Evaluation Due  (submit by 11:59 PM)"
+    "text": "Now that you’ve had a chance to practice building a few maps and learning some of the core ideas behind the Grammar of Graphics, we can extend those ideas into the development of interactive webmaps and more expansive data visualizations that can be served on the internet and accessed by collaborators and members of the public. Like the previous unit on static maps, this could be a course unto itself, but we should be able to introduce you to enough ideas to get started.",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "28: Interactive Dashboards"
+    ]
   },
   {
-    "objectID": "slides/05-slides.html#for-today",
-    "href": "slides/05-slides.html#for-today",
-    "title": "Literate Programming, Quarto, and Workflows",
-    "section": "For today",
-    "text": "For today\n\nIntroduce literate programming\nDescribe pseudocode and its utility for designing an analysis\nIntroduce Quarto as a means of documenting your work\nPractice workflow"
+    "objectID": "content/28-content.html#resources",
+    "href": "content/28-content.html#resources",
+    "title": "Interactive Dashboards",
+    "section": "Resources",
+    "text": "Resources\n\n The flexdashboard vignette has a simple working example of an interactive dashboard and links to other examples with source code.",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "28: Interactive Dashboards"
+    ]
   },
   {
-    "objectID": "slides/05-slides.html#why-do-we-need-reproducibility",
-    "href": "slides/05-slides.html#why-do-we-need-reproducibility",
-    "title": "Literate Programming, Quarto, and Workflows",
-    "section": "Why Do We Need Reproducibility?",
-    "text": "Why Do We Need Reproducibility?\n\n\n\nNoise!!\nConfirmation bias\nHindsight bias\n\n\n\n\n\nMunafo et al. 2017. Nat Hum Beh."
+    "objectID": "content/28-content.html#objectives",
+    "href": "content/28-content.html#objectives",
+    "title": "Interactive Dashboards",
+    "section": "Objectives",
+    "text": "Objectives\nBy the end of today you should be able to:\n\nList the necessary elements of an interactive dashboard\nOutline the structure of code needed to build a flexdashboard\nBuild a simple interactive dashboard with spatial data\n\n\n View all slides in new window  Download PDF of all slides",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "28: Interactive Dashboards"
+    ]
   },
   {
-    "objectID": "slides/05-slides.html#reproducibility-and-your-code",
-    "href": "slides/05-slides.html#reproducibility-and-your-code",
-    "title": "Literate Programming, Quarto, and Workflows",
-    "section": "Reproducibility and your code",
-    "text": "Reproducibility and your code\n\nScripts: may make your code reproducible (but not your analysis)\nCommenting and formatting can help!\n\n\n```{r}\n#| eval: false\n#|\n## load the packages necessary\nlibrary(tidyverse)\n## read in the data\nlandmarks.csv &lt;- read_csv(\"/Users/mattwilliamson/Google Drive/My Drive/TEACHING/Intro_Spatial_Data_R/Data/2023/assignment01/landmarks_ID.csv\")\n\n## How many in each feature class\ntable(landmarks.csv$MTFCC)\n```"
+    "objectID": "slides/02-slides.html#checking-in",
+    "href": "slides/02-slides.html#checking-in",
+    "title": "Why Geographic Analysis",
+    "section": "Checking in",
+    "text": "Checking in\n\nWhat are some advantages and disadvantages of using R for spatial analysis\nWhat can I clarify about the course?\nHow do you feel about git and github classroom? How can I make that easier for you?"
   },
   {
-    "objectID": "slides/05-slides.html#reproducible-scripts",
-    "href": "slides/05-slides.html#reproducible-scripts",
-    "title": "Literate Programming, Quarto, and Workflows",
-    "section": "Reproducible scripts",
-    "text": "Reproducible scripts\n\nComments explain what the code is doing\nOperations are ordered logically\nOnly relevant commands are presented\nUseful object and function names\nScript runs without errors (on your machine and someone else’s)"
+    "objectID": "slides/02-slides.html#todays-plan",
+    "href": "slides/02-slides.html#todays-plan",
+    "title": "Why Geographic Analysis",
+    "section": "Today’s Plan",
+    "text": "Today’s Plan\n\n\nWhat can we do with geographic information?\nConceptual challenges\nAnalytical challenges\nCritiques of quantitative geography"
   },
   {
-    "objectID": "slides/05-slides.html#toward-efficient-reproducible-analyses",
-    "href": "slides/05-slides.html#toward-efficient-reproducible-analyses",
-    "title": "Literate Programming, Quarto, and Workflows",
-    "section": "Toward Efficient Reproducible Analyses",
-    "text": "Toward Efficient Reproducible Analyses\n\nScripts can document what you did, but not why you did it!\nScripts separate your analysis products from your report/manuscript"
+    "objectID": "slides/02-slides.html#what-is-geography",
+    "href": "slides/02-slides.html#what-is-geography",
+    "title": "Why Geographic Analysis",
+    "section": "What is geography",
+    "text": "What is geography\n\nGeo: land, earth, terrain\nGraph: writing, discourse\nTuan: Space (extent) and Place (location)\nAnalysis of the effects of extent and location on events or features"
   },
   {
-    "objectID": "slides/05-slides.html#what-is-literate-programming",
-    "href": "slides/05-slides.html#what-is-literate-programming",
-    "title": "Literate Programming, Quarto, and Workflows",
-    "section": "What is literate programming?",
-    "text": "What is literate programming?\n\nLet us change our traditional attitude to the construction of programs: Instead of imagining that our main task is to instruct a computer what to do, let us concentrate rather on explaining to human beings what we want a computer to do.\n\n— Donald Knuth, CSLI, 1984"
+    "objectID": "slides/02-slides.html#five-themes-in-geography",
+    "href": "slides/02-slides.html#five-themes-in-geography",
+    "title": "Why Geographic Analysis",
+    "section": "Five Themes in Geography",
+    "text": "Five Themes in Geography\n\n\n\nLocation\nPlace\nRegion\nMovement\nHuman-Environment Interaction\n\n\n\n\n\nWGBH Educational Foundation"
   },
   {
-    "objectID": "slides/05-slides.html#what-is-literate-programming-1",
-    "href": "slides/05-slides.html#what-is-literate-programming-1",
-    "title": "Literate Programming, Quarto, and Workflows",
-    "section": "What is literate programming?",
-    "text": "What is literate programming?\n\nDocumentation containing code (not vice versa!)\nDirect connection between code and explanation\nConvey meaning to humans rather than telling computer what to do!\nMultiple “scales” possible"
+    "objectID": "slides/02-slides.html#location",
+    "href": "slides/02-slides.html#location",
+    "title": "Why Geographic Analysis",
+    "section": "Location",
+    "text": "Location\nThe place (on Earth) of a particular geographic feature"
   },
   {
-    "objectID": "slides/05-slides.html#why-literate-programming",
-    "href": "slides/05-slides.html#why-literate-programming",
-    "title": "Literate Programming, Quarto, and Workflows",
-    "section": "Why literate programming?",
-    "text": "Why literate programming?\n\nYour analysis scripts are computer software\nIntegrate math, figures, code, and narrative in one place\nExplaining something helps you learn it"
+    "objectID": "slides/02-slides.html#location-1",
+    "href": "slides/02-slides.html#location-1",
+    "title": "Why Geographic Analysis",
+    "section": "Location",
+    "text": "Location\nThe place (on Earth) of a particular geographic feature"
   },
   {
-    "objectID": "slides/05-slides.html#planning-an-analysis",
-    "href": "slides/05-slides.html#planning-an-analysis",
-    "title": "Literate Programming, Quarto, and Workflows",
-    "section": "Planning an analysis",
-    "text": "Planning an analysis\n\n\n\nOutline your project\nWrite pseudocode\nIdentify potential packages\nBorrow (and attribute) code from others (including yourself!)"
+    "objectID": "slides/02-slides.html#place",
+    "href": "slides/02-slides.html#place",
+    "title": "Why Geographic Analysis",
+    "section": "Place",
+    "text": "Place\nWhat is a location like?\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nForest cover map by Robert Simmons via Wikimedia Commons; temp map from GISgeography.com"
   },
   {
-    "objectID": "slides/05-slides.html#pseudocode-and-literate-programming",
-    "href": "slides/05-slides.html#pseudocode-and-literate-programming",
-    "title": "Literate Programming, Quarto, and Workflows",
-    "section": "Pseudocode and literate programming",
-    "text": "Pseudocode and literate programming\n\nAn informal way of writing the ‘logic’ of your program\nBalance between readability and precision\nAvoid syntactic drift"
+    "objectID": "slides/02-slides.html#place-1",
+    "href": "slides/02-slides.html#place-1",
+    "title": "Why Geographic Analysis",
+    "section": "Place",
+    "text": "Place\nWhat is a location like?"
   },
   {
-    "objectID": "slides/05-slides.html#writing-pseudocode",
-    "href": "slides/05-slides.html#writing-pseudocode",
-    "title": "Literate Programming, Quarto, and Workflows",
-    "section": "Writing pseudocode",
-    "text": "Writing pseudocode\n\n\n\nFocus on statements\nMathematical operations\nConditionals\nIteration\nExceptions"
+    "objectID": "slides/02-slides.html#region",
+    "href": "slides/02-slides.html#region",
+    "title": "Why Geographic Analysis",
+    "section": "Region",
+    "text": "Region\nHow are different areas similar or different?"
   },
   {
-    "objectID": "slides/05-slides.html#pseudocode-1",
-    "href": "slides/05-slides.html#pseudocode-1",
-    "title": "Literate Programming, Quarto, and Workflows",
-    "section": "Pseudocode",
-    "text": "Pseudocode\n\nStart function\nInput information\nLogical test: if TRUE\n  (what to do if TRUE)\nelse\n  (what to do if FALSE)\nEnd function"
+    "objectID": "slides/02-slides.html#region-1",
+    "href": "slides/02-slides.html#region-1",
+    "title": "Why Geographic Analysis",
+    "section": "Region",
+    "text": "Region\nHow are different areas similar or different?"
   },
   {
-    "objectID": "slides/05-slides.html#what-is-quarto",
-    "href": "slides/05-slides.html#what-is-quarto",
-    "title": "Literate Programming, Quarto, and Workflows",
-    "section": "What is Quarto?",
-    "text": "What is Quarto?\n\nA multi-language platform for developing reproducible documents\nA ‘lab notebook’ for your analyses\nAllows transparent, reproducible scientific reports and presentations"
+    "objectID": "slides/02-slides.html#movement",
+    "href": "slides/02-slides.html#movement",
+    "title": "Why Geographic Analysis",
+    "section": "Movement",
+    "text": "Movement\nHow do genes, individuals, populations, ideas, goods, etc traverse the landscape."
   },
   {
-    "objectID": "slides/05-slides.html#key-components",
-    "href": "slides/05-slides.html#key-components",
-    "title": "Literate Programming, Quarto, and Workflows",
-    "section": "Key components",
-    "text": "Key components\n\nMetadata and global options: YAML\nText, figures, and tables: Markdown and LaTeX\nCode: knitr (or jupyter if you’re into that sort of thing)"
+    "objectID": "slides/02-slides.html#movement-1",
+    "href": "slides/02-slides.html#movement-1",
+    "title": "Why Geographic Analysis",
+    "section": "Movement",
+    "text": "Movement\nHow do genes, individuals, populations, ideas, goods, etc traverse the landscape.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nBoth maps courtesy of High Country News"
   },
   {
-    "objectID": "slides/05-slides.html#yaml---yet-another-markup-language",
-    "href": "slides/05-slides.html#yaml---yet-another-markup-language",
-    "title": "Literate Programming, Quarto, and Workflows",
-    "section": "YAML - Yet Another Markup Language",
-    "text": "YAML - Yet Another Markup Language\n\nAllows you to set (or change) output format\nProvide options that apply to the entire document\nSpacing matters!"
+    "objectID": "slides/02-slides.html#human-environment-interactions",
+    "href": "slides/02-slides.html#human-environment-interactions",
+    "title": "Why Geographic Analysis",
+    "section": "Human-Environment Interactions",
+    "text": "Human-Environment Interactions\nHow do people relate to and change the physical world to meet their needs?\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSmoke map courtesy of Capital Public Radio; Nightlights courtesy of NASA Earth Observatory."
   },
   {
-    "objectID": "slides/05-slides.html#formatting-text",
-    "href": "slides/05-slides.html#formatting-text",
-    "title": "Literate Programming, Quarto, and Workflows",
-    "section": "Formatting Text",
-    "text": "Formatting Text\n\nBasic formatting via Markdown\nFancier options using Divs and spans via Pandoc\nFenced Divs start and end with ::: (can be any number &gt;3 but must match)"
+    "objectID": "slides/02-slides.html#description",
+    "href": "slides/02-slides.html#description",
+    "title": "Why Geographic Analysis",
+    "section": "Description",
+    "text": "Description\n\n\n\nCoordinates\nDistances\nNeighbors\nSummary statistics\n\n\n\n\n\n\ncourtesy of innovative GIS"
   },
   {
-    "objectID": "slides/05-slides.html#adding-code-chunks",
-    "href": "slides/05-slides.html#adding-code-chunks",
-    "title": "Literate Programming, Quarto, and Workflows",
-    "section": "Adding Code Chunks",
-    "text": "Adding Code Chunks\n\nUse 3x ``` on each end\nInclude the engine {r} (or python or Julia)\nInclude options beneath the “fence” using a hashpipe (#|)"
+    "objectID": "slides/02-slides.html#description-1",
+    "href": "slides/02-slides.html#description-1",
+    "title": "Why Geographic Analysis",
+    "section": "Description",
+    "text": "Description\n\n\n\nRange Maps\nHotspots\nIndices"
   },
   {
-    "objectID": "slides/05-slides.html#additional-considerations",
-    "href": "slides/05-slides.html#additional-considerations",
-    "title": "Literate Programming, Quarto, and Workflows",
-    "section": "Additional considerations",
-    "text": "Additional considerations\n\nFile locations and Quarto\nCaching for slow operations\nModularizing code and functional programming"
+    "objectID": "slides/02-slides.html#explanation-and-inference",
+    "href": "slides/02-slides.html#explanation-and-inference",
+    "title": "Why Geographic Analysis",
+    "section": "Explanation and Inference",
+    "text": "Explanation and Inference\n\nCognitive Description: collection ordering and classification of data\nCause and Effect: design-based or model-based testing of the factors that give rise to geographic distributions\nSystems Analysis: describes the entire complex set of interactions that structure an activity"
   },
   {
-    "objectID": "lesson/dataclasses.html",
-    "href": "lesson/dataclasses.html",
-    "title": "Data Structures",
+    "objectID": "slides/02-slides.html#prediction",
+    "href": "slides/02-slides.html#prediction",
+    "title": "Why Geographic Analysis",
+    "section": "Prediction",
+    "text": "Prediction\n\n\n\n\n\nExtend description or explanation into unmeasured space\nStationarity: the rules governing a process do not drift over space-time"
+  },
+  {
+    "objectID": "slides/02-slides.html#scale",
+    "href": "slides/02-slides.html#scale",
+    "title": "Why Geographic Analysis",
+    "section": "Scale",
+    "text": "Scale\n\nWhat do we even mean?\n\n\n\n\n\n\nGrain: the smallest unit of measurement\nExtent: the areal coverage of the measurement\n\n\n\n\nFrom Manson 2008"
+  },
+  {
+    "objectID": "slides/02-slides.html#scale-1",
+    "href": "slides/02-slides.html#scale-1",
+    "title": "Why Geographic Analysis",
+    "section": "Scale",
+    "text": "Scale\n\nEven if it exists, how do we know we are measuring at the right scale?"
+  },
+  {
+    "objectID": "slides/02-slides.html#fallacies",
+    "href": "slides/02-slides.html#fallacies",
+    "title": "Why Geographic Analysis",
+    "section": "Fallacies",
+    "text": "Fallacies\n\n\n\nLocational Fallacy: Error due to the spatial characterization chosen for elements of study\nAtomic Fallacy: Applying conclusions from individuals to entire spatial units\nEcological Fallacy: Applying conclusions from aggregated information to individuals"
+  },
+  {
+    "objectID": "slides/02-slides.html#measurement-error-and-mismatch",
+    "href": "slides/02-slides.html#measurement-error-and-mismatch",
+    "title": "Why Geographic Analysis",
+    "section": "Measurement Error and Mismatch",
+    "text": "Measurement Error and Mismatch"
+  },
+  {
+    "objectID": "slides/02-slides.html#spatial-autocorrelation",
+    "href": "slides/02-slides.html#spatial-autocorrelation",
+    "title": "Why Geographic Analysis",
+    "section": "Spatial Autocorrelation",
+    "text": "Spatial Autocorrelation\n\nFrom Manuel Gimond"
+  },
+  {
+    "objectID": "slides/02-slides.html#stationarity",
+    "href": "slides/02-slides.html#stationarity",
+    "title": "Why Geographic Analysis",
+    "section": "Stationarity",
+    "text": "Stationarity\nThe rules governing a process do not drift over space-time\n\n\n\nFirst Order effects: any event has an equal probability of occurring in a location\nSecond Order effects: the location of one event is independent of the other events\n\n\n\n\n\nFrom Manuel Gimond"
+  },
+  {
+    "objectID": "slides/02-slides.html#not-all-geography-needs-to-be-quantitative",
+    "href": "slides/02-slides.html#not-all-geography-needs-to-be-quantitative",
+    "title": "Why Geographic Analysis",
+    "section": "Not all geography needs to be quantitative",
+    "text": "Not all geography needs to be quantitative\n\nAbstraction removes the interesting part\nWhat “is” may require assumptions we don’t want to accept\nWholly dependent on the military-industrial complex"
+  },
+  {
+    "objectID": "lesson/vector_intro.html",
+    "href": "lesson/vector_intro.html",
+    "title": "Intro to Vector Data",
     "section": "",
-    "text": "Okay, now that we have all of those details out of the way, let’s take a look at data structures in R. As we discussed,R has six basic types of data: numeric, integer, logical, complex, character, and raw. For this class, we won’t bother with complex or raw as you are unlikely to encounter them in your introductory spatial explorations.\n\nNumeric data are numbers that contain a decimal. They can also be whole numbers\nIntegers are whole numbers (those numbers without a decimal point).\nLogical data take on the value of either TRUE or FALSE. There’s also another special type of logical called NA to represent missing values.\nCharacter data represent string values. You can think of character strings as something like a word (or multiple words). A special type of character string is a factor, which is a string but with additional attributes (like levels or an order). Factors become important in the analyses and visualizations we’ll attempt later in the course.\n\nThere are a variety of ways to learn more about the structure of different data types:\n\nclass() - returns the type of object (high level)\ntypeof() - returns the type of object (low level)\nlength() tells you about the length of an object\nattributes() - does the object have any metadata\n\n\n\nCode\nnum &lt;- 2.2\nclass(num)\n\n\n[1] \"numeric\"\n\n\nCode\ntypeof(num)\n\n\n[1] \"double\"\n\n\nCode\ny &lt;- 1:10 \ny\n\n\n [1]  1  2  3  4  5  6  7  8  9 10\n\n\nCode\nclass(y)\n\n\n[1] \"integer\"\n\n\nCode\ntypeof(y)\n\n\n[1] \"integer\"\n\n\nCode\nlength(y)\n\n\n[1] 10\n\n\nCode\nb &lt;- \"3\"\nclass(b)\n\n\n[1] \"character\"\n\n\nCode\nis.numeric(b)\n\n\n[1] FALSE\n\n\nCode\nc &lt;- as.numeric(b)\nclass(c)\n\n\n[1] \"numeric\"\n\n\n\n\n\nYou can store information in a variety of ways in R. The types we are most likely to encounter this semester are:\n\nVectors: a collection of elements that are typically character, logical, integer, or numeric.\n\n\n\nCode\n#sometimes we'll need to make sequences of numbers to facilitate joins\nseries &lt;- 1:10\nseries.2 &lt;- seq(10)\nseries.3 &lt;- seq(from = 1, to = 10, by = 0.1)\nseries\n\n\n [1]  1  2  3  4  5  6  7  8  9 10\n\n\nCode\nseries.2\n\n\n [1]  1  2  3  4  5  6  7  8  9 10\n\n\nCode\nseries.3\n\n\n [1]  1.0  1.1  1.2  1.3  1.4  1.5  1.6  1.7  1.8  1.9  2.0  2.1  2.2  2.3  2.4\n[16]  2.5  2.6  2.7  2.8  2.9  3.0  3.1  3.2  3.3  3.4  3.5  3.6  3.7  3.8  3.9\n[31]  4.0  4.1  4.2  4.3  4.4  4.5  4.6  4.7  4.8  4.9  5.0  5.1  5.2  5.3  5.4\n[46]  5.5  5.6  5.7  5.8  5.9  6.0  6.1  6.2  6.3  6.4  6.5  6.6  6.7  6.8  6.9\n[61]  7.0  7.1  7.2  7.3  7.4  7.5  7.6  7.7  7.8  7.9  8.0  8.1  8.2  8.3  8.4\n[76]  8.5  8.6  8.7  8.8  8.9  9.0  9.1  9.2  9.3  9.4  9.5  9.6  9.7  9.8  9.9\n[91] 10.0\n\n\nCode\nc(series.2, series.3)\n\n\n  [1]  1.0  2.0  3.0  4.0  5.0  6.0  7.0  8.0  9.0 10.0  1.0  1.1  1.2  1.3  1.4\n [16]  1.5  1.6  1.7  1.8  1.9  2.0  2.1  2.2  2.3  2.4  2.5  2.6  2.7  2.8  2.9\n [31]  3.0  3.1  3.2  3.3  3.4  3.5  3.6  3.7  3.8  3.9  4.0  4.1  4.2  4.3  4.4\n [46]  4.5  4.6  4.7  4.8  4.9  5.0  5.1  5.2  5.3  5.4  5.5  5.6  5.7  5.8  5.9\n [61]  6.0  6.1  6.2  6.3  6.4  6.5  6.6  6.7  6.8  6.9  7.0  7.1  7.2  7.3  7.4\n [76]  7.5  7.6  7.7  7.8  7.9  8.0  8.1  8.2  8.3  8.4  8.5  8.6  8.7  8.8  8.9\n [91]  9.0  9.1  9.2  9.3  9.4  9.5  9.6  9.7  9.8  9.9 10.0\n\n\nCode\nclass(series.3)\n\n\n[1] \"numeric\"\n\n\nCode\ntypeof(series.3)\n\n\n[1] \"double\"\n\n\nCode\nlength(series.3)\n\n\n[1] 91\n\n\n\nMissing Data: R supports missing data in most of the data structures we use, but they can lead to some strange behaviors. Here are a few ways to find missing data:\n\n\n\nCode\nx &lt;- c(\"a\", NA, \"c\", \"d\", NA)\nis.na(x)\n\n\n[1] FALSE  TRUE FALSE FALSE  TRUE\n\n\nCode\nanyNA(x)\n\n\n[1] TRUE\n\n\n\nMatrices: are an extension of the numeric or character vectors. They are not a separate type of object but simply an atomic vector with dimensions; the number of rows and columns. As with atomic vectors, the elements of a matrix must be of the same data. Matrices are the foundation of rasters, which we’ll be discussing frequently throughout the course\n\n\n\nCode\n#matrices are filled columnwise in R\nm &lt;- matrix(1:6, nrow = 2, ncol = 3)\ndim(m)\n\n\n[1] 2 3\n\n\nCode\nx &lt;- 1:3\ny &lt;- 10:12\n\na &lt;- cbind(x, y)\ndim(a)\n\n\n[1] 3 2\n\n\nCode\na[3,1]\n\n\nx \n3 \n\n\nCode\nb &lt;- rbind(x, y)\ndim(b)\n\n\n[1] 2 3\n\n\nCode\nb[1,3]\n\n\nx \n3 \n\n\n\nLists: Lists essentially act like containers in R - they can hold a variety of different data types and structures including more lists. We use lists a lot for functional programming in R where we can apply a function to each element in a list. We’ll see this with extracting values from multiple rasters. We can extract elements of lists usin [] and [[]]\n\n\n\nCode\nx &lt;- list(1, \"a\", TRUE, 1+4i)\nx\n\n\n[[1]]\n[1] 1\n\n[[2]]\n[1] \"a\"\n\n[[3]]\n[1] TRUE\n\n[[4]]\n[1] 1+4i\n\n\nCode\n#adding names\nxlist &lt;- list(a = \"Waldo\", b = 1:10, data = head(mtcars))\nxlist\n\n\n$a\n[1] \"Waldo\"\n\n$b\n [1]  1  2  3  4  5  6  7  8  9 10\n\n$data\n                   mpg cyl disp  hp drat    wt  qsec vs am gear carb\nMazda RX4         21.0   6  160 110 3.90 2.620 16.46  0  1    4    4\nMazda RX4 Wag     21.0   6  160 110 3.90 2.875 17.02  0  1    4    4\nDatsun 710        22.8   4  108  93 3.85 2.320 18.61  1  1    4    1\nHornet 4 Drive    21.4   6  258 110 3.08 3.215 19.44  1  0    3    1\nHornet Sportabout 18.7   8  360 175 3.15 3.440 17.02  0  0    3    2\nValiant           18.1   6  225 105 2.76 3.460 20.22  1  0    3    1\n\n\nCode\nxlist[[1]]\n\n\n[1] \"Waldo\"\n\n\nCode\nxlist[[3]]\n\n\n                   mpg cyl disp  hp drat    wt  qsec vs am gear carb\nMazda RX4         21.0   6  160 110 3.90 2.620 16.46  0  1    4    4\nMazda RX4 Wag     21.0   6  160 110 3.90 2.875 17.02  0  1    4    4\nDatsun 710        22.8   4  108  93 3.85 2.320 18.61  1  1    4    1\nHornet 4 Drive    21.4   6  258 110 3.08 3.215 19.44  1  0    3    1\nHornet Sportabout 18.7   8  360 175 3.15 3.440 17.02  0  0    3    2\nValiant           18.1   6  225 105 2.76 3.460 20.22  1  0    3    1\n\n\nCode\nxlist[[3]][1]\n\n\n                   mpg\nMazda RX4         21.0\nMazda RX4 Wag     21.0\nDatsun 710        22.8\nHornet 4 Drive    21.4\nHornet Sportabout 18.7\nValiant           18.1\n\n\nCode\nxlist[[3]][1,2]\n\n\n[1] 6\n\n\nCode\nxlist[3][1]\n\n\n$data\n                   mpg cyl disp  hp drat    wt  qsec vs am gear carb\nMazda RX4         21.0   6  160 110 3.90 2.620 16.46  0  1    4    4\nMazda RX4 Wag     21.0   6  160 110 3.90 2.875 17.02  0  1    4    4\nDatsun 710        22.8   4  108  93 3.85 2.320 18.61  1  1    4    1\nHornet 4 Drive    21.4   6  258 110 3.08 3.215 19.44  1  0    3    1\nHornet Sportabout 18.7   8  360 175 3.15 3.440 17.02  0  0    3    2\nValiant           18.1   6  225 105 2.76 3.460 20.22  1  0    3    1\n\n\n\nData Frames: data frames resemble that tabular datasets you might be used to in spreadsheet programs and are probably one of the most common types of data in R. A data frame is a special type of list where every element has the same length (but can have different types of data). We’ll be reading in a number of data frames for this first assignment.\n\n\n\nCode\ndat &lt;- data.frame(id = letters[1:10], x = 1:10, y = 11:20)\ndat\n\n\n   id  x  y\n1   a  1 11\n2   b  2 12\n3   c  3 13\n4   d  4 14\n5   e  5 15\n6   f  6 16\n7   g  7 17\n8   h  8 18\n9   i  9 19\n10  j 10 20\n\n\nCode\nis.list(dat)\n\n\n[1] TRUE\n\n\nCode\nclass(dat)\n\n\n[1] \"data.frame\"\n\n\nCode\n#lots of ways to look at data in data frames\nstr(dat) #compact summary of the structure of a dataframe\n\n\n'data.frame':   10 obs. of  3 variables:\n $ id: chr  \"a\" \"b\" \"c\" \"d\" ...\n $ x : int  1 2 3 4 5 6 7 8 9 10\n $ y : int  11 12 13 14 15 16 17 18 19 20\n\n\nCode\nhead(dat) #gives the first 6 rows similar to tail()\n\n\n  id x  y\n1  a 1 11\n2  b 2 12\n3  c 3 13\n4  d 4 14\n5  e 5 15\n6  f 6 16\n\n\nCode\ndim(dat)\n\n\n[1] 10  3\n\n\nCode\ncolnames(dat)\n\n\n[1] \"id\" \"x\"  \"y\" \n\n\nCode\n## accessing elements of a dataframe\ndat[1,3]\n\n\n[1] 11\n\n\nCode\ndat[[\"y\"]]\n\n\n [1] 11 12 13 14 15 16 17 18 19 20\n\n\nCode\ndat$y\n\n\n [1] 11 12 13 14 15 16 17 18 19 20\n\n\n\nTibbles: are similar to data frames, but allow for lists within columns. They are designed for use with the tidyverse (which we’ll explore more in future classes), but the primary reason for introducing them here is because they are the foundation of sf objects which we’ll use frequently in the weeks to come.\n\n\n\nCode\nlibrary(tidyverse)\n\n\n── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──\n✔ dplyr     1.1.4     ✔ readr     2.1.5\n✔ forcats   1.0.0     ✔ stringr   1.4.0\n✔ ggplot2   3.5.1     ✔ tibble    3.2.1\n✔ lubridate 1.9.3     ✔ tidyr     1.3.1\n✔ purrr     1.0.2     \n── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──\n✖ dplyr::filter() masks stats::filter()\n✖ dplyr::lag()    masks stats::lag()\nℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors\n\n\nCode\ndat.tib &lt;- tibble(dat)\nis.list(dat.tib)\n\n\n[1] TRUE\n\n\nCode\nclass(dat.tib)\n\n\n[1] \"tbl_df\"     \"tbl\"        \"data.frame\"\n\n\nCode\n#lots of ways to look at data in data frames\nstr(dat.tib) #compact summary of the structure of a dataframe\n\n\ntibble [10 × 3] (S3: tbl_df/tbl/data.frame)\n $ id: chr [1:10] \"a\" \"b\" \"c\" \"d\" ...\n $ x : int [1:10] 1 2 3 4 5 6 7 8 9 10\n $ y : int [1:10] 11 12 13 14 15 16 17 18 19 20\n\n\nCode\nhead(dat.tib) #gives the first 6 rows similar to tail()\n\n\n# A tibble: 6 × 3\n  id        x     y\n  &lt;chr&gt; &lt;int&gt; &lt;int&gt;\n1 a         1    11\n2 b         2    12\n3 c         3    13\n4 d         4    14\n5 e         5    15\n6 f         6    16\n\n\nCode\ndim(dat.tib)\n\n\n[1] 10  3\n\n\nCode\ncolnames(dat.tib)\n\n\n[1] \"id\" \"x\"  \"y\" \n\n\nCode\n## accessing elements of a dataframe\ndat.tib[1,3]\n\n\n# A tibble: 1 × 1\n      y\n  &lt;int&gt;\n1    11\n\n\nCode\ndat.tib[[\"y\"]]\n\n\n [1] 11 12 13 14 15 16 17 18 19 20\n\n\nCode\ndat.tib$y\n\n\n [1] 11 12 13 14 15 16 17 18 19 20\n\n\nMany of the packages used for spatial operations in R rely on special objects (e.g., sf, SpatRasters) that are combinations of these various elemental data types. That is why we are taking a little time to understand them before jumping into spatial data.",
+    "text": "Today we’ll build on the introductory discussion we were having about vector operations and the sf package. We’ll build a few vectors from scratch and then move on to explore a broader suite of common vector operations implemented by the sf package.",
     "crumbs": [
       "Lessons",
-      "Getting started",
-      "Data Classes"
+      "Spatial operations in R",
+      "Vector data"
     ]
   },
   {
-    "objectID": "lesson/dataclasses.html#data-types-and-structures",
-    "href": "lesson/dataclasses.html#data-types-and-structures",
-    "title": "Data Structures",
-    "section": "",
-    "text": "Okay, now that we have all of those details out of the way, let’s take a look at data structures in R. As we discussed,R has six basic types of data: numeric, integer, logical, complex, character, and raw. For this class, we won’t bother with complex or raw as you are unlikely to encounter them in your introductory spatial explorations.\n\nNumeric data are numbers that contain a decimal. They can also be whole numbers\nIntegers are whole numbers (those numbers without a decimal point).\nLogical data take on the value of either TRUE or FALSE. There’s also another special type of logical called NA to represent missing values.\nCharacter data represent string values. You can think of character strings as something like a word (or multiple words). A special type of character string is a factor, which is a string but with additional attributes (like levels or an order). Factors become important in the analyses and visualizations we’ll attempt later in the course.\n\nThere are a variety of ways to learn more about the structure of different data types:\n\nclass() - returns the type of object (high level)\ntypeof() - returns the type of object (low level)\nlength() tells you about the length of an object\nattributes() - does the object have any metadata\n\n\n\nCode\nnum &lt;- 2.2\nclass(num)\n\n\n[1] \"numeric\"\n\n\nCode\ntypeof(num)\n\n\n[1] \"double\"\n\n\nCode\ny &lt;- 1:10 \ny\n\n\n [1]  1  2  3  4  5  6  7  8  9 10\n\n\nCode\nclass(y)\n\n\n[1] \"integer\"\n\n\nCode\ntypeof(y)\n\n\n[1] \"integer\"\n\n\nCode\nlength(y)\n\n\n[1] 10\n\n\nCode\nb &lt;- \"3\"\nclass(b)\n\n\n[1] \"character\"\n\n\nCode\nis.numeric(b)\n\n\n[1] FALSE\n\n\nCode\nc &lt;- as.numeric(b)\nclass(c)\n\n\n[1] \"numeric\"\n\n\n\n\n\nYou can store information in a variety of ways in R. The types we are most likely to encounter this semester are:\n\nVectors: a collection of elements that are typically character, logical, integer, or numeric.\n\n\n\nCode\n#sometimes we'll need to make sequences of numbers to facilitate joins\nseries &lt;- 1:10\nseries.2 &lt;- seq(10)\nseries.3 &lt;- seq(from = 1, to = 10, by = 0.1)\nseries\n\n\n [1]  1  2  3  4  5  6  7  8  9 10\n\n\nCode\nseries.2\n\n\n [1]  1  2  3  4  5  6  7  8  9 10\n\n\nCode\nseries.3\n\n\n [1]  1.0  1.1  1.2  1.3  1.4  1.5  1.6  1.7  1.8  1.9  2.0  2.1  2.2  2.3  2.4\n[16]  2.5  2.6  2.7  2.8  2.9  3.0  3.1  3.2  3.3  3.4  3.5  3.6  3.7  3.8  3.9\n[31]  4.0  4.1  4.2  4.3  4.4  4.5  4.6  4.7  4.8  4.9  5.0  5.1  5.2  5.3  5.4\n[46]  5.5  5.6  5.7  5.8  5.9  6.0  6.1  6.2  6.3  6.4  6.5  6.6  6.7  6.8  6.9\n[61]  7.0  7.1  7.2  7.3  7.4  7.5  7.6  7.7  7.8  7.9  8.0  8.1  8.2  8.3  8.4\n[76]  8.5  8.6  8.7  8.8  8.9  9.0  9.1  9.2  9.3  9.4  9.5  9.6  9.7  9.8  9.9\n[91] 10.0\n\n\nCode\nc(series.2, series.3)\n\n\n  [1]  1.0  2.0  3.0  4.0  5.0  6.0  7.0  8.0  9.0 10.0  1.0  1.1  1.2  1.3  1.4\n [16]  1.5  1.6  1.7  1.8  1.9  2.0  2.1  2.2  2.3  2.4  2.5  2.6  2.7  2.8  2.9\n [31]  3.0  3.1  3.2  3.3  3.4  3.5  3.6  3.7  3.8  3.9  4.0  4.1  4.2  4.3  4.4\n [46]  4.5  4.6  4.7  4.8  4.9  5.0  5.1  5.2  5.3  5.4  5.5  5.6  5.7  5.8  5.9\n [61]  6.0  6.1  6.2  6.3  6.4  6.5  6.6  6.7  6.8  6.9  7.0  7.1  7.2  7.3  7.4\n [76]  7.5  7.6  7.7  7.8  7.9  8.0  8.1  8.2  8.3  8.4  8.5  8.6  8.7  8.8  8.9\n [91]  9.0  9.1  9.2  9.3  9.4  9.5  9.6  9.7  9.8  9.9 10.0\n\n\nCode\nclass(series.3)\n\n\n[1] \"numeric\"\n\n\nCode\ntypeof(series.3)\n\n\n[1] \"double\"\n\n\nCode\nlength(series.3)\n\n\n[1] 91\n\n\n\nMissing Data: R supports missing data in most of the data structures we use, but they can lead to some strange behaviors. Here are a few ways to find missing data:\n\n\n\nCode\nx &lt;- c(\"a\", NA, \"c\", \"d\", NA)\nis.na(x)\n\n\n[1] FALSE  TRUE FALSE FALSE  TRUE\n\n\nCode\nanyNA(x)\n\n\n[1] TRUE\n\n\n\nMatrices: are an extension of the numeric or character vectors. They are not a separate type of object but simply an atomic vector with dimensions; the number of rows and columns. As with atomic vectors, the elements of a matrix must be of the same data. Matrices are the foundation of rasters, which we’ll be discussing frequently throughout the course\n\n\n\nCode\n#matrices are filled columnwise in R\nm &lt;- matrix(1:6, nrow = 2, ncol = 3)\ndim(m)\n\n\n[1] 2 3\n\n\nCode\nx &lt;- 1:3\ny &lt;- 10:12\n\na &lt;- cbind(x, y)\ndim(a)\n\n\n[1] 3 2\n\n\nCode\na[3,1]\n\n\nx \n3 \n\n\nCode\nb &lt;- rbind(x, y)\ndim(b)\n\n\n[1] 2 3\n\n\nCode\nb[1,3]\n\n\nx \n3 \n\n\n\nLists: Lists essentially act like containers in R - they can hold a variety of different data types and structures including more lists. We use lists a lot for functional programming in R where we can apply a function to each element in a list. We’ll see this with extracting values from multiple rasters. We can extract elements of lists usin [] and [[]]\n\n\n\nCode\nx &lt;- list(1, \"a\", TRUE, 1+4i)\nx\n\n\n[[1]]\n[1] 1\n\n[[2]]\n[1] \"a\"\n\n[[3]]\n[1] TRUE\n\n[[4]]\n[1] 1+4i\n\n\nCode\n#adding names\nxlist &lt;- list(a = \"Waldo\", b = 1:10, data = head(mtcars))\nxlist\n\n\n$a\n[1] \"Waldo\"\n\n$b\n [1]  1  2  3  4  5  6  7  8  9 10\n\n$data\n                   mpg cyl disp  hp drat    wt  qsec vs am gear carb\nMazda RX4         21.0   6  160 110 3.90 2.620 16.46  0  1    4    4\nMazda RX4 Wag     21.0   6  160 110 3.90 2.875 17.02  0  1    4    4\nDatsun 710        22.8   4  108  93 3.85 2.320 18.61  1  1    4    1\nHornet 4 Drive    21.4   6  258 110 3.08 3.215 19.44  1  0    3    1\nHornet Sportabout 18.7   8  360 175 3.15 3.440 17.02  0  0    3    2\nValiant           18.1   6  225 105 2.76 3.460 20.22  1  0    3    1\n\n\nCode\nxlist[[1]]\n\n\n[1] \"Waldo\"\n\n\nCode\nxlist[[3]]\n\n\n                   mpg cyl disp  hp drat    wt  qsec vs am gear carb\nMazda RX4         21.0   6  160 110 3.90 2.620 16.46  0  1    4    4\nMazda RX4 Wag     21.0   6  160 110 3.90 2.875 17.02  0  1    4    4\nDatsun 710        22.8   4  108  93 3.85 2.320 18.61  1  1    4    1\nHornet 4 Drive    21.4   6  258 110 3.08 3.215 19.44  1  0    3    1\nHornet Sportabout 18.7   8  360 175 3.15 3.440 17.02  0  0    3    2\nValiant           18.1   6  225 105 2.76 3.460 20.22  1  0    3    1\n\n\nCode\nxlist[[3]][1]\n\n\n                   mpg\nMazda RX4         21.0\nMazda RX4 Wag     21.0\nDatsun 710        22.8\nHornet 4 Drive    21.4\nHornet Sportabout 18.7\nValiant           18.1\n\n\nCode\nxlist[[3]][1,2]\n\n\n[1] 6\n\n\nCode\nxlist[3][1]\n\n\n$data\n                   mpg cyl disp  hp drat    wt  qsec vs am gear carb\nMazda RX4         21.0   6  160 110 3.90 2.620 16.46  0  1    4    4\nMazda RX4 Wag     21.0   6  160 110 3.90 2.875 17.02  0  1    4    4\nDatsun 710        22.8   4  108  93 3.85 2.320 18.61  1  1    4    1\nHornet 4 Drive    21.4   6  258 110 3.08 3.215 19.44  1  0    3    1\nHornet Sportabout 18.7   8  360 175 3.15 3.440 17.02  0  0    3    2\nValiant           18.1   6  225 105 2.76 3.460 20.22  1  0    3    1\n\n\n\nData Frames: data frames resemble that tabular datasets you might be used to in spreadsheet programs and are probably one of the most common types of data in R. A data frame is a special type of list where every element has the same length (but can have different types of data). We’ll be reading in a number of data frames for this first assignment.\n\n\n\nCode\ndat &lt;- data.frame(id = letters[1:10], x = 1:10, y = 11:20)\ndat\n\n\n   id  x  y\n1   a  1 11\n2   b  2 12\n3   c  3 13\n4   d  4 14\n5   e  5 15\n6   f  6 16\n7   g  7 17\n8   h  8 18\n9   i  9 19\n10  j 10 20\n\n\nCode\nis.list(dat)\n\n\n[1] TRUE\n\n\nCode\nclass(dat)\n\n\n[1] \"data.frame\"\n\n\nCode\n#lots of ways to look at data in data frames\nstr(dat) #compact summary of the structure of a dataframe\n\n\n'data.frame':   10 obs. of  3 variables:\n $ id: chr  \"a\" \"b\" \"c\" \"d\" ...\n $ x : int  1 2 3 4 5 6 7 8 9 10\n $ y : int  11 12 13 14 15 16 17 18 19 20\n\n\nCode\nhead(dat) #gives the first 6 rows similar to tail()\n\n\n  id x  y\n1  a 1 11\n2  b 2 12\n3  c 3 13\n4  d 4 14\n5  e 5 15\n6  f 6 16\n\n\nCode\ndim(dat)\n\n\n[1] 10  3\n\n\nCode\ncolnames(dat)\n\n\n[1] \"id\" \"x\"  \"y\" \n\n\nCode\n## accessing elements of a dataframe\ndat[1,3]\n\n\n[1] 11\n\n\nCode\ndat[[\"y\"]]\n\n\n [1] 11 12 13 14 15 16 17 18 19 20\n\n\nCode\ndat$y\n\n\n [1] 11 12 13 14 15 16 17 18 19 20\n\n\n\nTibbles: are similar to data frames, but allow for lists within columns. They are designed for use with the tidyverse (which we’ll explore more in future classes), but the primary reason for introducing them here is because they are the foundation of sf objects which we’ll use frequently in the weeks to come.\n\n\n\nCode\nlibrary(tidyverse)\n\n\n── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──\n✔ dplyr     1.1.4     ✔ readr     2.1.5\n✔ forcats   1.0.0     ✔ stringr   1.4.0\n✔ ggplot2   3.5.1     ✔ tibble    3.2.1\n✔ lubridate 1.9.3     ✔ tidyr     1.3.1\n✔ purrr     1.0.2     \n── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──\n✖ dplyr::filter() masks stats::filter()\n✖ dplyr::lag()    masks stats::lag()\nℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors\n\n\nCode\ndat.tib &lt;- tibble(dat)\nis.list(dat.tib)\n\n\n[1] TRUE\n\n\nCode\nclass(dat.tib)\n\n\n[1] \"tbl_df\"     \"tbl\"        \"data.frame\"\n\n\nCode\n#lots of ways to look at data in data frames\nstr(dat.tib) #compact summary of the structure of a dataframe\n\n\ntibble [10 × 3] (S3: tbl_df/tbl/data.frame)\n $ id: chr [1:10] \"a\" \"b\" \"c\" \"d\" ...\n $ x : int [1:10] 1 2 3 4 5 6 7 8 9 10\n $ y : int [1:10] 11 12 13 14 15 16 17 18 19 20\n\n\nCode\nhead(dat.tib) #gives the first 6 rows similar to tail()\n\n\n# A tibble: 6 × 3\n  id        x     y\n  &lt;chr&gt; &lt;int&gt; &lt;int&gt;\n1 a         1    11\n2 b         2    12\n3 c         3    13\n4 d         4    14\n5 e         5    15\n6 f         6    16\n\n\nCode\ndim(dat.tib)\n\n\n[1] 10  3\n\n\nCode\ncolnames(dat.tib)\n\n\n[1] \"id\" \"x\"  \"y\" \n\n\nCode\n## accessing elements of a dataframe\ndat.tib[1,3]\n\n\n# A tibble: 1 × 1\n      y\n  &lt;int&gt;\n1    11\n\n\nCode\ndat.tib[[\"y\"]]\n\n\n [1] 11 12 13 14 15 16 17 18 19 20\n\n\nCode\ndat.tib$y\n\n\n [1] 11 12 13 14 15 16 17 18 19 20\n\n\nMany of the packages used for spatial operations in R rely on special objects (e.g., sf, SpatRasters) that are combinations of these various elemental data types. That is why we are taking a little time to understand them before jumping into spatial data.",
+    "objectID": "lesson/vector_intro.html#a-reminder-about-vector-geometries-in-r",
+    "href": "lesson/vector_intro.html#a-reminder-about-vector-geometries-in-r",
+    "title": "Intro to Vector Data",
+    "section": "A reminder about vector geometries in R",
+    "text": "A reminder about vector geometries in R\nYou’ll recall that the sf package organizes the different types of vectors (e.g., points, lines, polygons) in to a hierarchical structure organized by complexity of geometries contained within an R object. For example, a single point will be a POINT, several points will be a MULTIPOINT, and an object containing points, polygons, and lines will be a GEOMETRYCOLLECTION. We need to be aware of what types of geometries and objects we have becasue some operations are restricted to particular types of objects or geometries as indicated by errors that read:\nError in UseMethod(\"st_crs&lt;-\") :    no applicable method for 'st_crs&lt;-' applied to an object of class \"c('XY', 'POINT', 'sfg')\"\nwhich indicates that the function (st_crs) does not have a method defined for the type of object it’s being applied to. Note that the function inside UseMethod will be replaced by whichever function you’re attempting to apply to your object and the object of class component will vary based on the function and the object class.\n\n\n\n\n\n\n\ntype\ndescription\n\n\n\n\nPOINT\nsingle point geometry\n\n\nMULTIPOINT\nset of points\n\n\nLINESTRING\nsingle linestring (two or more points connected by straight lines)\n\n\nMULTILINESTRING\nset of linestrings\n\n\nPOLYGON\nexterior ring with zero or more inner rings, denoting holes\n\n\nMULTIPOLYGON\nset of polygons\n\n\nGEOMETRYCOLLECTION\nset of the geometries above\n\n\n\nAs is, these geometries are built on vertices with coordinates that are based on the Cartesian plane and thus are “spatial”, but not georeferenced or geographic. In order to convert these sf geometries to a geogrphic object (i.e., one with a CRS and whose location depicts and actual spot on the earth’s surface), we use st_sfc() to create a simple feature geography list column (see ?st_sfc for an example of this workflow).",
     "crumbs": [
       "Lessons",
-      "Getting started",
-      "Data Classes"
+      "Spatial operations in R",
+      "Vector data"
     ]
   },
   {
-    "objectID": "example/session-5-example.html",
-    "href": "example/session-5-example.html",
-    "title": "Session 5 Live Code",
+    "objectID": "lesson/vector_intro.html#conventions-in-sf-and-the-tidyverse",
+    "href": "lesson/vector_intro.html#conventions-in-sf-and-the-tidyverse",
+    "title": "Intro to Vector Data",
+    "section": "Conventions in sf and the tidyverse",
+    "text": "Conventions in sf and the tidyverse\nOne of the benefits of the sf package is that it is designed to interface with the tidyverse suite of packages. One of the appealing parts of working with tidyverse packages is that they share an underlying philosophy, data structure, and grammar. This can make life a lot easier as you move from getting your data into R, constructing a set of covariates (including those derived from spatial data), analyzing, and plotting (or mapping) those data. People have strong opinions about the tidyverse, but I find it to be an (eventually) useful way for people to gain some intuition for working in R. One of the grammatical conventions used in the tidyverse suite of packages is the use _ in function calls (this is known as snake case should you ever need to know that at a dinner party). The _ is typically used to separate the verb in a function call from its predicate. For example, bind_rows() in the dplyr package “binds” (the verb) rows (the predicate) wheras bind_cols() binds columns. For the sf package it’s slightly different in that most of the functions begin with a st_ or sf_ prefix to indicate that the function is designed to work on spatial objects followed by a word (or words) describing what the operation does (e.g., st_centroid() returns a MULTIPOINT object with each point located at the centroid of a polygon). We can classify these functions based on what they are expected to return:\n\nPredicates: evaluate a logical statement asserting that a property is TRUE\nMeasures: return a numeric value with units based on the units of the CRS\nTransformations: create new geometries based on input geometries.\n\nWe can also distinguish these functions based on how many geometries that operate on:\n\nUnary: operate on a single geometry at a time (meaning that if you have a MULTI* object the function works on each geometry individually)\nBinary: operate on pairs of geometries\nn-ary: operate on sets of geometries\n\nWe’ll focus on the unary operators for now, but the binary and n-ary operators will become more important as we move to develop databases for spatial analysis.\n\nUnary predicates\nUnary predicates are helpful ‘checks’ to make sure the object you are working with has the properties you might expect. Are the geometries valid? Is the data projected? Because we are asking a set of TRUE/FALSE questions, these functions are specified as st_is_:\n\n\n\n\n\n\n\npredicate\nasks…\n\n\n\n\nsimple\nis the geometry self-intersecting (i.e., simple)?\n\n\nvalid\nis the geometry valid?\n\n\nempty\nis the geometry column of an object empty?\n\n\nlonglat\ndoes the object have geographic coordinates? (FALSE if coords are projected, NA if no crs)\n\n\nis(geometry, class)\nis the geometry of a particular class?\n\n\n\n\n\nCode\nnc &lt;- st_read(system.file(\"shape/nc.shp\", package=\"sf\"))\n\n\nReading layer `nc' from data source \n  `C:\\Users\\carolynkoehn\\AppData\\Local\\R\\cache\\R\\renv\\cache\\v5\\R-4.3\\x86_64-w64-mingw32\\sf\\1.0-16\\ad57b543f7c3fca05213ba78ff63df9b\\sf\\shape\\nc.shp' \n  using driver `ESRI Shapefile'\nSimple feature collection with 100 features and 14 fields\nGeometry type: MULTIPOLYGON\nDimension:     XY\nBounding box:  xmin: -84.32385 ymin: 33.88199 xmax: -75.45698 ymax: 36.58965\nGeodetic CRS:  NAD27\n\n\nCode\nst_is_longlat(nc)\n\n\n[1] TRUE\n\n\nCode\nst_is_valid(nc)\n\n\n  [1] TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE\n [16] TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE\n [31] TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE\n [46] TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE\n [61] TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE\n [76] TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE\n [91] TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE TRUE\n\n\n\n\nUnary measures\nMeasures return a quantity that describes the geometry\n\n\n\n\n\n\n\nmeasure\nreturns\n\n\n\n\ndimension\n0 for points, 1 for linear, 2 for polygons, possibly NA for empty geometries\n\n\narea\nthe area of a geometry\n\n\nlength\nthe length of a linear geometry\n\n\n\ndistance is a binary measure that returns the distance between pairs of geometries either within a single object or between features in multiple objects\n\n\nCode\nhead(st_area(nc))\n\n\nUnits: [m^2]\n[1] 1137107793  610916077 1423145355  694378925 1520366979  967504822\n\n\nCode\nst_distance(nc)[1:5,1:5]\n\n\nUnits: [m]\n         [,1]     [,2]     [,3]      [,4]      [,5]\n[1,]      0.0      0.0  25591.8 439493.26 299049.94\n[2,]      0.0      0.0      0.0 408416.68 268284.09\n[3,]  25591.8      0.0      0.0 366648.94 226461.23\n[4,] 439493.3 408416.7 366648.9      0.00  67066.43\n[5,] 299049.9 268284.1 226461.2  67066.43      0.00\n\n\n\n\nUnary transformers\nUnary transformations work on a per object basis and return a new geometry for each geometry. These are a few of the most common, we’ll encounter a few more as the semester continues.\n\n\n\ntransformer\nreturns a geometry …\n\n\n\n\ncentroid\nof type POINT with the geometry’s centroid\n\n\nbuffer\nthat is this larger (or smaller) than the input geometry, depending on the buffer size\n\n\njitter\nthat was moved in space a certain amount, using a bivariate uniform distribution\n\n\nboundary\nwith the boundary of the input geometry\n\n\nconvex_hull\nthat forms the convex hull of the input geometry\n\n\nline_merge\nafter merging connecting LINESTRING elements of a MULTILINESTRING into longer LINESTRINGs.\n\n\nmake_valid\nthat is valid\n\n\nnode\nwith added nodes to linear geometries at intersections without a node; only works on individual linear geometries\n\n\npoint_on_surface\nwith a (arbitrary) point on a surface\n\n\npolygonize\nof type polygon, created from lines that form a closed ring\n\n\nsegmentize\na (linear) geometry with nodes at a given density or minimal distance\n\n\nsimplify\nsimplified by removing vertices/nodes (lines or polygons)\n\n\nsplit\nthat has been split with a splitting linestring\n\n\ntransform\ntransformed or convert to a new coordinate reference system (last week)\n\n\ncollection_extract\nwith subgeometries from a GEOMETRYCOLLECTION of a particular type\n\n\ncast\nthat is converted to another type\n\n\n\n\n\nCode\nplot(st_geometry(nc))\nplot(st_geometry(st_centroid(nc)), add=TRUE, col='red')\n\n\nWarning: st_centroid assumes attributes are constant over geometries",
+    "crumbs": [
+      "Lessons",
+      "Spatial operations in R",
+      "Vector data"
+    ]
+  },
+  {
+    "objectID": "lesson/vector_intro.html#using-sf-and-the-tidyverse",
+    "href": "lesson/vector_intro.html#using-sf-and-the-tidyverse",
+    "title": "Intro to Vector Data",
+    "section": "Using sf and the tidyverse",
+    "text": "Using sf and the tidyverse\nAs I mentioned, one of the benefits of using the sf package is that commands from the other tidyverse package have defined methods for spatial objects. The dplyr package has a ton of helpful functions for maniputlating data in R. For example, we might select a single row from a shapefile based on the value of its attributes by using the dplyr::filter() command:\n\n\nCode\ndurham.cty &lt;- nc %&gt;% \n  filter(., NAME == \"Durham\")\n## We can also use the bracket approach\ndurham.cty2 &lt;- nc[nc$NAME == \"Durham\",]\n\nplot(st_geometry(nc))\nplot(st_geometry(durham.cty), add=TRUE, col=\"blue\")\n\n\n\n\n\n\n\n\n\nOr perhaps we only want a few of the columns in the dataset (because shapefiles always have lots of extra stuff). We can use dplyr::select() to choose columns by name:\n\n\nCode\nnc.select &lt;- nc %&gt;% \n  select(., c(\"CNTY_ID\", \"NAME\", \"FIPS\"))\nplot(nc.select)\n\n\n\n\n\n\n\n\n\nNotice that the geometries are sticky, this will be important later",
+    "crumbs": [
+      "Lessons",
+      "Spatial operations in R",
+      "Vector data"
+    ]
+  },
+  {
+    "objectID": "example/session-11-example.html",
+    "href": "example/session-11-example.html",
+    "title": "Session 11 Code",
     "section": "",
-    "text": "This is the html output of the Quarto options we tested in class today.",
+    "text": "Code for questions 1 and 2 can be found in Session 11, in both the slides and the Panopto recording.",
     "crumbs": [
       "Examples",
-      "Getting started",
-      "Quarto formatting"
+      "Spatial operations in R",
+      "Vector Operations II"
     ]
   },
   {
-    "objectID": "example/session-5-example.html#code-chunk-output-options",
-    "href": "example/session-5-example.html#code-chunk-output-options",
-    "title": "Session 5 Live Code",
-    "section": "Code chunk output options",
-    "text": "Code chunk output options\nCommon code chunk options (all true by default):\n\ninclude\neval\necho\nwarning\nmessage\n\n\n\n\nThis table shows what occurs when these options are set to false.\n\n\nWe used the following code to test code chunk options to generate this table. We also added code chunk labels.\n\n\nCode\n```{r}\n#| output: false\n#| label: \"read libraries\"\n\nlibrary(tidyverse)\nlibrary(sf)\n```\n\n\nI’m getting data from this source. In literate programming, we would add more detail!\n\n\nCode\ncejst &lt;- st_read(\"/opt/data/data/assignment01/cejst_nw.shp\")\n\n\n\n\nCode\n```{r}\n#| warning: false\n\nggplot(data = cejst, aes(x = AGE_10, y = AGE_MIDDLE)) +\n  geom_point()\n```\n\n\n\n\n\n\n\n\n\nYou can find more information on code chunk options here.",
+    "objectID": "example/session-11-example.html#question-3",
+    "href": "example/session-11-example.html#question-3",
+    "title": "Session 11 Code",
+    "section": "Question 3",
+    "text": "Question 3\n\nWhat do we need to know?\n\n\n\nPseudocode\n\n\n\nStep 1: Get cdc data and project if necessary\nWe did this in the previous questions – the dataset is cdc.idaho.\n\n\nStep 2: Get hospital data and project if necessary\nWe did this in the previous questions – the dataset is hospital.sf.proj.\n\n\nStep 3: Buffer service areas around hospitals\nWe did this in the previous questions – the dataset is hospital.buf.\n\n\nStep 4: Find intersections of service areas\nWe did this in the previous questions – the dataset is hospital.int.overlaps. However, we re-projected it, so now we need to project cdc.idaho to the same projection. A plot shows that they are aligned.\n\n\nCode\ncdc.idaho.proj &lt;- st_transform(cdc.idaho, crs=st_crs(hospital.int.overlaps))\n\nplot(st_geometry(cdc.idaho.proj), col=\"purple\")\nplot(st_geometry(hospital.int.overlaps), add=TRUE)\n\n\n\n\n\n\n\n\n\n\n\nStep 5: Find tracts that overlap those intersections\n\n\nCode\noverlap.tracts.matrix &lt;- st_intersects(cdc.idaho.proj, hospital.int.overlaps, sparse = FALSE)\n\noverlap.tracts.matrix[1:12, 1:5]\n\n\n       [,1]  [,2]  [,3]  [,4]  [,5]\n [1,] FALSE FALSE FALSE FALSE FALSE\n [2,] FALSE FALSE FALSE FALSE FALSE\n [3,] FALSE FALSE FALSE FALSE FALSE\n [4,] FALSE FALSE FALSE FALSE FALSE\n [5,] FALSE FALSE  TRUE FALSE FALSE\n [6,] FALSE FALSE  TRUE FALSE FALSE\n [7,] FALSE FALSE  TRUE FALSE FALSE\n [8,] FALSE FALSE  TRUE FALSE FALSE\n [9,] FALSE FALSE  TRUE FALSE FALSE\n[10,] FALSE FALSE  TRUE FALSE FALSE\n[11,] FALSE FALSE  TRUE FALSE FALSE\n[12,] FALSE FALSE  TRUE FALSE FALSE\n\n\nThis creates a logical matrix where each row corresponds to a tract, and the cells in the matrix show whether it overlaps with each overlap area (TRUE) or whether it does not (FALSE). The cool thing about logicals is that they also count as numbers (TRUE = 1, FALSE = 0). By finding the rowSums, we can see which tracts overlap with 2+ hospital areas (rowSum &gt;= 1) and which don’t (rowSum = 0).\n\n\nCode\noverlap.tracts.filter &lt;- rowSums(overlap.tracts.matrix)\n\noverlap.tracts &lt;- cdc.idaho.proj[overlap.tracts.filter&gt;=1, ]\n\nplot(st_geometry(overlap.tracts), col=\"cornflowerblue\")\nplot(st_geometry(hospital.int.overlaps), add=TRUE, col=\"orange\")\n\n\n\n\n\n\n\n\n\nFor an alternate tidyverse integration, see this Stack Overflow question.\n\n\nStep 6: Find tracts outside of service buffers\nWe’ll use the same process as step 5, but this time we’ll keep the rowSums that are equal to 0.\n\n\nCode\nnohosp.tracts.matrix &lt;- st_intersects(cdc.idaho.proj, hospital.buf, sparse = FALSE)\nnohosp.tracts.matrix[1:12, 1:5]\n\n\n       [,1]  [,2]  [,3]  [,4]  [,5]\n [1,] FALSE FALSE FALSE FALSE FALSE\n [2,] FALSE FALSE FALSE FALSE FALSE\n [3,] FALSE FALSE FALSE FALSE FALSE\n [4,] FALSE FALSE FALSE FALSE FALSE\n [5,] FALSE FALSE  TRUE FALSE FALSE\n [6,] FALSE FALSE  TRUE FALSE FALSE\n [7,] FALSE FALSE  TRUE FALSE FALSE\n [8,] FALSE FALSE  TRUE FALSE FALSE\n [9,] FALSE FALSE  TRUE FALSE FALSE\n[10,] FALSE FALSE  TRUE FALSE FALSE\n[11,] FALSE FALSE  TRUE FALSE FALSE\n[12,] FALSE FALSE  TRUE FALSE FALSE\n\n\nCode\nnohosp.tracts.filter &lt;- rowSums(nohosp.tracts.matrix)\n\nnohosp.tracts &lt;- cdc.idaho.proj[nohosp.tracts.filter==0, ]\n\nplot(st_geometry(nohosp.tracts), col=\"firebrick\")\nplot(st_geometry(hospital.buf), add=TRUE, col=\"orange\")\n\n\n\n\n\n\n\n\n\n\n\nStep 7: Calculate average chronic heart disease rate for both groups of tracts\n\n\nCode\navg.nohosp.rate &lt;- mean(nohosp.tracts$chd_crudep)\n\navg.overlaps.rate &lt;- mean(overlap.tracts$chd_crudep)\n\n\n\n\nStep 8: Find the difference\n\n\nCode\navg.overlaps.rate - avg.nohosp.rate\n\n\n[1] 0.36875\n\n\nThe rates of chronic heart disease are on average higher in tracts with multiple hospitals than those with no hospitals. Maybe there’s less access to a diagnosis, or heart disease is more fatal to people with less hospital access…?",
     "crumbs": [
       "Examples",
-      "Getting started",
-      "Quarto formatting"
+      "Spatial operations in R",
+      "Vector Operations II"
     ]
   },
   {
-    "objectID": "example/session-5-example.html#inline-code",
-    "href": "example/session-5-example.html#inline-code",
-    "title": "Session 5 Live Code",
-    "section": "Inline code",
-    "text": "Inline code\nWe implemented inline code by with the formula: `, r, a single space, some code, `.\nThe mean proportion of children 10 and under in the Northwest is 0.1140576.\nYou can find more information on inline code here.",
-    "crumbs": [
-      "Examples",
-      "Getting started",
-      "Quarto formatting"
-    ]
+    "objectID": "slides/28-slides.html#what-is-an-interactive-dashboard",
+    "href": "slides/28-slides.html#what-is-an-interactive-dashboard",
+    "title": "Interactive Dashboards",
+    "section": "What is an interactive dashboard?",
+    "text": "What is an interactive dashboard?\n\nReactive to user inputs\nExamples"
   },
   {
-    "objectID": "example/session-5-example.html#heading-styles",
-    "href": "example/session-5-example.html#heading-styles",
-    "title": "Session 5 Live Code",
-    "section": "Heading Styles",
-    "text": "Heading Styles\n# Heading 1\n## Heading 2\n### Heading 3\n#### Heading 4\n##### Heading 5\n###### Heading 6\nrenders as:",
-    "crumbs": [
-      "Examples",
-      "Getting started",
-      "Quarto formatting"
-    ]
+    "objectID": "slides/28-slides.html#what-do-we-need",
+    "href": "slides/28-slides.html#what-do-we-need",
+    "title": "Interactive Dashboards",
+    "section": "What do we need?",
+    "text": "What do we need?\n\nProper YAML header\nglobal code chunk to load libraries and data\nShiny inputs and outputs\nRender results"
   },
   {
-    "objectID": "example/session-5-example.html#heading-2",
-    "href": "example/session-5-example.html#heading-2",
-    "title": "Session 5 Live Code",
-    "section": "Heading 2",
-    "text": "Heading 2\n\nHeading 3\n\nHeading 4\n\nHeading 5\n\nHeading 6",
-    "crumbs": [
-      "Examples",
-      "Getting started",
-      "Quarto formatting"
-    ]
+    "objectID": "slides/28-slides.html#yaml-header",
+    "href": "slides/28-slides.html#yaml-header",
+    "title": "Interactive Dashboards",
+    "section": "YAML header",
+    "text": "YAML header\n\nOutput is now a flexdashboard (instead of html)\nruntime:: shiny allows R Shiny to handle interactivity\n\n\n---\ntitle: \"Climate, social, and environmental justice markers for the Pacific Northwest\"\noutput: flexdashboard::flex_dashboard\nruntime: shiny\n---"
   },
   {
-    "objectID": "example/session-5-example.html#text-formatting",
-    "href": "example/session-5-example.html#text-formatting",
-    "title": "Session 5 Live Code",
-    "section": "Text formatting",
-    "text": "Text formatting\n**bold** renders as bold\n_italics_ renders as italics",
-    "crumbs": [
-      "Examples",
-      "Getting started",
-      "Quarto formatting"
-    ]
+    "objectID": "slides/28-slides.html#global-code",
+    "href": "slides/28-slides.html#global-code",
+    "title": "Interactive Dashboards",
+    "section": "global code",
+    "text": "global code\nCode that only needs to run once\n\n```{r global}\n# include: false\n\nlibrary(shiny)\nlibrary(sf)\nlibrary(tidyverse)\nlibrary(tmap)\ntmap_mode(\"view\")\n\ncejst &lt;- st_read(\"/opt/data/data/assignment01/cejst_nw.shp\")\n\n# get column codes and meanings\ncol_choices &lt;- read_csv(\"/opt/data/data/assignment04/columns.csv\") %&gt;%\n  # make nicer column names for a display table\n  rename(\"Code\" = \"shapefile_column\", \"Description\" = \"column_name\") %&gt;%\n  # keep only \"percentile\" type columns\n  filter(str_detect(Code, \"PFS\"))\n```"
   },
   {
-    "objectID": "example/session-5-example.html#lists",
-    "href": "example/session-5-example.html#lists",
-    "title": "Session 5 Live Code",
-    "section": "Lists",
-    "text": "Lists\n\nBullet List\n- bullet 1\n- bullet 2\n- another sub-bullet\n- bullet 3\nrenders as:\n\nbullet 1\n\nbullet 2\n\nanother sub-bullet\n\n\nbullet 3\n\n\n\nNumbered List\n1. number 1\n2. number 2\nrenders as:\n\nnumber 1\nnumber 2",
-    "crumbs": [
-      "Examples",
-      "Getting started",
-      "Quarto formatting"
-    ]
+    "objectID": "slides/28-slides.html#inputs",
+    "href": "slides/28-slides.html#inputs",
+    "title": "Interactive Dashboards",
+    "section": "Inputs",
+    "text": "Inputs\n\nLive in a sidebar\n\n\nColumn {.sidebar}\n-----------------------------------------------------------------------"
   },
   {
-    "objectID": "example/session-5-example.html#commenting",
-    "href": "example/session-5-example.html#commenting",
-    "title": "Session 5 Live Code",
-    "section": "Commenting",
-    "text": "Commenting\nTo comment out text outside code chunks, use &lt;!-- at the beginning of a comment and --&gt; at the end.\nMore information about text formatting in Quarto can be found here.",
-    "crumbs": [
-      "Examples",
-      "Getting started",
-      "Quarto formatting"
-    ]
+    "objectID": "slides/28-slides.html#types-of-inputs",
+    "href": "slides/28-slides.html#types-of-inputs",
+    "title": "Interactive Dashboards",
+    "section": "Types of Inputs",
+    "text": "Types of Inputs\n\n\n\n\nR Function\nInput Type\n\n\n\n\nselectInput\nA box with choices to select from\n\n\nsliderInput\nA slider bar\n\n\nradioButtons\nA set of radio buttons\n\n\ntextInput\nA field to enter text\n\n\nnumericInput\nA field to enter numbers\n\n\ncheckboxInput\nA single check box\n\n\ndateInput\nA calendar to aid date selection\n\n\ndateRangeInput\nA pair of calendars for selecting a date range\n\n\nfileInput\nA file upload control wizard"
+  },
+  {
+    "objectID": "slides/28-slides.html#adding-inputs",
+    "href": "slides/28-slides.html#adding-inputs",
+    "title": "Interactive Dashboards",
+    "section": "Adding Inputs",
+    "text": "Adding Inputs\n\n# Box with choices: which cejst column to map\nselectInput(\"column_select\", label = \"Justice Marker:\",\n            choices = col_choices$Code, selected = \"DF_PFS\")\n\n# Two sliders to select the maximum and minimum values to map\nsliderInput(\"min_threshold_adjust\", label = \"Minimum value:\",\n            min = 0, max = 1, value = 0.5, step = 0.05)\nsliderInput(\"max_threshold_adjust\", label = \"Maximum value:\",\n            min = 0, max = 1, value = 1, step = 0.05)"
+  },
+  {
+    "objectID": "slides/28-slides.html#adding-outputs",
+    "href": "slides/28-slides.html#adding-outputs",
+    "title": "Interactive Dashboards",
+    "section": "Adding Outputs",
+    "text": "Adding Outputs\nCreate a new column with title\n\nColumn\n-----------------------------------------------------------------------\n\n### Climate, Social, and Environmental Justice"
+  },
+  {
+    "objectID": "slides/28-slides.html#types-of-outputs",
+    "href": "slides/28-slides.html#types-of-outputs",
+    "title": "Interactive Dashboards",
+    "section": "Types of Outputs",
+    "text": "Types of Outputs\n\n\n\nR Function\nOutput Type\n\n\n\n\nrenderPlot\nR graphics output\n\n\nrenderPrint\nR printed output\n\n\nrenderTable\nData frame, matrix, other table like structures\n\n\nrenderText\nCharacter vectors"
+  },
+  {
+    "objectID": "slides/28-slides.html#adding-reactive-output",
+    "href": "slides/28-slides.html#adding-reactive-output",
+    "title": "Interactive Dashboards",
+    "section": "Adding Reactive Output",
+    "text": "Adding Reactive Output\n\nSpecify reactive elements with input$NameOfInput\nIn this example, we use reactive filtering to only map cejst tracts that meet user criteria\n\n\n# renderTmap is a tmap special case of renderPlot\nrenderTmap({\n  # put reactively filtered data in tm_shape\n  tm_shape(subset(cejst[, input$column_select], # subset data to user's column\n                  # use the subset in the filtering steps, selecting the column of data with [[1]]\n                  cejst[, input$column_select][[1]] &lt;= input$max_threshold_adjust & # data column should be less than or equal to the user's max threhold\n                    cejst[, input$column_select][[1]] &gt;= input$min_threshold_adjust)) + #more than or equal to the min threshold\n    # add the polygons filled by the user's selected column\n    tm_polygons(col = input$column_select)\n})"
+  },
+  {
+    "objectID": "slides/28-slides.html#add-textexplanation-to-sidebar",
+    "href": "slides/28-slides.html#add-textexplanation-to-sidebar",
+    "title": "Interactive Dashboards",
+    "section": "Add text/explanation to sidebar",
+    "text": "Add text/explanation to sidebar\n\nAdd plain text before or after code chunks\nI’ve also added a nice table with the column name meanings for reference\n\n\nknitr::kable(col_choices[,1:2])"
+  },
+  {
+    "objectID": "slides/28-slides.html#publishing",
+    "href": "slides/28-slides.html#publishing",
+    "title": "Interactive Dashboards",
+    "section": "Publishing",
+    "text": "Publishing\n\nOn shinyapps.io (free; tutorial here)\nOn GitHub Pages (limited free pages; tutorial here)\nContact Research Computing for options"
   },
   {
     "objectID": "slides/27-slides.html#categories-of-data-visualization",
