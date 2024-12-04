@@ -3764,7 +3764,7 @@
     "href": "slides/29-slides.html#storing-your-data",
     "title": "Conclusion",
     "section": "Storing your data",
-    "text": "Storing your data\n\nKyle’s shared Google drive folder syncs to: /opt/data/2023/project_data/\n\nRead Only\nSyncs hourly\n\nYou have write access to: /opt/projects/\n\nIntermediate files\nThings you don’t want others to see"
+    "text": "Storing your data\n\nKyle’s shared Google drive folder syncs to: /opt/data/data/finalproject/\n\nRead Only\nSyncs hourly (at half past)"
   },
   {
     "objectID": "slides/29-slides.html#by-the-end-of-this-course-you-should-be-able-to",
